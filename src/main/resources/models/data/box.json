@@ -1,0 +1,6 @@
+{
+  "name" :"box",
+  "path" :"box",
+  "texture" :"box",
+  "canAnimated" :false
+}

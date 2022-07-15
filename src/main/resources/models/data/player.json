@@ -1,0 +1,6 @@
+{
+  "name" :"player",
+  "path" :"player",
+  "texture" :"player",
+  "canAnimated" :true
+}

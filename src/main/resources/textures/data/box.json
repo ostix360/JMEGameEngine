@@ -1,0 +1,11 @@
+{
+  "name" :"box",
+  "path" :"entities/box",
+  "textureProperties" :{
+	"shineDamper" :54.385834,
+	"reflectivity" :0.2401252,
+	"numbersOfRows" :1,
+	"isTransparency" :false,
+	"useFakeLighting" :false
+  }
+}

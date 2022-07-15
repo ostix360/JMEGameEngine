@@ -1,0 +1,12 @@
+{
+  "name" :"lamp",
+  "path" :"entities/lamp",
+  "textureProperties" :{
+	"specularMap" :"lamp",
+	"shineDamper" :0.0,
+	"reflectivity" :2.4851248,
+	"numbersOfRows" :1,
+	"isTransparency" :false,
+	"useFakeLighting" :false
+  }
+}

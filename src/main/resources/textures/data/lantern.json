@@ -1,0 +1,12 @@
+{
+  "name": "lantern",
+  "path": "entities/lantern",
+  "textureProperties": {
+    "specularMap": "lanternS",
+    "shineDamper": 0.0,
+    "reflectivity": 5.0,
+    "numbersOfRows": 1,
+    "isTransparency": false,
+    "useFakeLighting": false
+  }
+}

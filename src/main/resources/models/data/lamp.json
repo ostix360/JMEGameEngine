@@ -1,0 +1,6 @@
+{
+  "name" :"lamp",
+  "path" :"lamp",
+  "texture" :"lamp",
+  "canAnimated" :false
+}

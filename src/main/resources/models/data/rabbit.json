@@ -1,0 +1,6 @@
+{
+  "name" :"rabbit",
+  "path" :"rabbit",
+  "texture" :"rabbit",
+  "canAnimated" :true
+}

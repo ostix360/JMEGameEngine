@@ -1,0 +1,13 @@
+{
+  "name": "barrel",
+  "path": "entities/barrel",
+  "textureProperties": {
+    "specularMap": "barrelS",
+    "normalMap": "barrelNormal",
+    "shineDamper": 13.821083,
+    "reflectivity": 1.7404999,
+    "numbersOfRows": 1,
+    "isTransparency": false,
+    "useFakeLighting": false
+  }
+}

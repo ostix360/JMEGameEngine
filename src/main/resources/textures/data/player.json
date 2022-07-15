@@ -1,0 +1,11 @@
+{
+  "name" :"player",
+  "path" :"entities/player",
+  "textureProperties" :{
+	"shineDamper" :68.6822,
+	"reflectivity" :0.648,
+	"numbersOfRows" :1,
+	"isTransparency" :false,
+	"useFakeLighting" :false
+  }
+}

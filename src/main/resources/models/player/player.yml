@@ -1,0 +1,9 @@
+entity:
+
+  position: 50, 0, 55
+
+  rotation: 0, 0, 0
+
+  scale: 1
+
+boundingBox:
