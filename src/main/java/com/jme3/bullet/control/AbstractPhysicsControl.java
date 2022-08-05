@@ -152,6 +152,10 @@ public abstract class AbstractPhysicsControl implements PhysicsControl {
         return spatial.getPosition();
     }
 
+    public void setSpatial(Entity spatial) {
+        this.spatial = spatial;
+    }
+
     /**
      * Access whichever spatial rotation corresponds to the physics rotation.
      *
@@ -189,7 +193,7 @@ public abstract class AbstractPhysicsControl implements PhysicsControl {
 //            } else {
                 spatial.setPosition(worldLocation);
                 spatial.getTransform().setQ(worldRotation);
-//            }
+//           }
         }
 
     }

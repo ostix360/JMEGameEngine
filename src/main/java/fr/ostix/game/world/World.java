@@ -1,10 +1,14 @@
 package fr.ostix.game.world;
 
+import com.jme3.bullet.*;
+import com.jme3.bullet.collision.shapes.*;
+import com.jme3.bullet.control.*;
 import fr.ostix.game.audio.*;
 import fr.ostix.game.core.*;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.*;
 import fr.ostix.game.core.events.listener.player.*;
+import fr.ostix.game.core.loader.*;
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.entity.*;
 import fr.ostix.game.entity.animated.animation.animatedModel.*;
@@ -23,6 +27,7 @@ import fr.ostix.game.graphics.particles.particleSpawn.*;
 import fr.ostix.game.graphics.textures.*;
 import fr.ostix.game.toolBox.*;
 import fr.ostix.game.world.chunk.*;
+import fr.ostix.game.world.texture.*;
 import fr.ostix.game.world.water.*;
 import fr.ostix.game.world.weather.*;
 import org.joml.*;
@@ -58,8 +63,10 @@ public class World {
     private Weather weather;
     private float time = 0000.0F;
 
-    public World() {
+    private final BulletAppState physics = new BulletAppState();
 
+    public World() {
+        physics.startPhysics();
     }
 
     public static void addLight(Light light) {
@@ -81,9 +88,14 @@ public class World {
         HashMap<String, Texture> textures = ResourcePack.getTextureByName();
         HashMap<String, Model> models = pack.getModelByName();
 
+        physics.setDebugEnabled(true);
+        physics.getPhysicsSpace().setGravity(new Vector3f(0,-0.1f,0));
+
+
 
         AnimatedModel an = pack.getAnimatedModelByName().get("player2");
-        player = new Player(an, new Vector3f(2055, 5, 2055), new Vector3f(0), 1);
+        player = new Player(an, new Vector3f(15, 5, 15), new Vector3f(0), 1f);
+
         ParticleTargetProperties targetProperties = new ParticleTargetProperties(0, 6, 0, 80, 6);
         ParticleSystem system = new ParticleSystem(new ParticleTexture(textures.get("fire").getID(), 8, true),
                 4000, 0.1f, -0, 60 * 2.2f, 4);
@@ -99,8 +111,10 @@ public class World {
         //player.addComponent(new AIComponent(player, ai));
         // player.addComponent(new ParticleComponent(system, player));
         player.addComponent(new AnimationComponent(player, ResourcePack.getAnimationByName().get(an)));
-        CollisionComponent cp = (CollisionComponent) ComponentType.COLLISION_COMPONENT.loadComponent(player, pack.getComponents().get(-1940279936));
-        player.setCollision(cp);
+//        CollisionComponent cp = (CollisionComponent) ComponentType.COLLISION_COMPONENT.loadComponent(player, pack.getComponents().get(-1940279936));
+//        player.setCollision(cp);
+        physics.getPhysicsSpace().add(player);
+
         PlayerListener PL = new PlayerListener();
         this.worldListeners.add(PL);
         EventManager.getInstance().register(PL);
@@ -116,18 +130,23 @@ public class World {
 
 
         entities.add(player);
+        CUBE = models.get("cube");
 
-        Model test = models.get("fontaine");
-        Entity testE = new Entity(45,test, new Vector3f(2300, getTerrainHeight(2100, 2100), 2300), new Vector3f(0, 0, 0), 1f);
+        Model test = models.get("box");
+        Entity testE = new Entity(45,CUBE, new Vector3f(5, getTerrainHeight(2050, 2050), 5), new Vector3f(0, 0, 0), 1f);
         LoadComponents.loadComponents(pack.getComponents().get(1995130752), testE);
         entities.add(testE);
+        RigidBodyControl rb = new RigidBodyControl(new BoxCollisionShape(new Vector3f(5f)), 0f);
+
+        testE.setPhysic(new RigidBodyControl(0));
+        physics.getPhysicsSpace().add(testE);
 //
 //        Model cube = models.get("box");
 //        Entity cubeE = new Entity(cube, new Vector3f(50, 0, 20), new Vector3f(2000, 90, 2000), 20);
 //        LoadComponents.loadComponents(pack.getComponents().get(2026772471), cubeE);
 //        entities.add(cubeE);
 
-        CUBE = models.get("cube");
+
 
         Light sun = new Light(new Vector3f(100000, 100000, -100000), Color.SUN, 0.5f, null);
         //lights.add(sun);
@@ -156,14 +175,38 @@ public class World {
         back2.setLooping(true);
         back2.setProperty(AL10.AL_SOURCE_RELATIVE, AL10.AL_TRUE);
         // back2.play();
-        chunkHandler.start();
+//        chunkHandler.start();
+
+
         isInit = true;
     }
 
     private void initWater() {
         float waterHeight = -10f;
-        waterTiles.add(new WaterTile(15, 10, waterHeight));
+        waterTiles.add(new WaterTile(5, 5, waterHeight));
     }
+
+    private void initTerrain() {
+        TerrainTexture backgroundTexture = new TerrainTexture(ResourcePack.getTextureByName().get("grassy2").getID());
+        TerrainTexture rTexture = new TerrainTexture(ResourcePack.getTextureByName().get("mud").getID());
+        TerrainTexture gTexture = new TerrainTexture(ResourcePack.getTextureByName().get("grassFlowers").getID());
+        TerrainTexture bTexture = new TerrainTexture(ResourcePack.getTextureByName().get("path").getID());
+
+        TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture, bTexture);
+        TerrainTexture blendMap = new TerrainTexture(ResourcePack.getTextureByName().get("blendMap").getID());
+
+//        worldIndex = new int[2][2];
+        int index = 0;
+        for (int x = 0; x < 2; x++) {
+            for (int z = 0; z < 2; z++) {
+                terrains.put(new Vector2f(19+x,19+z),new Chunk(19+x,19+z,new ArrayList<>()).setTerrain(new Terrain(19+x, 19+z, texturePack, blendMap, "heightmap")));
+//                worldIndex[x][z] = index;
+                index++;
+            }
+        }
+
+    }
+
 
     private void initEntity() {
 
@@ -195,7 +238,7 @@ public class World {
 
     public void update() {
         //entity.increaseRotation(new Vector3f(0, 1, 0));
-
+        physics.update(1/60f);
         cam.move();
 
         if (Input.keys[GLFW.GLFW_KEY_O]) {
@@ -223,6 +266,7 @@ public class World {
 
 
     public void render() {
+        physics.render();
         renderer.renderScene(entities, waterTiles, terrains, lights, cam);
         MasterParticle.render(cam);
     }
@@ -244,6 +288,7 @@ public class World {
 
     public void cleanUp() {
         EventManager.getInstance().removeAll(worldListeners);
+        physics.stopPhysics();
         chunkHandler.exit();
         renderer.cleanUp();
         MasterParticle.cleanUp();

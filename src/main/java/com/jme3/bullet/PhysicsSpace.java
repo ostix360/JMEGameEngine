@@ -393,8 +393,9 @@ public class PhysicsSpace {
         if (obj == null) return;
         if (obj instanceof PhysicsControl) {
             ((PhysicsControl) obj).setPhysicsSpace(this);
-//        } else if (obj instanceof Entity) {    TODO Attention sans doute faut
-//            Entity node = (Entity) obj;
+        } else if (obj instanceof Entity) { //   TODO Attention sans doute faut
+            Entity node = (Entity) obj;
+            this.add(node.getControl());
 //            for (int i = 0; i < node.getNumControls(); i++) {
 //                if (node.getControl(i) instanceof PhysicsControl) {
 //                    add(node.getControl(i));
@@ -430,8 +431,9 @@ public class PhysicsSpace {
         if (obj == null) return;
         if (obj instanceof PhysicsControl) {
             ((PhysicsControl) obj).setPhysicsSpace(null);
-//        } else if (obj instanceof Entity) {    TODO Attention sans doute faut
-//            Entity node = (Entity) obj;
+       } else if (obj instanceof Entity) {    //TODO Attention sans doute faut
+            Entity node = (Entity) obj;
+            this.remove(node.getControl());
 //            for (int i = 0; i < node.getNumControls(); i++) {
 //                if (node.getControl(i) instanceof PhysicsControl) {
 //                    remove(node.getControl(i));

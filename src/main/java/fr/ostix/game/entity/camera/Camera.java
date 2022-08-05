@@ -29,7 +29,7 @@ public class Camera implements ICamera {
 
     public Camera(Player player) {
         this.player = player;
-        this.position = player.getPosition();
+        this.position = new Vector3f(player.getPosition());
     }
 
     private float terrainHeight;
@@ -55,7 +55,7 @@ public class Camera implements ICamera {
         calculateAngleAroundPlayerAndPitch();
         float horizontalDistance = calculateHorizontalDistance();
         float verticalDistance = calculateVerticalDistance();
-        float yOffset = updateSmooth(player.getPosition().y + 7 + verticalDistance, this.position.y());
+        float yOffset = updateSmooth(player.getPosition().y() + 7 + verticalDistance, this.position.y());
         caculateCameraPosition(horizontalDistance, yOffset);
         this.yaw = 180 - (player.getRotation().y() + angleAroundPlayer.get());
         this.projection = MasterRenderer.getProjectionMatrix();
@@ -92,12 +92,12 @@ public class Camera implements ICamera {
         float theta = player.getRotation().y() + angleAroundPlayer.get();
         float xoffset = (float) (horzontalDistance * Math.sin(Math.toRadians(theta)));
         float zoffset = (float) (horzontalDistance * Math.cos(Math.toRadians(theta)));
-        position.x = player.getPosition().x - xoffset;
+        position.x = player.getPosition().x() - xoffset;
         position.y = yOffset;
         if (position.y < terrainHeight) {
             position.y = terrainHeight;
         }
-        position.z = player.getPosition().z - zoffset;
+        position.z = player.getPosition().z() - zoffset;
     }
 
     private void calculateAngleAroundPlayerAndPitch() {

@@ -5,7 +5,11 @@ import fr.ostix.game.core.ressourceProcessor.*;
 public class TerrainTexture {
 
     private int textureID;
-    private final TextureLoaderRequest tlr;
+    private TextureLoaderRequest tlr;
+
+    public TerrainTexture(int textureID){
+        this.textureID = textureID;
+    }
 
     private TerrainTexture(TextureLoaderRequest tlr) {
         this.tlr = tlr;

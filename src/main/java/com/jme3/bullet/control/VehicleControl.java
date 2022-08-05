@@ -86,7 +86,7 @@ public class VehicleControl extends PhysicsVehicle implements PhysicsControl {
      * Instantiate an enabled with the specified collision shape and mass.
      *
      * @param shape the desired shape (not null, alias created)
-     * @param mass (&gt;0)
+     * @param mass  (&gt;0)
      */
     public VehicleControl(CollisionShape shape, float mass) {
         super(shape, mass);
@@ -108,31 +108,31 @@ public class VehicleControl extends PhysicsVehicle implements PhysicsControl {
      * coordinates.
      *
      * @param applyPhysicsLocal true&rarr;match local coordinates,
-     * false&rarr;match world coordinates (default=false)
+     *                          false&rarr;match world coordinates (default=false)
      */
     public void setApplyPhysicsLocal(boolean applyPhysicsLocal) {
         motionState.setApplyPhysicsLocal(applyPhysicsLocal);
-        for (Iterator<VehicleWheel> it = wheels.iterator(); it.hasNext();) {
+        for (Iterator<VehicleWheel> it = wheels.iterator(); it.hasNext(); ) {
             VehicleWheel vehicleWheel = it.next();
             vehicleWheel.setApplyLocal(applyPhysicsLocal);
         }
     }
 
-    private Vector3f getSpatialTranslation(){
+    private Vector3f getSpatialTranslation() {
 //        if(motionState.isApplyPhysicsLocal()){
 //            return entity.getLocalTranslation();
 //        }
         return entity.getPosition();
     }
 
-    private Quaternionf getSpatialRotation(){
+    private Quaternionf getSpatialRotation() {
 //        if(motionState.isApplyPhysicsLocal()){
 //            return entity.getLocalRotation();
 //        }
         return entity.getTransform().getQRotation();
     }
 
-//    /**
+    //    /**
 //     * Clone this control for a different spatial. No longer used as of JME 3.1.
 //     *
 //     * @param spatial the spatial for the clone to control (or null)
@@ -222,15 +222,10 @@ public class VehicleControl extends PhysicsVehicle implements PhysicsControl {
 //     * @param spatial spatial to control (or null)
 //     */
 //    @Override
-//    public void setSpatial(Spatial spatial) {
-//        this.spatial = spatial;
-//        setUserObject(spatial);
-//        if (spatial == null) {
-//            return;
-//        }
-//        setPhysicsLocation(getSpatialTranslation());
-//        setPhysicsRotation(getSpatialRotation());
-//    }
+    @Override
+    public void setSpatial(Entity e) {
+        this.entity = e;
+    }
 
     /**
      * Enable or disable this control.
@@ -246,7 +241,7 @@ public class VehicleControl extends PhysicsVehicle implements PhysicsControl {
         this.enabled = enabled;
         if (space != null) {
             if (enabled && !added) {
-                if(entity !=null){
+                if (entity != null) {
                     setPhysicsLocation(getSpatialTranslation());
                     setPhysicsRotation(getSpatialRotation());
                 }

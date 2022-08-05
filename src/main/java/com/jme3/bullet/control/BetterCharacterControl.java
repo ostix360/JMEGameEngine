@@ -115,7 +115,7 @@ public class BetterCharacterControl extends AbstractPhysicsControl implements Ph
      */
     protected float physicsDamping = 0.9f;
     protected final Vector3f scale = new Vector3f(1, 1, 1);
-    protected final Vector3f velocity = new Vector3f();
+    protected Vector3f velocity = new Vector3f();
     protected boolean jump = false;
     protected boolean onGround = false;
     protected boolean ducked = false;
@@ -160,6 +160,7 @@ public class BetterCharacterControl extends AbstractPhysicsControl implements Ph
     public void update(float tpf) {
         super.update(tpf);
         rigidBody.getPhysicsLocation(location);
+
         //rotation has been set through viewDirection
         applyPhysicsTransform(location, rotation);
     }
@@ -198,7 +199,7 @@ public class BetterCharacterControl extends AbstractPhysicsControl implements Ph
         // Attenuate any existing X-Z motion.
         float existingLeftVelocity = velocity.dot(localLeft);
         float existingForwardVelocity = velocity.dot(localForward);
-        Vector3f counter = vars.vect1;
+        Vector3f counter = new Vector3f(0,0,0);
         existingLeftVelocity = existingLeftVelocity * physicsDamping;
         existingForwardVelocity = existingForwardVelocity * physicsDamping;
         counter.set(-existingLeftVelocity, 0, -existingForwardVelocity);
@@ -219,7 +220,8 @@ public class BetterCharacterControl extends AbstractPhysicsControl implements Ph
             //add resulting vector to existing velocity
             velocity.add(localWalkDirection);
         }
-        if(currentVelocity.distance(velocity) > FastMath.ZERO_TOLERANCE) rigidBody.setLinearVelocity(velocity);
+        if(currentVelocity.distance(velocity) > FastMath.ZERO_TOLERANCE)
+            rigidBody.setLinearVelocity(velocity);
         if (jump) {
             //TODO: precalculate jump force
             Vector3f rotatedJumpForce = vars.vect1;
@@ -318,6 +320,11 @@ public class BetterCharacterControl extends AbstractPhysicsControl implements Ph
         }
     }
 
+
+    public void setVelocity(Vector3f velocity) {
+        this.velocity = velocity;
+    }
+
     /**
      * Check if the character is ducking, either due to user input or due to
      * unducking being impossible at the moment (obstacle above).
@@ -346,6 +353,8 @@ public class BetterCharacterControl extends AbstractPhysicsControl implements Ph
     public float getDuckedFactor() {
         return duckedFactor;
     }
+
+
 
     /**
      * Alter the character's the walk direction. This parameter is framerate
@@ -597,8 +606,8 @@ public class BetterCharacterControl extends AbstractPhysicsControl implements Ph
             return;
         }
         TempVars vars = TempVars.get();
-        Vector3f newLeft = vars.vect1;
-        Vector3f newLeftNegate = vars.vect2;
+        Vector3f newLeft = new Vector3f();
+        Vector3f newLeftNegate = new Vector3f();
 
         newLeft.set(worldUpVector).cross(direction).normalize();
         if (newLeft.equals(new Vector3f().zero())) {
@@ -661,6 +670,9 @@ public class BetterCharacterControl extends AbstractPhysicsControl implements Ph
     @Override
     protected void addPhysics(PhysicsSpace space) {
         space.getGravity(localUp).normalize().negate();
+        if (!space.getGravity(localUp).equals(new Vector3f(0f))){
+            space.getGravity(localUp).normalize().negate();
+        }
         updateLocalCoordinateSystem();
 
         space.addCollisionObject(rigidBody);

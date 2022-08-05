@@ -71,7 +71,7 @@ public class BulletAppState
     /**
      * threading mode to use (not null)
      */
-    protected ThreadingType threadingType = ThreadingType.SEQUENTIAL;
+    protected ThreadingType threadingType = ThreadingType.PARALLEL;
     /**
      * broadphase collision-detection algorithm for the physics space to use
      * (not null)

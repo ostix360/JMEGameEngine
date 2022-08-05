@@ -104,7 +104,7 @@ public class BIHTree {
             throw new IllegalArgumentException("A mesh should at least contain a Position buffer");
         }
         int[] ib = mesh.getVAO().getIndices();
-        FloatBuffer vb = (FloatBuffer) vBuffer.getData();
+        FloatBuffer vb = (FloatBuffer) vBuffer.getDataReadOnly();
 
 //        if (ib == null) {
 //            ib = new VirtualIndexBuffer(mesh.getVertexCount(), mesh.getMode());

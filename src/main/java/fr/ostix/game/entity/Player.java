@@ -1,5 +1,6 @@
 package fr.ostix.game.entity;
 
+import com.jme3.bullet.control.*;
 import fr.ostix.game.graphics.model.*;
 import fr.ostix.game.inventory.*;
 import org.joml.*;
@@ -25,8 +26,12 @@ public class Player extends Entity {
     private PlayerInventory inventory;
 
 
+
     public Player(Model model, Vector3f position, Vector3f rotation, float scale) {
         super(0, model, position, rotation, scale);
+        this.physic = new BetterCharacterControl(1f, 8f, 2f);
+
+
     }
 
 
@@ -48,6 +53,7 @@ public class Player extends Entity {
                 sprintTime = 60 * 5;
             }
         }
+//        ( (BetterCharacterControl)physic).update(1/60f);
         super.update();
     }
 
@@ -85,6 +91,10 @@ public class Player extends Entity {
         // }
     }
 
+    @Override
+    public BetterCharacterControl getControl() {
+        return (BetterCharacterControl) super.getControl();
+    }
 
     public int getHealth() {
         return health;

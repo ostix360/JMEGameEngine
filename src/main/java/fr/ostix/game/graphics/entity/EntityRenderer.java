@@ -84,7 +84,7 @@ public class EntityRenderer {
     }
 
     public void prepareInstance(Entity entity) {
-        shader.loadTransformationMatrix(entity.getTransform().getTransformation());
+         shader.loadTransformationMatrix(entity.getTransform().getTransformation());
         shader.offset.loadVector2fToUniform(new Vector2f(entity.getTextureXOffset(), entity.getTextureYOffset()));
     }
 

@@ -1,6 +1,7 @@
 package fr.ostix.game.entity;
 
 
+import com.jme3.bullet.control.*;
 import fr.ostix.game.entity.component.*;
 import fr.ostix.game.entity.component.collision.*;
 import fr.ostix.game.entity.component.particle.*;
@@ -22,6 +23,8 @@ public class Entity {
     private CollisionComponent collision;
     private int textureIndex = 1;
     protected boolean canInteract = false;
+
+    protected PhysicsControl physic;
 
     private final List<Component> components = new ArrayList<>();
 
@@ -53,7 +56,9 @@ public class Entity {
                 ((ParticleComponent) c).setOffset(new Vector3f(0, 8.5f, 0));
             }
             c.update();
+
         }
+        physic.update(1/60f);
     }
 
 
@@ -83,6 +88,11 @@ public class Entity {
     }
 
     public Vector3f getPosition() {
+//        return new Vector3f(1);
+        return position;
+    }
+
+    public Vector3f getRPosition(){
         return position;
     }
 
@@ -137,6 +147,10 @@ public class Entity {
         this.scale = scale;
     }
 
+    public void setPhysic(PhysicsControl physic) {
+        this.physic = physic;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -147,6 +161,11 @@ public class Entity {
     @Override
     public int hashCode() {
         return Objects.hash(getModel(), getPosition(), getRotation(), getScale(), components);
+    }
+
+    public Object getControl() {
+        physic.setSpatial(this);
+        return physic;
     }
 
     public enum MovementType {

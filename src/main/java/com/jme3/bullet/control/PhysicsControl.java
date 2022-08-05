@@ -32,6 +32,7 @@
 package com.jme3.bullet.control;
 
 import com.jme3.bullet.*;
+import fr.ostix.game.entity.*;
 
 /**
  * An interface for a scene-graph control that links a physics object to a
@@ -52,12 +53,16 @@ public interface PhysicsControl {
      */
     public void setPhysicsSpace(PhysicsSpace space);
 
+    public void setSpatial(Entity e);
+
     /**
      * Access the physics space to which the object is (or would be) added.
      *
      * @return the pre-existing space, or null for none
      */
     public PhysicsSpace getPhysicsSpace();
+
+    public void update(float tpf);
 
     /**
      * Enable or disable this control.

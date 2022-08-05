@@ -223,6 +223,11 @@ public class CharacterControl extends PhysicsCharacter implements PhysicsControl
     }
 
     @Override
+    public void setSpatial(Entity e) {
+        this.entity = e;
+    }
+
+    @Override
     public PhysicsSpace getPhysicsSpace() {
         return space;
     }

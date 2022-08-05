@@ -297,6 +297,11 @@ public class GhostControl extends PhysicsGhostObject implements PhysicsControl {
         space = newSpace;
     }
 
+    @Override
+    public void setSpatial(Entity e) {
+        this.entity = e;
+    }
+
     /**
      * Access the physics space to which the ghost object is (or would be)
      * added.

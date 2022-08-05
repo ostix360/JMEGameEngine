@@ -227,8 +227,8 @@ public class Converter {
 
         int[] indices = mesh.getVAO().getIndices();
 
-        FloatBuffer vertices = (FloatBuffer) mesh.getVAO().getPosition().getData();
-        vertices.rewind();
+        FloatBuffer vertices = (FloatBuffer) mesh.getVAO().getPosition().getDataReadOnly();
+//        vertices.rewind();
 
         int verticesLength = mesh.getVertexCount() * 3;
         jBulletIndexedMesh.numVertices = mesh.getVertexCount();

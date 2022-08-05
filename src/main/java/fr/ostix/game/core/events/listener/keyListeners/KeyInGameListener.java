@@ -6,6 +6,7 @@ import fr.ostix.game.core.events.entity.*;
 import fr.ostix.game.core.events.inventoryEvent.*;
 import fr.ostix.game.core.events.keyEvent.*;
 import fr.ostix.game.core.events.player.*;
+import fr.ostix.game.core.events.quest.*;
 import fr.ostix.game.entity.*;
 import fr.ostix.game.inventory.*;
 import fr.ostix.game.world.*;
@@ -76,20 +77,23 @@ public class KeyInGameListener implements KeyListener {
         } else if (Input.keys[GLFW_KEY_S] || Input.keys[GLFW_KEY_DOWN]) {
             p.setMovement(Entity.MovementType.BACK);
             EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
+        }else if (Input.keys[GLFW_KEY_SPACE]) {
+            p.setMovement(Entity.MovementType.JUMP);
+            EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
+        }else {
+            p.setMovement(Entity.MovementType.STATIC);
+            EventManager.getInstance().callEvent(new PlayerMoveEvent(p,1));
         }
+
         if (Input.keys[GLFW_KEY_A] || Input.keys[GLFW_KEY_LEFT]) {
             p.increaseRotation(new Vector3f(0, 1.8f, 0));
         } else if (Input.keys[GLFW_KEY_D] || Input.keys[GLFW_KEY_RIGHT]) {
             p.increaseRotation(new Vector3f(0, -1.8f, 0));
         }
         if (Input.keys[GLFW_KEY_LEFT_SHIFT]) {
-            EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
-           //
+//            EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
+           p.getControl().setWalkDirection(new Vector3f(0,-10,0));
         }
-        if (Input.keys[GLFW_KEY_SPACE]) {
-            p.setMovement(Entity.MovementType.JUMP);
-            p.jump();
-            EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
-        }
+
     }
 }

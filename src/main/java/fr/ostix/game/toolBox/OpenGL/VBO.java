@@ -83,7 +83,7 @@ public class VBO {
 
     public void delete() {
         GL15.glDeleteBuffers(id);
-        buffer.clear();
+//        buffer.clear();
     }
 
     public Buffer getBuffer() {

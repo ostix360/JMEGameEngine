@@ -4,6 +4,9 @@ import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.*;
 import fr.ostix.game.core.events.player.*;
 import fr.ostix.game.entity.*;
+import org.joml.*;
+import org.joml.Math;
+
 
 public class PlayerListener implements Listener {
 
@@ -11,18 +14,26 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
+        float dx = 0, dy = 0, dz = 0;
         switch (p.getMovement()) {
             case FORWARD:
-                float dx = (float) (Math.sin(Math.toRadians(p.getRotation().y())));
-                float dz = (float) (Math.cos(Math.toRadians(p.getRotation().y())));
+                dx = (Math.sin(Math.toRadians(p.getRotation().y())));
+                dz = (Math.cos(Math.toRadians(p.getRotation().y())));
                 break;
             case BACK:
-                dx = -(float) (Math.sin(Math.toRadians(p.getRotation().y())));
-                dz = -(float) (Math.cos(Math.toRadians(p.getRotation().y())));
+                dx = -(Math.sin(Math.toRadians(p.getRotation().y())));
+                dz = -(Math.cos(Math.toRadians(p.getRotation().y())));
+                break;
+            case JUMP:
+//                e.getPlayer().getControl().jump();
+                dy = 0.5f;
                 break;
             default:
                 break;
 
         }
+        e.getPlayer().getControl().setWalkDirection(new Vector3f(dx, dy, dz).mul(40));
+//        e.getPlayer().increasePosition(new Vector3f(dx,dy,dz));
+
     }
 }

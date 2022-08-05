@@ -178,20 +178,19 @@ public class RigidBodyControl extends PhysicsRigidBody implements PhysicsControl
 //     *
 //     * @param spatial the spatial to control (or null)
 //     */
-//    @Override
-//    public void setSpatial(Spatial spatial) {
-//        this.spatial = spatial;
-//        setUserObject(spatial);
-//        if (spatial == null) {
-//            return;
-//        }
-//        if (collisionShape == null) {
-//            createCollisionShape();
-//            rebuildRigidBody();
-//        }
-//        setPhysicsLocation(getSpatialTranslation());
-//        setPhysicsRotation(getSpatialRotation());
-//    }
+    public void setSpatial(Entity spatial) {
+        this.entity = spatial;
+        setUserObject(spatial);
+        if (spatial == null) {
+            return;
+        }
+        if (collisionShape == null) {
+            createCollisionShape();
+            rebuildRigidBody();
+        }
+        setPhysicsLocation(getSpatialTranslation());
+        setPhysicsRotation(getSpatialRotation());
+    }
 
     /**
      * @return returns the spatial the control is added to, or null if the control is not attached to a spatial yet.
