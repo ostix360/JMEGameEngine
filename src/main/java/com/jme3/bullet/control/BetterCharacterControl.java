@@ -90,7 +90,7 @@ public class BetterCharacterControl extends AbstractPhysicsControl implements Ph
     /**
      * Local z-forward quaternion for the "local absolute" z-forward direction.
      */
-    protected final Quaternionf localForwardRotation = new Quaternionf();//TODO
+    protected final Quaternionf localForwardRotation = new Quaternionf();
     /**
      * a Z-forward vector based on the view direction and the local X-Z plane.
      */
@@ -105,7 +105,7 @@ public class BetterCharacterControl extends AbstractPhysicsControl implements Ph
      *
      * @see #rotatedViewDirection
      */
-    protected final Quaternionf rotation = new Quaternionf();//TODO
+    protected final Quaternionf rotation = new Quaternionf();
     protected final Vector3f rotatedViewDirection = new Vector3f(0, 0, 1);
     protected final Vector3f walkDirection = new Vector3f();
     protected final Vector3f jumpForce;
@@ -629,7 +629,7 @@ public class BetterCharacterControl extends AbstractPhysicsControl implements Ph
             }
         }
         if (rotation != null) {
-            Matrix3f m = new Matrix3f(newLeft, worldUpVector, direction); // TODO Pas sur
+            Matrix3f m = new Matrix3f(newLeft, worldUpVector, direction); // TODO ... Not really sure
             rotation.setFromUnnormalized(m);
             //rotation.fromAxes(newLeft, worldUpVector, direction);
         }
@@ -641,8 +641,8 @@ public class BetterCharacterControl extends AbstractPhysicsControl implements Ph
      *
      * @param vec desired location (not null, unaffected)
      */
-    //@Override
-    protected void setPhysicsLocation(Vector3f vec) {
+    @Override
+    public void setPhysicsLocation(Vector3f vec) {
         rigidBody.setPhysicsLocation(vec);
         location.set(vec);
     }

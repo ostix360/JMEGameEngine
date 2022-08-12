@@ -48,9 +48,10 @@ public class MasterRenderer {
     private final Map<Model, List<Entity>> entities = new HashMap<>();
     private final Weather weather;
 
-    public MasterRenderer(Weather weather) {
+    public MasterRenderer(Weather weather, Map<Vector2f, Chunk> worldChunk) {
         OpenGlUtils.cullBackFaces(true);
         this.weather = weather;
+        this.terrains = worldChunk;
         projectionMatrix = createProjectionMatrix();
         this.entityRenderer = new EntityRenderer(shader, projectionMatrix);
         this.terrainRenderer = new TerrainRenderer(terrainShader, projectionMatrix);
@@ -79,11 +80,10 @@ public class MasterRenderer {
         }
     }
 
-    public void renderScene(List<Entity> entities, List<WaterTile> waterTiles, Map<Vector2f, Chunk> terrains, List<Light> lights, Camera camera) {
+    public void renderScene(List<Entity> entities, List<WaterTile> waterTiles, List<Light> lights, Camera camera) {
         for (Entity entity : entities) {
             processEntity(entity);
         }
-        this.terrains = terrains;
         skyColor = weather.getSky().getSkyColour();
         GL11.glEnable(GL30.GL_CLIP_DISTANCE0);
         renderWaterRefractionPass(lights, camera);

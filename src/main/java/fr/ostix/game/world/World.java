@@ -8,7 +8,6 @@ import fr.ostix.game.core.*;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.*;
 import fr.ostix.game.core.events.listener.player.*;
-import fr.ostix.game.core.loader.*;
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.entity.*;
 import fr.ostix.game.entity.animated.animation.animatedModel.*;
@@ -16,7 +15,6 @@ import fr.ostix.game.entity.camera.*;
 import fr.ostix.game.entity.component.*;
 import fr.ostix.game.entity.component.ai.*;
 import fr.ostix.game.entity.component.animation.*;
-import fr.ostix.game.entity.component.collision.*;
 import fr.ostix.game.entity.component.light.*;
 import fr.ostix.game.graphics.*;
 import fr.ostix.game.graphics.font.meshCreator.*;
@@ -37,6 +35,7 @@ import org.lwjgl.openal.*;
 import java.lang.Math;
 import java.util.Random;
 import java.util.*;
+import java.util.concurrent.*;
 
 public class World {
 
@@ -50,7 +49,7 @@ public class World {
     private static final List<Entity> entities = new ArrayList<>();
     private static final List<Entity> aabbs = new ArrayList<>();
     private static final List<Light> lights = new ArrayList<>();
-    private static final Map<Vector2f, Chunk> terrains = new HashMap<>();
+    private static final Map<Vector2f, Chunk> worldChunk = new ConcurrentHashMap<>();
     public static Model CUBE;
     private final List<WaterTile> waterTiles = new ArrayList<>();
     private final List<Listener> worldListeners = new ArrayList<>();
@@ -63,7 +62,7 @@ public class World {
     private Weather weather;
     private float time = 0000.0F;
 
-    private final BulletAppState physics = new BulletAppState();
+    private static final BulletAppState physics = new BulletAppState();
 
     public World() {
         physics.startPhysics();
@@ -86,10 +85,9 @@ public class World {
 
     public final void initWorld(ResourcePack pack) {
         HashMap<String, Texture> textures = ResourcePack.getTextureByName();
-        HashMap<String, Model> models = pack.getModelByName();
 
         physics.setDebugEnabled(true);
-        physics.getPhysicsSpace().setGravity(new Vector3f(0,-0.1f,0));
+        physics.getPhysicsSpace().setGravity(new Vector3f(0,-9.81f,0).mul(20f));
 
 
 
@@ -122,24 +120,24 @@ public class World {
 
         listener = new SoundListener(player.getPosition(), new Vector3f(), player.getRotation());
         cam = new Camera(player);
-        chunkHandler = new ChunkHandler(cam);
+        chunkHandler = new ChunkHandler(cam, worldChunk, this);
 
         weather = new Weather(cam);
-        renderer = new MasterRenderer(weather);
+        renderer = new MasterRenderer(weather,worldChunk);
 
 
 
         entities.add(player);
-        CUBE = models.get("cube");
+        CUBE = pack.getModelByName("cube");
 
-        Model test = models.get("box");
-        Entity testE = new Entity(45,CUBE, new Vector3f(5, getTerrainHeight(2050, 2050), 5), new Vector3f(0, 0, 0), 1f);
+        Model test = pack.getModelByName("fontaine");
+        Entity testE = new Entity(45,test, new Vector3f(5, getTerrainHeight(2050, 2050), 5), new Vector3f(0, 0, 0), 1f);
         LoadComponents.loadComponents(pack.getComponents().get(1995130752), testE);
-        entities.add(testE);
-        RigidBodyControl rb = new RigidBodyControl(new BoxCollisionShape(new Vector3f(5f)), 0f);
+//        entities.add(testE);
 
-        testE.setPhysic(new RigidBodyControl(0));
-        physics.getPhysicsSpace().add(testE);
+//        testE.setPhysic(new RigidBodyControl(0));
+//        physics.getPhysicsSpace().add(testE);
+//        this.initEntity(testE);
 //
 //        Model cube = models.get("box");
 //        Entity cubeE = new Entity(cube, new Vector3f(50, 0, 20), new Vector3f(2000, 90, 2000), 20);
@@ -152,7 +150,7 @@ public class World {
         //lights.add(sun);
         //  lights.add(sunc);
 
-        initEntity();
+//        initEntity();
         initWater();
         GUIText text1 = new GUIText("Bienvenu dans ce jeu magique", 1f, Game.gameFont, new Vector2f(0, 0), 1920f, true);
         text1.setColour(Color.RED);
@@ -163,19 +161,19 @@ public class World {
         SoundSource back = pack.getSoundByName().get("ambient");
 
         SoundSource back2 = AudioManager.loadSound("test1", true);
-
+//        initTerrain(worldChunk);
 
         back.setGain(0.2f);
         back.setPosition(new Vector3f(0, 0, 0));
         back.setLooping(true);
         back.setProperty(AL10.AL_SOURCE_RELATIVE, AL10.AL_TRUE);
-        //back.play();
+        back.play();
         back2.setGain(0.2f);
         back2.setPosition(new Vector3f(0, 0, 0));
         back2.setLooping(true);
         back2.setProperty(AL10.AL_SOURCE_RELATIVE, AL10.AL_TRUE);
         // back2.play();
-//        chunkHandler.start();
+        chunkHandler.run();
 
 
         isInit = true;
@@ -186,7 +184,7 @@ public class World {
         waterTiles.add(new WaterTile(5, 5, waterHeight));
     }
 
-    private void initTerrain() {
+    private void initTerrain(Map<Vector2f, Chunk> worldChunk) {
         TerrainTexture backgroundTexture = new TerrainTexture(ResourcePack.getTextureByName().get("grassy2").getID());
         TerrainTexture rTexture = new TerrainTexture(ResourcePack.getTextureByName().get("mud").getID());
         TerrainTexture gTexture = new TerrainTexture(ResourcePack.getTextureByName().get("grassFlowers").getID());
@@ -196,19 +194,17 @@ public class World {
         TerrainTexture blendMap = new TerrainTexture(ResourcePack.getTextureByName().get("blendMap").getID());
 
 //        worldIndex = new int[2][2];
-        int index = 0;
-        for (int x = 0; x < 2; x++) {
-            for (int z = 0; z < 2; z++) {
-                terrains.put(new Vector2f(19+x,19+z),new Chunk(19+x,19+z,new ArrayList<>()).setTerrain(new Terrain(19+x, 19+z, texturePack, blendMap, "heightmap")));
+        for (int x = 0; x < 1; x++) {
+            for (int z = 0; z < 1; z++) {
+                worldChunk.put(new Vector2f(x,z),new Chunk(x,z,new ArrayList<>()).setTerrain(new Terrain(x, z, texturePack, blendMap, "heightmap")));
 //                worldIndex[x][z] = index;
-                index++;
             }
         }
 
     }
 
 
-    private void initEntity() {
+    private void initEntity(Entity e) {
 
 
         // Model treeModel = new Model(LoadModel.loadModel("tree",".dae", loader), new TextureModel(loader.loadTexture("tree")).setTransparency(true));
@@ -219,9 +215,14 @@ public class World {
 //                new TextureModel(loader.loadTexture("fern")));
 //        fernModel.getTexture().setTransparency(true);
         Random r = new Random();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 2000; i++) {
             float x = r.nextFloat() * 400;
             float z = r.nextFloat() * 400;
+            Entity te = new Entity(e);
+            te.setPosition(new Vector3f(x,0,z));
+            entities.add(te);
+            te.setPhysic(new RigidBodyControl(0));
+            physics.getPhysicsSpace().add(te);
 //            entities.add(new Entity(treeModel, new Vector3f(x, getTerrainHeight(x, z), z),
 //                    new Vector3f(0, 0, 0), 1f));
 //            x = r.nextFloat() * 1600;
@@ -252,11 +253,10 @@ public class World {
 
         listener.updateTransform(player.getPosition(), player.getRotation());
         MasterParticle.update(cam);
-//        terrains.clear();
-//        terrains.putAll(chunkHandler.getChunkMap());
-//        entities.clear();
-//        entities.addAll(chunkHandler.getEntities());
-//        entities.add(player);
+
+        entities.clear();
+        entities.addAll(chunkHandler.getEntities());
+        entities.add(player);
     }
 
     private void updateTime() {
@@ -267,7 +267,7 @@ public class World {
 
     public void render() {
         physics.render();
-        renderer.renderScene(entities, waterTiles, terrains, lights, cam);
+        renderer.renderScene(entities, waterTiles, lights, cam);
         MasterParticle.render(cam);
     }
 
@@ -275,7 +275,7 @@ public class World {
         int x = (int) Math.floor(worldX / Terrain.getSIZE());
         int z = (int) Math.floor(worldZ / Terrain.getSIZE());
         try {
-            return terrains.get(new Vector2f(x,z)).getTerrain().getHeightOfTerrain(worldX, worldZ);
+            return worldChunk.get(new Vector2f(x,z)).getTerrain().getHeightOfTerrain(worldX, worldZ);
         } catch (Exception e) {
              //Logger.err("World doesn't exist in this coordinates xIndex : " + x + " ZIndex : " + z);
         }
@@ -301,5 +301,9 @@ public class World {
 
     public List<Entity> getEntitiesNear() {
         return new ArrayList<>();
+    }
+
+    public static PhysicsSpace getPhysics() {
+        return physics.getPhysicsSpace();
     }
 }

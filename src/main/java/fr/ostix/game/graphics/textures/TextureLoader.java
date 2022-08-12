@@ -99,6 +99,31 @@ public class TextureLoader {
         return new TextureLoader(id,w);
     }
 
+    public static ByteBuffer loadImage(BufferedImage image) {
+        int w = image.getWidth();
+        int h = image.getHeight();
+
+        int[] pixels = new int[w*h];
+        image.getRGB(0,0,w,h,pixels,0,w);
+
+        ByteBuffer buffer = BufferUtils.createByteBuffer(w*h*4);
+
+        for (int y = 0;y<w;y++)
+        {
+            for (int x = 0;x<h;x++)
+            {
+                int i = pixels[x+y*w];
+                buffer.put((byte) ((i >> 16) & 0xFF));
+                buffer.put((byte) ((i >> 8) & 0xFF));
+                buffer.put((byte) ((i ) & 0xFF));
+                buffer.put((byte) ((i >> 24) & 0xFF));
+            }
+        }
+
+        buffer.flip();
+        return buffer;
+    }
+
     public int getId() {
         return id;
     }

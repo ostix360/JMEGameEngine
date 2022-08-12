@@ -50,6 +50,8 @@ import com.jme3.bullet.objects.*;
 import com.jme3.bullet.util.*;
 import com.jme3.jme3tools.*;
 import fr.ostix.game.entity.*;
+import fr.ostix.game.world.*;
+import fr.ostix.game.world.chunk.*;
 import org.joml.*;
 
 import java.util.*;
@@ -405,9 +407,22 @@ public class PhysicsSpace {
             addCollisionObject((PhysicsCollisionObject) obj);
         } else if (obj instanceof PhysicsJoint) {
             addJoint((PhysicsJoint) obj);
+        } else if (obj instanceof Chunk) {
+            addChunk((Chunk) obj);
         } else {
             throw (new UnsupportedOperationException("Cannot add this kind of object to the physics space."));
         }
+    }
+
+    private void addChunk(Chunk chunk) {
+        chunk.getEntities().forEach(this::add);
+//        addTerrain(chunk.getTerrain());
+    }
+
+    private void addTerrain(Terrain obj) {
+        TerrainControl tc = new TerrainControl(obj,0);
+        obj.setControl(tc);
+        tc.setPhysicsSpace(this);
     }
 
     public void addCollisionObject(PhysicsCollisionObject obj) {
@@ -443,9 +458,20 @@ public class PhysicsSpace {
             removeCollisionObject((PhysicsCollisionObject) obj);
         } else if (obj instanceof PhysicsJoint) {
             removeJoint((PhysicsJoint) obj);
+        } else if (obj instanceof Chunk) {
+            removeChunk((Chunk) obj);
         } else {
             throw (new UnsupportedOperationException("Cannot remove this kind of object from the physics space."));
         }
+    }
+
+    private void removeChunk(Chunk chunk) {
+         chunk.getEntities().forEach(this::remove);
+         this.removeTerrain(chunk.getTerrain());
+    }
+
+    private void removeTerrain(Terrain obj) {
+        (obj).getControl().setPhysicsSpace(null);
     }
 
     public void removeCollisionObject(PhysicsCollisionObject obj) {

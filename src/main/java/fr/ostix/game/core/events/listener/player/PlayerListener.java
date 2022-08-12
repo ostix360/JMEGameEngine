@@ -24,15 +24,15 @@ public class PlayerListener implements Listener {
                 dx = -(Math.sin(Math.toRadians(p.getRotation().y())));
                 dz = -(Math.cos(Math.toRadians(p.getRotation().y())));
                 break;
-            case JUMP:
+//            case JUMP:
 //                e.getPlayer().getControl().jump();
-                dy = 0.5f;
-                break;
+////                dy = 0.5f;
+//                break;
             default:
                 break;
 
         }
-        e.getPlayer().getControl().setWalkDirection(new Vector3f(dx, dy, dz).mul(40));
+        e.getPlayer().getControl().setWalkDirection(new Vector3f(dx, 0, dz).mul(30));
 //        e.getPlayer().increasePosition(new Vector3f(dx,dy,dz));
 
     }

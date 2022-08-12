@@ -37,8 +37,12 @@ public class ResourcePack {
         return sounds;
     }
 
-    public HashMap<String, Model> getModelByName() {
-        return models;
+    public Model getModelByName(String model) throws NullPointerException {
+        Model m;
+        if ((m = models.get(model)) == null){
+            throw new NullPointerException("Model " + model + " not found");
+        }
+        return m;
     }
 
     public static HashMap<AnimatedModel, HashMap<String, Animation>> getAnimationByName() {

@@ -35,6 +35,7 @@ import com.jme3.bullet.collision.shapes.*;
 import com.jme3.bullet.collision.shapes.infos.*;
 import fr.ostix.game.entity.*;
 import fr.ostix.game.graphics.model.*;
+import fr.ostix.game.world.*;
 import org.joml.*;
 
 import java.util.*;
@@ -185,7 +186,11 @@ public class CollisionShapeFactory {
      */
     public static CollisionShape createMeshShape(Entity e) {
         return createSingleMeshShape(e);
+    }
 
+    public static CollisionShape createMeshShape(Terrain t) {
+//        return new HeightfieldCollisionShape(heightMap.getHeightData());
+        return new HeightfieldCollisionShape(t.getfHeightMap(),new Vector3f(6.6f,1f,6.6f));
     }
 
     /**
@@ -234,6 +239,17 @@ public class CollisionShapeFactory {
         if (mesh != null) {
             MeshCollisionShape mColl = new MeshCollisionShape(mesh);
             mColl.setScale(trans.getScale());
+            return mColl;
+        } else {
+            return null;
+        }
+    }
+
+    private static MeshCollisionShape createSingleMeshShape(Terrain t) {
+        MeshModel mesh = t.getModel();
+        if (mesh != null) {
+            MeshCollisionShape mColl = new MeshCollisionShape(mesh);
+            mColl.setScale(new Vector3f(1));
             return mColl;
         } else {
             return null;

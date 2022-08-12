@@ -3,6 +3,7 @@ package fr.ostix.game.entity;
 import com.jme3.bullet.control.*;
 import fr.ostix.game.graphics.model.*;
 import fr.ostix.game.inventory.*;
+import fr.ostix.game.world.*;
 import org.joml.*;
 import org.joml.Math;
 
@@ -29,8 +30,8 @@ public class Player extends Entity {
 
     public Player(Model model, Vector3f position, Vector3f rotation, float scale) {
         super(0, model, position, rotation, scale);
-        this.physic = new BetterCharacterControl(1f, 8f, 2f);
-
+        this.physic = new BetterCharacterControl(1f, 8f, 2000f);
+        ((BetterCharacterControl)this.physic).getJumpForce().mul(5.5f);
 
     }
 
@@ -41,6 +42,7 @@ public class Player extends Entity {
 
     @Override
     public void update() {
+        super.update();
         this.move();
         if (this.getMovement() == MovementType.FORWARD) {
             this.sprintTime--;
@@ -54,7 +56,6 @@ public class Player extends Entity {
             }
         }
 //        ( (BetterCharacterControl)physic).update(1/60f);
-        super.update();
     }
 
     private void move() {
@@ -76,11 +77,14 @@ public class Player extends Entity {
         //super.increasePosition(new Vector3f(dx, upwardsSpeed, dz));
         //if (!canJump) {
         //  }
-//        float terrainHeight = World.getTerrainHeight(this.getPosition().x(), this.getPosition().z())+2.4f;
-//        if (this.getPosition().y() <= terrainHeight) {
+        float terrainHeight = World.getTerrainHeight(this.getPosition().x(), this.getPosition().z())-0.5f;
+        if (this.getPosition().y() <= terrainHeight) {
 //            canJump = true;
-//            position.set(this.getPosition().x(), terrainHeight, this.getPosition().z());
-//        }
+
+//            ((BetterCharacterControl) physic).setWalkDirection(((BetterCharacterControl) physic).getWalkDirection().add(0,-9.81f,0));
+            position.set(this.getPosition().x(), terrainHeight, this.getPosition().z());
+            ((BetterCharacterControl) physic).setPhysicsLocation(this.getPosition());
+        }
 
     }
 

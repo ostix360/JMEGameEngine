@@ -36,6 +36,17 @@ public class Entity {
         this.scale = new Vector3f(scale);
         this.transform = new Transform(position, rotation, scale);
     }
+    public Entity(Entity entity) {
+        this.model = entity.model;
+        this.position = new Vector3f(entity.position);
+        this.rotation = new Vector3f(entity.rotation);
+        this.scale = new Vector3f(entity.scale);
+        this.transform = entity.transform;
+        this.textureIndex = entity.textureIndex;
+        this.id = entity.id;
+        this.movement = MovementType.STATIC;
+    }
+
 
 
     public CollisionComponent getCollision() {
@@ -58,7 +69,9 @@ public class Entity {
             c.update();
 
         }
-        physic.update(1/60f);
+        if (physic != null) {
+            physic.update(1/60f);
+        }
     }
 
 
@@ -164,6 +177,10 @@ public class Entity {
     }
 
     public Object getControl() {
+        if (this.physic == null){
+            collision.getPhysic().setSpatial(this);
+            return collision.getPhysic();
+        }
         physic.setSpatial(this);
         return physic;
     }

@@ -77,12 +77,13 @@ public class KeyInGameListener implements KeyListener {
         } else if (Input.keys[GLFW_KEY_S] || Input.keys[GLFW_KEY_DOWN]) {
             p.setMovement(Entity.MovementType.BACK);
             EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
-        }else if (Input.keys[GLFW_KEY_SPACE]) {
-            p.setMovement(Entity.MovementType.JUMP);
-            EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
-        }else {
+        } else {
             p.setMovement(Entity.MovementType.STATIC);
             EventManager.getInstance().callEvent(new PlayerMoveEvent(p,1));
+        }
+        if (Input.keys[GLFW_KEY_SPACE]) {
+            p.setMovement(Entity.MovementType.JUMP);
+            p.getControl().jump();
         }
 
         if (Input.keys[GLFW_KEY_A] || Input.keys[GLFW_KEY_LEFT]) {

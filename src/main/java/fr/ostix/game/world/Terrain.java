@@ -1,8 +1,9 @@
 package fr.ostix.game.world;
 
-
+import com.jme3.bullet.control.*;
 import fr.ostix.game.core.ressourceProcessor.*;
 import fr.ostix.game.graphics.model.*;
+import fr.ostix.game.graphics.textures.*;
 import fr.ostix.game.toolBox.*;
 import fr.ostix.game.world.chunk.*;
 import fr.ostix.game.world.texture.*;
@@ -11,6 +12,7 @@ import org.joml.*;
 import javax.imageio.*;
 import java.awt.image.*;
 import java.io.*;
+import java.nio.*;
 import java.util.*;
 import java.lang.Math;
 
@@ -28,6 +30,11 @@ public class Terrain {
     private static Map<Vector2f, Chunk> worldChunk;
     private ModelLoaderRequest modelRequest;
 
+
+    private float[] fHeightMap;
+
+    private TerrainControl control = null;
+
     public Terrain(float gridX, float gridZ, TerrainTexturePack texturePack, TerrainTexture blendMap,
                    String heightMap) {
         this.x = gridX * SIZE;
@@ -35,6 +42,8 @@ public class Terrain {
         generateTerrain(heightMap);
         this.texturePack = texturePack;
         this.blendMap = blendMap;
+        TerrainControl tc = new TerrainControl(this,0);
+        setControl(tc);
     }
 
     public static void setWorldChunk(Map<Vector2f, Chunk> worldChunk) {
@@ -71,14 +80,18 @@ public class Terrain {
         int count = VERTEX_COUNT * VERTEX_COUNT;
         float[] vertices = new float[count * 3];
         int vertexPointer = 0;
+        int counter = 0;
         for (int z = 0; z < VERTEX_COUNT; z++) {            // Boucle de generation de monde
             for (int x = 0; x < VERTEX_COUNT; x++) {
                 vertices[vertexPointer * 3] = (float) x / ((float) VERTEX_COUNT - 1) * SIZE;
                 vertices[vertexPointer * 3 + 1] = heights[x][z];
                 vertices[vertexPointer * 3 + 2] = (float) z / ((float) VERTEX_COUNT - 1) * SIZE;
                 vertexPointer++;
+                fHeightMap[counter] = heights[x][z];
+                counter++;
             }
         }
+
         ModelData data = modelRequest.getData();
         modelRequest = new ModelLoaderRequest(new ModelData(vertices, data.getTexcoords(), data.getNormals(), data.getIndices()));
         GLRequestProcessor.sendRequest(modelRequest);
@@ -86,14 +99,19 @@ public class Terrain {
 
     private void generateTerrain(String heightMap) {
         BufferedImage image = null;
+        File file = new File(ToolDirectory.RES_FOLDER + "/textures/terrain/heightMap/" + heightMap + ".png");
 
         try {
-            image = ImageIO.read(new File(ToolDirectory.RES_FOLDER + "/textures/terrain/heightMap/" + heightMap + ".png"));
+            image = ImageIO.read(file);
         } catch (IOException e) {
             Logger.err("Couldn't load heightMap "+heightMap, e);
         }
-
         assert image != null;
+
+        ByteBuffer data = TextureLoader.loadImage(image);
+
+
+
         int VERTEX_COUNT = image.getHeight();
         heights = new float[VERTEX_COUNT][VERTEX_COUNT];
         int count = VERTEX_COUNT * VERTEX_COUNT;
@@ -102,13 +120,17 @@ public class Terrain {
         float[] textureCoords = new float[count * 2];
         int[] indices = new int[6 * (VERTEX_COUNT - 1) * (VERTEX_COUNT - 1)];
         int vertexPointer = 0;
+        int index = 0;
+        fHeightMap = new float[count];
         for (int z = 0; z < VERTEX_COUNT; z++) {            // Boucle de generation de monde
             for (int x = 0; x < VERTEX_COUNT; x++) {
                 float height = getHeight(x, z, image);
                 heights[x][z] = height;
+                fHeightMap[index]= height;
+                index++;
             }
         }
-        if (worldChunk.size() > 0) {
+        if (worldChunk != null && worldChunk.size() > 0) {
             smoothTerrain(worldChunk.get(new Vector2f(x / SIZE - 1, z / SIZE)),
                     worldChunk.get(new Vector2f(x / SIZE + 1, z / SIZE)),
                     worldChunk.get(new Vector2f(x / SIZE, z / SIZE + 1))
@@ -249,7 +271,14 @@ public class Terrain {
     public void setModel() {
         if (modelRequest.isExecuted()) {
             this.model = modelRequest.getModel();
+            control.setSpatial(this);
+            control.setPhysicsSpace(World.getPhysics());
         }
+    }
+
+
+    public float[] getfHeightMap() {
+        return fHeightMap;
     }
 
     public static int getSIZE() {
@@ -278,5 +307,14 @@ public class Terrain {
 
     public TerrainTexture getBlendMap() {
         return blendMap;
+    }
+
+    public void setControl(TerrainControl tc) {
+
+        this.control = tc;
+    }
+
+    public TerrainControl getControl() {
+        return control;
     }
 }

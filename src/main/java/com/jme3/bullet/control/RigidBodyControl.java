@@ -334,7 +334,7 @@ public class RigidBodyControl extends PhysicsRigidBody implements PhysicsControl
      *
      * @param tpf the time interval between frames (in seconds, &ge;0)
      */
-   // @Override
+    @Override
     public void update(float tpf) {
         if (enabled && entity != null) {
             if (isKinematic() && kinematicSpatial) {

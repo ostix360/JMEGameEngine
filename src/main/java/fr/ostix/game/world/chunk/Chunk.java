@@ -53,7 +53,7 @@ public class Chunk {
             String entityName = values[0];
             int id = Integer.parseInt(values[1]);
             int component = Integer.parseInt(values[2]);
-            Model m = res.getModelByName().get(entityName);
+            Model m = res.getModelByName(entityName);
             Transform t = Transform.load(lines[index++]);
             Entity e = new Entity(id, m, t.getPosition(), t.getRotation(), t.getScale().y());
             LoadComponents.loadComponents(res.getComponents().get(component), e);

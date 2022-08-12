@@ -21,54 +21,17 @@ public class CollisionCreator implements ComponentCreator {
 
     @Override
     public Component loadComponent(String component, Entity entity) {
-//        CollisionProperties prop = new CollisionProperties();
-//        List<BoundingModel> bounds = new ArrayList<>();
-//        String[] lines = component.split("\n");
-//        if (!lines[0].equalsIgnoreCase("Collision Component")) {
-//            return null;
-//        }
-//        for (int i = 1; i < lines.length - 1; i++) {
-//            String line = lines[i];
-//            CollisionShapeType type = isType(line);
-//            if (type != null) {
-//                BoundingModel model;
-//                switch (type) {
-//                    case BOX:
-//                        model = BoxShape.load(lines[++i]);
-//                        break;
-//                    case CAPSULE:
-//                        model = CapsuleShape.load(lines[++i]);
-//                        break;
-//                    case CONE:
-//                        model = ConeShape.load(lines[++i]);
-//                        break;
-//                    case CYLINDER:
-//                        model = CylinderShape.load(lines[++i]);
-//                        break;
-//                    default:
-//                        model = SphereShape.load(lines[++i]);
-//                }
-//                Transform t = Transform.load(lines[++i]);
-//                model.setTransform(t);
-//                bounds.add(model);
-//            } else {
-//                String sb = lines[i++] + "\n" +
-//                        lines[i++];
-//                bounds.add(BoundingModel.load(sb));
-//            }
-//        }
-//        prop.setCanMove(Boolean.parseBoolean(lines[lines.length - 1]));
-//        prop.setBoundingModels(bounds);
-
-        return new CollisionComponent(entity);
+        String[] lines = component.split("\n");
+        if (!lines[0].equalsIgnoreCase("Collision Component")) {
+            return null;
+        }
+        CollisionProperty prop = new CollisionProperty();
+        try {
+            prop.setControllerType(lines[1]);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new CollisionComponent(entity, prop);
     }
 
-//    private CollisionShapeType isType(String line) {
-//        for (CollisionShapeType type : CollisionShapeType.values()) {
-//            if (line.equalsIgnoreCase(type.toString())) {
-//                return type;
-//            }
-//        }
-//        return null;
-//    }
 }

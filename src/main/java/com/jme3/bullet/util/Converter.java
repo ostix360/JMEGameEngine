@@ -230,10 +230,10 @@ public class Converter {
         FloatBuffer vertices = (FloatBuffer) mesh.getVAO().getPosition().getDataReadOnly();
 //        vertices.rewind();
 
-        int verticesLength = mesh.getVertexCount() * 3;
+
         jBulletIndexedMesh.numVertices = mesh.getVertexCount();
         jBulletIndexedMesh.vertexStride = 12; //3 verts * 4 bytes per.
-        for (int i = 0; i < verticesLength; i++) {
+        for (int i = 0; i < vertices.limit(); i++) {
             float tempFloat = vertices.get();
             jBulletIndexedMesh.vertexBase.putFloat(tempFloat);
         }

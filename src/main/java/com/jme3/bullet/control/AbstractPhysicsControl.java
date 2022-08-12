@@ -154,6 +154,8 @@ public abstract class AbstractPhysicsControl implements PhysicsControl {
 
     public void setSpatial(Entity spatial) {
         this.spatial = spatial;
+
+
     }
 
     /**
@@ -313,6 +315,8 @@ public abstract class AbstractPhysicsControl implements PhysicsControl {
         if (newSpace != null && isEnabled()) {
             addPhysics(newSpace);
             added = true;
+            setPhysicsLocation(getSpatialTranslation());
+            setPhysicsRotation(getSpatialRotation());
         }
         /*
          * If this control isn't enabled, its physics object will be
