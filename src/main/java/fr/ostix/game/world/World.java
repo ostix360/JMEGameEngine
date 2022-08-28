@@ -1,7 +1,6 @@
 package fr.ostix.game.world;
 
 import com.jme3.bullet.*;
-import com.jme3.bullet.collision.shapes.*;
 import com.jme3.bullet.control.*;
 import fr.ostix.game.audio.*;
 import fr.ostix.game.core.*;
@@ -87,12 +86,12 @@ public class World {
         HashMap<String, Texture> textures = ResourcePack.getTextureByName();
 
         physics.setDebugEnabled(true);
-        physics.getPhysicsSpace().setGravity(new Vector3f(0,-9.81f,0).mul(20f));
+        physics.getPhysicsSpace().setGravity(new Vector3f(0,-9.81f,0).mul(10f));
 
 
 
         AnimatedModel an = pack.getAnimatedModelByName().get("player2");
-        player = new Player(an, new Vector3f(15, 5, 15), new Vector3f(0), 1f);
+        player = new Player(an, new Vector3f(135, 70, 75), new Vector3f(0), 0.5f);
 
         ParticleTargetProperties targetProperties = new ParticleTargetProperties(0, 6, 0, 80, 6);
         ParticleSystem system = new ParticleSystem(new ParticleTexture(textures.get("fire").getID(), 8, true),
@@ -167,12 +166,13 @@ public class World {
         back.setPosition(new Vector3f(0, 0, 0));
         back.setLooping(true);
         back.setProperty(AL10.AL_SOURCE_RELATIVE, AL10.AL_TRUE);
-        back.play();
+//        back.play();
         back2.setGain(0.2f);
         back2.setPosition(new Vector3f(0, 0, 0));
         back2.setLooping(true);
         back2.setProperty(AL10.AL_SOURCE_RELATIVE, AL10.AL_TRUE);
         // back2.play();
+
         chunkHandler.run();
 
 
@@ -196,7 +196,7 @@ public class World {
 //        worldIndex = new int[2][2];
         for (int x = 0; x < 1; x++) {
             for (int z = 0; z < 1; z++) {
-                worldChunk.put(new Vector2f(x,z),new Chunk(x,z,new ArrayList<>()).setTerrain(new Terrain(x, z, texturePack, blendMap, "heightmap")));
+                worldChunk.put(new Vector2f(x,z),new Chunk(x,z,new ArrayList<>()).setTerrain(new Terrain(x, z, texturePack, blendMap, new float[][]{})));
 //                worldIndex[x][z] = index;
             }
         }

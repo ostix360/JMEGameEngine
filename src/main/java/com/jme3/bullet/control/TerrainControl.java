@@ -85,7 +85,7 @@ public class TerrainControl extends PhysicsRigidBody implements PhysicsControl{
 //                return;
 //            }
 //        }
-
+//TODO change to Chunk File if needed
         collisionShape = CollisionShapeFactory.createMeshShape(terrain);
 
     }

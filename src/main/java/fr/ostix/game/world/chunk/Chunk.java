@@ -16,8 +16,12 @@ public class Chunk {
     private Terrain terrain;
     private static ResourcePack res;
 
-    public Chunk(int x, int z,List<Entity> entities) {
+    private final int x,z;
+
+    public Chunk(int x, int z, List<Entity> entities) {
         this.entities = entities;
+        this.x = x;
+        this.z = z;
     }
 
 
@@ -34,8 +38,8 @@ public class Chunk {
         return terrain;
     }
 
-    public static Chunk load(String content, int x, int z) {
-        Terrain t = importTerrain(content);
+    public static Chunk load(String content, int x, int z, float[][] heights) {
+        Terrain t = importTerrain(content,heights);
         List<Entity> entities = importEntities(content);
         return new Chunk(x,z,entities).setTerrain(t);
     }
@@ -67,7 +71,7 @@ public class Chunk {
         Chunk.res = res;
     }
 
-    private static Terrain importTerrain(String content) {
+    private static Terrain importTerrain(String content,float[][] heights) {
         String[] lines = content.split("\n");
         int index = 0;
 
@@ -78,8 +82,15 @@ public class Chunk {
         TerrainTexturePack ttp = TerrainTexturePack.load(lines[index++]);
         values = lines[index].split(";");
         TerrainTexture blendMap = TerrainTexture.load(values[0],true);
-        String heightMap = values[1];
-        return new Terrain(x / Terrain.getSIZE(), z / Terrain.getSIZE(), ttp, blendMap, heightMap);
+        return new Terrain(x / Terrain.getSIZE(), z / Terrain.getSIZE(), ttp, blendMap, heights);
 
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getZ() {
+        return z;
     }
 }

@@ -30,8 +30,8 @@ public class Player extends Entity {
 
     public Player(Model model, Vector3f position, Vector3f rotation, float scale) {
         super(0, model, position, rotation, scale);
-        this.physic = new BetterCharacterControl(1f, 8f, 2000f);
-        ((BetterCharacterControl)this.physic).getJumpForce().mul(5.5f);
+        this.physic = new BetterCharacterControl(1f, 4f, 20f);
+        ((BetterCharacterControl)this.physic).getJumpForce().mul(2.8f);
 
     }
 
@@ -77,11 +77,11 @@ public class Player extends Entity {
         //super.increasePosition(new Vector3f(dx, upwardsSpeed, dz));
         //if (!canJump) {
         //  }
-        float terrainHeight = World.getTerrainHeight(this.getPosition().x(), this.getPosition().z())-0.5f;
+        float terrainHeight = World.getTerrainHeight(this.getPosition().x(), this.getPosition().z())-25f;
         if (this.getPosition().y() <= terrainHeight) {
 //            canJump = true;
 
-//            ((BetterCharacterControl) physic).setWalkDirection(((BetterCharacterControl) physic).getWalkDirection().add(0,-9.81f,0));
+            ((BetterCharacterControl) physic).setWalkDirection(((BetterCharacterControl) physic).getWalkDirection().add(0,-9.81f,0));
             position.set(this.getPosition().x(), terrainHeight, this.getPosition().z());
             ((BetterCharacterControl) physic).setPhysicsLocation(this.getPosition());
         }

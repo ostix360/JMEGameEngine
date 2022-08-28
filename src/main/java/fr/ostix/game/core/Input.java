@@ -28,7 +28,6 @@ public class Input {
     public static boolean[] keysMousePressed = new boolean[65535];
 
 
-
     public static void init(long window) {
         GLFW.glfwSetKeyCallback(window, new GLFWKeyCallback() {
             @Override
@@ -57,13 +56,15 @@ public class Input {
             }
         });
 
-        glfwSetScrollCallback(window, (w, xoffset, yoffset) -> mouseDWhell = (float) (yoffset - xoffset));
+        glfwSetScrollCallback(window,
+                (w, xoffset, yoffset) -> {
+                    mouseDWhell = (float) (yoffset - xoffset);
+                });
     }
 
     public static void updateInput(long window) {
         mouseDY = 0;
         mouseDX = 0;
-        mouseDWhell = 0;
 
         glfwGetCursorPos(window, MOUSE_X, MOUSE_Y);
         mouseX = MOUSE_X.get();

@@ -32,7 +32,7 @@ public class PlayerListener implements Listener {
                 break;
 
         }
-        e.getPlayer().getControl().setWalkDirection(new Vector3f(dx, 0, dz).mul(30));
+        e.getPlayer().getControl().setWalkDirection(new Vector3f(dx, 0, dz).mul(15));
 //        e.getPlayer().increasePosition(new Vector3f(dx,dy,dz));
 
     }

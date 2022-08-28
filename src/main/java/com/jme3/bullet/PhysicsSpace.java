@@ -420,9 +420,9 @@ public class PhysicsSpace {
     }
 
     private void addTerrain(Terrain obj) {
-        TerrainControl tc = new TerrainControl(obj,0);
-        obj.setControl(tc);
-        tc.setPhysicsSpace(this);
+//        TerrainControl tc = new TerrainControl(obj,0);
+//        obj.setControl(tc);
+//        tc.setPhysicsSpace(this);
     }
 
     public void addCollisionObject(PhysicsCollisionObject obj) {

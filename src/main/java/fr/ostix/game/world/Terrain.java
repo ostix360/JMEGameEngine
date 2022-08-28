@@ -35,15 +35,14 @@ public class Terrain {
 
     private TerrainControl control = null;
 
-    public Terrain(float gridX, float gridZ, TerrainTexturePack texturePack, TerrainTexture blendMap,
-                   String heightMap) {
+    public Terrain(float gridX, float gridZ, TerrainTexturePack texturePack, TerrainTexture blendMap, float[][] heights) {
         this.x = gridX * SIZE;
         this.z = gridZ * SIZE;
-        generateTerrain(heightMap);
+        this.heights = heights;
+        generateTerrain();
         this.texturePack = texturePack;
         this.blendMap = blendMap;
-        TerrainControl tc = new TerrainControl(this,0);
-        setControl(tc);
+        this.control = new TerrainControl(this,0);
     }
 
     public static void setWorldChunk(Map<Vector2f, Chunk> worldChunk) {
@@ -76,44 +75,36 @@ public class Terrain {
 
     private void regenerateTerrain() {
         this.model = null;
-        int VERTEX_COUNT = heights.length;
+        int VERTEX_COUNT = 16;
         int count = VERTEX_COUNT * VERTEX_COUNT;
         float[] vertices = new float[count * 3];
+        float[] normals = new float[count * 3];
         int vertexPointer = 0;
-        int counter = 0;
         for (int z = 0; z < VERTEX_COUNT; z++) {            // Boucle de generation de monde
             for (int x = 0; x < VERTEX_COUNT; x++) {
                 vertices[vertexPointer * 3] = (float) x / ((float) VERTEX_COUNT - 1) * SIZE;
-                vertices[vertexPointer * 3 + 1] = heights[x][z];
+                vertices[vertexPointer * 3 + 1] = getHeight(x,z);
                 vertices[vertexPointer * 3 + 2] = (float) z / ((float) VERTEX_COUNT - 1) * SIZE;
+                Vector3f normal = calculateNormal(x, z);
+                normals[vertexPointer * 3] = normal.x;
+                normals[vertexPointer * 3 + 1] = normal.y;
+                normals[vertexPointer * 3 + 2] = normal.z;
                 vertexPointer++;
-                fHeightMap[counter] = heights[x][z];
-                counter++;
             }
         }
-
         ModelData data = modelRequest.getData();
-        modelRequest = new ModelLoaderRequest(new ModelData(vertices, data.getTexcoords(), data.getNormals(), data.getIndices()));
+        modelRequest = new ModelLoaderRequest(new ModelData(vertices, data.getTexcoords(), normals, data.getIndices()));
         GLRequestProcessor.sendRequest(modelRequest);
     }
 
-    private void generateTerrain(String heightMap) {
-        BufferedImage image = null;
-        File file = new File(ToolDirectory.RES_FOLDER + "/textures/terrain/heightMap/" + heightMap + ".png");
-
-        try {
-            image = ImageIO.read(file);
-        } catch (IOException e) {
-            Logger.err("Couldn't load heightMap "+heightMap, e);
-        }
-        assert image != null;
-
-        ByteBuffer data = TextureLoader.loadImage(image);
+    private void generateTerrain() {
 
 
 
-        int VERTEX_COUNT = image.getHeight();
-        heights = new float[VERTEX_COUNT][VERTEX_COUNT];
+
+
+        int VERTEX_COUNT = 16;
+//        heights = new float[VERTEX_COUNT][VERTEX_COUNT];
         int count = VERTEX_COUNT * VERTEX_COUNT;
         float[] vertices = new float[count * 3];
         float[] normals = new float[count * 3];
@@ -124,24 +115,22 @@ public class Terrain {
         fHeightMap = new float[count];
         for (int z = 0; z < VERTEX_COUNT; z++) {            // Boucle de generation de monde
             for (int x = 0; x < VERTEX_COUNT; x++) {
-                float height = getHeight(x, z, image);
-                heights[x][z] = height;
-                fHeightMap[index]= height;
+                fHeightMap[index] = getHeight(x, z);
                 index++;
             }
         }
-        if (worldChunk != null && worldChunk.size() > 0) {
-            smoothTerrain(worldChunk.get(new Vector2f(x / SIZE - 1, z / SIZE)),
-                    worldChunk.get(new Vector2f(x / SIZE + 1, z / SIZE)),
-                    worldChunk.get(new Vector2f(x / SIZE, z / SIZE + 1))
-                    , worldChunk.get(new Vector2f(x / SIZE, z / SIZE - 1)));
-        }
+//        if (worldChunk != null && worldChunk.size() > 0) {
+//            smoothTerrain(worldChunk.get(new Vector2f(x / SIZE - 1, z / SIZE)),
+//                    worldChunk.get(new Vector2f(x / SIZE + 1, z / SIZE)),
+//                    worldChunk.get(new Vector2f(x / SIZE, z / SIZE + 1))
+//                    , worldChunk.get(new Vector2f(x / SIZE, z / SIZE - 1)));
+//        }
         for (int z = 0; z < VERTEX_COUNT; z++) {            // Boucle de generation de monde
             for (int x = 0; x < VERTEX_COUNT; x++) {
                 vertices[vertexPointer * 3] = (float) x / ((float) VERTEX_COUNT - 1) * SIZE;
-                vertices[vertexPointer * 3 + 1] = heights[x][z];
+                vertices[vertexPointer * 3 + 1] = getHeight(x, z);
                 vertices[vertexPointer * 3 + 2] = (float) z / ((float) VERTEX_COUNT - 1) * SIZE;
-                Vector3f normal = calculateNormal(x, z, image);
+                Vector3f normal = calculateNormal(x, z);
                 normals[vertexPointer * 3] = normal.x;
                 normals[vertexPointer * 3 + 1] = normal.y;
                 normals[vertexPointer * 3 + 2] = normal.z;
@@ -246,6 +235,17 @@ public class Terrain {
         }
 
     }
+    private Vector3f calculateNormal(int x, int z) {
+        float heightL = getHeight(x - 1, z);
+        float heightR = getHeight(x + 1, z);
+        float heightD = getHeight(x, z - 1);
+        float heightU = getHeight(x, z + 1);
+        Vector3f normal = new Vector3f(heightL - heightR, 2f, heightD - heightU);
+        normal.normalize();
+        return normal;
+    }
+
+
 
     private Vector3f calculateNormal(int x, int z, BufferedImage image) {
         float heightL = getHeight(x - 1, z, image);
@@ -266,6 +266,13 @@ public class Terrain {
         height /= MAX_PIXEL_COLOR / 2;
         height *= MAX_HEIGHT;
         return height;
+    }
+
+    private float getHeight(int x, int z) {
+        if (x < -1 || x >= 17 || z < -1 || z >= 17) {
+            return 0;
+        }
+        return heights[x+1][z+1];
     }
 
     public void setModel() {
