@@ -68,13 +68,19 @@ public class Game extends Thread {
         window = DisplayManager.createDisplay();
 
         AudioManager.init(AL11.AL_EXPONENT_DISTANCE);
+        SoundSource source = AudioManager.loadSound("loading",true);
+        source.play();
         Input.init(window);
         guiManager = new MasterGui(loader);
         masterFont = new MasterFont(loader);
 
         glfwShowWindow(window);
+
         stateManager.init(guiManager);
         gameFont = new FontType(ResourcePack.getTextureByName().get("candara").getID(), "candara");
+
+
+
     }
 
 
