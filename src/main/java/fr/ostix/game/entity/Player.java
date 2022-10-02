@@ -1,6 +1,7 @@
 package fr.ostix.game.entity;
 
 import com.jme3.bullet.control.*;
+import fr.ostix.game.entity.camera.*;
 import fr.ostix.game.graphics.model.*;
 import fr.ostix.game.inventory.*;
 import fr.ostix.game.world.*;
@@ -116,5 +117,6 @@ public class Player extends Entity {
     public void setInventory(PlayerInventory playerInventory) {
         this.inventory = playerInventory;
     }
+
 }
 

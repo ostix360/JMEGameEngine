@@ -4,13 +4,15 @@ import fr.ostix.game.core.events.listener.*;
 
 import java.lang.reflect.*;
 import java.util.*;
+import java.util.concurrent.*;
 
 public class EventManager {
     private static final EventManager INSTANCE = new EventManager();
-    private final HashSet<Listener> listeners;
+    private final List<Listener> listeners;
 
     public EventManager() {
-        listeners = new HashSet<>();
+        listeners = new CopyOnWriteArrayList<>();
+
     }
 
     public static EventManager getInstance() {

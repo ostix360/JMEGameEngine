@@ -138,6 +138,11 @@ public class Maths {
         }
     }
 
+
+    public static boolean almostEqual(double a, double b, double eps){
+        return Math.abs(a-b)<eps;
+    }
+
     public static Vector3f setByAxis(int index,float value, Vector3f dest){
         switch (index) {
             case 0:

@@ -88,10 +88,10 @@ public class Camera implements ICamera {
         distanceFromPlayer.setTarget(target);
     }
 
-    private void caculateCameraPosition(float horzontalDistance, float yOffset) {
+    private void caculateCameraPosition(float horizontalDistance, float yOffset) {
         float theta = player.getRotation().y() + angleAroundPlayer.get();
-        float xoffset = (float) (horzontalDistance * Math.sin(Math.toRadians(theta)));
-        float zoffset = (float) (horzontalDistance * Math.cos(Math.toRadians(theta)));
+        float xoffset = (float) (horizontalDistance * Math.sin(Math.toRadians(theta)));
+        float zoffset = (float) (horizontalDistance * Math.cos(Math.toRadians(theta)));
         position.x = player.getPosition().x() - xoffset;
         position.y = yOffset;
 //        if (position.y < terrainHeight) {
@@ -142,5 +142,39 @@ public class Camera implements ICamera {
     public void reflect(float height) {
         this.invertPitch();
         this.position.y = position.y - 2 * (position.y - height);
+    }
+
+    public void goTo(Transform t) {
+        this.pitch = 3;
+
+        float xoffset = (float) (8);
+        float zoffset = (float) (10);
+        SmoothFloat x = new SmoothFloat(position.x(),5f);
+        SmoothFloat y = new SmoothFloat(position.y(),5f);
+        SmoothFloat z = new SmoothFloat(position.z(),5f);
+        x.setTarget((int) (t.getPosition().x() - xoffset));
+        y.setTarget(4);
+        z.setTarget((int) (t.getPosition().z() + zoffset));
+        this.yaw = -5;
+        Thread thread = new Thread(() -> {
+            while (true) {
+                x.update(1 / 120f);
+                y.update(1 / 120f);
+                z.update(1 / 120f);
+                position.x = x.get();
+                position.y = y.get();
+                position.z = z.get();
+                if (Maths.almostEqual(position.x(),x.getTarget(),1f) && Maths.almostEqual(position.y(),y.getTarget(),1f) && Maths.almostEqual(position.z(),z.getTarget(),1f)){
+                    break;
+                }
+                try {
+                    Thread.sleep(8);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        });
+        thread.start();
     }
 }

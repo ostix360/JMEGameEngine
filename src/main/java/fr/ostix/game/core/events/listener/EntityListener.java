@@ -9,7 +9,7 @@ public class EntityListener implements Listener {
     // private final List<Entity> entities = new ArrayList<>();
     // public static EntityListener instance = new EntityListener();
 
-    private final Entity e;
+    protected final Entity e;
 
     public EntityListener(Entity e) {
         this.e = e;
@@ -18,8 +18,8 @@ public class EntityListener implements Listener {
     @EventHandler
     public void onEntityInteract(EntityInteractEvent e) {
         if (this.e.equals(e.getEntity())) {
-            if (this.e instanceof Shop) {
-
+            if (this.e instanceof Interact) {
+                ((Interact) this.e).interact(e.getWorld());
             }
         }
     }

@@ -57,4 +57,12 @@ public class ResourcePack {
     public HashMap<Integer, String> getComponents() {
         return components;
     }
+
+    public boolean isModelAnimated(String modelName) {
+        if (animatedModels.containsKey(modelName)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

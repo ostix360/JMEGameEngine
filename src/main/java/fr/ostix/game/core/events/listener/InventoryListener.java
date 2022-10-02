@@ -14,15 +14,15 @@ public class InventoryListener implements Listener {
 
     @EventHandler
     public void onOpen(InventoryOpenEvent e) {
+        worldState.setWorldCanBeUpdated(false);
         worldState.setOpenInventory(true);
         worldState.setCurrentInventory(e.getInv());
-        worldState.setWorldCanBeUpdated(false);
     }
 
     @EventHandler
     public void onClose(InventoryCloseEvent e) {
-        worldState.setWorldCanBeUpdated(true);
         worldState.setOpenInventory(false);
         worldState.setCurrentInventory(null);
+        worldState.setWorldCanBeUpdated(true);
     }
 }

@@ -6,6 +6,7 @@ import fr.ostix.game.audio.*;
 import fr.ostix.game.core.*;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.*;
+import fr.ostix.game.core.events.listener.keyListeners.*;
 import fr.ostix.game.core.events.listener.player.*;
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.entity.*;
@@ -22,13 +23,13 @@ import fr.ostix.game.graphics.model.*;
 import fr.ostix.game.graphics.particles.*;
 import fr.ostix.game.graphics.particles.particleSpawn.*;
 import fr.ostix.game.graphics.textures.*;
+import fr.ostix.game.menu.*;
 import fr.ostix.game.toolBox.*;
 import fr.ostix.game.world.chunk.*;
 import fr.ostix.game.world.texture.*;
 import fr.ostix.game.world.water.*;
 import fr.ostix.game.world.weather.*;
 import org.joml.*;
-import org.lwjgl.glfw.*;
 import org.lwjgl.openal.*;
 
 import java.lang.Math;
@@ -55,15 +56,21 @@ public class World {
 
     private ChunkHandler chunkHandler;
 
-    SoundListener listener;
+    private SoundListener listener;
     private Player player;
-    Camera cam;
+    private Camera cam;
     private Weather weather;
     private float time = 0000.0F;
+    private final WorldState state;
+
+    private KeyInGameListener keyWorldListener;
 
     private static final BulletAppState physics = new BulletAppState();
+    private final List<Entity> entitiesNear = new ArrayList<>();
 
-    public World() {
+    public World(WorldState state) {
+        this.state = state;
+
         physics.startPhysics();
     }
 
@@ -113,8 +120,11 @@ public class World {
         physics.getPhysicsSpace().add(player);
 
         PlayerListener PL = new PlayerListener();
+        keyWorldListener = new KeyInGameListener(this, this.getPlayer(), player.getInventory());
+        PlayerInteractListener PLI = new PlayerInteractListener(this, entities);
+        this.worldListeners.add(keyWorldListener);
         this.worldListeners.add(PL);
-        EventManager.getInstance().register(PL);
+        this.worldListeners.add(PLI);
 
 
         listener = new SoundListener(player.getPosition(), new Vector3f(), player.getRotation());
@@ -239,6 +249,7 @@ public class World {
 
     public void update() {
         //entity.increaseRotation(new Vector3f(0, 1, 0));
+        keyWorldListener.update();
         physics.update(1/60f);
         cam.move();
 
@@ -294,13 +305,29 @@ public class World {
         MasterParticle.cleanUp();
     }
 
+    public void pause(){
+        EventManager.getInstance().removeAll(worldListeners);
+        state.setWorldCanBeUpdated(false);
+        player.getControl().setWalkDirection(new Vector3f(0));
+    }
+
+    public void resume(){
+        worldListeners.forEach(wl -> EventManager.getInstance().register(wl));
+        state.setWorldCanBeUpdated(true);
+
+    }
+
 
     public boolean isInit() {
         return isInit;
     }
 
     public List<Entity> getEntitiesNear() {
-        return new ArrayList<>();
+        return entitiesNear;
+    }
+
+    public Camera getCamera() {
+        return cam;
     }
 
     public static PhysicsSpace getPhysics() {

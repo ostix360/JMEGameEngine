@@ -8,6 +8,7 @@ import fr.ostix.game.core.events.keyEvent.*;
 import fr.ostix.game.core.events.player.*;
 import fr.ostix.game.core.events.quest.*;
 import fr.ostix.game.entity.*;
+import fr.ostix.game.entity.entities.*;
 import fr.ostix.game.inventory.*;
 import fr.ostix.game.world.*;
 import org.joml.*;
@@ -37,9 +38,12 @@ public class KeyInGameListener implements KeyListener {
             }
         }
         if (e.getKEY() == GLFW_KEY_E) {
-            if (world.getEntitiesNear().size() == 0)
-                EventManager.getInstance().callEvent(new EntityInteractEvent(world.getEntitiesNear().get(1), 3));
+            if (!world.getEntitiesNear().isEmpty()) {
+                EventManager.getInstance().callEvent(new EntityInteractEvent(world.getEntitiesNear().get(0), world, 3));
+            }
         }
+
+
     }
 
     @Override
@@ -66,8 +70,29 @@ public class KeyInGameListener implements KeyListener {
 //            EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
 //            p.increasePosition(new Vector3f(0,-2,0));
 //        }
-    }
 
+//        if (e.getKEY() == GLFW_KEY_W || e.getKEY() == GLFW_KEY_UP) {
+//            p.setMovement(Entity.MovementType.FORWARD);
+//            EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
+//        } else if (e.getKEY() == GLFW_KEY_S || e.getKEY() == GLFW_KEY_DOWN) {
+//            p.setMovement(Entity.MovementType.BACK);
+//            EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
+//        } else {
+//            p.setMovement(Entity.MovementType.STATIC);
+//            EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
+//        }
+//
+//
+//        if (e.getKEY() == GLFW_KEY_A || e.getKEY() == GLFW_KEY_LEFT) {
+//            p.increaseRotation(new Vector3f(0, 1.8f, 0));
+//        } else if (e.getKEY() == GLFW_KEY_D || e.getKEY() == GLFW_KEY_RIGHT) {
+//            p.increaseRotation(new Vector3f(0, -1.8f, 0));
+//        }
+//        if (e.getKEY() == GLFW_KEY_LEFT_SHIFT) {
+////            EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
+//            p.getControl().setWalkDirection(new Vector3f(0, -10, 0));
+//        }
+    }
 
 
     public void update() {
@@ -79,7 +104,7 @@ public class KeyInGameListener implements KeyListener {
             EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
         } else {
             p.setMovement(Entity.MovementType.STATIC);
-            EventManager.getInstance().callEvent(new PlayerMoveEvent(p,1));
+            EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
         }
         if (Input.keys[GLFW_KEY_SPACE]) {
             p.setMovement(Entity.MovementType.JUMP);
@@ -93,7 +118,7 @@ public class KeyInGameListener implements KeyListener {
         }
         if (Input.keys[GLFW_KEY_LEFT_SHIFT]) {
 //            EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
-           p.getControl().setWalkDirection(new Vector3f(0,-10,0));
+            p.getControl().setWalkDirection(new Vector3f(0, -10, 0));
         }
 
     }

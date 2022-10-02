@@ -69,7 +69,7 @@ public class Game extends Thread {
 
         AudioManager.init(AL11.AL_EXPONENT_DISTANCE);
         SoundSource source = AudioManager.loadSound("loading",true);
-        source.play();
+//        source.play();
         Input.init(window);
         guiManager = new MasterGui(loader);
         masterFont = new MasterFont(loader);

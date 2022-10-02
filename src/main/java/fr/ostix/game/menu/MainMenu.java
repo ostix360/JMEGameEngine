@@ -4,12 +4,14 @@ import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.keyListeners.*;
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.menu.component.*;
+import fr.ostix.game.world.*;
 
 public class MainMenu extends Screen {
 
     public boolean startWorld = false;
     private Button start;
-    private KeyInGameListener keyInGameListener;
+
+    private World world;
 
     public MainMenu() {
         super("Main Menu");
@@ -24,7 +26,8 @@ public class MainMenu extends Screen {
                 ResourcePack.getTextureByName().get("startButton").getID(), (b) -> {
             startWorld = true;
             start.cleanUp();
-            EventManager.getInstance().register(keyInGameListener);
+            world.resume();
+
         });
         this.addComponent(start);
 
@@ -35,7 +38,8 @@ public class MainMenu extends Screen {
         super.update();
     }
 
-    public void setKeyWorldListener(KeyInGameListener keyWorldListener) {
-        this.keyInGameListener = keyWorldListener;
+
+    public void setWorld(World world) {
+        this.world = world;
     }
 }

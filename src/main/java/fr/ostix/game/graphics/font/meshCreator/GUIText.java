@@ -12,7 +12,7 @@ import java.util.Objects;
 
 public class GUIText {
 
-    private final String textString;
+    private String textString;
     private final float fontSize;
     private final boolean centerText;
     private final Vector2f position;
@@ -100,4 +100,7 @@ public class GUIText {
         return textString;
     }
 
+    public void setText(String textString) {
+        this.textString = textString;
+    }
 }

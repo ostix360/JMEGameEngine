@@ -19,7 +19,6 @@ public class StateManager {
     private MainMenu mainMenu;
     private Screen currentScreen;
     private Listener keyMainMenuListener;
-    private KeyInGameListener keyWorldListener;
 
     public StateManager(Loader loader) {
         this.loader = loader;
@@ -47,11 +46,10 @@ public class StateManager {
             screens[1] = world;
             MasterParticle.init(loader, MasterRenderer.getProjectionMatrix());
             Logger.log("World is Loaded");
-            keyWorldListener = new KeyInGameListener(world.getWorld(), world.getWorld().getPlayer(), world.getPlayerInventory());
-            mainMenu.setKeyWorldListener(keyWorldListener);
+
+            mainMenu.setWorld(world.getWorld());
         }
         if (mainMenu.startWorld) {
-            keyWorldListener.update();
             return 1;
         }
         return 0;

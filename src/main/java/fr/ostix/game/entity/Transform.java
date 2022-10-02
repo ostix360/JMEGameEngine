@@ -58,6 +58,11 @@ public class Transform {
         return matrix.getNormalizedRotation(new Quaternionf());
     }
 
+    @Override
+    public Object clone(){
+        return new Transform(new Vector3f(this.getPosition()),new Vector3f(this.getRotation()),this.getScale().x());
+    }
+
     public Vector3f getRotation() {
         return rotation;
     }

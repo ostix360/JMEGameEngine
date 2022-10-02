@@ -4,6 +4,7 @@ package fr.ostix.game.world.chunk;
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.entity.*;
 import fr.ostix.game.entity.component.*;
+import fr.ostix.game.entity.entities.*;
 import fr.ostix.game.graphics.model.*;
 import fr.ostix.game.world.*;
 import fr.ostix.game.world.texture.*;
@@ -57,9 +58,24 @@ public class Chunk {
             String entityName = values[0];
             int id = Integer.parseInt(values[1]);
             int component = Integer.parseInt(values[2]);
-            Model m = res.getModelByName(entityName);
+            Model m;
+            if (!res.isModelAnimated(entityName))
+                m = res.getModelByName(entityName);
+            else
+                m = res.getAnimatedModelByName().get(entityName);
             Transform t = Transform.load(lines[index++]);
-            Entity e = new Entity(id, m, t.getPosition(), t.getRotation(), t.getScale().y());
+            String entityType = values[3];
+            Entity e;
+            switch (entityType) {
+                case "NPC":
+                    e = new NPC(id, m, t.getPosition(), t.getRotation(), t.getScale().y(),entityName);
+                    break;
+                case "Shop":
+                    e = new Shop(m, t.getPosition(), t.getRotation(), t.getScale().y(),id);
+                    break;
+                default:
+                    e = new Entity(id, m, t.getPosition(), t.getRotation(), t.getScale().y());
+            }
             LoadComponents.loadComponents(res.getComponents().get(component), e);
 
             entities.add(e);

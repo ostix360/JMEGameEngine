@@ -21,7 +21,7 @@ public class WorldState extends Screen {
 
     public WorldState() {
         super("World");
-        world = new World();
+        world = new World(this);
 
         hotBar = new InGameMenu();
 
@@ -74,7 +74,7 @@ public class WorldState extends Screen {
         } else if (currentInventory != null) {
             currentInventory.update();
         } else {
-            System.err.println("Problem during the choice of the thing that need to be update");
+//            System.err.println("Problem during the choice of the thing that need to be update");
         }
 
     }
