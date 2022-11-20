@@ -5,6 +5,8 @@ import fr.ostix.game.core.quest.*;
 import fr.ostix.game.core.quest.serialization.*;
 
 import java.io.*;
+import java.nio.charset.*;
+import java.nio.file.*;
 
 public class JsonUtils {
 
@@ -19,7 +21,7 @@ public class JsonUtils {
         BufferedReader reader;
         try {
             reader = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(jsonFile)));
+                    new InputStreamReader(Files.newInputStream(Paths.get(jsonFile)), StandardCharsets.UTF_8));
             String line;
             while ((line = reader.readLine()) != null) {
                 sb.append(line);

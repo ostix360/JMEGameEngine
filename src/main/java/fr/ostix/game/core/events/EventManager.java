@@ -1,6 +1,8 @@
 package fr.ostix.game.core.events;
 
+import fr.ostix.game.core.events.entity.npc.*;
 import fr.ostix.game.core.events.listener.*;
+import fr.ostix.game.core.events.quest.*;
 
 import java.lang.reflect.*;
 import java.util.*;
@@ -8,11 +10,10 @@ import java.util.concurrent.*;
 
 public class EventManager {
     private static final EventManager INSTANCE = new EventManager();
-    private final List<Listener> listeners;
+    private final Set<Listener> listeners;
 
     public EventManager() {
-        listeners = new CopyOnWriteArrayList<>();
-
+        listeners = ConcurrentHashMap.newKeySet();
     }
 
     public static EventManager getInstance() {
@@ -20,7 +21,10 @@ public class EventManager {
     }
 
     public void callEvent(Event e) {
-        //if (e instanceof PlayerEvent) System.out.printf("Event %s called\n", e.getClass().getSimpleName());
+        //
+        if (e instanceof NPCTalkEvent){
+            System.out.printf("Event %s called\n", e.getClass().getSimpleName());
+        }
         //long nano = System.nanoTime();
         this.listeners.forEach(listener -> {
             for (Method method : listener.getClass().getDeclaredMethods()) {
@@ -35,6 +39,7 @@ public class EventManager {
                         }
                     } catch (Exception ex) {
                         System.err.println(ex.getMessage());
+                        System.err.println("Error during invoking method " + method.getName() + " for the event " + e.getClass().getName());
                         ex.printStackTrace(System.err);
                     }
                 }

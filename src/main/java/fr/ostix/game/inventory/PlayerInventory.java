@@ -2,9 +2,12 @@ package fr.ostix.game.inventory;
 
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.gui.*;
+import fr.ostix.game.items.*;
 import fr.ostix.game.menu.component.*;
 import fr.ostix.game.toolBox.*;
 import org.joml.*;
+
+import java.util.*;
 
 public class PlayerInventory extends Inventory {
 
@@ -52,6 +55,16 @@ public class PlayerInventory extends Inventory {
         this.recipeTab.stopRendering();
         isOpen = false;
     }
+
+    public void addItems(List<ItemStack> items) {
+        super.addItems(items);
+        this.recipeTab.addItems(items);
+    }
+
+    public void removeItems(List<ItemStack> items) {
+
+    }
+
 
     @Override
     public void update() {

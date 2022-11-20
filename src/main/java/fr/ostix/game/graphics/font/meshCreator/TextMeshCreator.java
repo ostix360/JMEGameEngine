@@ -64,6 +64,22 @@ public class TextMeshCreator {
 		Line currentLine = new Line(metaData.getSpaceWidth(), text.getFontSize(), text.getMaxLineSize());
 		Word currentWord = new Word(text.getFontSize());
 		for (char c : chars) {
+			if (c == '\n'){
+				currentLine.attemptToAddWord(currentWord);
+				lines.add(currentLine);
+				currentLine = new Line(metaData.getSpaceWidth(), text.getFontSize(), text.getMaxLineSize());
+				currentWord = new Word(text.getFontSize());
+				continue;
+			}
+			if (c == '\t'){
+				currentLine.attemptToAddWord(currentWord);
+				currentLine.attemptToAddWord(new Word(text.getFontSize()));
+				currentLine.attemptToAddWord(new Word(text.getFontSize()));
+				currentLine.attemptToAddWord(new Word(text.getFontSize()));
+				currentLine.attemptToAddWord(new Word(text.getFontSize()));
+				currentWord = new Word(text.getFontSize());
+				continue;
+			}
 			if ((int) c == SPACE_ASCII) {
 				boolean added = currentLine.attemptToAddWord(currentWord);
 				if (!added) {
@@ -75,6 +91,10 @@ public class TextMeshCreator {
 				continue;
 			}
 			Character character = metaData.getCharacter(c);
+			if (character == null){
+				System.err.println(c + " is not a valid char");
+				continue;
+			}
 			currentWord.addCharacter(character);
 		}
 		completeStructure(lines, currentLine, currentWord, text);

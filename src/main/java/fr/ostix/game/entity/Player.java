@@ -30,7 +30,7 @@ public class Player extends Entity {
 
 
     public Player(Model model, Vector3f position, Vector3f rotation, float scale) {
-        super(0, model, position, rotation, scale);
+        super(-1, model, position, rotation, scale);
         this.physic = new BetterCharacterControl(1f, 4f, 20f);
         ((BetterCharacterControl)this.physic).getJumpForce().mul(2.8f);
 

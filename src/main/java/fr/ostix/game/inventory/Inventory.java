@@ -44,6 +44,14 @@ public abstract class Inventory extends Screen {
     protected void render() {
     }
 
+    public void addItems(List<ItemStack> items) {
+        this.items.addAll(items);
+    }
+
+    public void removeItems(List<ItemStack> items) {
+        this.items.removeAll(items);
+    }
+
 
     public void close() {
         MasterGui.removeGui(backGround);

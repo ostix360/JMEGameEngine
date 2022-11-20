@@ -3,10 +3,11 @@ package fr.ostix.game.core.quest;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.*;
 import fr.ostix.game.core.quest.serialization.*;
+import fr.ostix.game.entity.*;
 
 public abstract class Quest implements IQuestSerializer {
     private final int id;
-    private final int npc;
+    private final int npcID;
     private final String title;
     private final String description;
     private final Rewards rewards;
@@ -19,7 +20,7 @@ public abstract class Quest implements IQuestSerializer {
 
     public Quest() {
         this.id = 0;
-        this.npc = -1;
+        this.npcID = -1;
         this.title = "Null Quest";
         this.description = "The Quest is null";
         this.rewards = new Rewards();
@@ -28,13 +29,14 @@ public abstract class Quest implements IQuestSerializer {
 
     public abstract void execute();
 
-    public void done() {
+    public void done(Player p) {
         this.status = QuestStatus.DONE;
         EventManager.getInstance().unRegister(this.listener);
+        this.rewards.reward(p);
     }
 
-    public int getNpc() {
-        return npc;
+    public int getNpcID() {
+        return npcID;
     }
 
     public String getDescription() {
@@ -63,5 +65,9 @@ public abstract class Quest implements IQuestSerializer {
 
     public boolean isFinished() {
         return isFinished;
+    }
+
+    public void setStatus(QuestStatus status) {
+        this.status = status;
     }
 }

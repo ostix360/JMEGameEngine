@@ -1,6 +1,7 @@
 package fr.ostix.game.world.chunk;
 
 
+import fr.ostix.game.core.*;
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.entity.*;
 import fr.ostix.game.entity.component.*;
@@ -69,12 +70,15 @@ public class Chunk {
             switch (entityType) {
                 case "NPC":
                     e = new NPC(id, m, t.getPosition(), t.getRotation(), t.getScale().y(),entityName);
+                    Registered.registerNPC((NPC) e);
                     break;
                 case "Shop":
                     e = new Shop(m, t.getPosition(), t.getRotation(), t.getScale().y(),id);
+                    Registered.registerEntity(e);
                     break;
                 default:
                     e = new Entity(id, m, t.getPosition(), t.getRotation(), t.getScale().y());
+                    Registered.registerEntity(e);
             }
             LoadComponents.loadComponents(res.getComponents().get(component), e);
 

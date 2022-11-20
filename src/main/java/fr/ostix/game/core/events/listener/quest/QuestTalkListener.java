@@ -18,9 +18,10 @@ public class QuestTalkListener implements Listener {
 
     @EventHandler
     public void onTalk(NPCTalkEvent event) {
-        if (event.getNpc().getId() == quest.getNpc()) {
-            Registered.getNPC(this.quest.getNpc()).talke(this.quest.getDialogs(),event.getWorld());
-            EventManager.getInstance().callEvent(new QuestFinishedEvent(quest.getId(),1));
+        if (event.getNpc().getId() == quest.getNpcID()) {
+            Registered.getNPC(this.quest.getNpcID()).talke(this.quest.getDialogs(),event.getWorld());
+
+            EventManager.getInstance().callEvent(new QuestFinishedEvent(quest.getId(),1,event.getWorld().getPlayer()));
         }
     }
 }

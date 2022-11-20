@@ -2,6 +2,7 @@ package fr.ostix.game.inventory;
 
 import fr.ostix.game.core.*;
 import fr.ostix.game.core.resources.*;
+import fr.ostix.game.graphics.font.meshCreator.*;
 import fr.ostix.game.graphics.font.rendering.*;
 import fr.ostix.game.gui.*;
 import fr.ostix.game.items.*;
@@ -18,6 +19,8 @@ public class Slot {
     private ItemStack stack;
     private boolean isIn;
 
+    private GUIText count;
+
     public Slot(float x, float y, float size) {
         this.x = x;
         this.y = y;
@@ -26,7 +29,7 @@ public class Slot {
                 new Vector2f(x, y), new Vector2f(size * 1.23f, size));
         texture.setLayer(new Color(0.3f, 0.3f, 0.3f, 0.3f));
         itemDescriptionMenu = new GuiTexture(ResourcePack.getTextureByName().get("itemDescription").getID(),
-                new Vector2f(500, 200), new Vector2f(400, 500));
+                new Vector2f(25, 230), new Vector2f(400, 500));
         this.stack = new ItemStack(null, 0);
     }
 
@@ -62,6 +65,12 @@ public class Slot {
     public void startRendering() {
         if (!this.getStack().isEmpty()) {
             stack.getItem().startRendering(this.x + 5, this.y + 5);
+            count = new GUIText(String.valueOf(stack.getCount()),
+                    1f, Game.gameFont,
+                    new Vector2f(this.x + this.size, this.y + this.size -40f),
+                    3000f, false);
+            count.setColour(Color.RED);
+            MasterFont.add(count);
         }
         MasterGui.addGui(texture);
     }
@@ -69,6 +78,7 @@ public class Slot {
     public void stopRendering() {
         if (!this.getStack().isEmpty()) {
             stack.getItem().stopRendering();
+            MasterFont.remove(count);
         }
         MasterGui.removeGui(texture);
     }

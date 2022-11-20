@@ -5,9 +5,12 @@ import com.jme3.bullet.control.*;
 import fr.ostix.game.audio.*;
 import fr.ostix.game.core.*;
 import fr.ostix.game.core.events.*;
+import fr.ostix.game.core.events.entity.*;
+import fr.ostix.game.core.events.entity.npc.*;
 import fr.ostix.game.core.events.listener.*;
 import fr.ostix.game.core.events.listener.keyListeners.*;
 import fr.ostix.game.core.events.listener.player.*;
+import fr.ostix.game.core.quest.*;
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.entity.*;
 import fr.ostix.game.entity.animated.animation.animatedModel.*;
@@ -16,6 +19,7 @@ import fr.ostix.game.entity.component.*;
 import fr.ostix.game.entity.component.ai.*;
 import fr.ostix.game.entity.component.animation.*;
 import fr.ostix.game.entity.component.light.*;
+import fr.ostix.game.entity.entities.npc.*;
 import fr.ostix.game.graphics.*;
 import fr.ostix.game.graphics.font.meshCreator.*;
 import fr.ostix.game.graphics.font.rendering.*;
@@ -23,6 +27,7 @@ import fr.ostix.game.graphics.model.*;
 import fr.ostix.game.graphics.particles.*;
 import fr.ostix.game.graphics.particles.particleSpawn.*;
 import fr.ostix.game.graphics.textures.*;
+import fr.ostix.game.inventory.*;
 import fr.ostix.game.menu.*;
 import fr.ostix.game.toolBox.*;
 import fr.ostix.game.world.chunk.*;
@@ -63,6 +68,8 @@ public class World {
     private float time = 0000.0F;
     private final WorldState state;
 
+    private static final List<Action> toDo = new ArrayList<>();
+
     private KeyInGameListener keyWorldListener;
 
     private static final BulletAppState physics = new BulletAppState();
@@ -89,7 +96,7 @@ public class World {
         entities.addAll(aabbs);
     }
 
-    public final void initWorld(ResourcePack pack) {
+    public final void initWorld(ResourcePack pack, PlayerInventory playerInventory) {
         HashMap<String, Texture> textures = ResourcePack.getTextureByName();
 
         physics.setDebugEnabled(true);
@@ -99,7 +106,7 @@ public class World {
 
         AnimatedModel an = pack.getAnimatedModelByName().get("player2");
         player = new Player(an, new Vector3f(1450, 70, 2250), new Vector3f(0), 0.5f);
-
+        player.setInventory(playerInventory);
         ParticleTargetProperties targetProperties = new ParticleTargetProperties(0, 6, 0, 80, 6);
         ParticleSystem system = new ParticleSystem(new ParticleTexture(textures.get("fire").getID(), 8, true),
                 4000, 0.1f, -0, 60 * 2.2f, 4);
@@ -161,7 +168,7 @@ public class World {
 
 //        initEntity();
         initWater();
-        GUIText text1 = new GUIText("Bienvenu dans ce jeu magique", 1f, Game.gameFont, new Vector2f(0, 0), 1920f, true);
+        GUIText text1 = new GUIText("Bienvenue dans ce jeu magique", 1f, Game.gameFont, new Vector2f(0, 0), 1920f, true);
         text1.setColour(Color.RED);
         MasterFont.add(text1);
 
@@ -182,6 +189,8 @@ public class World {
         back2.setLooping(true);
         back2.setProperty(AL10.AL_SOURCE_RELATIVE, AL10.AL_TRUE);
         // back2.play();
+
+        Registered.registerNPC(NPCGod.getInstance());
 
         chunkHandler.run();
 
@@ -248,10 +257,15 @@ public class World {
 
 
     public void update() {
-        //entity.increaseRotation(new Vector3f(0, 1, 0));
         keyWorldListener.update();
-        physics.update(1/60f);
         cam.move();
+
+        physics.update(1/60f);
+
+
+        //entity.increaseRotation(new Vector3f(0, 1, 0));
+
+
 
 //        if (Input.keys[GLFW.GLFW_KEY_O]) {
             updateTime();
@@ -268,6 +282,8 @@ public class World {
         entities.clear();
         entities.addAll(chunkHandler.getEntities());
         entities.add(player);
+        toDo.forEach(a -> a.action(this));
+        toDo.clear();
     }
 
     private void updateTime() {
@@ -316,7 +332,13 @@ public class World {
         state.setWorldCanBeUpdated(true);
 
     }
+    public static void addToDo(Action action){
+        toDo.add(action);
+    }
 
+    public static void removeToDo(Action action){
+        toDo.remove(action);
+    }
 
     public boolean isInit() {
         return isInit;

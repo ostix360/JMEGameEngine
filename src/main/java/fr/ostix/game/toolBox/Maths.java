@@ -217,7 +217,7 @@ public class Maths {
         matrix4f.rotate(Math.toRadians(cam.getYaw()), new Vector3f(0, 1, 0));
         matrix4f.rotate(Math.toRadians(cam.getRoll()), new Vector3f(0, 0, 1));
         Vector3f cameraPos = cam.getPosition();
-        Vector3f negativeCameraPos = new Vector3f(-cameraPos.x, -cameraPos.y, -cameraPos.z);
+        Vector3f negativeCameraPos = new Vector3f(-cameraPos.x(), -cameraPos.y(), -cameraPos.z());
         matrix4f.translate(negativeCameraPos);
         return matrix4f;
     }

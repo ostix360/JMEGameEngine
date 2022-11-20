@@ -15,14 +15,17 @@ public class Item {
     private GuiTexture gui;
     private final GUIText itemDescription;
 
+
+
     public Item(int id, String name, String description, String textureName) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.texture = ResourcePack.getTextureByName().get(textureName).getID();
         this.itemDescription = new GUIText(description, 1f, Game.gameFont,
-                new Vector2f(570, 260f), 300f, false);
+                new Vector2f(95, 290f), 280f, false);
         this.itemDescription.setColour(Color.MAGENTA);
+
     }
 
     public void onItemUse() {
@@ -51,6 +54,7 @@ public class Item {
     public void startRendering(float x, float y) {
         gui = new GuiTexture(texture, new Vector2f(x, y), new Vector2f(130 * 1.23f, 130));
         MasterGui.addGui(gui);
+
     }
 
     public void stopRendering() {

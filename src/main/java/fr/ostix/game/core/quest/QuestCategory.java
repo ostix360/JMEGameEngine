@@ -1,5 +1,6 @@
 package fr.ostix.game.core.quest;
 
+import fr.ostix.game.core.*;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.quest.*;
 import fr.ostix.game.core.events.quest.*;
@@ -11,7 +12,7 @@ public class QuestCategory {
 
     public HashMap<Integer, Quest> quests;
     public int id;
-    public String title;
+    private final String title;
     private QuestStatus status;
     private int nextQuest;
     private QuestCategoryListener listener;
@@ -97,10 +98,12 @@ public class QuestCategory {
 
     public void start() {
         EventManager.getInstance().register(listener = new QuestCategoryListener(this));
+        EventManager.getInstance().callEvent(new QuestStartedEvent(quests().get(0).getId(),2));
     }
 
     public void complete() {
         EventManager.getInstance().unRegister(listener);
-        EventManager.getInstance().callEvent(new QuestCategoryStartEvent(this.nextQuest, 2));
+        if (this.nextQuest != -1)
+            EventManager.getInstance().callEvent(new QuestCategoryStartEvent(this.nextQuest, 2));
     }
 }

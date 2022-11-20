@@ -1,10 +1,12 @@
 package fr.ostix.game.menu;
 
+import fr.ostix.game.core.*;
 import fr.ostix.game.core.events.listener.*;
 import fr.ostix.game.core.events.listener.keyListeners.*;
 import fr.ostix.game.core.loader.*;
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.graphics.*;
+import fr.ostix.game.graphics.font.meshCreator.*;
 import fr.ostix.game.graphics.particles.*;
 import fr.ostix.game.gui.*;
 import fr.ostix.game.toolBox.*;
@@ -31,6 +33,9 @@ public class StateManager {
         loaderMenu.init(loader, masterGui);
         loaderMenu.cleanUp();
         pack = loaderMenu.getPack();
+        Game.gameFont = new FontType(ResourcePack.getTextureByName().get("candara").getID(), "candara");
+
+        QuestLoader.loadAllQuest();
         mainMenu = new MainMenu();
         mainMenu.init();
         screens[0] = mainMenu;

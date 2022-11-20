@@ -1,5 +1,6 @@
 package fr.ostix.game.core.quest;
 
+import fr.ostix.game.entity.*;
 import fr.ostix.game.items.*;
 
 import java.util.*;
@@ -22,5 +23,10 @@ public class Rewards {
 
     public int getMoneyAmount() {
         return moneyAmount;
+    }
+
+    public void reward(Player p) {
+        p.getInventory().addItems(rewardsItems);
+        //TODO add Money
     }
 }

@@ -37,8 +37,7 @@ public class WorldState extends Screen {
     public void init(ResourcePack pack) {
         super.init();
         playerInventory = new PlayerInventory("Player Inventory");
-        world.initWorld(pack);
-        world.getPlayer().setInventory(playerInventory);
+        world.initWorld(pack,playerInventory);
         hotBar.init(world.getPlayer());
         worldInitialized = world.isInit();
 

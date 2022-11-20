@@ -13,7 +13,8 @@ import java.lang.Math;
 
 public class Camera implements ICamera {
 
-    private final SmoothFloat distanceFromPlayer = new SmoothFloat(50, 8);
+    private final SmoothFloat distanceFromObject = new SmoothFloat(50, 8);
+
     private final SmoothFloat angleAroundPlayer = new SmoothFloat(0, 10);
     public int viewDistance = 15;
     private Matrix4f projection;
@@ -68,16 +69,16 @@ public class Camera implements ICamera {
     }
 
     private float calculateHorizontalDistance() {
-        return (float) (distanceFromPlayer.get() * Math.cos(Math.toRadians(pitch)));
+        return (float) (distanceFromObject.get() * Math.cos(Math.toRadians(pitch)));
     }
 
     private float calculateVerticalDistance() {
-        return (float) (distanceFromPlayer.get() * Math.sin(Math.toRadians(pitch)));
+        return (float) (distanceFromObject.get() * Math.sin(Math.toRadians(pitch)));
     }
 
     private void calculateZoom() {
         float zoomLevel = Input.getMouseDWhell();
-        float target = this.distanceFromPlayer.getTarget();
+        float target = this.distanceFromObject.getTarget();
         target -= zoomLevel;
         if (target <= 3) {
             target = 3;
@@ -85,7 +86,7 @@ public class Camera implements ICamera {
         if (target >= 105) {
             target = 105;
         }
-        distanceFromPlayer.setTarget(target);
+        distanceFromObject.setTarget(target);
     }
 
     private void caculateCameraPosition(float horizontalDistance, float yOffset) {
@@ -94,9 +95,9 @@ public class Camera implements ICamera {
         float zoffset = (float) (horizontalDistance * Math.cos(Math.toRadians(theta)));
         position.x = player.getPosition().x() - xoffset;
         position.y = yOffset;
-//        if (position.y < terrainHeight) {
-//            position.y = terrainHeight;
-//        }
+        if (position.y < terrainHeight) {
+            position.y = terrainHeight;
+        }
         position.z = player.getPosition().z() - zoffset;
     }
 
@@ -110,13 +111,13 @@ public class Camera implements ICamera {
                 pitch = 90;
             }
             if (pitch <= -4) {
-                if (elapsedMouseDY < pitchChange) distanceFromPlayer.increaseTarget((float) (pitchChange * 1.4));
+                if (elapsedMouseDY < pitchChange) distanceFromObject.increaseTarget((float) (pitchChange * 1.4));
                 pitch = -4;
             }
             elapsedMouseDY = pitchChange;
         }
         angleAroundPlayer.update(1 / 60f);
-        distanceFromPlayer.update(1f / 60f);
+        distanceFromObject.update(1f / 60f);
     }
 
     public void invertPitch() {
@@ -124,7 +125,7 @@ public class Camera implements ICamera {
     }
 
     public Vector3f getPosition() {
-        return position;
+        return new Vector3f(position);
     }
 
     public float getPitch() {
@@ -145,30 +146,60 @@ public class Camera implements ICamera {
     }
 
     public void goTo(Transform t) {
-        this.pitch = 3;
 
-        float xoffset = (float) (8);
-        float zoffset = (float) (10);
+        float zoom = 10;
+        float pitchP = 20;
+
+
+        float angleAroundObject = 180;
+        float horizontalDistance = (float) (zoom * Math.cos(Math.toRadians(pitch)));
+        float verticalDistance = (float) (zoom * Math.sin(Math.toRadians(pitch)));
+//        float yOffset = updateSmooth(t.getPosition().y() + 4 + verticalDistance, this.position.y());
+
+        float yOffset = t.getPosition().y() + verticalDistance;
+        float theta = t.getRotation().y() + angleAroundObject;
+        float xOffset = (float) (horizontalDistance * Math.sin(Math.toRadians(theta)));
+        float zOffset = (float) (horizontalDistance * Math.cos(Math.toRadians(theta)));
+        float xP = t.getPosition().x() - xOffset;
+        float yP = yOffset;
+        if (yP < terrainHeight) {
+            yP = terrainHeight;
+        }
+        float zP = t.getPosition().z() - zOffset;
+
+//        caculateCameraPosition(horizontalDistance, yOffset);
+        float yawP = 180 - (t.getRotation().y() + angleAroundObject);
+        this.projection = MasterRenderer.getProjectionMatrix();
+
+
         SmoothFloat x = new SmoothFloat(position.x(),5f);
         SmoothFloat y = new SmoothFloat(position.y(),5f);
         SmoothFloat z = new SmoothFloat(position.z(),5f);
-        x.setTarget((int) (t.getPosition().x() - xoffset));
-        y.setTarget(4);
-        z.setTarget((int) (t.getPosition().z() + zoffset));
-        this.yaw = -5;
+        SmoothFloat yaw = new SmoothFloat(this.yaw,5f);
+        SmoothFloat pitch = new SmoothFloat(this.pitch,5f);
+        x.setTarget((int) (xP));
+        y.setTarget((int) (yP));
+        z.setTarget((int) (zP));
+        yaw.setTarget(yawP);
+        pitch.setTarget(pitchP);
+
         Thread thread = new Thread(() -> {
             while (true) {
-                x.update(1 / 120f);
-                y.update(1 / 120f);
-                z.update(1 / 120f);
-                position.x = x.get();
-                position.y = y.get();
-                position.z = z.get();
-                if (Maths.almostEqual(position.x(),x.getTarget(),1f) && Maths.almostEqual(position.y(),y.getTarget(),1f) && Maths.almostEqual(position.z(),z.getTarget(),1f)){
+                x.update(1 / 60f);
+                y.update(1 / 60f);
+                z.update(1 / 60f);
+                yaw.update(1/60f);
+                pitch.update(1/60f);
+                this.position.x = x.get();
+                this.position.y = y.get();
+                this.position.z = z.get();
+                this.yaw = yaw.get();
+                this.pitch = pitch.get();
+                if (Maths.almostEqual(this.position.x(),x.getTarget(),1f) && Maths.almostEqual(this.position.y(),y.getTarget(),1f) && Maths.almostEqual(this.position.z(),z.getTarget(),1f)){
                     break;
                 }
                 try {
-                    Thread.sleep(8);
+                    Thread.sleep(17);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

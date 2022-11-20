@@ -30,7 +30,7 @@ public class Registered {
         entityRegistered.put(e.getId(), e);
     }
 
-    public static void registerItem(NPC npc) {
+    public static void registerNPC(NPC npc) {
         npcRegistered.put(npc.getId(), npc);
     }
 

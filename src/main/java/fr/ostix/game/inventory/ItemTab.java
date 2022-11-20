@@ -1,6 +1,10 @@
 package fr.ostix.game.inventory;
 
 
+import fr.ostix.game.items.*;
+
+import java.util.*;
+
 public class ItemTab {
     private final String name;
     private final Slot[] slots;
@@ -59,5 +63,38 @@ public class ItemTab {
 
     public String getName() {
         return name;
+    }
+
+    public void addItems(List<ItemStack> items) {
+        for (ItemStack stack : items) {
+            Slot s;
+            if ((s = slotsContain(stack.getItem())) != null)  {
+                s.getStack().addItems(stack.getItem(),stack.getCount());
+            }else{
+                for (Slot slot : slots) {
+                    if (slot.isEmpty()){
+                        slot.getStack().addItems(stack.getItem(),stack.getCount());
+                        return;
+                    }
+                }
+            }
+        }
+        // TODO return boolean possibility
+
+    }
+
+    public void removeItems(List<ItemStack> items) {
+        // TODO return boolean possibility
+    }
+
+    private Slot slotsContain(Item i){
+        for(Slot slot : slots){
+            if (slot.isEmpty())
+                continue;
+            if (!slot.getStack().getItem().equals(i))
+                continue;
+            return slot;
+        }
+        return null;
     }
 }

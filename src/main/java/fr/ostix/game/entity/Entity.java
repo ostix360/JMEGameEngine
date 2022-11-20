@@ -32,7 +32,7 @@ public class Entity {
         this.id = id;
         this.model = model;
         this.position = position;
-        this.rotation = rotation.add(0, 0, 0);
+        this.rotation = rotation;
         this.scale = new Vector3f(scale);
         this.transform = new Transform(position, rotation, scale);
     }
