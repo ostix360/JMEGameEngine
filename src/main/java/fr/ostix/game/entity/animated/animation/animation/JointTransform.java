@@ -1,7 +1,6 @@
 package fr.ostix.game.entity.animated.animation.animation;
 
-import org.joml.Matrix4f;
-import org.joml.Vector3f;
+import org.joml.*;
 
 /**
  * Represents the local bone-space transform of a joint at a certain keyframe

@@ -1,7 +1,7 @@
 package fr.ostix.game.graphics.particles.particleSpawn;
 
-import fr.ostix.game.toolBox.Maths;
-import org.joml.Vector3f;
+import fr.ostix.game.toolBox.*;
+import org.joml.*;
 
 public class Line implements ParticleSpawn {
 

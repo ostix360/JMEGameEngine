@@ -1,10 +1,7 @@
 package fr.ostix.game.graphics.water;
 
-import fr.ostix.game.toolBox.OpenGL.shader.ShaderProgram;
-import fr.ostix.game.toolBox.OpenGL.shader.uniform.FloatUniform;
-import fr.ostix.game.toolBox.OpenGL.shader.uniform.IntUniform;
-import fr.ostix.game.toolBox.OpenGL.shader.uniform.MatrixUniform;
-import fr.ostix.game.toolBox.OpenGL.shader.uniform.Vector3fUniform;
+import fr.ostix.game.toolBox.OpenGL.shader.*;
+import fr.ostix.game.toolBox.OpenGL.shader.uniform.*;
 
 public class WaterShader extends ShaderProgram {
 

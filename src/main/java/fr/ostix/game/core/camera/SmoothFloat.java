@@ -1,4 +1,4 @@
-package fr.ostix.game.entity.camera;
+package fr.ostix.game.core.camera;
 
 public class SmoothFloat {
     private final float agility;

@@ -2,7 +2,6 @@ package fr.ostix.game.core.quest;
 
 import fr.ostix.game.core.*;
 import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.entity.*;
 import fr.ostix.game.core.events.entity.npc.*;
 import fr.ostix.game.core.events.listener.quest.*;
 import fr.ostix.game.core.loader.json.*;

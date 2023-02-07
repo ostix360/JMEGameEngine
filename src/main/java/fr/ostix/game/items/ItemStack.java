@@ -1,6 +1,6 @@
 package fr.ostix.game.items;
 
-import fr.ostix.game.toolBox.Logger;
+import fr.ostix.game.toolBox.*;
 
 public class ItemStack {
     private Item item;
@@ -16,7 +16,7 @@ public class ItemStack {
             this.item = item;
             this.count = number;
         }else if(this.item == item){
-            this.count = number;
+            this.count += number;
         }else{
             Logger.warn("you couldn't had item to an itemStack if there is not the same...");
         }
@@ -46,5 +46,16 @@ public class ItemStack {
 
     public int getCount() {
         return count;
+    }
+
+    public void removeItems(Item item, int number) {
+        if (this.item == item){
+            this.count -= number;
+        }else{
+            Logger.warn("you couldn't had item to an itemStack if there is not the same...");
+        }
+        if (this.count <= 0){
+            this.count = 0;
+        }
     }
 }

@@ -19,13 +19,15 @@ public class WorldState extends Screen {
     private boolean openInventory = false;
     private Inventory currentInventory;
 
+    private Screen overWorld;
+
     public WorldState() {
         super("World");
         world = new World(this);
 
         hotBar = new InGameMenu();
 
-        EventManager.getInstance().register(new InventoryListener(this));
+//        EventManager.getInstance().register(new InventoryListener(this));
     }
 
     public boolean isWorldInitialized() {
@@ -45,10 +47,8 @@ public class WorldState extends Screen {
 
     public void render() {
         world.render();
-        if (!playerInventory.isOpen()) {
-            hotBar.render();
-        } else {
-            playerInventory.render();
+        if (overWorld != null) {
+            overWorld.render();
         }
     }
 
@@ -61,21 +61,11 @@ public class WorldState extends Screen {
     public void update() {
         super.update();
         checkInputs();
-        if (openInventory) {
-            if (!playerInventory.isOpen()) {
-                playerInventory.open();
-            }
-            playerInventory.update();
-        } else if (playerInventory.isOpen()) {
-            playerInventory.close();
-        } else if (worldCanBeUpdated) {
+        if (overWorld != null) {
+            overWorld.update();
+        }else{
             world.update();
-        } else if (currentInventory != null) {
-            currentInventory.update();
-        } else {
-//            System.err.println("Problem during the choice of the thing that need to be update");
         }
-
     }
 
     private void checkInputs() {
@@ -111,9 +101,40 @@ public class WorldState extends Screen {
     }
 
     @Override
+    public void close() {
+        if (overWorld != null) {
+            overWorld.close();
+            overWorld.cleanUp();
+            overWorld = null;
+        }
+    }
+
+    @Override
     public void cleanUp() {
         super.cleanUp();
         world.cleanUp();
+        worldInitialized = false;
+    }
+
+    public void notifyStateOverWorldSet(Screen screen) {
+        if (screen != null) {
+            if (!screen.isInit()){
+                screen.init();
+            }
+            screen.open();
+            world.pause();
+        }else{
+            world.resume();
+        }
+        if (overWorld != null) {
+            overWorld.close();
+            overWorld.cleanUp();
+        }
+        overWorld = screen;
+    }
+
+    public boolean hasScreenOverWorld() {
+        return overWorld != null;
     }
 }
 

@@ -1,6 +1,6 @@
 package fr.ostix.game.toolBox.OpenGL.shader.uniform;
 
-import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.*;
 
 public class FloatUniform extends Uniform {
 

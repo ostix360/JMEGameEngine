@@ -1,9 +1,9 @@
 package fr.ostix.game.core.loader;
 
-import fr.ostix.game.entity.animated.animation.animatedModel.AnimatedModel;
-import fr.ostix.game.entity.animated.animation.loaders.AnimatedModelLoader;
-import fr.ostix.game.graphics.model.Model;
-import fr.ostix.game.graphics.textures.Texture;
+import fr.ostix.game.entity.animated.animation.animatedModel.*;
+import fr.ostix.game.entity.animated.animation.loaders.*;
+import fr.ostix.game.graphics.model.*;
+import fr.ostix.game.graphics.textures.*;
 
 public class ResourceLoader {
 

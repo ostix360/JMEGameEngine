@@ -5,8 +5,8 @@ import fr.ostix.game.toolBox.*;
 import org.joml.*;
 import org.lwjgl.assimp.*;
 
-import java.util.*;
 import java.lang.Math;
+import java.util.*;
 
 public class LoadMeshModel {
     private static final Matrix4f CORRECTION = new Matrix4f().rotate((float) Math.toRadians(-90), new Vector3f(1, 0, 0));

@@ -1,9 +1,7 @@
 package fr.ostix.game.world.chunk;
 
 
-import com.jme3.bullet.control.*;
 import fr.ostix.game.toolBox.*;
-import fr.ostix.game.world.*;
 
 import javax.imageio.*;
 import java.awt.image.*;

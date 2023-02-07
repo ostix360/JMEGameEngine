@@ -1,6 +1,6 @@
 package fr.ostix.game.graphics.model;
 
-import fr.ostix.game.graphics.textures.Texture;
+import fr.ostix.game.graphics.textures.*;
 
 public class Model {
 

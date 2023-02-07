@@ -3,13 +3,13 @@ package fr.ostix.game.core.events.listener.keyListeners;
 import fr.ostix.game.core.*;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.entity.*;
-import fr.ostix.game.core.events.inventoryEvent.*;
 import fr.ostix.game.core.events.keyEvent.*;
 import fr.ostix.game.core.events.player.*;
-import fr.ostix.game.core.events.quest.*;
+import fr.ostix.game.core.events.states.*;
 import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.entities.*;
 import fr.ostix.game.inventory.*;
+import fr.ostix.game.menu.*;
+import fr.ostix.game.menu.stat.*;
 import fr.ostix.game.world.*;
 import org.joml.*;
 
@@ -17,24 +17,45 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class KeyInGameListener implements KeyListener {
     private final World world;
+    private final WorldState worldState;
     private final Player p;
     private final PlayerInventory pi;
 
-    public KeyInGameListener(World world, Player p, PlayerInventory pi) {
-        this.world = world;
+    private final QuestHandlerMenu questHandlerMenu;
+
+    public KeyInGameListener(WorldState state, Player p, PlayerInventory pi) {
+        this.world = state.getWorld();
+        this.worldState = state;
         this.p = p;
         this.pi = pi;
+        this.questHandlerMenu = new QuestHandlerMenu();
     }
 
     @Override
     @EventHandler
     public void onKeyPress(KeyPressedEvent e) {
 
-        if (e.getKEY() == GLFW_KEY_TAB) {
-            if (pi.isOpen()) {
-                EventManager.getInstance().callEvent(new InventoryCloseEvent(2, pi));
+        if (e.getKEY() == GLFW_KEY_Q) {
+            if (!pi.isOpen()) {
+                EventManager.getInstance().callEvent(new StateOverWorldEvent("Player Inventory",pi,2));
             } else {
-                EventManager.getInstance().callEvent(new InventoryOpenEvent(2, pi));
+                EventManager.getInstance().callEvent(new StateOverWorldEvent("world",null,2));
+            }
+        }
+        if (e.getKEY() == GLFW_KEY_ESCAPE) { // Resume menu
+            if (worldState.hasScreenOverWorld()) {
+                EventManager.getInstance().callEvent(new StateOverWorldEvent("world",null,2));
+            }else{
+                EventManager.getInstance().callEvent(new StateOverWorldEvent("Resume Menu",new PauseMenu(),2));
+            }
+
+        }
+
+        if (e.getKEY() == GLFW_KEY_TAB) {
+            if (!QuestHandlerMenu.isOpened()) {
+                EventManager.getInstance().callEvent(new StateOverWorldEvent("Quest Handler Menu",questHandlerMenu,2));
+            }else{
+                EventManager.getInstance().callEvent(new StateOverWorldEvent("world",null,2));
             }
         }
         if (e.getKEY() == GLFW_KEY_E) {
@@ -42,8 +63,6 @@ public class KeyInGameListener implements KeyListener {
                 EventManager.getInstance().callEvent(new EntityInteractEvent(world.getEntitiesNear().get(0), world, 3));
             }
         }
-
-
     }
 
     @Override

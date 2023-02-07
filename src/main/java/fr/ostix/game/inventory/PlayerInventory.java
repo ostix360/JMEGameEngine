@@ -22,11 +22,11 @@ public class PlayerInventory extends Inventory {
     }
 
     public void init() {
-        this.backGround = new GuiTexture(ResourcePack.getTextureByName().get("inventory").getID(),
+        this.backGround = new GuiTexture(ResourcePack.getTextureByName("inventory").getID(),
                 new Vector2f(0), new Vector2f(1920,
                 1080));
         this.right_button = new Button(1830, 125, 90, 950,
-                ResourcePack.getTextureByName().get("right_button").getID(), (b) -> {
+                ResourcePack.getTextureByName("right_button").getID(), (b) -> {
             Logger.log("right button");
         });
         recipeTab = ItemTab.newEmptyTab("RecipeTab", 35);
@@ -62,7 +62,8 @@ public class PlayerInventory extends Inventory {
     }
 
     public void removeItems(List<ItemStack> items) {
-
+        this.recipeTab.removeItems(items);
+        super.removeItems(items);
     }
 
 

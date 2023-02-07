@@ -1,9 +1,9 @@
 package fr.ostix.game.core.loader;
 
-import fr.ostix.game.entity.Entity;
-import fr.ostix.game.entity.component.Component;
+import fr.ostix.game.entity.*;
+import fr.ostix.game.entity.component.*;
 
-import java.util.List;
+import java.util.*;
 
 public class ComponentLoader {
 

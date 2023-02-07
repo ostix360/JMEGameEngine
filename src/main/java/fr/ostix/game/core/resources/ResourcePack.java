@@ -33,6 +33,15 @@ public class ResourcePack {
         return textures;
     }
 
+    public static Texture getTextureByName(String name) {
+        Texture texture;
+        if ((texture = textures.get(name)) == null){
+            texture = textures.get("missing");
+            System.err.println("Texture " + name + " not found");
+        }
+        return texture;
+    }
+
     public HashMap<String, SoundSource> getSoundByName() {
         return sounds;
     }

@@ -84,6 +84,14 @@ public class ItemTab {
     }
 
     public void removeItems(List<ItemStack> items) {
+        for (ItemStack stack : items) {
+            Slot s;
+            if ((s = slotsContain(stack.getItem())) != null)  {
+                s.getStack().removeItems(stack.getItem(),stack.getCount());
+            }else{
+
+            }
+        }
         // TODO return boolean possibility
     }
 

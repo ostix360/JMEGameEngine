@@ -4,6 +4,7 @@ import fr.ostix.game.core.*;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.*;
 import fr.ostix.game.core.events.listener.keyListeners.*;
+import fr.ostix.game.core.events.states.*;
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.entity.*;
 import fr.ostix.game.entity.entities.*;
@@ -11,6 +12,7 @@ import fr.ostix.game.graphics.font.meshCreator.*;
 import fr.ostix.game.graphics.font.rendering.*;
 import fr.ostix.game.gui.*;
 import fr.ostix.game.menu.*;
+import fr.ostix.game.menu.stat.*;
 import fr.ostix.game.toolBox.*;
 import fr.ostix.game.world.*;
 import org.joml.*;
@@ -40,7 +42,7 @@ public class NPCGui extends Screen {
 
     @Override
     public void init() {
-        background = new GuiTexture(ResourcePack.getTextureByName().get("dialogs").getID(),new Vector2f(600,500),
+        background = new GuiTexture(ResourcePack.getTextureByName("dialogs").getID(),new Vector2f(600,500),
                 new Vector2f(600,550));
         this.read = new NPCReaderListener(this);
         super.init();
@@ -63,7 +65,7 @@ public class NPCGui extends Screen {
         this.dialogs.clear();
         this.dialogs.addAll(dialogs);
         this.world = world;
-        this.world.pause();
+        EventManager.getInstance().callEvent(new StateOverWorldEvent(this.title,this,2));
 
         this.dialog = new GUIText(dialogs.get(0),1f, Game.gameFont,new Vector2f(600,700),600,true);
         this.dialog.setColour(Color.GRAY);
@@ -103,7 +105,7 @@ public class NPCGui extends Screen {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            this.world.resume();
+            EventManager.getInstance().callEvent(new StateOverWorldEvent(States.WORLD.getName(),null,2));
         }
     }
 }

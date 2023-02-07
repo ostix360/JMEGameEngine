@@ -1,11 +1,10 @@
 package fr.ostix.game.entity.component.light;
 
 
-import fr.ostix.game.entity.Entity;
-import fr.ostix.game.entity.component.Component;
-import fr.ostix.game.entity.component.ComponentCreator;
-import fr.ostix.game.toolBox.Color;
-import org.joml.Vector3f;
+import fr.ostix.game.entity.*;
+import fr.ostix.game.entity.component.*;
+import fr.ostix.game.toolBox.*;
+import org.joml.*;
 
 
 public class LightCreator implements ComponentCreator {

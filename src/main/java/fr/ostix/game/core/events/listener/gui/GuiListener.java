@@ -4,6 +4,7 @@ import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.gui.*;
 import fr.ostix.game.core.events.listener.*;
 import fr.ostix.game.menu.*;
+import fr.ostix.game.menu.stat.*;
 
 public class GuiListener implements Listener {
     private final StateManager stateManager;

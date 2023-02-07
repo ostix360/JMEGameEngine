@@ -1,11 +1,9 @@
 package fr.ostix.game.graphics.font.rendering;
 
 
-import fr.ostix.game.toolBox.OpenGL.shader.ShaderProgram;
-import fr.ostix.game.toolBox.OpenGL.shader.uniform.Vector2fUniform;
-import fr.ostix.game.toolBox.OpenGL.shader.uniform.Vector3fUniform;
-import org.joml.Vector2f;
-import org.joml.Vector3f;
+import fr.ostix.game.toolBox.OpenGL.shader.*;
+import fr.ostix.game.toolBox.OpenGL.shader.uniform.*;
+import org.joml.*;
 
 
 public class FontShader extends ShaderProgram {

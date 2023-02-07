@@ -1,6 +1,6 @@
 package fr.ostix.game.graphics.particles.particleSpawn;
 
-import org.joml.Vector3f;
+import org.joml.*;
 
 public class Point implements ParticleSpawn {
     @Override

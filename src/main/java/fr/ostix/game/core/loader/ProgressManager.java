@@ -1,10 +1,8 @@
 package fr.ostix.game.core.loader;
 
-import fr.ostix.game.toolBox.Logger;
+import fr.ostix.game.toolBox.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class ProgressManager {
 

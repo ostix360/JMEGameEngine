@@ -1,6 +1,6 @@
 package fr.ostix.game.graphics.entity;
 
-import fr.ostix.game.entity.camera.*;
+import fr.ostix.game.core.camera.*;
 import fr.ostix.game.entity.component.light.*;
 import fr.ostix.game.toolBox.*;
 import fr.ostix.game.toolBox.OpenGL.shader.*;

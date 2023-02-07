@@ -1,17 +1,17 @@
 package fr.ostix.game.menu;
 
 import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.listener.keyListeners.*;
+import fr.ostix.game.core.events.states.*;
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.menu.component.*;
-import fr.ostix.game.world.*;
+import fr.ostix.game.menu.stat.*;
 
 public class MainMenu extends Screen {
 
     public boolean startWorld = false;
     private Button start;
 
-    private World world;
+    private WorldState world;
 
     public MainMenu() {
         super("Main Menu");
@@ -23,13 +23,21 @@ public class MainMenu extends Screen {
         super.init();
         start = new Button((float) 1920 / 2 - 125,
                 (float) 1080 / 2 - 200, 250, 125,
-                ResourcePack.getTextureByName().get("startButton").getID(), (b) -> {
+                ResourcePack.getTextureByName("startButton").getID(), (b) -> {
             startWorld = true;
             start.cleanUp();
-            world.resume();
+            EventManager.getInstance().callEvent(new StateChangeEvent(States.WORLD.getName(), world, 4));
 
         });
+    }
+
+    @Override
+    public void open() {
         this.addComponent(start);
+    }
+
+    @Override
+    public void close() {
 
     }
 
@@ -39,7 +47,7 @@ public class MainMenu extends Screen {
     }
 
 
-    public void setWorld(World world) {
+    public void setWorld(WorldState world) {
         this.world = world;
     }
 }

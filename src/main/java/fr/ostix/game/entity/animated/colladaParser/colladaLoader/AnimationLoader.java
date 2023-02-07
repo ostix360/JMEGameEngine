@@ -1,14 +1,12 @@
 package fr.ostix.game.entity.animated.colladaParser.colladaLoader;
 
-import fr.ostix.game.entity.animated.colladaParser.dataStructures.AnimationData;
-import fr.ostix.game.entity.animated.colladaParser.dataStructures.JointTransformData;
-import fr.ostix.game.entity.animated.colladaParser.dataStructures.KeyFrameData;
-import fr.ostix.game.entity.animated.colladaParser.xmlParser.XmlNode;
-import org.joml.Matrix4f;
-import org.lwjgl.BufferUtils;
+import fr.ostix.game.entity.animated.colladaParser.dataStructures.*;
+import fr.ostix.game.entity.animated.colladaParser.xmlParser.*;
+import org.joml.*;
+import org.lwjgl.*;
 
-import java.nio.FloatBuffer;
-import java.util.List;
+import java.nio.*;
+import java.util.*;
 
 
 public class AnimationLoader {

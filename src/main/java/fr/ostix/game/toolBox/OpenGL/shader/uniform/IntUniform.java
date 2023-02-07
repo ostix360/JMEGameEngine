@@ -1,6 +1,6 @@
 package fr.ostix.game.toolBox.OpenGL.shader.uniform;
 
-import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.*;
 
 public class IntUniform extends Uniform {
     public IntUniform(String name) {

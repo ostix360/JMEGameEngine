@@ -1,16 +1,11 @@
 package fr.ostix.game.entity.animated.colladaParser.colladaLoader;
 
-import fr.ostix.game.entity.animated.colladaParser.dataStructures.MeshData;
-import fr.ostix.game.entity.animated.colladaParser.dataStructures.Vertex;
-import fr.ostix.game.entity.animated.colladaParser.dataStructures.VertexSkinData;
-import fr.ostix.game.entity.animated.colladaParser.xmlParser.XmlNode;
-import org.joml.Matrix4f;
-import org.joml.Vector2f;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
+import fr.ostix.game.entity.animated.colladaParser.dataStructures.*;
+import fr.ostix.game.entity.animated.colladaParser.xmlParser.*;
+import org.joml.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.Math;
+import java.util.*;
 
 /**
  * Loads the mesh data for a model from a collada XML file.

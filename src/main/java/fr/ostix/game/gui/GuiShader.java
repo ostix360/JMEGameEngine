@@ -1,10 +1,9 @@
 package fr.ostix.game.gui;
 
-import fr.ostix.game.toolBox.Color;
-import fr.ostix.game.toolBox.OpenGL.shader.ShaderProgram;
-import fr.ostix.game.toolBox.OpenGL.shader.uniform.MatrixUniform;
-import fr.ostix.game.toolBox.OpenGL.shader.uniform.Vector4fUniform;
-import org.joml.Matrix4f;
+import fr.ostix.game.toolBox.*;
+import fr.ostix.game.toolBox.OpenGL.shader.*;
+import fr.ostix.game.toolBox.OpenGL.shader.uniform.*;
+import org.joml.*;
 
 public class GuiShader extends ShaderProgram {
 

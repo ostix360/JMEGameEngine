@@ -1,11 +1,11 @@
 package fr.ostix.game.gui;
 
-import fr.ostix.game.toolBox.Color;
-import fr.ostix.game.toolBox.OpenGL.DisplayManager;
-import org.joml.Vector2f;
+import fr.ostix.game.toolBox.*;
+import fr.ostix.game.toolBox.OpenGL.*;
+import org.joml.*;
 
 public class GuiTexture {
-    private final Vector2f position;
+    private Vector2f position;
     private final int texture;
     private Vector2f scale;
     private Color layer = new Color(0, 0, 0, 0);
@@ -75,5 +75,9 @@ public class GuiTexture {
     public void setLayer(Color layer) {
         this.layer = layer;
         hasLayer = true;
+    }
+
+    public void setPosition(Vector2f position) {
+        this.position = position;
     }
 }

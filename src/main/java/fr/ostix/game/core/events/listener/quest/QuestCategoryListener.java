@@ -14,22 +14,35 @@ public class QuestCategoryListener implements Listener {
 
     @EventHandler
     public void onQuestStart(QuestStartedEvent event) {
-        questCategory.quests().get(event.getQuestID() - 1).execute();
-        questCategory.quests().get(event.getQuestID() - 1).setStatus(QuestStatus.QUESTING);
+        try {
+            questCategory.quests().get(event.getQuestID() - 1).execute();
+            Quest q = questCategory.quests().get(event.getQuestID() - 1);
+            q.setStatus(QuestStatus.QUESTING);
+            questCategory.setQuestingQuest(q);
+        } catch (Exception e) {
+            System.err.println("Exception for " + questCategory.getName()); // ???
+            e.printStackTrace();
+        }
     }
 
     @EventHandler
     public void onQuestComplete(QuestFinishedEvent event) {
         try {
             questCategory.quests().get(event.getQuestID() - 1).done(event.getP());
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println("Exception for " + questCategory.getName()); // ???
+            e.printStackTrace();
         }
-        if (questCategory.quests().size() == event.getQuestID()){
-            EventManager.getInstance().callEvent(new QuestCategoryCompleteEvent(questCategory.getId(),2));
+        if (questCategory.quests().size() == event.getQuestID()) {
+            EventManager.getInstance().callEvent(new QuestCategoryCompleteEvent(questCategory.getId(), 2));
             return;
         }
-        questCategory.quests().get(event.getQuestID()).setStatus(QuestStatus.AVAILABLE);
+        try {
+            questCategory.quests().get(event.getQuestID()).setStatus(QuestStatus.AVAILABLE);
+        } catch (Exception e) {
+            System.err.println("Exception for " + questCategory.getName()); // ???
+            e.printStackTrace();
+        }
         EventManager.getInstance().callEvent(new QuestStartedEvent(event.getQuestID() + 1, 2));
     }
 }

@@ -1,6 +1,6 @@
 package fr.ostix.game.graphics.model;
 
-import fr.ostix.game.toolBox.OpenGL.VAO;
+import fr.ostix.game.toolBox.OpenGL.*;
 
 public class MeshModel {
     private int[][] lod;

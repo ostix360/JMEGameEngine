@@ -1,8 +1,9 @@
 package fr.ostix.game.menu.component;
 
-import fr.ostix.game.gui.GuiTexture;
-import fr.ostix.game.gui.MasterGui;
-import org.joml.Vector2f;
+import fr.ostix.game.core.*;
+import fr.ostix.game.gui.*;
+import fr.ostix.game.toolBox.OpenGL.*;
+import org.joml.*;
 
 public abstract class Component {
 
@@ -22,6 +23,8 @@ public abstract class Component {
 
     public abstract void update();
 
+    public abstract void render();
+
     public void init() {
         MasterGui.addGui(texture);
     }
@@ -29,4 +32,14 @@ public abstract class Component {
     public void cleanUp() {
         MasterGui.removeGui(texture);
     }
+
+
+    public boolean isIn(){
+        float mX = (float) Input.getMouseX() / DisplayManager.getWidth() * 1920;
+        float mY = (float) Input.getMouseY() / DisplayManager.getHeight() * 1080;
+        return mX >= this.x && mY >= this.y &&
+                mX < (this.x + this.width) && mY < (this.y + this.height);
+    }
+
+
 }

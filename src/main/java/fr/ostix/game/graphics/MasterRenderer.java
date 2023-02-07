@@ -1,7 +1,8 @@
 package fr.ostix.game.graphics;
 
+import fr.ostix.game.core.camera.*;
+import fr.ostix.game.core.ressourceProcessor.*;
 import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.camera.*;
 import fr.ostix.game.entity.component.light.*;
 import fr.ostix.game.graphics.entity.*;
 import fr.ostix.game.graphics.model.*;
@@ -85,10 +86,12 @@ public class MasterRenderer {
             processEntity(entity);
         }
         skyColor = weather.getSky().getSkyColour();
-        GL11.glEnable(GL30.GL_CLIP_DISTANCE0);
-        renderWaterRefractionPass(lights, camera);
-        renderWaterReflectionPass(lights, waterTiles, camera);
-        GL11.glDisable(GL30.GL_CLIP_DISTANCE0);
+        if (!waterTiles.isEmpty()){
+            GL11.glEnable(GL30.GL_CLIP_DISTANCE0);
+            renderWaterRefractionPass(lights, camera);
+            renderWaterReflectionPass(lights, waterTiles, camera);
+            GL11.glDisable(GL30.GL_CLIP_DISTANCE0);
+        }
         render(lights, waterTiles, camera);
     }
 
@@ -99,8 +102,8 @@ public class MasterRenderer {
         skyboxRenderer.render(camera, weather);
         entityRenderer.render(entities, lights, camera, skyColor, new Vector4f(0, 1, 0, -waterTiles.get(0).getHeight() - 0.001f));
         //terrainRenderer.render(terrains, lights,camera, skyColor,new Vector4f(0, 1, 0, -waterTiles.get(0).getHeight()-0.1f));
-        waterFbos.unbindCurrentFrameBuffer();
         camera.reflect(waterTiles.get(0).getHeight());
+        waterFbos.unbindCurrentFrameBuffer();
     }
 
     private void renderWaterRefractionPass(List<Light> lights, Camera camera) {
@@ -129,11 +132,14 @@ public class MasterRenderer {
     }
 
     public void cleanUp() {
-        this.waterRenderer.cleanUp();
-        this.skyboxRenderer.cleanUp();
-        this.terrainShader.cleanUp();
-        this.shader.cleanUp();
-        glDisable(GL_BLEND);
+        GLRequestProcessor.sendRequest(new GLRunnableRequest(() -> {
+            waterFbos.cleanUp();
+            this.shader.cleanUp();
+            this.terrainShader.cleanUp();
+            this.skyboxRenderer.cleanUp();
+            this.waterRenderer.cleanUp();
+            glDisable(GL_BLEND);
+        }));
     }
 
     private Matrix4f createProjectionMatrix() {

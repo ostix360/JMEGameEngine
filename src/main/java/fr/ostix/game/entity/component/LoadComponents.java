@@ -1,7 +1,7 @@
 package fr.ostix.game.entity.component;
 
-import fr.ostix.game.entity.Entity;
-import fr.ostix.game.entity.component.collision.CollisionComponent;
+import fr.ostix.game.entity.*;
+import fr.ostix.game.entity.component.collision.*;
 
 public class LoadComponents {
 

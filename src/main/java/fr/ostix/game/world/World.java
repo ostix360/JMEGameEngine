@@ -4,17 +4,16 @@ import com.jme3.bullet.*;
 import com.jme3.bullet.control.*;
 import fr.ostix.game.audio.*;
 import fr.ostix.game.core.*;
+import fr.ostix.game.core.camera.*;
 import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.entity.*;
-import fr.ostix.game.core.events.entity.npc.*;
 import fr.ostix.game.core.events.listener.*;
 import fr.ostix.game.core.events.listener.keyListeners.*;
 import fr.ostix.game.core.events.listener.player.*;
-import fr.ostix.game.core.quest.*;
+import fr.ostix.game.core.events.sounds.*;
 import fr.ostix.game.core.resources.*;
+import fr.ostix.game.core.ressourceProcessor.*;
 import fr.ostix.game.entity.*;
 import fr.ostix.game.entity.animated.animation.animatedModel.*;
-import fr.ostix.game.entity.camera.*;
 import fr.ostix.game.entity.component.*;
 import fr.ostix.game.entity.component.ai.*;
 import fr.ostix.game.entity.component.animation.*;
@@ -51,7 +50,7 @@ public class World {
     public static final int MAX_LIGHTS = 11;
 
 
-    private static final List<Entity> entities = new ArrayList<>();
+    private static final List<Entity> entities = new CopyOnWriteArrayList<>();
     private static final List<Entity> aabbs = new ArrayList<>();
     private static final List<Light> lights = new ArrayList<>();
     private static final Map<Vector2f, Chunk> worldChunk = new ConcurrentHashMap<>();
@@ -61,7 +60,6 @@ public class World {
 
     private ChunkHandler chunkHandler;
 
-    private SoundListener listener;
     private Player player;
     private Camera cam;
     private Weather weather;
@@ -78,7 +76,7 @@ public class World {
     public World(WorldState state) {
         this.state = state;
 
-        physics.startPhysics();
+
     }
 
     public static void addLight(Light light) {
@@ -98,10 +96,9 @@ public class World {
 
     public final void initWorld(ResourcePack pack, PlayerInventory playerInventory) {
         HashMap<String, Texture> textures = ResourcePack.getTextureByName();
-
+        physics.startPhysics();
         physics.setDebugEnabled(true);
-        physics.getPhysicsSpace().setGravity(new Vector3f(0,-9.81f,0).mul(10f));
-
+        physics.getPhysicsSpace().setGravity(new Vector3f(0, -9.81f, 0).mul(10f));
 
 
         AnimatedModel an = pack.getAnimatedModelByName().get("player2");
@@ -127,27 +124,25 @@ public class World {
         physics.getPhysicsSpace().add(player);
 
         PlayerListener PL = new PlayerListener();
-        keyWorldListener = new KeyInGameListener(this, this.getPlayer(), player.getInventory());
+        keyWorldListener = new KeyInGameListener(state, this.getPlayer(), player.getInventory());
         PlayerInteractListener PLI = new PlayerInteractListener(this, entities);
-        this.worldListeners.add(keyWorldListener);
+        EventManager.getInstance().register(keyWorldListener);
         this.worldListeners.add(PL);
         this.worldListeners.add(PLI);
 
 
-        listener = new SoundListener(player.getPosition(), new Vector3f(), player.getRotation());
         cam = new Camera(player);
         chunkHandler = new ChunkHandler(cam, worldChunk, this);
 
         weather = new Weather(cam);
-        renderer = new MasterRenderer(weather,worldChunk);
-
+        renderer = new MasterRenderer(weather, worldChunk);
 
 
         entities.add(player);
         CUBE = pack.getModelByName("cube");
 
         Model test = pack.getModelByName("fontaine");
-        Entity testE = new Entity(45,test, new Vector3f(5, getTerrainHeight(2050, 2050), 5), new Vector3f(0, 0, 0), 1f);
+        Entity testE = new Entity(45, test, new Vector3f(5, getTerrainHeight(2050, 2050), 5), new Vector3f(0, 0, 0), 1f);
         LoadComponents.loadComponents(pack.getComponents().get(1995130752), testE);
 //        entities.add(testE);
 
@@ -161,7 +156,6 @@ public class World {
 //        entities.add(cubeE);
 
 
-
         Light sun = new Light(new Vector3f(100000, 100000, -100000), Color.SUN, 0.5f, null);
         //lights.add(sun);
         //  lights.add(sunc);
@@ -173,22 +167,15 @@ public class World {
         MasterFont.add(text1);
 
 
-
-        SoundSource back = pack.getSoundByName().get("ambient");
-
-        SoundSource back2 = AudioManager.loadSound("test1", true);
+        SoundSource back2 = pack.getSoundByName().get("worldMusic");
 //        initTerrain(worldChunk);
 
-        back.setGain(0.2f);
-        back.setPosition(new Vector3f(0, 0, 0));
-        back.setLooping(true);
-        back.setProperty(AL10.AL_SOURCE_RELATIVE, AL10.AL_TRUE);
-//        back.play();
         back2.setGain(0.2f);
         back2.setPosition(new Vector3f(0, 0, 0));
         back2.setLooping(true);
         back2.setProperty(AL10.AL_SOURCE_RELATIVE, AL10.AL_TRUE);
-        // back2.play();
+        addToDo(w -> EventManager.getInstance().callEvent(new StartSoundsEvent(2, back2)));
+
 
         Registered.registerNPC(NPCGod.getInstance());
 
@@ -204,18 +191,18 @@ public class World {
     }
 
     private void initTerrain(Map<Vector2f, Chunk> worldChunk) {
-        TerrainTexture backgroundTexture = new TerrainTexture(ResourcePack.getTextureByName().get("grassy2").getID());
-        TerrainTexture rTexture = new TerrainTexture(ResourcePack.getTextureByName().get("mud").getID());
-        TerrainTexture gTexture = new TerrainTexture(ResourcePack.getTextureByName().get("grassFlowers").getID());
-        TerrainTexture bTexture = new TerrainTexture(ResourcePack.getTextureByName().get("path").getID());
+        TerrainTexture backgroundTexture = new TerrainTexture(ResourcePack.getTextureByName("grassy2").getID());
+        TerrainTexture rTexture = new TerrainTexture(ResourcePack.getTextureByName("mud").getID());
+        TerrainTexture gTexture = new TerrainTexture(ResourcePack.getTextureByName("grassFlowers").getID());
+        TerrainTexture bTexture = new TerrainTexture(ResourcePack.getTextureByName("path").getID());
 
         TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture, bTexture);
-        TerrainTexture blendMap = new TerrainTexture(ResourcePack.getTextureByName().get("blendMap").getID());
+        TerrainTexture blendMap = new TerrainTexture(ResourcePack.getTextureByName("blendMap").getID());
 
 //        worldIndex = new int[2][2];
         for (int x = 0; x < 1; x++) {
             for (int z = 0; z < 1; z++) {
-                worldChunk.put(new Vector2f(x,z),new Chunk(x,z,new ArrayList<>()).setTerrain(new Terrain(x, z, texturePack, blendMap, new float[][]{})));
+                worldChunk.put(new Vector2f(x, z), new Chunk(x, z, new ArrayList<>()).setTerrain(new Terrain(x, z, texturePack, blendMap, new float[][]{})));
 //                worldIndex[x][z] = index;
             }
         }
@@ -238,7 +225,7 @@ public class World {
             float x = r.nextFloat() * 400;
             float z = r.nextFloat() * 400;
             Entity te = new Entity(e);
-            te.setPosition(new Vector3f(x,0,z));
+            te.setPosition(new Vector3f(x, 0, z));
             entities.add(te);
             te.setPhysic(new RigidBodyControl(0));
             physics.getPhysicsSpace().add(te);
@@ -260,23 +247,20 @@ public class World {
         keyWorldListener.update();
         cam.move();
 
-        physics.update(1/60f);
+        physics.update(1 / 60f);
 
 
         //entity.increaseRotation(new Vector3f(0, 1, 0));
 
 
-
 //        if (Input.keys[GLFW.GLFW_KEY_O]) {
-            updateTime();
+        updateTime();
 //        }
         for (Entity e : entities) {
             e.update();
         }
         weather.update(time);
 
-
-        listener.updateTransform(player.getPosition(), player.getRotation());
         MasterParticle.update(cam);
 
         entities.clear();
@@ -302,9 +286,9 @@ public class World {
         int x = (int) Math.floor(worldX / Terrain.getSIZE());
         int z = (int) Math.floor(worldZ / Terrain.getSIZE());
         try {
-            return worldChunk.get(new Vector2f(x,z)).getTerrain().getHeightOfTerrain(worldX, worldZ);
+            return worldChunk.get(new Vector2f(x, z)).getTerrain().getHeightOfTerrain(worldX, worldZ);
         } catch (Exception e) {
-             //Logger.err("World doesn't exist in this coordinates xIndex : " + x + " ZIndex : " + z);
+            //Logger.err("World doesn't exist in this coordinates xIndex : " + x + " ZIndex : " + z);
         }
         return 0;
     }
@@ -318,25 +302,27 @@ public class World {
         physics.stopPhysics();
         chunkHandler.exit();
         renderer.cleanUp();
-        MasterParticle.cleanUp();
+        GLRequestProcessor.sendRequest(new GLRunnableRequest(MasterParticle::cleanUp));
+
     }
 
-    public void pause(){
+    public void pause() {
         EventManager.getInstance().removeAll(worldListeners);
         state.setWorldCanBeUpdated(false);
         player.getControl().setWalkDirection(new Vector3f(0));
     }
 
-    public void resume(){
+    public void resume() {
         worldListeners.forEach(wl -> EventManager.getInstance().register(wl));
         state.setWorldCanBeUpdated(true);
 
     }
-    public static void addToDo(Action action){
+
+    public static void addToDo(Action action) {
         toDo.add(action);
     }
 
-    public static void removeToDo(Action action){
+    public static void removeToDo(Action action) {
         toDo.remove(action);
     }
 

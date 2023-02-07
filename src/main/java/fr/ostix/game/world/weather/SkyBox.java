@@ -1,7 +1,7 @@
 package fr.ostix.game.world.weather;
 
+import fr.ostix.game.core.camera.*;
 import fr.ostix.game.core.loader.*;
-import fr.ostix.game.entity.camera.*;
 import fr.ostix.game.graphics.model.*;
 
 public class SkyBox {

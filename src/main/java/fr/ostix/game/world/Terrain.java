@@ -3,18 +3,14 @@ package fr.ostix.game.world;
 import com.jme3.bullet.control.*;
 import fr.ostix.game.core.ressourceProcessor.*;
 import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.graphics.textures.*;
 import fr.ostix.game.toolBox.*;
 import fr.ostix.game.world.chunk.*;
 import fr.ostix.game.world.texture.*;
 import org.joml.*;
 
-import javax.imageio.*;
 import java.awt.image.*;
-import java.io.*;
-import java.nio.*;
-import java.util.*;
 import java.lang.Math;
+import java.util.*;
 
 public class Terrain {
     private static final int SIZE = 100;

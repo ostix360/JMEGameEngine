@@ -1,7 +1,7 @@
 package fr.ostix.game.entity.component;
 
 
-import fr.ostix.game.entity.Entity;
+import fr.ostix.game.entity.*;
 
 public interface ComponentCreator {
     Component createComponent(Entity entity);

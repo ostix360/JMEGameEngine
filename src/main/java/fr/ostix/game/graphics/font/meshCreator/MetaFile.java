@@ -1,14 +1,11 @@
 package fr.ostix.game.graphics.font.meshCreator;
 
 
-import fr.ostix.game.toolBox.OpenGL.DisplayManager;
-import fr.ostix.game.toolBox.ToolDirectory;
+import fr.ostix.game.toolBox.OpenGL.*;
+import fr.ostix.game.toolBox.*;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 
 public class MetaFile {

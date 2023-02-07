@@ -12,7 +12,6 @@ public class NPCGodGui extends NPCGui{
     @Override
     protected void moveToNPC() {
         Transform t = (Transform) (world.getPlayer().getTransform().clone());
-//        t.getPosition().add(0,10,0);
         this.world.getCamera().goTo(t);
     }
 }

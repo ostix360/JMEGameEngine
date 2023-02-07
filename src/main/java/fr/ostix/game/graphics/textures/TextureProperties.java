@@ -1,6 +1,6 @@
 package fr.ostix.game.graphics.textures;
 
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.*;
 
 public class TextureProperties {
 

@@ -18,7 +18,7 @@ public abstract class Inventory extends Screen {
 
     public Inventory(String title) {
         super(title);
-        this.backGround = new GuiTexture(ResourcePack.getTextureByName().get("inventory").getID(),
+        this.backGround = new GuiTexture(ResourcePack.getTextureByName("inventory").getID(),
                 new Vector2f(0), new Vector2f(1920,
                 1080));
         init();
@@ -41,7 +41,7 @@ public abstract class Inventory extends Screen {
         }
     }
 
-    protected void render() {
+    public void render() {
     }
 
     public void addItems(List<ItemStack> items) {
@@ -49,7 +49,13 @@ public abstract class Inventory extends Screen {
     }
 
     public void removeItems(List<ItemStack> items) {
-        this.items.removeAll(items);
+        List<ItemStack> iToRemove = new ArrayList<>();
+        items.forEach(stack ->{
+            if (stack.getCount() <= 0){
+                iToRemove.add(stack);
+            }
+        });
+        items.removeAll(iToRemove);
     }
 
 

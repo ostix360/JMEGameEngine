@@ -1,19 +1,18 @@
 package fr.ostix.game.audio;
 
-import fr.ostix.game.toolBox.ToolDirectory;
-import org.lwjgl.BufferUtils;
+import fr.ostix.game.toolBox.*;
+import org.lwjgl.*;
 import org.lwjgl.openal.*;
-import org.lwjgl.stb.STBVorbisInfo;
-import org.lwjgl.system.MemoryStack;
+import org.lwjgl.stb.*;
+import org.lwjgl.system.*;
+import org.newdawn.slick.openal.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.*;
+import java.util.*;
 
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.stb.STBVorbis.*;
-import static org.lwjgl.system.MemoryUtil.NULL;
+import static org.lwjgl.system.MemoryUtil.*;
 
 
 public class AudioManager {
@@ -48,6 +47,7 @@ public class AudioManager {
     public static SoundSource loadSound(String path, boolean isAmbient) {
         int bufferID = AL10.alGenBuffers();
         buffers.add(bufferID);
+//        WaveData data = WaveData.create(path);
         try (STBVorbisInfo info = STBVorbisInfo.malloc()) {
             ByteBuffer data = loadOggSound(path, info);
             AL10.alBufferData(bufferID, info.channels() == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16, data, info.sample_rate());

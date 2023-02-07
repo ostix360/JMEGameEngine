@@ -1,20 +1,16 @@
 package fr.ostix.game.entity.component.particle;
 
-import fr.ostix.game.core.loader.json.JsonUtils;
-import fr.ostix.game.core.resources.ResourcePack;
-import fr.ostix.game.entity.Entity;
-import fr.ostix.game.entity.component.Component;
-import fr.ostix.game.entity.component.ComponentCreator;
-import fr.ostix.game.graphics.particles.ParticleSystem;
-import fr.ostix.game.graphics.particles.ParticleTarget;
-import fr.ostix.game.graphics.particles.ParticleTargetProperties;
-import fr.ostix.game.graphics.particles.ParticleTexture;
+import fr.ostix.game.core.loader.json.*;
+import fr.ostix.game.core.resources.*;
+import fr.ostix.game.entity.*;
+import fr.ostix.game.entity.component.*;
+import fr.ostix.game.graphics.particles.*;
 import fr.ostix.game.graphics.particles.particleSpawn.*;
-import fr.ostix.game.graphics.textures.Texture;
-import fr.ostix.game.toolBox.Logger;
-import org.joml.Vector3f;
+import fr.ostix.game.graphics.textures.*;
+import fr.ostix.game.toolBox.*;
+import org.joml.*;
 
-import java.util.Objects;
+import java.util.*;
 
 public class ParticleCreator implements ComponentCreator {
     @Override
@@ -26,7 +22,7 @@ public class ParticleCreator implements ComponentCreator {
     public Component loadComponent(String component, Entity entity) {
         ParticleSystem system = null;
         String[] lines = component.split("\n");
-        Texture tex = ResourcePack.getTextureByName().get(lines[lines.length - 1]);
+        Texture tex = ResourcePack.getTextureByName(lines[lines.length - 1]);
         ParticleTexture texture = new ParticleTexture(tex.getID(), tex.getNumbersOfRows(), tex.isAdditive());
         String[] values;
         try {

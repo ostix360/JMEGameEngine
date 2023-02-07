@@ -1,7 +1,9 @@
 package fr.ostix.game.toolBox;
 
 
-import org.joml.Matrix4f;
+import org.joml.*;
+
+import java.lang.Math;
 
 /**
  * A quaternion simply represents a 3D rotation. The maths behind it is quite

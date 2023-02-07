@@ -21,7 +21,7 @@ public class Item {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.texture = ResourcePack.getTextureByName().get(textureName).getID();
+        this.texture = ResourcePack.getTextureByName(textureName).getID();
         this.itemDescription = new GUIText(description, 1f, Game.gameFont,
                 new Vector2f(95, 290f), 280f, false);
         this.itemDescription.setColour(Color.MAGENTA);

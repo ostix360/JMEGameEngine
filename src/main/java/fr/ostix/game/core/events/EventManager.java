@@ -1,31 +1,54 @@
 package fr.ostix.game.core.events;
 
-import fr.ostix.game.core.events.entity.npc.*;
 import fr.ostix.game.core.events.listener.*;
-import fr.ostix.game.core.events.quest.*;
+import fr.ostix.game.core.events.sounds.*;
+import fr.ostix.game.core.events.states.*;
 
 import java.lang.reflect.*;
 import java.util.*;
 import java.util.concurrent.*;
 
 public class EventManager {
+
+    // TODO Event sur un thread séparé LinkedBlockingQueue
+
     private static final EventManager INSTANCE = new EventManager();
-    private final Set<Listener> listeners;
+
+    private final List<Listener> listeners;
 
     public EventManager() {
-        listeners = ConcurrentHashMap.newKeySet();
+        this.listeners = new CopyOnWriteArrayList<>();
+
     }
+
 
     public static EventManager getInstance() {
         return INSTANCE;
     }
 
-    public void callEvent(Event e) {
+    private void executeEvent(Event e) {
+
         //
-        if (e instanceof NPCTalkEvent){
+        if (e instanceof StartSoundsEvent) {
             System.out.printf("Event %s called\n", e.getClass().getSimpleName());
         }
         //long nano = System.nanoTime();
+        sendEvent(e);
+        //System.out.printf("listener call took %s s.\n",(System.nanoTime()-nano));
+    }
+
+    public void callEvent(Event e) {
+        if (e instanceof StateChangeEvent) {
+            System.out.printf("Event %s called\n", e.getClass().getSimpleName());
+        }
+        //long nano = System.nanoTime();
+        sendEvent(e);
+//        executorService.submit(() -> {
+//            executeEvent(e);
+//        });
+    }
+
+    private void sendEvent(Event e) {
         this.listeners.forEach(listener -> {
             for (Method method : listener.getClass().getDeclaredMethods()) {
                 if (method.isAnnotationPresent(EventHandler.class)) {
@@ -45,7 +68,6 @@ public class EventManager {
                 }
             }
         });
-        //System.out.printf("listener call took %s s.\n",(System.nanoTime()-nano));
     }
 
     public void removeAll(List<Listener> listeners) {
@@ -57,6 +79,10 @@ public class EventManager {
     }
 
     public void unRegister(Listener listener) {
-        this.listeners.remove(listener);
+        if (listeners == null)
+            return;
+        if (listeners.contains(listener)) {
+            this.listeners.remove(listener);
+        }
     }
 }

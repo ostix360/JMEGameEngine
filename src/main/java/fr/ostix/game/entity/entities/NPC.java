@@ -3,6 +3,7 @@ package fr.ostix.game.entity.entities;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.entity.npc.*;
 import fr.ostix.game.core.events.listener.*;
+import fr.ostix.game.core.events.player.*;
 import fr.ostix.game.entity.*;
 import fr.ostix.game.entity.entities.npc.gui.*;
 import fr.ostix.game.graphics.model.*;
@@ -51,6 +52,7 @@ public class NPC extends Entity implements Interact{
 
     @Override
     public void interact(World world) {
+        EventManager.getInstance().callEvent(new PlayerGiveItemEvent(world.getPlayer(),world, 1));
         EventManager.getInstance().callEvent(new NPCTalkEvent(world, 1, this));
     }
 

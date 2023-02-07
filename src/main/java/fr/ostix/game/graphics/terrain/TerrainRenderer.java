@@ -1,6 +1,6 @@
 package fr.ostix.game.graphics.terrain;
 
-import fr.ostix.game.entity.camera.*;
+import fr.ostix.game.core.camera.*;
 import fr.ostix.game.entity.component.light.*;
 import fr.ostix.game.graphics.model.*;
 import fr.ostix.game.graphics.textures.*;

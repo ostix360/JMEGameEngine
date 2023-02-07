@@ -1,6 +1,6 @@
 package fr.ostix.game.toolBox.OpenGL.shader.uniform;
 
-import org.joml.Matrix4f;
+import org.joml.*;
 
 public class MatrixUniformArray extends Uniform{
 

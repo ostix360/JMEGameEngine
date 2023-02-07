@@ -2,12 +2,12 @@ package fr.ostix.game.core;
 
 import fr.ostix.game.audio.*;
 import fr.ostix.game.core.loader.*;
-import fr.ostix.game.core.resources.*;
 import fr.ostix.game.core.ressourceProcessor.*;
 import fr.ostix.game.graphics.font.meshCreator.*;
 import fr.ostix.game.graphics.font.rendering.*;
 import fr.ostix.game.gui.*;
 import fr.ostix.game.menu.*;
+import fr.ostix.game.menu.stat.*;
 import fr.ostix.game.toolBox.*;
 import fr.ostix.game.toolBox.OpenGL.*;
 import org.lwjgl.openal.*;
@@ -79,7 +79,7 @@ public class Game extends Thread {
 
         stateManager.init(guiManager);
 
-
+        Runtime.getRuntime().addShutdownHook(new Thread(this::exit, "Shutdown-thread"));
 
     }
 
@@ -88,11 +88,17 @@ public class Game extends Thread {
         init();
         while (running) {
             if (glfwWindowShouldClose(window)) {
-                exit();
-                return;
+                break;
             }
             loop();
         }
+        GLRequestProcessor.forceRequest();
+        GLRequestProcessor.executeRequest();
+        AudioManager.cleanUp();
+        masterFont.cleanUp();
+        guiManager.cleanUp();
+        loader.cleanUp();
+        System.exit(0);
     }
 
     long timer = System.currentTimeMillis();
@@ -149,14 +155,14 @@ public class Game extends Thread {
     private void update() {
         Input.updateInput(window);
         GLRequestProcessor.executeRequest();
-        currentScreen = stateManager.getCurrentState(stateManager.update());
+        currentScreen = stateManager.update();
         currentScreen.update();
         glfwPollEvents();
     }
 
     private void render() {
         if (currentScreen instanceof WorldState) {
-            ((WorldState) currentScreen).render();
+            currentScreen.render();
         } else {
             OpenGlUtils.clearGL();
         }
@@ -166,12 +172,10 @@ public class Game extends Thread {
 
     private void exit() {
         Logger.log("Exiting");
-        AudioManager.cleanUp();
-        masterFont.cleanUp();
-        guiManager.cleanUp();
-        stateManager.cleanUp();
         running = false;
-        loader.cleanUp();
+        Scheduler.stop();
+        stateManager.cleanUp();
+
         DisplayManager.closeDisplay();
     }
 

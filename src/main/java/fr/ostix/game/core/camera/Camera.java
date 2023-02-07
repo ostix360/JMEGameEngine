@@ -1,4 +1,4 @@
-package fr.ostix.game.entity.camera;
+package fr.ostix.game.core.camera;
 
 import fr.ostix.game.core.*;
 import fr.ostix.game.entity.*;
@@ -7,9 +7,9 @@ import fr.ostix.game.toolBox.*;
 import fr.ostix.game.world.*;
 import org.joml.*;
 
-import static org.lwjgl.glfw.GLFW.*;
-
 import java.lang.Math;
+
+import static org.lwjgl.glfw.GLFW.*;
 
 public class Camera implements ICamera {
 
@@ -42,6 +42,9 @@ public class Camera implements ICamera {
 
     @Override
     public Matrix4f getProjectionMatrix() {
+        if (projection == null) {
+            projection = MasterRenderer.getProjectionMatrix();
+        }
         return projection;
     }
 
@@ -154,7 +157,6 @@ public class Camera implements ICamera {
         float angleAroundObject = 180;
         float horizontalDistance = (float) (zoom * Math.cos(Math.toRadians(pitch)));
         float verticalDistance = (float) (zoom * Math.sin(Math.toRadians(pitch)));
-//        float yOffset = updateSmooth(t.getPosition().y() + 4 + verticalDistance, this.position.y());
 
         float yOffset = t.getPosition().y() + verticalDistance;
         float theta = t.getRotation().y() + angleAroundObject;
@@ -167,7 +169,6 @@ public class Camera implements ICamera {
         }
         float zP = t.getPosition().z() - zOffset;
 
-//        caculateCameraPosition(horizontalDistance, yOffset);
         float yawP = 180 - (t.getRotation().y() + angleAroundObject);
         this.projection = MasterRenderer.getProjectionMatrix();
 
@@ -182,14 +183,14 @@ public class Camera implements ICamera {
         z.setTarget((int) (zP));
         yaw.setTarget(yawP);
         pitch.setTarget(pitchP);
-
+        float delta = 1 / 200f;
         Thread thread = new Thread(() -> {
             while (true) {
-                x.update(1 / 60f);
-                y.update(1 / 60f);
-                z.update(1 / 60f);
-                yaw.update(1/60f);
-                pitch.update(1/60f);
+                x.update(delta);
+                y.update(delta);
+                z.update(delta);
+                yaw.update(delta);
+                pitch.update(delta);
                 this.position.x = x.get();
                 this.position.y = y.get();
                 this.position.z = z.get();
@@ -199,11 +200,14 @@ public class Camera implements ICamera {
                     break;
                 }
                 try {
-                    Thread.sleep(17);
+                    Thread.sleep(5);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
+            this.position.x = x.get();
+            this.position.y = y.get();
+            this.position.z = z.get();
 
         });
         thread.start();

@@ -19,14 +19,14 @@ public class Button extends Component {
 
     @Override
     public void update() {
-        float mX = (float) Input.getMouseX() / DisplayManager.getWidth() * 1920;
-        float mY = (float) Input.getMouseY() / DisplayManager.getHeight() * 1080;
-
-
-        pressed = mX >= this.x && mY >= this.y &&
-                mX < (this.x + this.width) && mY < (this.y + this.height) && Input.keysMouse[GLFW.GLFW_MOUSE_BUTTON_1];
+        pressed = isIn() && Input.keysMouse[GLFW.GLFW_MOUSE_BUTTON_1];
         if (pressed) onPress.onPress(this);
         this.texture.hasLayer(pressed);
+    }
+
+    @Override
+    public void render() {
+
     }
 
     public boolean mouseIn(Vector2f MousePos) {

@@ -1,12 +1,10 @@
 package fr.ostix.game.entity;
 
 import com.jme3.bullet.control.*;
-import fr.ostix.game.entity.camera.*;
 import fr.ostix.game.graphics.model.*;
 import fr.ostix.game.inventory.*;
 import fr.ostix.game.world.*;
 import org.joml.*;
-import org.joml.Math;
 
 public class Player extends Entity {
 

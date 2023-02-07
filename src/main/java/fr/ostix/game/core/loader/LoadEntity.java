@@ -1,6 +1,6 @@
 package fr.ostix.game.core.loader;
 
-import org.joml.Vector3f;
+import org.joml.*;
 
 
 public class LoadEntity {

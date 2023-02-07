@@ -1,14 +1,11 @@
 package fr.ostix.game.graphics.font.rendering;
 
 
-import fr.ostix.game.graphics.font.meshCreator.FontType;
-import fr.ostix.game.graphics.font.meshCreator.GUIText;
-import fr.ostix.game.toolBox.OpenGL.OpenGlUtils;
-import fr.ostix.game.toolBox.OpenGL.VAO;
-import org.lwjgl.opengl.GL13;
+import fr.ostix.game.graphics.font.meshCreator.*;
+import fr.ostix.game.toolBox.OpenGL.*;
+import org.lwjgl.opengl.*;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.lwjgl.opengl.GL11.*;
 

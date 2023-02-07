@@ -1,6 +1,6 @@
 package fr.ostix.game.toolBox.OpenGL;
 
-import org.lwjgl.BufferUtils;
+import org.lwjgl.*;
 import org.lwjgl.opengl.*;
 
 import java.nio.*;

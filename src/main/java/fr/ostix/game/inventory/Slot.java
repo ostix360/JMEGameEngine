@@ -25,10 +25,10 @@ public class Slot {
         this.x = x;
         this.y = y;
         this.size = size;
-        texture = new GuiTexture(ResourcePack.getTextureByName().get("slot").getID(),
+        texture = new GuiTexture(ResourcePack.getTextureByName("slot").getID(),
                 new Vector2f(x, y), new Vector2f(size * 1.23f, size));
         texture.setLayer(new Color(0.3f, 0.3f, 0.3f, 0.3f));
-        itemDescriptionMenu = new GuiTexture(ResourcePack.getTextureByName().get("itemDescription").getID(),
+        itemDescriptionMenu = new GuiTexture(ResourcePack.getTextureByName("itemDescription").getID(),
                 new Vector2f(25, 230), new Vector2f(400, 500));
         this.stack = new ItemStack(null, 0);
     }

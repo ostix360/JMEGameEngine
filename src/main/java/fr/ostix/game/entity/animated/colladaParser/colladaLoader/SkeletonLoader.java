@@ -1,14 +1,13 @@
 package fr.ostix.game.entity.animated.colladaParser.colladaLoader;
 
-import fr.ostix.game.entity.animated.colladaParser.dataStructures.JointData;
-import fr.ostix.game.entity.animated.colladaParser.dataStructures.SkeletonData;
-import fr.ostix.game.entity.animated.colladaParser.xmlParser.XmlNode;
-import org.joml.Matrix4f;
-import org.joml.Vector3f;
-import org.lwjgl.BufferUtils;
+import fr.ostix.game.entity.animated.colladaParser.dataStructures.*;
+import fr.ostix.game.entity.animated.colladaParser.xmlParser.*;
+import org.joml.*;
+import org.lwjgl.*;
 
-import java.nio.FloatBuffer;
-import java.util.List;
+import java.lang.Math;
+import java.nio.*;
+import java.util.*;
 
 
 public class SkeletonLoader {

@@ -1,17 +1,13 @@
 package fr.ostix.game.entity.animated.animation.loaders;
 
 
-import fr.ostix.game.core.loader.Loader;
-import fr.ostix.game.entity.animated.animation.animatedModel.AnimatedModel;
-import fr.ostix.game.entity.animated.animation.animatedModel.Joint;
-import fr.ostix.game.entity.animated.colladaParser.colladaLoader.ColladaLoader;
-import fr.ostix.game.entity.animated.colladaParser.dataStructures.AnimatedModelData;
-import fr.ostix.game.entity.animated.colladaParser.dataStructures.JointData;
-import fr.ostix.game.entity.animated.colladaParser.dataStructures.MeshData;
-import fr.ostix.game.entity.animated.colladaParser.dataStructures.SkeletonData;
-import fr.ostix.game.graphics.model.MeshModel;
-import fr.ostix.game.graphics.textures.Texture;
-import fr.ostix.game.toolBox.ToolDirectory;
+import fr.ostix.game.core.loader.*;
+import fr.ostix.game.entity.animated.animation.animatedModel.*;
+import fr.ostix.game.entity.animated.colladaParser.colladaLoader.*;
+import fr.ostix.game.entity.animated.colladaParser.dataStructures.*;
+import fr.ostix.game.graphics.model.*;
+import fr.ostix.game.graphics.textures.*;
+import fr.ostix.game.toolBox.*;
 
 public class AnimatedModelLoader {
 

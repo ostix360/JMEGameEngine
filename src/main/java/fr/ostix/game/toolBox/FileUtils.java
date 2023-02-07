@@ -1,18 +1,13 @@
 package fr.ostix.game.toolBox;
 
-import org.lwjgl.BufferUtils;
+import org.lwjgl.*;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.channels.SeekableByteChannel;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.*;
+import java.nio.*;
+import java.nio.channels.*;
+import java.nio.file.*;
 
-import static org.lwjgl.BufferUtils.createByteBuffer;
+import static org.lwjgl.BufferUtils.*;
 
 public class FileUtils {
 

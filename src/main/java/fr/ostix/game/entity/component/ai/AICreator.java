@@ -1,10 +1,9 @@
 package fr.ostix.game.entity.component.ai;
 
-import fr.ostix.game.core.loader.json.JsonUtils;
-import fr.ostix.game.entity.Entity;
-import fr.ostix.game.entity.component.Component;
-import fr.ostix.game.entity.component.ComponentCreator;
-import fr.ostix.game.toolBox.Logger;
+import fr.ostix.game.core.loader.json.*;
+import fr.ostix.game.entity.*;
+import fr.ostix.game.entity.component.*;
+import fr.ostix.game.toolBox.*;
 
 public class AICreator implements ComponentCreator {
     @Override

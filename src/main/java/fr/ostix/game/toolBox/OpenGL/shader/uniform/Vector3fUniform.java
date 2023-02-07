@@ -1,7 +1,7 @@
 package fr.ostix.game.toolBox.OpenGL.shader.uniform;
 
-import org.joml.Vector3f;
-import org.lwjgl.opengl.GL20;
+import org.joml.*;
+import org.lwjgl.opengl.*;
 
 public class Vector3fUniform extends Uniform {
 

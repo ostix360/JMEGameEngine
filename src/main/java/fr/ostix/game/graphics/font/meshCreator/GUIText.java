@@ -1,13 +1,12 @@
 package fr.ostix.game.graphics.font.meshCreator;
 
 
-import fr.ostix.game.graphics.font.rendering.MasterFont;
-import fr.ostix.game.graphics.model.MeshModel;
-import fr.ostix.game.toolBox.Color;
-import org.joml.Vector2f;
-import org.joml.Vector3f;
+import fr.ostix.game.graphics.font.rendering.*;
+import fr.ostix.game.graphics.model.*;
+import fr.ostix.game.toolBox.*;
+import org.joml.*;
 
-import java.util.Objects;
+import java.util.*;
 
 
 public class GUIText {
@@ -21,11 +20,13 @@ public class GUIText {
     private MeshModel textMeshVao;
     private int vertexCount;
     private int numberOfLines;
+
+    private boolean edited;
     private Vector3f colour = new Vector3f(0f, 0f, 0f);
 
     public GUIText(String text, float fontSize, FontType font, Vector2f position, float maxLineLength,
                    boolean centered) {
-        this.textString = text;
+        setText(text);
         this.fontSize = fontSize;
         this.font = font;
         this.position = position.div(1920, 1080);
@@ -69,6 +70,7 @@ public class GUIText {
     public void setMeshInfo(MeshModel vao, int verticesCount) {
         this.textMeshVao = vao;
         this.vertexCount = verticesCount;
+        this.edited = false;
     }
 
     @Override
@@ -96,11 +98,16 @@ public class GUIText {
         return lineMaxSize;
     }
 
-    protected String getTextString() {
+    public String getTextString() {
         return textString;
+    }
+
+    public boolean isEdited() {
+        return edited;
     }
 
     public void setText(String textString) {
         this.textString = textString;
+        this.edited = true;
     }
 }

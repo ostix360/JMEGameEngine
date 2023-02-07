@@ -1,12 +1,9 @@
 package fr.ostix.game.world.water;
 
-import fr.ostix.game.toolBox.OpenGL.DisplayManager;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL14;
-import org.lwjgl.opengl.GL30;
-import org.lwjgl.opengl.GL32;
+import fr.ostix.game.toolBox.OpenGL.*;
+import org.lwjgl.opengl.*;
 
-import java.nio.ByteBuffer;
+import java.nio.*;
 
 public class WaterFrameBuffers {
 

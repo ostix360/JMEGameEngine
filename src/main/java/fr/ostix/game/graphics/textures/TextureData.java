@@ -1,6 +1,6 @@
 package fr.ostix.game.graphics.textures;
 
-import java.nio.ByteBuffer;
+import java.nio.*;
 
 public class TextureData {
     private final int wight;

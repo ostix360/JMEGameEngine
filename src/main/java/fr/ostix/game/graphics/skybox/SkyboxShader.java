@@ -1,7 +1,7 @@
 package fr.ostix.game.graphics.skybox;
 
 
-import fr.ostix.game.entity.camera.*;
+import fr.ostix.game.core.camera.*;
 import fr.ostix.game.toolBox.*;
 import fr.ostix.game.toolBox.OpenGL.shader.*;
 import fr.ostix.game.toolBox.OpenGL.shader.uniform.*;
@@ -29,7 +29,7 @@ public class SkyboxShader extends ShaderProgram {
         projectionMatrix.loadMatrixToUniform(matrix);
     }
 
-    public void loadViewMatrix(Camera camera,float rotate) {
+    public void loadViewMatrix(Camera camera, float rotate) {
         Matrix4f matrix = Maths.createViewMatrix(camera);
         matrix.m30(0);
         matrix.m31(0);

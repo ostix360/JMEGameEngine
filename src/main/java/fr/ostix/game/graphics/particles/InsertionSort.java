@@ -1,6 +1,6 @@
 package fr.ostix.game.graphics.particles;
 
-import java.util.List;
+import java.util.*;
 
 
 public class InsertionSort {

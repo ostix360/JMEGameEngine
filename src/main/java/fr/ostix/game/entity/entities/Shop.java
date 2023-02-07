@@ -21,7 +21,7 @@ public class Shop extends Entity {
         inventory = new ShopInventory();
         inventory.init();
         this.canInteract = true;
-        bgInteraction = new GuiTexture(ResourcePack.getTextureByName().get("bgInteraction").getID(),
+        bgInteraction = new GuiTexture(ResourcePack.getTextureByName("bgInteraction").getID(),
                 new Vector2f(1920 / 2f - 60, 850), new Vector2f(120, 40));
         interactionText = new GUIText("Ouvrir", 5, Game.gameFont, new Vector2f(1920 / 2f - 50, 860),
                 20, false);

@@ -1,6 +1,6 @@
 package fr.ostix.game.world.weather;
 
-import fr.ostix.game.entity.camera.*;
+import fr.ostix.game.core.camera.*;
 import fr.ostix.game.toolBox.*;
 import org.joml.Math;
 import org.joml.*;
@@ -25,6 +25,7 @@ public class Weather {
 
     public Weather(ICamera cam) {
         this.sky = new Sky(cam);
+        updateSkyBox(weatherFrames[0], weatherFrames[1]);
     }
 
     public void update(float time) {

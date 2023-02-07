@@ -18,9 +18,9 @@ public class InGameMenu extends Screen {
     public void init(Player player) {
         super.init();
         this.player = player;
-        heartTexture = ResourcePack.getTextureByName().get("food").getID();
-        enduranceBar = new GuiTexture(ResourcePack.getTextureByName().get("enduranceBar").getID(), new Vector2f(975, 955), new Vector2f(590, 135));
-        enduranceTexture = ResourcePack.getTextureByName().get("endurance").getID();
+        heartTexture = ResourcePack.getTextureByName("food").getID();
+        enduranceBar = new GuiTexture(ResourcePack.getTextureByName("enduranceBar").getID(), new Vector2f(975, 955), new Vector2f(590, 135));
+        enduranceTexture = ResourcePack.getTextureByName("endurance").getID();
     }
 
 

@@ -1,20 +1,17 @@
 package fr.ostix.game.graphics.particles;
 
-import fr.ostix.game.core.loader.Loader;
-import fr.ostix.game.entity.camera.Camera;
-import fr.ostix.game.graphics.model.MeshModel;
-import fr.ostix.game.toolBox.Maths;
-import fr.ostix.game.toolBox.OpenGL.VAO;
-import fr.ostix.game.toolBox.OpenGL.VBO;
-import org.joml.Matrix4f;
-import org.joml.Vector3f;
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL32;
+import fr.ostix.game.core.camera.*;
+import fr.ostix.game.core.loader.*;
+import fr.ostix.game.graphics.model.*;
+import fr.ostix.game.toolBox.*;
+import fr.ostix.game.toolBox.OpenGL.*;
+import org.joml.*;
+import org.lwjgl.*;
+import org.lwjgl.opengl.*;
 
-import java.nio.FloatBuffer;
-import java.util.List;
-import java.util.Map;
+import java.lang.Math;
+import java.nio.*;
+import java.util.*;
 
 import static org.lwjgl.opengl.GL11.*;
 

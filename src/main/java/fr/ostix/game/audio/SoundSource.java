@@ -1,15 +1,17 @@
 package fr.ostix.game.audio;
 
-import org.joml.Vector3f;
+import org.joml.*;
 
 import static org.lwjgl.openal.AL11.*;
 
 public class SoundSource {
 
     private final int sourceID;
+    private boolean isAmbient;
 
     public SoundSource(boolean isAmbient) {
         this.sourceID = alGenSources();
+        this.isAmbient = isAmbient;
         alSourcei(sourceID, AL_SOURCE_RELATIVE, isAmbient ? AL_TRUE : AL_FALSE);
 //        alSourcef(sourceID, AL_ROLLOFF_FACTOR, rollOffFactor);
 //        alSourcef(sourceID, AL_REFERENCE_DISTANCE, referenceDistance);
@@ -60,5 +62,9 @@ public class SoundSource {
     public void cleanup() {
         stop();
         alDeleteSources(sourceID);
+    }
+
+    public boolean isAmbient() {
+        return isAmbient;
     }
 }

@@ -1,8 +1,9 @@
 package fr.ostix.game.graphics.particles;
 
-import fr.ostix.game.entity.camera.Camera;
-import org.joml.Vector2f;
-import org.joml.Vector3f;
+import fr.ostix.game.core.camera.*;
+import org.joml.*;
+
+import java.lang.Math;
 
 public class Particle {
     private final Vector3f position;

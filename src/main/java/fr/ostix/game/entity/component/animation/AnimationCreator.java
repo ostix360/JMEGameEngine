@@ -1,10 +1,9 @@
 package fr.ostix.game.entity.component.animation;
 
-import fr.ostix.game.core.resources.ResourcePack;
-import fr.ostix.game.entity.Entity;
-import fr.ostix.game.entity.animated.animation.animatedModel.AnimatedModel;
-import fr.ostix.game.entity.component.Component;
-import fr.ostix.game.entity.component.ComponentCreator;
+import fr.ostix.game.core.resources.*;
+import fr.ostix.game.entity.*;
+import fr.ostix.game.entity.animated.animation.animatedModel.*;
+import fr.ostix.game.entity.component.*;
 
 public class AnimationCreator implements ComponentCreator {
     @Override

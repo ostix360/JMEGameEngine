@@ -1,9 +1,8 @@
 package fr.ostix.game.toolBox;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.io.*;
+import java.text.*;
+import java.util.*;
 
 public class Logger {
     private static final ArrayList<String> logLines = new ArrayList<>();

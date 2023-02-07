@@ -1,18 +1,14 @@
 package fr.ostix.game.toolBox.OpenGL;
 
-import fr.ostix.game.toolBox.Logger;
-import org.lwjgl.glfw.Callbacks;
-import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWVidMode;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.system.MemoryStack;
+import fr.ostix.game.toolBox.*;
+import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.*;
+import org.lwjgl.system.*;
 
-import java.nio.IntBuffer;
+import java.nio.*;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.system.MemoryUtil.NULL;
+import static org.lwjgl.system.MemoryUtil.*;
 
 public class DisplayManager {
 
@@ -44,14 +40,7 @@ public class DisplayManager {
             throw new RuntimeException("Unable/Failed to Create GLFW Window");
         }
 
-        try (MemoryStack stack = MemoryStack.stackPush()) {
-            IntBuffer width = stack.mallocInt(1);
-            IntBuffer height = stack.mallocInt(1);
-
-            glfwGetWindowSize(window, width, height);
-            DisplayManager.width = width.get();
-            DisplayManager.height = height.get();
-        }
+        sizeHandler();
 
 
         GLFWVidMode vidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
@@ -71,8 +60,7 @@ public class DisplayManager {
         return window;
     }
 
-    public static void updateDisplay() {
-
+    private static void sizeHandler() {
         try (MemoryStack stack = MemoryStack.stackPush()) {
             IntBuffer width = stack.mallocInt(1);
             IntBuffer height = stack.mallocInt(1);
@@ -81,6 +69,11 @@ public class DisplayManager {
             DisplayManager.width = width.get();
             DisplayManager.height = height.get();
         }
+    }
+
+    public static void updateDisplay() {
+
+        sizeHandler();
         float currentFrameTime = getCurrentTime();
         delta = (currentFrameTime - lastFrameTime)/1000;
         lastFrameTime = getCurrentTime();

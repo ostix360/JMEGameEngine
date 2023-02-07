@@ -1,7 +1,7 @@
 package fr.ostix.game.entity.animated.animation.animation;
 
 
-import fr.ostix.game.entity.animated.animation.animatedModel.AnimatedModel;
+import fr.ostix.game.entity.animated.animation.animatedModel.*;
 
 /**
  * * Represents an animation that can applied to an {@link AnimatedModel} . It

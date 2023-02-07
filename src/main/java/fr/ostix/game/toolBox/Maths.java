@@ -2,13 +2,12 @@ package fr.ostix.game.toolBox;
 
 
 import com.jme3.math.*;
-import fr.ostix.game.entity.camera.Camera;
+import fr.ostix.game.core.camera.*;
 import org.joml.Math;
 import org.joml.*;
-import org.lwjgl.assimp.AIMatrix4x4;
+import org.lwjgl.assimp.*;
 
 import java.nio.*;
-import java.util.*;
 import java.util.Random;
 
 public class Maths {

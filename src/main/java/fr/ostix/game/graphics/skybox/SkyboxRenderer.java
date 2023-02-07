@@ -1,6 +1,6 @@
 package fr.ostix.game.graphics.skybox;
 
-import fr.ostix.game.entity.camera.*;
+import fr.ostix.game.core.camera.*;
 import fr.ostix.game.toolBox.OpenGL.*;
 import fr.ostix.game.world.weather.*;
 import org.joml.*;
@@ -34,14 +34,14 @@ public class SkyboxRenderer {
         SkyBox skybox = weather.getSky().getSkyBox();
         glDepthMask(false);
         shader.bind();
-        shader.loadViewMatrix(cam,skybox.getRotation());
+        shader.loadViewMatrix(cam, skybox.getRotation());
         shader.loadFogColor(weather.getSky().getSkyColour());
 
         skybox.getBox().getVAO().bind(0);
         bindTextures(skybox);
         glDrawArrays(GL_TRIANGLES, 0, skybox.getBox().getVertexCount());
         VAO.unbind(0);
-        glBindTexture(GL_TEXTURE_2D,0);
+        glBindTexture(GL_TEXTURE_2D, 0);
         shader.unBind();
         glDepthMask(true);
         OpenGlUtils.enableDepthTesting(true);

@@ -22,6 +22,6 @@ public class QuestManagerListener implements Listener {
     @EventHandler
     public void onQuestCategoryComplete(QuestCategoryCompleteEvent event) {
         this.questManager.removeFromQuesting(event.getQuestID());
-        this.questManager.getQuest(event.getQuestID()).complete();
+        this.questManager.getQuest(event.getQuestID()).complete(event.getQuestID());
     }
 }

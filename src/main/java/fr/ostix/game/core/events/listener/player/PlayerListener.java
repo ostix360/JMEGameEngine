@@ -4,8 +4,8 @@ import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.*;
 import fr.ostix.game.core.events.player.*;
 import fr.ostix.game.entity.*;
-import org.joml.*;
 import org.joml.Math;
+import org.joml.*;
 
 
 public class PlayerListener implements Listener {

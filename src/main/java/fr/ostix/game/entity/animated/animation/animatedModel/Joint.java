@@ -1,10 +1,9 @@
 package fr.ostix.game.entity.animated.animation.animatedModel;
 
-import fr.ostix.game.entity.animated.animation.animation.Animator;
-import org.joml.Matrix4f;
+import fr.ostix.game.entity.animated.animation.animation.*;
+import org.joml.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Represents a joint in a "skeleton". It contains the index of the joint which

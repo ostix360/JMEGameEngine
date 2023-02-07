@@ -1,10 +1,8 @@
 package fr.ostix.game.gui;
 
-import fr.ostix.game.core.loader.Loader;
+import fr.ostix.game.core.loader.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class MasterGui {
     private static final List<GuiTexture> guis = new ArrayList<>();

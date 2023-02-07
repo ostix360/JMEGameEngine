@@ -1,6 +1,5 @@
 package fr.ostix.game.toolBox;
 
-import javax.swing.filechooser.*;
 import java.io.*;
 
 public class ToolDirectory {

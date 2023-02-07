@@ -1,6 +1,6 @@
 package fr.ostix.game.graphics.textures;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
 public class Texture {
     private final int textureID;

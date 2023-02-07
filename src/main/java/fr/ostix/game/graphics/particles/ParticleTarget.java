@@ -1,8 +1,8 @@
 package fr.ostix.game.graphics.particles;
 
-import fr.ostix.game.entity.Entity;
-import fr.ostix.game.toolBox.Maths;
-import org.joml.Vector3f;
+import fr.ostix.game.entity.*;
+import fr.ostix.game.toolBox.*;
+import org.joml.*;
 
 public class ParticleTarget {
 

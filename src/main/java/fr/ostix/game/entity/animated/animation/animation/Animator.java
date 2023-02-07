@@ -1,11 +1,9 @@
 package fr.ostix.game.entity.animated.animation.animation;
 
-import fr.ostix.game.entity.animated.animation.animatedModel.AnimatedModel;
-import fr.ostix.game.entity.animated.animation.animatedModel.Joint;
-import org.joml.Matrix4f;
+import fr.ostix.game.entity.animated.animation.animatedModel.*;
+import org.joml.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 /**
