@@ -102,7 +102,7 @@ public class WorldState extends Screen {
 
     @Override
     public void close() {
-        if (overWorld != null) {
+        if (hasScreenOverWorld()) {
             overWorld.close();
             overWorld.cleanUp();
             overWorld = null;
@@ -114,6 +114,11 @@ public class WorldState extends Screen {
         super.cleanUp();
         world.cleanUp();
         worldInitialized = false;
+        if (hasScreenOverWorld()) {
+            overWorld.close();
+            overWorld.cleanUp();
+            overWorld = null;
+        }
     }
 
     public void notifyStateOverWorldSet(Screen screen) {

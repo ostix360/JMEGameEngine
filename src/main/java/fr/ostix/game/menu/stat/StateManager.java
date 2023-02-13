@@ -101,7 +101,6 @@ public class StateManager {
     }
 
     public void setCurrentScreen(Screen gui) {
-        toCleanUp = currentScreen;
         currentScreen = gui;
     }
 
@@ -111,11 +110,12 @@ public class StateManager {
             screen.init();
         }
         if (currentScreen != null) {
+            this.toCleanUp = currentScreen;
             Scheduler.schedule(() -> {
                 toCleanUp.close();
                 this.toCleanUp.cleanUp();
                 this.toCleanUp = null;
-            }, 500);
+            }, 400);
         }
         setCurrentScreen(screen);
 

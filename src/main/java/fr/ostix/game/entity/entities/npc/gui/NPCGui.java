@@ -54,7 +54,7 @@ public class NPCGui extends Screen {
 
         this.dialog = new GUIText(dialog,1f, Game.gameFont,new Vector2f(600,700),600,true);
         this.dialog.setColour(Color.GRAY);
-
+        this.world = world;
         moveToNPC();
         MasterGui.addGui(background);
         MasterFont.add(this.dialog);

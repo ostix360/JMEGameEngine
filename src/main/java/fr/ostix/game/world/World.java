@@ -183,6 +183,7 @@ public class World {
 
 
         isInit = true;
+        this.resume();
     }
 
     private void initWater() {
@@ -299,8 +300,13 @@ public class World {
 
     public void cleanUp() {
         EventManager.getInstance().removeAll(worldListeners);
+        EventManager.getInstance().unRegister(keyWorldListener);
         physics.stopPhysics();
         chunkHandler.exit();
+        worldChunk.clear();
+        entities.clear();
+        lights.clear();
+        toDo.clear();
         renderer.cleanUp();
         GLRequestProcessor.sendRequest(new GLRunnableRequest(MasterParticle::cleanUp));
 
