@@ -114,6 +114,9 @@ public class QuestCategory {
         if (questID != this.id)
             return;
         EventManager.getInstance().unRegister(this.listener);
+        this.status = QuestStatus.DONE;
+        this.save();
+
         if (this.nextQuest != -1)
             EventManager.getInstance().callEvent(new QuestCategoryStartEvent(this.nextQuest, 2));
     }

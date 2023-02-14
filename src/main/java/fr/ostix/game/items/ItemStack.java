@@ -1,9 +1,12 @@
 package fr.ostix.game.items;
 
+import com.google.gson.annotations.*;
 import fr.ostix.game.toolBox.*;
 
 public class ItemStack {
+    @Expose
     private Item item;
+    @Expose
     private int count;
 
     public ItemStack(Item item, int count) {

@@ -30,6 +30,10 @@ public class QuestManager {
         }
     }
 
+    public void reload(){
+
+    }
+
     public void addToQuesting(int q) {
         this.questing.add(q);
     }

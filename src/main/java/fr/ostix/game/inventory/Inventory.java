@@ -1,16 +1,20 @@
 package fr.ostix.game.inventory;
 
+import com.google.gson.annotations.*;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.inventoryEvent.*;
+import fr.ostix.game.core.loader.json.*;
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.gui.*;
 import fr.ostix.game.items.*;
 import fr.ostix.game.menu.*;
 import org.joml.*;
 
+import java.io.*;
 import java.util.*;
 
 public abstract class Inventory extends Screen {
+    @Expose
     protected final List<ItemStack> items = new ArrayList<>();
     private final GuiTexture backGround;
     private boolean isOpen = false;
@@ -69,5 +73,12 @@ public abstract class Inventory extends Screen {
         return items.stream().anyMatch(itemStack ->
                 itemStack.getItem().getId() == item.getItem().getId()
                         && itemStack.getCount() >= item.getCount());
+    }
+
+    public void loadInventory() {
+        // load inventory from file
+        File file = new File(title + ".inv");
+        String content = JsonUtils.loadJson(file.getName());
+        JsonUtils.gsonInstance(true).fromJson(content, Inventory.class);
     }
 }

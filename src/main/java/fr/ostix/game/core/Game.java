@@ -118,7 +118,7 @@ public class Game extends Thread {
 
         if (elapsedUpdate > updateTime) {
             try {
-                beforeUpdate += updateTime;
+                beforeUpdate += (long) updateTime;
                 update();
                 ticks++;
             } catch (Exception e) {
@@ -127,7 +127,7 @@ public class Game extends Thread {
             }
         } else if (elapsedRender > renderTime) {
             try {
-                beforeRender += renderTime;
+                beforeRender += (long) renderTime;
                 render();
                 DisplayManager.updateDisplay();
                 frames++;

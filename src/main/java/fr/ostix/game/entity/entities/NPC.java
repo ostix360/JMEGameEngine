@@ -4,6 +4,7 @@ import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.entity.npc.*;
 import fr.ostix.game.core.events.listener.*;
 import fr.ostix.game.core.events.player.*;
+import fr.ostix.game.core.events.states.*;
 import fr.ostix.game.entity.*;
 import fr.ostix.game.entity.entities.npc.gui.*;
 import fr.ostix.game.graphics.model.*;
@@ -12,7 +13,7 @@ import org.joml.*;
 
 import java.util.*;
 
-public class NPC extends Entity implements Interact{
+public class NPC extends Entity implements Interact {
     private final String name;
     protected NPCGui gui;
 
@@ -23,25 +24,35 @@ public class NPC extends Entity implements Interact{
     protected final Listener NPCDefaultsListener;
 
 
-    public NPC(int id, Model model, Vector3f position, Vector3f rotation, float scale,String name) {
+    public NPC(int id, Model model, Vector3f position, Vector3f rotation, float scale, String name) {
         super(id, model, position, rotation, scale);
         this.name = name;
         this.registerDefaultDialog();
         gui = new NPCGui("Talking to", this);
         NPCDefaultsListener = new NPCTalkListener(this);
         if (this.getId() == 0) return;
-        EventManager.getInstance().register(this.NPCDefaultsListener);
+
     }
 
-    public void talke(List<String> dialogs,World world) {
-        gui.showDialogs(dialogs,world);
+    @Override
+    public void initBeforeSpawn() {
+        EventManager.getInstance().register(this.NPCDefaultsListener);
+        super.initBeforeSpawn();
+    }
+
+    public void talke(List<String> dialogs,int line, World world) {
+        gui.showDialogs(dialogs,line, world);
+        EventManager.getInstance().callEvent(new StateOverWorldEvent(name, gui, 1));
 //        EventManager.getInstance().unRegister(this.NPCDefaultsListener);
     }
 
-    public void talke(String dialog,World world) {
-        if (dialog != null) {
-            gui.showDialog(dialog,world);
+    public void talke(String dialog, World world) {
+        if (dialog == null) {
+            return;
         }
+        gui.showDialog(dialog, world);
+
+        EventManager.getInstance().callEvent(new StateOverWorldEvent(name, gui, 1));
 //        EventManager.getInstance().unRegister(this.NPCDefaultsListener);
 //        List<String> dialogs = new ArrayList<String>();
 //        dialogs.add("Hello");
@@ -52,7 +63,7 @@ public class NPC extends Entity implements Interact{
 
     @Override
     public void interact(World world) {
-        EventManager.getInstance().callEvent(new PlayerGiveItemEvent(world.getPlayer(),world, 1));
+        EventManager.getInstance().callEvent(new PlayerGiveItemEvent(world.getPlayer(), world, 1));
         EventManager.getInstance().callEvent(new NPCTalkEvent(world, 1, this));
     }
 
@@ -73,6 +84,12 @@ public class NPC extends Entity implements Interact{
     }
 
     public void registerDefaultDialog() {
-            defaultMessage = theDefaultMessage;
+        defaultMessage = theDefaultMessage;
+    }
+
+    @Override
+    public void cleanUp() {
+        EventManager.getInstance().unRegister(this.NPCDefaultsListener);
+        super.cleanUp();
     }
 }

@@ -507,7 +507,7 @@ public class LodGenerator {
             if (!dest.isSeam) {
                 cost += meshBoundingSphereRadius;
             } else {
-                cost += meshBoundingSphereRadius * 0.5;
+                cost += meshBoundingSphereRadius * 0.5f;
             }
         }
         

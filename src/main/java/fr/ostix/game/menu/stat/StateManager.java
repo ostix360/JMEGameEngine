@@ -13,6 +13,7 @@ import fr.ostix.game.core.ressourceProcessor.*;
 import fr.ostix.game.entity.*;
 import fr.ostix.game.graphics.*;
 import fr.ostix.game.graphics.font.meshCreator.*;
+import fr.ostix.game.graphics.font.rendering.*;
 import fr.ostix.game.graphics.particles.*;
 import fr.ostix.game.gui.*;
 import fr.ostix.game.menu.*;
@@ -117,6 +118,8 @@ public class StateManager {
                 this.toCleanUp = null;
             }, 400);
         }
+        MasterFont.clear();
+        MasterGui.removeAllGui();
         setCurrentScreen(screen);
 
         screen.open();

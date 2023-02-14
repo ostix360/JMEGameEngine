@@ -16,6 +16,13 @@ public class JsonUtils {
         return gsonBuilder.create();
     }
 
+    public static Gson gsonInstance(boolean needToExcludeSomeFields) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setPrettyPrinting();
+        if (needToExcludeSomeFields)gsonBuilder.excludeFieldsWithoutExposeAnnotation();
+        return gsonBuilder.create();
+    }
+
     public static String loadJson(String jsonFile) {
         StringBuilder sb = new StringBuilder();
         BufferedReader reader;

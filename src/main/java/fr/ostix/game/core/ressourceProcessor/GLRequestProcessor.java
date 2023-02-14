@@ -15,7 +15,11 @@ public class GLRequestProcessor {
         long start = System.nanoTime();
         isRunning = true;
         while (requestQueue.hasRequests()) {
-            requestQueue.acceptNextRequest().execute();
+            try {
+                requestQueue.acceptNextRequest().execute();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             long end = System.nanoTime();
             long timeTaken = end - start;
             remainingTime -= (float) timeTaken;

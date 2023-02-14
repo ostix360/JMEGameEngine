@@ -4,6 +4,8 @@ import fr.ostix.game.core.*;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.*;
 import fr.ostix.game.core.resources.*;
+import fr.ostix.game.graphics.font.rendering.*;
+import fr.ostix.game.gui.*;
 import fr.ostix.game.inventory.*;
 import fr.ostix.game.world.*;
 
@@ -119,6 +121,7 @@ public class WorldState extends Screen {
             overWorld.cleanUp();
             overWorld = null;
         }
+
     }
 
     public void notifyStateOverWorldSet(Screen screen) {

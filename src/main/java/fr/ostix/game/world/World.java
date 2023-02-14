@@ -183,7 +183,6 @@ public class World {
 
 
         isInit = true;
-        this.resume();
     }
 
     private void initWater() {
@@ -301,6 +300,8 @@ public class World {
     public void cleanUp() {
         EventManager.getInstance().removeAll(worldListeners);
         EventManager.getInstance().unRegister(keyWorldListener);
+        entities.forEach(e -> physics.getPhysicsSpace().remove(e));
+        entities.forEach(Entity::cleanUp);
         physics.stopPhysics();
         chunkHandler.exit();
         worldChunk.clear();

@@ -29,16 +29,19 @@ public class QuestCategoryListener implements Listener {
     public void onQuestComplete(QuestFinishedEvent event) {
         try {
             questCategory.quests().get(event.getQuestID() - 1).done(event.getP());
+
         } catch (Exception e) {
             System.err.println("Exception for " + questCategory.getName()); // ???
             e.printStackTrace();
         }
         if (questCategory.quests().size() == event.getQuestID()) {
+
             EventManager.getInstance().callEvent(new QuestCategoryCompleteEvent(questCategory.getId(), 2));
             return;
         }
         try {
             questCategory.quests().get(event.getQuestID()).setStatus(QuestStatus.AVAILABLE);
+            questCategory.save();
         } catch (Exception e) {
             System.err.println("Exception for " + questCategory.getName()); // ???
             e.printStackTrace();

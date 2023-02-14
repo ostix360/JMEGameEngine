@@ -34,6 +34,8 @@ public class NPCGui extends Screen {
 
     protected World world;
 
+    protected int startLine = 0;
+
     public NPCGui(String title, NPC npc) {
         super(title);
         this.npc = npc;
@@ -51,23 +53,26 @@ public class NPCGui extends Screen {
     public void showDialog(String dialog, World world) {
         this.dialogs.clear();
         this.dialogs.add(dialog);
-
-        this.dialog = new GUIText(dialog,1f, Game.gameFont,new Vector2f(600,700),600,true);
-        this.dialog.setColour(Color.GRAY);
         this.world = world;
-        moveToNPC();
-        MasterGui.addGui(background);
-        MasterFont.add(this.dialog);
-        EventManager.getInstance().register(this.read);
     }
 
-    public void showDialogs(List<String> dialogs, World world) {
+
+    public void showDialogs(List<String> dialogs,int line, World world) {
         this.dialogs.clear();
         this.dialogs.addAll(dialogs);
         this.world = world;
-        EventManager.getInstance().callEvent(new StateOverWorldEvent(this.title,this,2));
+        this.startLine = line;
+    }
 
-        this.dialog = new GUIText(dialogs.get(0),1f, Game.gameFont,new Vector2f(600,700),600,true);
+    @Override
+    public void open() {
+
+        if (dialogs.size() <= startLine) {
+            System.err.println("No dialog to show");
+            return;
+        }
+
+        this.dialog = new GUIText(dialogs.get(startLine),1f, Game.gameFont,new Vector2f(600,700),600,true);
         this.dialog.setColour(Color.GRAY);
 
         moveToNPC();
@@ -97,8 +102,6 @@ public class NPCGui extends Screen {
             }
         }else {
             EventManager.getInstance().unRegister(this.read);
-            MasterGui.removeGui(background);
-            MasterFont.remove(this.dialog);
             indexDialog = 0;
             try {
                 Thread.sleep(100);
@@ -107,5 +110,11 @@ public class NPCGui extends Screen {
             }
             EventManager.getInstance().callEvent(new StateOverWorldEvent(States.WORLD.getName(),null,2));
         }
+    }
+
+    public void cleanUp() {
+        MasterGui.removeGui(background);
+        MasterFont.remove(this.dialog);
+        super.cleanUp();
     }
 }

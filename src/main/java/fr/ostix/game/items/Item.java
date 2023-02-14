@@ -1,5 +1,6 @@
 package fr.ostix.game.items;
 
+import com.google.gson.annotations.*;
 import fr.ostix.game.core.*;
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.graphics.font.meshCreator.*;
@@ -8,6 +9,8 @@ import fr.ostix.game.toolBox.*;
 import org.joml.*;
 
 public class Item {
+
+    @Expose
     private final int id;
     private final String name;
     private final String description;

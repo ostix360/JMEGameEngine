@@ -33,7 +33,7 @@ public class MasterGui {
         tempGuis.clear();
     }
 
-    public void removeAllGui() {
+    public static void removeAllGui() {
         guis.clear();
     }
 

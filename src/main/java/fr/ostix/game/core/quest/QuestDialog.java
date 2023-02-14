@@ -14,6 +14,8 @@ import java.util.*;
 public class QuestDialog extends Quest {
     private final List<String> dialogs;
 
+    private int dialogLine;
+
     public QuestDialog() {
 
         this.dialogs = new ArrayList<>();
@@ -37,6 +39,10 @@ public class QuestDialog extends Quest {
 
     public static QuestDialog load(String questData) {
         return JsonUtils.gsonInstance().fromJson(questData, QuestDialog.class);
+    }
+
+    public int getDialogLine() {
+        return dialogLine;
     }
 
     public List<String> getDialogs() {

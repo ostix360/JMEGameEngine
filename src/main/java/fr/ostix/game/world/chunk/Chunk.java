@@ -81,7 +81,7 @@ public class Chunk {
                     Registered.registerEntity(e);
             }
             LoadComponents.loadComponents(res.getComponents().get(component), e);
-
+            e.initBeforeSpawn(); // TODO
             entities.add(e);
         }
         return entities;

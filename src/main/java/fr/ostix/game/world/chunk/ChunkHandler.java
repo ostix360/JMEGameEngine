@@ -15,7 +15,7 @@ public class ChunkHandler {
     private final Map<Vector2f, ChunksFile> chunksFileList = new HashMap<>();
     private final Camera cam;
 
-    private static final float CHUNK_FILE_SIZE = 33f;
+    private static final int CHUNK_FILE_SIZE = 33;
 
     private final List<Entity> entitiesChunk = new ArrayList<>();
 
@@ -36,19 +36,19 @@ public class ChunkHandler {
         executor.execute(() -> {
 
 
-            int playerChunkX = (int) Math.floor(cam.getPosition().x() / Terrain.getSIZE() / CHUNK_FILE_SIZE); // Get the current chunk that the player is in on the X - Axis
-            int playerChunkZ = (int) Math.floor(cam.getPosition().z() / Terrain.getSIZE() / CHUNK_FILE_SIZE); // Get the current chunk that the player is in on the Z - Axis
+            int playerChunkX = (int) Math.floor(cam.getPosition().x() / Terrain.getSIZE() / ((float) CHUNK_FILE_SIZE)); // Get the current chunk that the player is in on the X - Axis
+            int playerChunkZ = (int) Math.floor(cam.getPosition().z() / Terrain.getSIZE() / ((float) CHUNK_FILE_SIZE)); // Get the current chunk that the player is in on the Z - Axis
 
             // System.out.println(playerChunkX + ", " + playerChunkZ);
 
             int viewDistanceChunkFile = cam.viewDistance;
             if (viewDistanceChunkFile <= CHUNK_FILE_SIZE) {
-                viewDistanceChunkFile = (int) (CHUNK_FILE_SIZE + 1);
+                viewDistanceChunkFile = CHUNK_FILE_SIZE + 1;
             }
             for (int x1 = 0; x1 <= viewDistanceChunkFile; x1 += CHUNK_FILE_SIZE) { // X - Axis iteration
                 for (int z1 = 0; z1 <= viewDistanceChunkFile; z1 += CHUNK_FILE_SIZE) { // Z - Axis iteration
                     int x = (int) (x1 / CHUNK_FILE_SIZE);
-                    int z = (int)(z1 / CHUNK_FILE_SIZE);
+                    int z = (int) (z1 / CHUNK_FILE_SIZE);
                     if (!(chunksFileList.containsKey(new Vector2f(playerChunkX + x, playerChunkZ)))) {
                         chunksFileList.put(new Vector2f(playerChunkX + x, playerChunkZ), new ChunksFile(playerChunkX + x, playerChunkZ));
                         chunksFileList.get(new Vector2f(playerChunkX + x, playerChunkZ)).load();
@@ -273,8 +273,8 @@ public class ChunkHandler {
 
 
         if (!(chunkList.containsKey(new Vector2f(playerChunkX, playerChunkZ - z)))) {
-            chunkFileIndexX = (int) Math.floor(playerChunkX / CHUNK_FILE_SIZE);
-            chunkFileIndexZ = (int) Math.floor((playerChunkZ - z) / CHUNK_FILE_SIZE);
+            chunkFileIndexX = (int) Math.floor(playerChunkX / ((float) CHUNK_FILE_SIZE));
+            chunkFileIndexZ = (int) Math.floor((playerChunkZ - z) / ((float) CHUNK_FILE_SIZE));
             Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ))
                     .load(playerChunkX, playerChunkZ - z);
             if (chunk != null) {
@@ -285,8 +285,8 @@ public class ChunkHandler {
         }
 
         if (!(chunkList.containsKey(new Vector2f(playerChunkX - x, playerChunkZ - z)))) {
-            chunkFileIndexX = (int) Math.floor((playerChunkX - x) / CHUNK_FILE_SIZE);
-            chunkFileIndexZ = (int) Math.floor((playerChunkZ - z) / CHUNK_FILE_SIZE);
+            chunkFileIndexX = (int) Math.floor((playerChunkX - x) / ((float) CHUNK_FILE_SIZE));
+            chunkFileIndexZ = (int) Math.floor((playerChunkZ - z) / ((float) CHUNK_FILE_SIZE));
             Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ))
                     .load(playerChunkX - x, playerChunkZ - z);
             if (chunk != null) {
@@ -298,7 +298,7 @@ public class ChunkHandler {
 
 
         if (!(chunkList.containsKey(new Vector2f(playerChunkX - x, playerChunkZ + z)))) {
-            chunkFileIndexX = (int) Math.floor((playerChunkX - x) / CHUNK_FILE_SIZE);
+            chunkFileIndexX = (int) Math.floor((playerChunkX - x) / ((float) CHUNK_FILE_SIZE));
             chunkFileIndexZ = chunkFileIndexZPositive;
             Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ)).load(playerChunkX - x, playerChunkZ + z);
             if (chunk != null) {
@@ -308,8 +308,8 @@ public class ChunkHandler {
             }
         }
         if (!(chunkList.containsKey(new Vector2f(playerChunkX - x, playerChunkZ)))) {
-            chunkFileIndexX = (int) Math.floor((playerChunkX - x) / CHUNK_FILE_SIZE);
-            chunkFileIndexZ = (int) Math.floor(playerChunkZ / CHUNK_FILE_SIZE);
+            chunkFileIndexX = (int) Math.floor((playerChunkX - x) / ((float) CHUNK_FILE_SIZE));
+            chunkFileIndexZ = (int) Math.floor(playerChunkZ / ((float) CHUNK_FILE_SIZE));
             Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ)).load(playerChunkX - x, playerChunkZ);
             if (chunk != null) {
                 chunkList.put(new Vector2f(playerChunkX - x, playerChunkZ), chunk); // Create new chunk

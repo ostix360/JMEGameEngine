@@ -47,7 +47,9 @@ public class Entity {
         this.movement = MovementType.STATIC;
     }
 
+    public void initBeforeSpawn(){
 
+    }
 
     public CollisionComponent getCollision() {
         return collision;
@@ -183,6 +185,10 @@ public class Entity {
         }
         physic.setSpatial(this);
         return physic;
+    }
+
+    public void cleanUp() {
+
     }
 
     public enum MovementType {

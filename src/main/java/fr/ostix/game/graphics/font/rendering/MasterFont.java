@@ -81,11 +81,19 @@ public class MasterFont {
 
     public static void remove(GUIText text) {
         List<GUIText> texts = guisTexts.get(text.getFont());
+        if (texts == null) {
+            return;
+        }
         texts.remove(text);
         if (texts.isEmpty()) {
             guisTexts.remove(text.getFont());
         }
 
+    }
+
+    public static void clear(){
+        guisTexts.clear();
+        tempGuisTexts.clear();
     }
 
     public void cleanUp() {
