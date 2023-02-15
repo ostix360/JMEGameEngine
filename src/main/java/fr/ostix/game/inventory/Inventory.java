@@ -81,4 +81,11 @@ public abstract class Inventory extends Screen {
         String content = JsonUtils.loadJson(file.getName());
         JsonUtils.gsonInstance(true).fromJson(content, Inventory.class);
     }
+
+    public void saveInventory() {
+        // save inventory to file
+        File file = new File(title + ".inv");
+        String content = JsonUtils.gsonInstance(true).toJson(this);
+        JsonUtils.saveJson(file.getName(), content);
+    }
 }

@@ -1,13 +1,10 @@
 package fr.ostix.game.menu;
 
 import fr.ostix.game.core.*;
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.listener.*;
 import fr.ostix.game.core.resources.*;
-import fr.ostix.game.graphics.font.rendering.*;
-import fr.ostix.game.gui.*;
 import fr.ostix.game.inventory.*;
 import fr.ostix.game.world.*;
+import fr.ostix.game.world.io.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -23,12 +20,18 @@ public class WorldState extends Screen {
 
     private Screen overWorld;
 
+    private WorldLoader worldLoader;
+
+    private WorldSaver worldSaver;
+
     public WorldState() {
         super("World");
         world = new World(this);
 
         hotBar = new InGameMenu();
 
+        worldLoader = new WorldLoader(world);
+        worldSaver = new WorldSaver(world);
 //        EventManager.getInstance().register(new InventoryListener(this));
     }
 
@@ -44,6 +47,10 @@ public class WorldState extends Screen {
         world.initWorld(pack,playerInventory);
         hotBar.init(world.getPlayer());
         worldInitialized = world.isInit();
+    }
+
+    @Override
+    public void open() {
 
     }
 

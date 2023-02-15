@@ -8,16 +8,19 @@ import org.joml.*;
 
 import java.io.*;
 
-public class LoadWorld {
+public class WorldLoader {
 
-    private Player player;
+    private final Player player;
     private final World world;
     private PlayerInventory PI;
-    private QuestManager questManager;
+    private final QuestManager questManager;
     private int time;
 
-    public LoadWorld(World world) {
+    public WorldLoader(World world) {
         this.world = world;
+        this.player = world.getPlayer();
+        this.PI = world.getPlayer().getInventory();
+        this.questManager = QuestManager.INSTANCE;
     }
 
     //Load Player position rotation, player inventory, questManager, time from a file
@@ -36,6 +39,8 @@ public class LoadWorld {
                         float rz = Float.parseFloat(data[6]);
                         player.setPosition(new Vector3f(x, y, z));
                         player.setRotation(new Vector3f(rx, ry, rz));
+                    }else if(data[0].equals("Time")){
+                        time = Integer.parseInt(data[1]);
                     }
                 }
         } catch (IOException e) {
@@ -43,6 +48,10 @@ public class LoadWorld {
         }
         PI = new PlayerInventory("Player Inventory");
         PI.loadInventory();
+        questManager.reload();
     }
 
+    public int getTime() {
+        return time;
+    }
 }

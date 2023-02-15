@@ -4,6 +4,7 @@ import fr.ostix.game.core.*;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.quest.*;
 import fr.ostix.game.core.events.quest.*;
+import fr.ostix.game.core.loader.*;
 
 import java.util.*;
 
@@ -31,7 +32,9 @@ public class QuestManager {
     }
 
     public void reload(){
-
+        quests.clear();
+        questing.clear();
+        QuestLoader.loadAllQuest();
     }
 
     public void addToQuesting(int q) {
@@ -55,5 +58,9 @@ public class QuestManager {
 
     public List<Integer> getQuest() {
         return questing;
+    }
+
+    public void save() {
+        quests.values().forEach(QuestCategory::save);
     }
 }

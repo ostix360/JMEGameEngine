@@ -39,4 +39,12 @@ public class JsonUtils {
         }
         return sb.toString();
     }
+
+    public static void saveJson(String name, String content) {
+        try (BufferedWriter br = new BufferedWriter(new FileWriter(name))) {
+            br.write(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
