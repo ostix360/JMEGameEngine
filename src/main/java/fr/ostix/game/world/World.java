@@ -348,4 +348,12 @@ public class World {
     public static PhysicsSpace getPhysics() {
         return physics.getPhysicsSpace();
     }
+
+    public float getTime() {
+        return time;
+    }
+
+    public void setTime(float time) {
+        this.time = time;
+    }
 }

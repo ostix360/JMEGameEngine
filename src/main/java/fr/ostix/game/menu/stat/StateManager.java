@@ -54,7 +54,7 @@ public class StateManager {
         pack = loaderMenu.getPack();
         Game.gameFont = new FontType(ResourcePack.getTextureByName("candara").getID(), "candara");
 
-        QuestLoader.loadAllQuest();
+//        QuestLoader.loadAllQuest();
         mainMenu = new MainMenu();
 
         EventManager.getInstance().callEvent(new StateChangeEvent(States.MAIN_MENU.getName(), mainMenu, 4));

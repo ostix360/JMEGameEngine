@@ -22,7 +22,7 @@ public class WorldState extends Screen {
 
     private WorldLoader worldLoader;
 
-    private WorldSaver worldSaver;
+    private final WorldSaver worldSaver;
 
     public WorldState() {
         super("World");
@@ -40,13 +40,14 @@ public class WorldState extends Screen {
     }
 
 
-
     public void init(ResourcePack pack) {
         super.init();
         playerInventory = new PlayerInventory("Player Inventory");
-        world.initWorld(pack,playerInventory);
+        world.initWorld(pack, playerInventory);
         hotBar.init(world.getPlayer());
         worldInitialized = world.isInit();
+        worldLoader.loadWorld();
+        world.setTime(worldLoader.getTime());
     }
 
     @Override
@@ -72,7 +73,7 @@ public class WorldState extends Screen {
         checkInputs();
         if (overWorld != null) {
             overWorld.update();
-        }else{
+        } else {
             world.update();
         }
     }
@@ -116,6 +117,7 @@ public class WorldState extends Screen {
             overWorld.cleanUp();
             overWorld = null;
         }
+        worldSaver.saveWorld();
     }
 
     @Override
@@ -133,12 +135,12 @@ public class WorldState extends Screen {
 
     public void notifyStateOverWorldSet(Screen screen) {
         if (screen != null) {
-            if (!screen.isInit()){
+            if (!screen.isInit()) {
                 screen.init();
             }
             screen.open();
             world.pause();
-        }else{
+        } else {
             world.resume();
         }
         if (overWorld != null) {

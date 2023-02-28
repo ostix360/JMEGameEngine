@@ -20,6 +20,9 @@ public class QuestGiveItemListener implements Listener {
         if (!event.getPlayer().getInventory().has(this.quest.getItem())) {
             Registered.getNPC(this.quest.getNpcID()).talke("Désolé vous n'avez pas assez de " + this.quest.getItem().getItem().getName(),event.getWorld());
             return;
+        }else{
+//            Registered.getNPC(this.quest.getNpcID()).talke("Merci pour le " + this.quest.getItem().getItem().getName(),event.getWorld());
+            event.getPlayer().getInventory().removeItems(this.quest.getItem());
         }
         EventManager.getInstance().callEvent(new QuestFinishedEvent(quest.getId(),1,event.getPlayer()));
     }

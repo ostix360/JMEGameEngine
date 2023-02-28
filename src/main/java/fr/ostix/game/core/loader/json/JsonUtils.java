@@ -12,14 +12,29 @@ public class JsonUtils {
 
     public static Gson gsonInstance() {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.setPrettyPrinting().registerTypeAdapter(Rewards.class, new RewardsTypeAdapter());
+        gsonBuilder.setPrettyPrinting();
         return gsonBuilder.create();
+    }
+
+      public static Gson gsonInstance(Class type, TypeAdapter serializer, boolean needToExcludeSomeFields) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        if (needToExcludeSomeFields) gsonBuilder.excludeFieldsWithoutExposeAnnotation();
+        return gsonBuilder.registerTypeAdapter(type, serializer)
+                .setPrettyPrinting().create();
+    }
+
+    public static Gson gsonInstance(Class type, JsonSerializer serializer, boolean needToExcludeSomeFields) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        if (needToExcludeSomeFields) gsonBuilder.excludeFieldsWithoutExposeAnnotation();
+        return gsonBuilder.registerTypeAdapter(type, serializer)
+                .excludeFieldsWithoutExposeAnnotation()
+                .setPrettyPrinting().create();
     }
 
     public static Gson gsonInstance(boolean needToExcludeSomeFields) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setPrettyPrinting();
-        if (needToExcludeSomeFields)gsonBuilder.excludeFieldsWithoutExposeAnnotation();
+        if (needToExcludeSomeFields) gsonBuilder.excludeFieldsWithoutExposeAnnotation();
         return gsonBuilder.create();
     }
 
@@ -36,6 +51,7 @@ public class JsonUtils {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
         return sb.toString();
     }

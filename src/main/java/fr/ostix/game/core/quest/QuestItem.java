@@ -1,13 +1,15 @@
 package fr.ostix.game.core.quest;
 
+import com.google.gson.annotations.Expose;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.quest.*;
 import fr.ostix.game.core.loader.json.*;
+import fr.ostix.game.core.quest.serialization.RewardsTypeAdapter;
 import fr.ostix.game.items.*;
 
 
 public class QuestItem extends Quest {
-
+    @Expose
     private final ItemStack item;
 
     public QuestItem() {
@@ -29,6 +31,6 @@ public class QuestItem extends Quest {
 
     @Override
     public String save() {
-        return JsonUtils.gsonInstance().toJson(this);
+        return JsonUtils.gsonInstance(Rewards.class, new RewardsTypeAdapter(), true).toJson(this);
     }
 }

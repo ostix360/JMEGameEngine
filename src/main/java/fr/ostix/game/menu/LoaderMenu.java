@@ -24,9 +24,14 @@ public class LoaderMenu extends Screen {
         pack = new ResourcePackLoader(loader);
         pack.loadAllResource(masterGui);
         while (!pack.isLoaded()) {
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
         }
-        masterGui.removeAllGui();
+        MasterGui.removeAllGui();
 
     }
 

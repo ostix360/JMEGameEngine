@@ -1,12 +1,16 @@
 package fr.ostix.game.core.quest;
 
+import com.google.gson.annotations.Expose;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.quest.*;
 import fr.ostix.game.core.loader.json.*;
+import fr.ostix.game.core.quest.serialization.RewardsTypeAdapter;
 import org.joml.*;
 
 public class QuestLocation extends Quest {
+    @Expose
     private final Vector3f pos;
+    @Expose
     private final float range;
 
 
@@ -37,6 +41,6 @@ public class QuestLocation extends Quest {
 
     @Override
     public String save() {
-        return JsonUtils.gsonInstance().toJson(this);
+        return JsonUtils.gsonInstance(Rewards.class,new RewardsTypeAdapter(),true).toJson(this);
     }
 }

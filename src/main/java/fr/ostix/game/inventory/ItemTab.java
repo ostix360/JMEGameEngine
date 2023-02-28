@@ -2,6 +2,7 @@ package fr.ostix.game.inventory;
 
 
 import fr.ostix.game.items.*;
+import fr.ostix.game.toolBox.Logger;
 
 import java.util.*;
 
@@ -9,15 +10,17 @@ public class ItemTab {
     private final String name;
     private final Slot[] slots;
 
-    private ItemTab(String name, Slot[] slots) {
+    private final ItemType type;
+
+    private ItemTab(String name, Slot[] slots, ItemType type) {
         this.name = name;
         this.slots = slots;
+        this.type = type;
     }
 
 
-    public static ItemTab newEmptyTab(String name, int slotCount) {
-
-        return new ItemTab(name, generate(slotCount));
+    public static ItemTab newEmptyTab(String name, int slotCount, ItemType type) {
+        return new ItemTab(name, generate(slotCount), type);
     }
 
     private static Slot[] generate(int slotCount) {
@@ -65,22 +68,36 @@ public class ItemTab {
         return name;
     }
 
-    public void addItems(List<ItemStack> items) {
-        for (ItemStack stack : items) {
+    private void clearSlots() {
+        for (Slot slot : slots) {
+            slot.setStack(new ItemStack(null, 0));
+        }
+    }
+
+    public boolean setItems(HashMap<Item, ItemStack> items) {
+        clearSlots();
+        for (Item item : items.keySet()) {
+            if (item.getType() != type && type != ItemType.ALL) continue;
+            ItemStack stack = items.get(item);
             Slot s;
             if ((s = slotsContain(stack.getItem())) != null)  {
-                s.getStack().addItems(stack.getItem(),stack.getCount());
+                s.getStack().setStack(stack);
             }else{
+                boolean found = false;
                 for (Slot slot : slots) {
                     if (slot.isEmpty()){
                         slot.getStack().addItems(stack.getItem(),stack.getCount());
-                        return;
+                        found = true;
+                        break;
                     }
+                }
+                if (!found) {
+                    Logger.log("Inventory full");
+                    return false;
                 }
             }
         }
-        // TODO return boolean possibility
-
+        return true;
     }
 
     public void removeItems(List<ItemStack> items) {

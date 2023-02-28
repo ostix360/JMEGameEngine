@@ -20,8 +20,9 @@ public class FontRequest extends GLRequest {
         this.masterFont = masterFont;
         if (fontsModels.containsKey(text.getTextString())){
             MeshModel vao = fontsModels.get(text.getTextString());
-            text.setMeshInfo(vao, vao.getVertexCount());
-            super.execute();
+            this.text.setMeshInfo(vao, vao.getVertexCount());
+            masterFont.addText(text, isTemp);
+            this.isExecuted = true;
         }
 
     }
@@ -35,8 +36,9 @@ public class FontRequest extends GLRequest {
         TextMeshData data = font.loadText(text);
         MeshModel vao = Loader.INSTANCE.loadFontToVAO(data.getVertexPositions(), data.getTextureCoords());
         text.setMeshInfo(vao, data.getVertexCount());
-        masterFont.addText(text, isTemp);
+        vao.getVAO().setVertexCount(data.getVertexCount());
         fontsModels.put(text.getTextString(), vao);
+        masterFont.addText(text, isTemp);
         super.execute();
     }
 }

@@ -1,5 +1,6 @@
 package fr.ostix.game.menu;
 
+import com.google.gson.annotations.*;
 import fr.ostix.game.menu.component.*;
 
 import java.util.*;
@@ -7,6 +8,8 @@ import java.util.concurrent.*;
 
 public abstract class Screen {
     private final List<Component> components = new CopyOnWriteArrayList<>();
+
+    @Expose
     protected String title;
     private Screen previousScreen;
 

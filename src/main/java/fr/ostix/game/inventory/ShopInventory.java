@@ -8,19 +8,18 @@ public class ShopInventory extends Inventory {
 
     public ShopInventory() {
         super("Shop");
-        shopTab = ItemTab.newEmptyTab("Shop", 35);
+        shopTab = ItemTab.newEmptyTab("Shop", 35,ItemType.ALL);
         setItems();
     }
 
     private void setItems() {
-        this.items.add(new ItemStack(Items.potion, 10));
-        int i = 0;
-        shopTab.getSlots()[i].setStack(new ItemStack(Items.potion, 10));
+        this.addItems(new ItemStack(Items.getItem(0), 10));
     }
 
     @Override
     public void open() {
         super.open();
+        shopTab.setItems(itemStackByItem);
         shopTab.startRendering();
     }
 

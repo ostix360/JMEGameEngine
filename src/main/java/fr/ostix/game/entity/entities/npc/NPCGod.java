@@ -14,7 +14,6 @@ public class NPCGod extends NPC {
     private NPCGod() {
         super(0,null,null,null,0, "God");
         this.gui = new NPCGodGui();
-        this.initBeforeSpawn();
     }
 
 

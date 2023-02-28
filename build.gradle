@@ -1,4 +1,5 @@
 import groovy.xml.MarkupBuilder
+import org.gradle.internal.os.OperatingSystem
 
 plugins {
     id 'java'
@@ -7,6 +8,15 @@ plugins {
 def MAIN_CLASS = 'fr.ostix.game.main.Main'
 group 'fr.ostix.game'
 version '0.5'
+
+switch (OperatingSystem.current()) {
+	case OperatingSystem.LINUX:
+		project.ext.lwjglNatives = "natives-linux"
+		break
+	case OperatingSystem.WINDOWS:
+		project.ext.lwjglNatives = "natives-windows"
+		break
+}
 
 repositories {
     mavenCentral()
@@ -44,7 +54,6 @@ task runConfiguration {
 
 project.ext.lwjglVersion = "3.3.1"
 project.ext.jomlVersion = "1.10.5"
-project.ext.lwjglNatives = "natives-windows"
 
 
 dependencies {

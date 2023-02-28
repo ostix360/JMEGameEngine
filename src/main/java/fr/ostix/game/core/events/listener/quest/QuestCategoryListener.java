@@ -41,7 +41,7 @@ public class QuestCategoryListener implements Listener {
         }
         try {
             questCategory.quests().get(event.getQuestID()).setStatus(QuestStatus.AVAILABLE);
-            questCategory.save();
+//            questCategory.save();
         } catch (Exception e) {
             System.err.println("Exception for " + questCategory.getName()); // ???
             e.printStackTrace();

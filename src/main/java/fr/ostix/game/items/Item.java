@@ -18,15 +18,18 @@ public class Item {
     private GuiTexture gui;
     private final GUIText itemDescription;
 
+    private final ItemType type;
 
 
-    public Item(int id, String name, String description, String textureName) {
+
+    public Item(int id, String name, String description, String textureName, ItemType type) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.texture = ResourcePack.getTextureByName(textureName).getID();
         this.itemDescription = new GUIText(description, 1f, Game.gameFont,
                 new Vector2f(95, 290f), 280f, false);
+        this.type = type;
         this.itemDescription.setColour(Color.MAGENTA);
 
     }
@@ -58,6 +61,10 @@ public class Item {
         gui = new GuiTexture(texture, new Vector2f(x, y), new Vector2f(130 * 1.23f, 130));
         MasterGui.addGui(gui);
 
+    }
+
+    public ItemType getType() {
+        return type;
     }
 
     public void stopRendering() {

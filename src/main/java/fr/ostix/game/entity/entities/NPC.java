@@ -27,16 +27,16 @@ public class NPC extends Entity implements Interact {
     public NPC(int id, Model model, Vector3f position, Vector3f rotation, float scale, String name) {
         super(id, model, position, rotation, scale);
         this.name = name;
-        this.registerDefaultDialog();
+
         gui = new NPCGui("Talking to", this);
         NPCDefaultsListener = new NPCTalkListener(this);
-        if (this.getId() == 0) return;
+//        if (this.getId() == 0)  ;
 
     }
 
     @Override
     public void initBeforeSpawn() {
-        EventManager.getInstance().register(this.NPCDefaultsListener);
+        this.registerDefaultDialog();
         super.initBeforeSpawn();
     }
 
@@ -63,8 +63,7 @@ public class NPC extends Entity implements Interact {
 
     @Override
     public void interact(World world) {
-        EventManager.getInstance().callEvent(new PlayerGiveItemEvent(world.getPlayer(), world, 1));
-        EventManager.getInstance().callEvent(new NPCTalkEvent(world, 1, this));
+
     }
 
     public String getName() {
@@ -80,10 +79,12 @@ public class NPC extends Entity implements Interact {
     }
 
     public void unRegisterDefaultDialog() {
+        EventManager.getInstance().unRegister(this.NPCDefaultsListener);
         defaultMessage = null;
     }
 
     public void registerDefaultDialog() {
+        EventManager.getInstance().register(this.NPCDefaultsListener);
         defaultMessage = theDefaultMessage;
     }
 

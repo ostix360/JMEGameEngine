@@ -1,17 +1,25 @@
 package fr.ostix.game.core.quest;
 
+import com.google.gson.annotations.Expose;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.*;
 import fr.ostix.game.core.quest.serialization.*;
 import fr.ostix.game.entity.*;
 
 public abstract class Quest implements IQuestSerializer {
+    @Expose
     private final int id;
+    @Expose
     private final int npcID;
+    @Expose
     private final String title;
+    @Expose
     private final String description;
+    @Expose
     private final Rewards rewards;
+    @Expose
     private QuestStatus status;
+
     protected Listener listener;
 
     private final boolean isStarted = false;

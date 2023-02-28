@@ -3,10 +3,12 @@ package fr.ostix.game.core.events.listener.keyListeners;
 import fr.ostix.game.core.*;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.entity.*;
+import fr.ostix.game.core.events.entity.npc.NPCTalkEvent;
 import fr.ostix.game.core.events.keyEvent.*;
 import fr.ostix.game.core.events.player.*;
 import fr.ostix.game.core.events.states.*;
 import fr.ostix.game.entity.*;
+import fr.ostix.game.entity.entities.NPC;
 import fr.ostix.game.inventory.*;
 import fr.ostix.game.menu.*;
 import fr.ostix.game.menu.stat.*;
@@ -60,7 +62,13 @@ public class KeyInGameListener implements KeyListener {
         }
         if (e.getKEY() == GLFW_KEY_E) {
             if (!world.getEntitiesNear().isEmpty()) {
+                Entity entity = world.getEntitiesNear().get(0);
+                if (entity instanceof NPC) {
+                    EventManager.getInstance().callEvent(new NPCTalkEvent(world, 1, (NPC) entity));
+                }
+                EventManager.getInstance().callEvent(new PlayerGiveItemEvent(world.getPlayer(), world, 1));
                 EventManager.getInstance().callEvent(new EntityInteractEvent(world.getEntitiesNear().get(0), world, 3));
+
             }
         }
     }

@@ -21,13 +21,27 @@ public class ItemStack {
         }else if(this.item == item){
             this.count += number;
         }else{
-            Logger.warn("you couldn't had item to an itemStack if there is not the same...");
+            Logger.warn("you couldn't had item to an itemStack if there is not the same skip...");
+        }
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void addItem(int count) {
+         if (item != null) {
+            this.count += count;
         }
     }
 
     public void increaseItemCount() {
-        if (item != null) {
-            count++;
+        if (this.item != null) {
+            this.count++;
         }
     }
 
@@ -55,10 +69,26 @@ public class ItemStack {
         if (this.item == item){
             this.count -= number;
         }else{
-            Logger.warn("you couldn't had item to an itemStack if there is not the same...");
+            Logger.warn("you couldn't remove item to an itemStack if there is not the same...");
         }
         if (this.count <= 0){
             this.count = 0;
         }
+    }
+
+    public boolean removeItems(int number) {
+        this.count -= number;
+        if (this.count == 0){
+            this.item = null;
+        }else {
+            Logger.warn("Error Youu want to remove more item than you have");
+            return false;
+        }
+        return true;
+    }
+
+    public void setStack(ItemStack stack) {
+        this.item = stack.getItem();
+        this.count = stack.getCount();
     }
 }

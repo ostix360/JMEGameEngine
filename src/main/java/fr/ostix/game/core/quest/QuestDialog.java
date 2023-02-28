@@ -1,10 +1,12 @@
 package fr.ostix.game.core.quest;
 
+import com.google.gson.annotations.Expose;
 import fr.ostix.game.core.*;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.entity.npc.*;
 import fr.ostix.game.core.events.listener.quest.*;
 import fr.ostix.game.core.loader.json.*;
+import fr.ostix.game.core.quest.serialization.RewardsTypeAdapter;
 import fr.ostix.game.entity.*;
 import fr.ostix.game.entity.entities.npc.*;
 import fr.ostix.game.world.*;
@@ -12,8 +14,9 @@ import fr.ostix.game.world.*;
 import java.util.*;
 
 public class QuestDialog extends Quest {
+    @Expose
     private final List<String> dialogs;
-
+    @Expose
     private int dialogLine;
 
     public QuestDialog() {
@@ -24,9 +27,9 @@ public class QuestDialog extends Quest {
     @Override
     public void execute() {
         EventManager.getInstance().register(this.listener = new QuestTalkListener(this));
-        if (getNpcID() == 0){
-            World.addToDo((w -> EventManager.getInstance().callEvent(new NPCTalkEvent(w,2,NPCGod.getInstance()))));
-        }else{
+        if (getNpcID() == 0) {
+            World.addToDo((w -> EventManager.getInstance().callEvent(new NPCTalkEvent(w, 2, NPCGod.getInstance()))));
+        } else {
             Registered.getNPC(this.getNpcID()).unRegisterDefaultDialog();
         }
     }
@@ -38,7 +41,7 @@ public class QuestDialog extends Quest {
     }
 
     public static QuestDialog load(String questData) {
-        return JsonUtils.gsonInstance().fromJson(questData, QuestDialog.class);
+        return JsonUtils.gsonInstance(Rewards.class, new RewardsTypeAdapter(), true).fromJson(questData, QuestDialog.class);
     }
 
     public int getDialogLine() {
@@ -51,6 +54,6 @@ public class QuestDialog extends Quest {
 
     @Override
     public String save() {
-        return JsonUtils.gsonInstance().toJson(this);
+        return JsonUtils.gsonInstance(Rewards.class, new RewardsTypeAdapter(), true).toJson(this);
     }
 }

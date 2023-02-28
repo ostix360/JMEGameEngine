@@ -4,21 +4,32 @@ import com.google.gson.annotations.*;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.inventoryEvent.*;
 import fr.ostix.game.core.loader.json.*;
+import fr.ostix.game.core.loader.json.typeAdapter.InventoryTypeAdapter;
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.gui.*;
 import fr.ostix.game.items.*;
 import fr.ostix.game.menu.*;
+import fr.ostix.game.toolBox.*;
 import org.joml.*;
 
 import java.io.*;
 import java.util.*;
 
-public abstract class Inventory extends Screen {
+public class Inventory extends Screen {
     @Expose
-    protected final List<ItemStack> items = new ArrayList<>();
+    private Collection<ItemStack> items;
+
+    protected final HashMap<Item, ItemStack> itemStackByItem = new HashMap<>();
     private final GuiTexture backGround;
     private boolean isOpen = false;
 
+    public Inventory() {
+        super("Inventory");
+        this.backGround = new GuiTexture(ResourcePack.getTextureByName("inventory").getID(),
+                new Vector2f(0), new Vector2f(1920,
+                1080));
+        init();
+    }
 
     public Inventory(String title) {
         super(title);
@@ -48,18 +59,37 @@ public abstract class Inventory extends Screen {
     public void render() {
     }
 
-    public void addItems(List<ItemStack> items) {
-        this.items.addAll(items);
+    public void addItems(ItemStack... items) {
+        for (ItemStack stack : items){
+            if (itemStackByItem.containsKey(stack.getItem())){
+                itemStackByItem.get(stack.getItem()).addItem(stack.getCount());
+            }else {
+                itemStackByItem.put(stack.getItem(),stack);
+            }
+        }
     }
 
-    public void removeItems(List<ItemStack> items) {
-        List<ItemStack> iToRemove = new ArrayList<>();
-        items.forEach(stack ->{
-            if (stack.getCount() <= 0){
-                iToRemove.add(stack);
+    public boolean removeItems(ItemStack... items) {
+        boolean success = true;
+        for (ItemStack stack : items) {
+            if (itemStackByItem.containsKey(stack.getItem())) {
+                if (!itemStackByItem.get(stack.getItem()).removeItems(stack.getCount())) {
+                    Logger.err("Not enough item in inventory to remove " + stack.getCount() + " " + stack.getItem().getName());
+                    success = false;
+                } else {
+                    if (itemStackByItem.get(stack.getItem()).getCount() == 0) {
+                        itemStackByItem.remove(stack.getItem());
+                    } else if (itemStackByItem.get(stack.getItem()).getCount() < 0) {
+                        Logger.err("Item count is negative");
+                        success = false;
+                    }
+                }
+            }else{
+                Logger.err("Item not found in inventory");
+                success = false;
             }
-        });
-        items.removeAll(iToRemove);
+        }
+        return success;
     }
 
 
@@ -70,22 +100,43 @@ public abstract class Inventory extends Screen {
     }
 
     public boolean has(ItemStack item) {
-        return items.stream().anyMatch(itemStack ->
+        return getItems().stream().anyMatch(itemStack ->
                 itemStack.getItem().getId() == item.getItem().getId()
                         && itemStack.getCount() >= item.getCount());
     }
 
     public void loadInventory() {
         // load inventory from file
-        File file = new File(title + ".inv");
-        String content = JsonUtils.loadJson(file.getName());
-        JsonUtils.gsonInstance(true).fromJson(content, Inventory.class);
+        File file = new File(ToolDirectory.RES_FOLDER, "world/inventory/" + title + ".inv");
+        if (!file.exists()) {
+            System.err.println("Inventory " + title + " not found");
+            file.getParentFile().mkdirs();
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return;
+        }
+        String content = JsonUtils.loadJson(file.getAbsolutePath());
+        if (content == null || content.isEmpty()) {
+            System.err.println("Inventory " + title + " not found");
+            return;
+        }
+        Inventory inv = JsonUtils.gsonInstance(Inventory.class,new InventoryTypeAdapter(),true).fromJson(content, Inventory.class);
+
+        this.addItems(inv.getItems().toArray(new ItemStack[0]));
     }
 
     public void saveInventory() {
         // save inventory to file
-        File file = new File(title + ".inv");
-        String content = JsonUtils.gsonInstance(true).toJson(this);
-        JsonUtils.saveJson(file.getName(), content);
+        this.items = getItems();
+        File file = new File(ToolDirectory.RES_FOLDER, "world/inventory/" + title + ".inv");
+        String content = JsonUtils.gsonInstance(Inventory.class,new InventoryTypeAdapter(),true).toJson(this);
+        JsonUtils.saveJson(file.getAbsolutePath(), content);
+    }
+
+    public Collection<ItemStack> getItems() {
+        return itemStackByItem.values();
     }
 }

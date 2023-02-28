@@ -11,6 +11,7 @@ import java.util.*;
 
 public class PlayerInventory extends Inventory {
 
+
     private GuiTexture backGround;
     private boolean isOpen = false;
     private ItemTab recipeTab;
@@ -29,7 +30,7 @@ public class PlayerInventory extends Inventory {
                 ResourcePack.getTextureByName("right_button").getID(), (b) -> {
             Logger.log("right button");
         });
-        recipeTab = ItemTab.newEmptyTab("RecipeTab", 35);
+        recipeTab = ItemTab.newEmptyTab("RecipeTab", 35,ItemType.CONSUMABLE);
         super.init();
     }
 
@@ -40,6 +41,7 @@ public class PlayerInventory extends Inventory {
     public void open() {
         MasterGui.addGui(backGround);
         this.addComponent(right_button);
+        recipeTab.setItems(itemStackByItem);
         recipeTab.startRendering();
         isOpen = true;
     }
@@ -57,16 +59,12 @@ public class PlayerInventory extends Inventory {
     }
 
     public void addItems(List<ItemStack> items) {
-        super.addItems(items);
-        this.recipeTab.addItems(items);
+        super.addItems(items.toArray(new ItemStack[0]));
     }
 
     public void removeItems(List<ItemStack> items) {
-        this.recipeTab.removeItems(items);
-        super.removeItems(items);
+        super.removeItems(items.toArray(new ItemStack[0]));
     }
-
-
     @Override
     public void update() {
         super.update();
