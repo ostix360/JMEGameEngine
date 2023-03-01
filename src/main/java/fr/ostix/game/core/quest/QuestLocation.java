@@ -5,18 +5,19 @@ import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.quest.*;
 import fr.ostix.game.core.loader.json.*;
 import fr.ostix.game.core.quest.serialization.RewardsTypeAdapter;
+import fr.ostix.game.toolBox.Vec3f;
 import org.joml.*;
 
 public class QuestLocation extends Quest {
     @Expose
-    private final Vector3f pos;
+    private final Vec3f pos;
     @Expose
     private final float range;
 
 
 
     public QuestLocation() {
-        this.pos = new Vector3f();
+        this.pos = new Vec3f();
         this.range = 5;
     }
 
@@ -32,7 +33,7 @@ public class QuestLocation extends Quest {
 
 
     public Vector3f getPos() {
-        return pos;
+        return pos.toVector3f();
     }
 
     public float getRange() {

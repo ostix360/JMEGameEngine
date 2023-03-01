@@ -66,7 +66,7 @@ public class QuestCategory {
 
     public String save() {
         final StringBuilder content = new StringBuilder();
-        content.append(this.id).append(";").append(this.title).append(";").append(this.quests.size()).append(';').append(status.toString()).append("\n");
+        content.append(this.id).append(";").append(this.title).append(";").append(this.quests.size()).append(';').append(status.toString()).append(';').append(nextQuest).append("\n");
         for (Quest q : this.quests.values()) {
             if (q instanceof QuestItem) {
                 content.append("QuestItem").append("\n");
@@ -99,7 +99,22 @@ public class QuestCategory {
 
     public void start() {
         EventManager.getInstance().register(listener = new QuestCategoryListener(this));
-        EventManager.getInstance().callEvent(new QuestStartedEvent(quests().get(0).getId(),2));
+        Quest q = quests().get(0);
+        int i = 0;
+        do{
+            if (q.getStatus() == QuestStatus.DONE) {
+                q = quests().get(q.getId());
+                continue;
+            }
+            if (q.getStatus() == QuestStatus.UNAVAILABLE)
+                return;
+            EventManager.getInstance().callEvent(new QuestStartedEvent(q.getId(),2));
+            return;
+        } while (quests.size() > ++i);
+
+
+        this.status = QuestStatus.DONE;
+
     }
 
     public void setQuestingQuest(Quest questingQuest) {

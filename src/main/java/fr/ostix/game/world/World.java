@@ -102,7 +102,7 @@ public class World {
 
 
         AnimatedModel an = pack.getAnimatedModelByName().get("player2");
-        player = new Player(an, new Vector3f(1450, 70, 2250), new Vector3f(0), 0.5f);
+        player = new Player(an, new Vector3f(1450, 30, 2250), new Vector3f(0), 0.5f);
         player.setInventory(playerInventory);
         ParticleTargetProperties targetProperties = new ParticleTargetProperties(0, 6, 0, 80, 6);
         ParticleSystem system = new ParticleSystem(new ParticleTexture(textures.get("fire").getID(), 8, true),

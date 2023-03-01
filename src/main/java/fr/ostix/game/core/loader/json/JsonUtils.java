@@ -20,7 +20,7 @@ public class JsonUtils {
         GsonBuilder gsonBuilder = new GsonBuilder();
         if (needToExcludeSomeFields) gsonBuilder.excludeFieldsWithoutExposeAnnotation();
         return gsonBuilder.registerTypeAdapter(type, serializer)
-                .setPrettyPrinting().create();
+                .create();
     }
 
     public static Gson gsonInstance(Class type, JsonSerializer serializer, boolean needToExcludeSomeFields) {
@@ -28,7 +28,7 @@ public class JsonUtils {
         if (needToExcludeSomeFields) gsonBuilder.excludeFieldsWithoutExposeAnnotation();
         return gsonBuilder.registerTypeAdapter(type, serializer)
                 .excludeFieldsWithoutExposeAnnotation()
-                .setPrettyPrinting().create();
+                .create();
     }
 
     public static Gson gsonInstance(boolean needToExcludeSomeFields) {
