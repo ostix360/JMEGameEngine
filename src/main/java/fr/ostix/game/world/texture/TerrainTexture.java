@@ -1,6 +1,7 @@
 package fr.ostix.game.world.texture;
 
-import fr.ostix.game.core.ressourceProcessor.*;
+import fr.ostix.game.core.logics.ressourceProcessor.GLRequestProcessor;
+import fr.ostix.game.core.logics.ressourceProcessor.TextureLoaderRequest;
 
 public class TerrainTexture {
 

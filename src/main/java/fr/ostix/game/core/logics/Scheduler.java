@@ -1,4 +1,4 @@
-package fr.ostix.game.core.ressourceProcessor;
+package fr.ostix.game.core.logics;
 
 import java.util.*;
 import java.util.concurrent.*;

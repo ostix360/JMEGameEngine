@@ -48,6 +48,7 @@ public class WorldState extends Screen {
         worldInitialized = world.isInit();
         worldLoader.loadWorld();
         world.setTime(worldLoader.getTime());
+        world.resume();
     }
 
     @Override

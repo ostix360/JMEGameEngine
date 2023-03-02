@@ -5,12 +5,14 @@ import fr.ostix.game.core.events.entity.npc.*;
 import fr.ostix.game.core.events.listener.*;
 import fr.ostix.game.core.events.player.*;
 import fr.ostix.game.core.events.states.*;
+import fr.ostix.game.core.logics.Callback;
 import fr.ostix.game.entity.*;
 import fr.ostix.game.entity.entities.npc.gui.*;
 import fr.ostix.game.graphics.model.*;
 import fr.ostix.game.world.*;
 import org.joml.*;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class NPC extends Entity implements Interact {
@@ -45,6 +47,36 @@ public class NPC extends Entity implements Interact {
         EventManager.getInstance().callEvent(new StateOverWorldEvent(name, gui, 1));
 //        EventManager.getInstance().unRegister(this.NPCDefaultsListener);
     }
+
+    public void talke(World w, Callback callback, Object... args) {
+        int line = 0;
+        int i = 0;
+        List<String> dialogs = new ArrayList<>();
+        if (args[i] instanceof Integer){
+            line = (int) args[i];
+            i++;
+        }
+        for (; i < args.length; i++) {
+            if ((args[i] instanceof String)) {
+                dialogs.add((String) args[i]);
+                continue;
+            }else if (args[i] instanceof Object[]){
+                for (Object o : (Object[]) args[i]) {
+                    if (o instanceof String){
+                        dialogs.add((String) o);
+                    }else {
+                        throw new IllegalArgumentException("args[" + i + "] is not a String");
+                    }
+                }
+                break;
+            }
+            throw new IllegalArgumentException("args[" + i + "] is not a String");
+        }
+
+        gui.showDialogs(dialogs, line, w,callback);
+        EventManager.getInstance().callEvent(new StateOverWorldEvent(name, gui, 1));
+    }
+
 
     public void talke(String dialog, World world) {
         if (dialog == null) {
@@ -84,6 +116,7 @@ public class NPC extends Entity implements Interact {
     }
 
     public void registerDefaultDialog() {
+        if (this.getId() == 0) return;
         EventManager.getInstance().register(this.NPCDefaultsListener);
         defaultMessage = theDefaultMessage;
     }

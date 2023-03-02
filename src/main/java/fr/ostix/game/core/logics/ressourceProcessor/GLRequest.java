@@ -1,4 +1,4 @@
-package fr.ostix.game.core.ressourceProcessor;
+package fr.ostix.game.core.logics.ressourceProcessor;
 
 public abstract class GLRequest {
     protected boolean isExecuted = false;

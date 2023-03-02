@@ -26,18 +26,18 @@ public class QuestDialog extends Quest {
 
     @Override
     public void execute() {
-        EventManager.getInstance().register(this.listener = new QuestTalkListener(this));
         if (getNpcID() == 0) {
             World.addToDo((w -> EventManager.getInstance().callEvent(new NPCTalkEvent(w, 2, NPCGod.getInstance()))));
         } else {
             Registered.getNPC(this.getNpcID()).unRegisterDefaultDialog();
         }
+        EventManager.getInstance().register(this.listener = new QuestTalkListener(this));
     }
 
     @Override
     public void done(Player p) {
         super.done(p);
-//        Registered.getNPC(this.getNpcID()).registerDefaultDialog(); TODO
+        Registered.getNPC(this.getNpcID()).registerDefaultDialog();
     }
 
     public static QuestDialog load(String questData) {

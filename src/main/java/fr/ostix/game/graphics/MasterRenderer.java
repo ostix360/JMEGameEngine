@@ -1,7 +1,8 @@
 package fr.ostix.game.graphics;
 
 import fr.ostix.game.core.camera.*;
-import fr.ostix.game.core.ressourceProcessor.*;
+import fr.ostix.game.core.logics.ressourceProcessor.GLRequestProcessor;
+import fr.ostix.game.core.logics.ressourceProcessor.GLRunnableRequest;
 import fr.ostix.game.entity.*;
 import fr.ostix.game.entity.component.light.*;
 import fr.ostix.game.graphics.entity.*;

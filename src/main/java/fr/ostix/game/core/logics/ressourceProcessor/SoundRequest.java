@@ -1,4 +1,4 @@
-package fr.ostix.game.core.ressourceProcessor;
+package fr.ostix.game.core.logics.ressourceProcessor;
 
 
 import fr.ostix.game.audio.*;

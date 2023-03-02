@@ -2,7 +2,8 @@ package fr.ostix.game.core;
 
 import fr.ostix.game.audio.*;
 import fr.ostix.game.core.loader.*;
-import fr.ostix.game.core.ressourceProcessor.*;
+import fr.ostix.game.core.logics.ressourceProcessor.GLRequestProcessor;
+import fr.ostix.game.core.logics.Scheduler;
 import fr.ostix.game.graphics.font.meshCreator.*;
 import fr.ostix.game.graphics.font.rendering.*;
 import fr.ostix.game.gui.*;

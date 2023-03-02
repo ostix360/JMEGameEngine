@@ -72,7 +72,7 @@ public class Inventory extends Screen {
     public boolean removeItems(ItemStack... items) {
         boolean success = true;
         for (ItemStack stack : items) {
-            if (itemStackByItem.containsKey(stack.getItem())) {
+            if (itemStackByItem.containsKey(stack.getItem())) { //Don't work
                 if (!itemStackByItem.get(stack.getItem()).removeItems(stack.getCount())) {
                     Logger.err("Not enough item in inventory to remove " + stack.getCount() + " " + stack.getItem().getName());
                     success = false;
@@ -85,7 +85,7 @@ public class Inventory extends Screen {
                     }
                 }
             }else{
-                Logger.err("Item not found in inventory");
+                Logger.err("Item "+ stack.getItem().getName() +" not found in inventory");
                 success = false;
             }
         }

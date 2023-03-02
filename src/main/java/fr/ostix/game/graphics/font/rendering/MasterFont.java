@@ -1,9 +1,9 @@
 package fr.ostix.game.graphics.font.rendering;
 
 import fr.ostix.game.core.loader.*;
-import fr.ostix.game.core.ressourceProcessor.*;
+import fr.ostix.game.core.logics.ressourceProcessor.FontRequest;
+import fr.ostix.game.core.logics.ressourceProcessor.GLRequestProcessor;
 import fr.ostix.game.graphics.font.meshCreator.*;
-import fr.ostix.game.graphics.model.*;
 
 import java.util.*;
 

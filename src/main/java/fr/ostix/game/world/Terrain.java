@@ -1,7 +1,8 @@
 package fr.ostix.game.world;
 
 import com.jme3.bullet.control.*;
-import fr.ostix.game.core.ressourceProcessor.*;
+import fr.ostix.game.core.logics.ressourceProcessor.GLRequestProcessor;
+import fr.ostix.game.core.logics.ressourceProcessor.ModelLoaderRequest;
 import fr.ostix.game.graphics.model.*;
 import fr.ostix.game.toolBox.*;
 import fr.ostix.game.world.chunk.*;
