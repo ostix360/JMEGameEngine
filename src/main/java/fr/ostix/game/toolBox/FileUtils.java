@@ -6,14 +6,27 @@ import java.io.*;
 import java.nio.*;
 import java.nio.channels.*;
 import java.nio.file.*;
+import java.util.List;
 
 import static org.lwjgl.BufferUtils.*;
 
 public class FileUtils {
 
+    public static void listFile(File directory, List<File> files) {
 
+        // Get all files from a directory.
+        File[] fList = directory.listFiles();
+        if (fList != null)
+            for (File file : fList) {
+                if (file.isFile()) {
+                    files.add(file);
+                } else if (file.isDirectory()) {
+                    listFile(file, files);
+                }
+            }
+    }
 
-    public static ByteBuffer loadByteBufferFromResources(String resource,int bufferSize) {
+    public static ByteBuffer loadByteBufferFromResources(String resource, int bufferSize) {
         ByteBuffer buffer = null;
 
         Path path = Paths.get("/sounds/" + resource + FileType.OGG);
@@ -43,7 +56,7 @@ public class FileUtils {
                 e.printStackTrace();
             }
         }
-        if(buffer == null){
+        if (buffer == null) {
             try {
                 throw new Exception("AudioBuffer is null");
             } catch (Exception e) {

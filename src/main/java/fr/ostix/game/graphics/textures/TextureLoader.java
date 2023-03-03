@@ -34,8 +34,8 @@ public class TextureLoader {
         int w = image.getWidth();
         int h = image.getHeight();
 
-        int[] pixels = new int[w*h];
-        image.getRGB(0,0,w,h,pixels,0,w);
+
+        int[] pixels = image.getRGB(0,0,w,h,null,0,w);
 
         ByteBuffer buffer = BufferUtils.createByteBuffer(w*h*4);
 
@@ -43,7 +43,7 @@ public class TextureLoader {
         {
             for (int x = 0;x<h;x++)
             {
-                int i = pixels[x+y*w];
+                int i = pixels[y * image.getWidth() + x];
                 buffer.put((byte) ((i >> 16) & 0xFF));
                 buffer.put((byte) ((i >> 8) & 0xFF));
                 buffer.put((byte) ((i ) & 0xFF));
@@ -55,6 +55,8 @@ public class TextureLoader {
 
 
         int id = glGenTextures();
+
+
         glBindTexture(GL_TEXTURE_2D,id);
         glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,w,h,0,GL_RGBA,GL_UNSIGNED_BYTE,buffer);
 
@@ -99,30 +101,30 @@ public class TextureLoader {
         return new TextureLoader(id,w);
     }
 
-    public static ByteBuffer loadImage(BufferedImage image) {
-        int w = image.getWidth();
-        int h = image.getHeight();
-
-        int[] pixels = new int[w*h];
-        image.getRGB(0,0,w,h,pixels,0,w);
-
-        ByteBuffer buffer = BufferUtils.createByteBuffer(w*h*4);
-
-        for (int y = 0;y<w;y++)
-        {
-            for (int x = 0;x<h;x++)
-            {
-                int i = pixels[x+y*w];
-                buffer.put((byte) ((i >> 16) & 0xFF));
-                buffer.put((byte) ((i >> 8) & 0xFF));
-                buffer.put((byte) ((i ) & 0xFF));
-                buffer.put((byte) ((i >> 24) & 0xFF));
-            }
-        }
-
-        buffer.flip();
-        return buffer;
-    }
+//    public static ByteBuffer loadImage(BufferedImage image) {
+//        int w = image.getWidth();
+//        int h = image.getHeight();
+//
+//        int[] pixels = new int[w*h];
+//        image.getRGB(0,0,w,h,pixels,0,w);
+//
+//        ByteBuffer buffer = BufferUtils.createByteBuffer(w*h*4);
+//
+//        for (int y = 0;y<w;y++)
+//        {
+//            for (int x = 0;x<h;x++)
+//            {
+//                int i = pixels[x+y*w];
+//                buffer.put((byte) ((i >> 16) & 0xFF));
+//                buffer.put((byte) ((i >> 8) & 0xFF));
+//                buffer.put((byte) ((i ) & 0xFF));
+//                buffer.put((byte) ((i >> 24) & 0xFF));
+//            }
+//        }
+//
+//        buffer.flip();
+//        return buffer;
+//    }
 
     public int getId() {
         return id;

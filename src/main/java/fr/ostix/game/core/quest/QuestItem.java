@@ -3,11 +3,13 @@ package fr.ostix.game.core.quest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
+import fr.ostix.game.core.Registered;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.quest.*;
 import fr.ostix.game.core.loader.json.*;
 import fr.ostix.game.core.loader.json.typeAdapter.ItemStackTypeAdapter;
 import fr.ostix.game.core.quest.serialization.RewardsTypeAdapter;
+import fr.ostix.game.entity.Player;
 import fr.ostix.game.items.*;
 
 
@@ -21,6 +23,7 @@ public class QuestItem extends Quest {
 
     @Override
     public void execute() {
+        Registered.getNPC(this.getNpcID()).unRegisterDefaultDialog();
         EventManager.getInstance().register(this.listener = new QuestGiveItemListener(this));
     }
 
@@ -30,6 +33,12 @@ public class QuestItem extends Quest {
                 .registerTypeAdapter(Rewards.class, new RewardsTypeAdapter())
                 .registerTypeAdapter(ItemStack.class, new ItemStackTypeAdapter());
         return builder.create().fromJson(questData, QuestItem.class);
+    }
+
+    @Override
+    public void done(Player p) {
+        super.done(p);
+        Registered.getNPC(this.getNpcID()).registerDefaultDialog();
     }
 
     public ItemStack getItem() {

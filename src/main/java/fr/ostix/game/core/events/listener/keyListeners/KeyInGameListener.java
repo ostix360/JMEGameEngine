@@ -11,7 +11,7 @@ import fr.ostix.game.entity.*;
 import fr.ostix.game.entity.entities.NPC;
 import fr.ostix.game.inventory.*;
 import fr.ostix.game.menu.*;
-import fr.ostix.game.menu.stat.*;
+import fr.ostix.game.menu.stat.PauseMenu;
 import fr.ostix.game.world.*;
 import org.joml.*;
 
