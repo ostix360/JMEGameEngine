@@ -80,8 +80,8 @@ public class ItemStack {
         this.count -= number;
         if (this.count == 0){
             this.item = null;
-        }else {
-            Logger.warn("Error Youu want to remove more item than you have");
+        }else if (this.count < 0){
+            Logger.warn("Error You want to remove more item than you have");
             return false;
         }
         return true;

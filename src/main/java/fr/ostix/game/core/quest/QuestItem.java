@@ -1,9 +1,12 @@
 package fr.ostix.game.core.quest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.listener.quest.*;
 import fr.ostix.game.core.loader.json.*;
+import fr.ostix.game.core.loader.json.typeAdapter.ItemStackTypeAdapter;
 import fr.ostix.game.core.quest.serialization.RewardsTypeAdapter;
 import fr.ostix.game.items.*;
 
@@ -22,7 +25,11 @@ public class QuestItem extends Quest {
     }
 
     public static QuestItem load(String questData) {
-        return JsonUtils.gsonInstance().fromJson(questData, QuestItem.class);
+        GsonBuilder builder = new GsonBuilder();
+        builder.excludeFieldsWithoutExposeAnnotation()
+                .registerTypeAdapter(Rewards.class, new RewardsTypeAdapter())
+                .registerTypeAdapter(ItemStack.class, new ItemStackTypeAdapter());
+        return builder.create().fromJson(questData, QuestItem.class);
     }
 
     public ItemStack getItem() {
@@ -31,6 +38,10 @@ public class QuestItem extends Quest {
 
     @Override
     public String save() {
-        return JsonUtils.gsonInstance(Rewards.class, new RewardsTypeAdapter(), true).toJson(this);
+        GsonBuilder builder = new GsonBuilder();
+        builder.excludeFieldsWithoutExposeAnnotation()
+                .registerTypeAdapter(Rewards.class, new RewardsTypeAdapter())
+                .registerTypeAdapter(ItemStack.class, new ItemStackTypeAdapter());
+        return builder.create().toJson(this);
     }
 }

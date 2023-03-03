@@ -8,6 +8,8 @@ import fr.ostix.game.gui.*;
 import fr.ostix.game.toolBox.*;
 import org.joml.*;
 
+import java.util.Objects;
+
 public class Item {
 
     @Expose
@@ -69,5 +71,18 @@ public class Item {
 
     public void stopRendering() {
         MasterGui.removeGui(gui);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return getId() == item.getId() && getType() == item.getType();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getType());
     }
 }

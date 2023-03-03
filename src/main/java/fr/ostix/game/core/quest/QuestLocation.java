@@ -27,7 +27,7 @@ public class QuestLocation extends Quest {
     }
 
     public static QuestLocation load(String questData) {
-        return JsonUtils.gsonInstance().fromJson(questData, QuestLocation.class);
+        return JsonUtils.gsonInstance(Rewards.class,new RewardsTypeAdapter(),true).fromJson(questData, QuestLocation.class);
     }
 
 

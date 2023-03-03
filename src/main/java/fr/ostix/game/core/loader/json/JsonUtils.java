@@ -16,14 +16,23 @@ public class JsonUtils {
         return gsonBuilder.create();
     }
 
-      public static Gson gsonInstance(Class type, TypeAdapter serializer, boolean needToExcludeSomeFields) {
+      public static Gson gsonInstance(Class<?> type, TypeAdapter<?> serializer, boolean needToExcludeSomeFields) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         if (needToExcludeSomeFields) gsonBuilder.excludeFieldsWithoutExposeAnnotation();
         return gsonBuilder.registerTypeAdapter(type, serializer)
                 .create();
     }
 
-    public static Gson gsonInstance(Class type, JsonSerializer serializer, boolean needToExcludeSomeFields) {
+    public static Gson gsonInstance(Class<?> type,  boolean needToExcludeSomeFields, Object... serializers) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        if (needToExcludeSomeFields) gsonBuilder.excludeFieldsWithoutExposeAnnotation();
+        for (Object serializer : serializers) {
+            gsonBuilder.registerTypeAdapter(type, serializer);
+        }
+        return gsonBuilder.create();
+    }
+
+    public static Gson gsonInstance(Class<?> type, JsonSerializer<?> serializer, boolean needToExcludeSomeFields) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         if (needToExcludeSomeFields) gsonBuilder.excludeFieldsWithoutExposeAnnotation();
         return gsonBuilder.registerTypeAdapter(type, serializer)

@@ -100,8 +100,9 @@ public class NPCGui extends Screen {
 
     public void next() {
         indexDialog++;
+
+        MasterFont.remove(this.dialog);
         if (indexDialog <= dialogs.size() - 1) {
-            MasterFont.remove(this.dialog);
             this.dialog.setText(dialogs.get(indexDialog));
             MasterFont.add(dialog);
             try {
