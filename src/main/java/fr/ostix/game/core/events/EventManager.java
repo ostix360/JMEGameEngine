@@ -61,9 +61,8 @@ public class EventManager {
                             System.err.println("The method " + method.getName() + "has to contain 1 parameter. ");
                         }
                     } catch (Exception ex) {
-                        System.err.println(ex.getMessage());
                         System.err.println("Error during invoking method " + method.getName() + " for the event " + e.getClass().getName());
-                        ex.printStackTrace(System.err);
+                        ex.printStackTrace();
                     }
                 }
             }

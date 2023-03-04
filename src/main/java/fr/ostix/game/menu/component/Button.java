@@ -8,20 +8,26 @@ import org.lwjgl.glfw.*;
 
 public class Button extends Component {
 
-    private boolean pressed;
+    protected boolean pressed;
     private final IPressable onPress;
 
     public Button(float x, float y, float width, float height, int texture, IPressable press) {
         super(x, y, width, height, texture);
-        this.texture.setLayer(new Color(0.45f, 0.45f, 0.5f, 0.85f));
+
         this.onPress = press;
     }
 
     @Override
+    public void init() {
+        super.init();
+        this.texture.setLayer(new Color(0.45f, 0.45f, 0.5f, 0.85f));
+    }
+
+    @Override
     public void update() {
+        this.texture.hasLayer(isIn());
         pressed = isIn() && Input.keysMouse[GLFW.GLFW_MOUSE_BUTTON_1];
         if (pressed) onPress.onPress(this);
-        this.texture.hasLayer(pressed);
     }
 
     @Override

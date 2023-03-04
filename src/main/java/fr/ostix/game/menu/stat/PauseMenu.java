@@ -20,18 +20,18 @@ public class PauseMenu extends Screen {
     @Override
     public void init() {
         super.init();
-        resumeButton = new Button((float) 1920 / 2 - 125,
+        resumeButton = new HorizontalButton((float) 1920 / 2 - 125,
                 (float) 1080 / 2 - 200, 250, 125,
                 ResourcePack.getTextureByName("resumeButton").getID(), (b) -> {
             resume();
         });
-        quitButton = new Button((float) 1920 / 2 - 125,
+        quitButton = new HorizontalButton((float) 1920 / 2 - 125,
                 (float) 1080 / 2 - 50, 250, 125,
                 ResourcePack.getTextureByName("settingsButton").getID(), (b) -> {
             settings();
 
         });
-        settingsButton = new Button((float) 1920 / 2 - 125,
+        settingsButton = new HorizontalButton((float) 1920 / 2 - 125,
                 (float) 1080 / 2 + 100, 250, 125,
                 ResourcePack.getTextureByName("quitButton").getID(), (b) -> {
             quit();

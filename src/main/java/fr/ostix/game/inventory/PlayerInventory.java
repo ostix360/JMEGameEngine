@@ -29,7 +29,7 @@ public class PlayerInventory extends Inventory {
         this.right_button = new Button(1830, 125, 90, 950,
                 ResourcePack.getTextureByName("right_button").getID(), (b) -> {
             Logger.log("right button");
-        });
+        }); //TODO: add right button
         recipeTab = ItemTab.newEmptyTab("RecipeTab", 35,ItemType.CONSUMABLE);
         super.init();
     }

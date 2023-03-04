@@ -48,7 +48,7 @@ public class ResourcePackLoader {
         try {
             loadAllTextures();
         } catch (Exception e) {
-            Logger.err("Error while loading textures",e);
+            Logger.err("Error while loading textures", e);
         }
 
 
@@ -59,7 +59,7 @@ public class ResourcePackLoader {
         try {
             loadAllSounds();
         } catch (Exception e) {
-            Logger.err("Error while loading sounds",e);
+            Logger.err("Error while loading sounds", e);
         }
 
 
@@ -70,7 +70,7 @@ public class ResourcePackLoader {
         try {
             loadAllModels();
         } catch (Exception e) {
-            Logger.err("Error while loading models",e);
+            Logger.err("Error while loading models", e);
         }
 
 
@@ -81,7 +81,7 @@ public class ResourcePackLoader {
         try {
             loadAllAnimations();
         } catch (Exception e) {
-            Logger.err("Error while loading animations",e);
+            Logger.err("Error while loading animations", e);
         }
 
 
@@ -92,7 +92,7 @@ public class ResourcePackLoader {
         try {
             loadAllComponents();
         } catch (Exception e) {
-            Logger.err("Error while loading components",e);
+            Logger.err("Error while loading components", e);
         }
 
         ProgressManager.remove(resourcesBar);
@@ -125,9 +125,10 @@ public class ResourcePackLoader {
 
     private void loadAllTextures() throws Exception {
         File textureFolder = new File(ToolDirectory.RES_FOLDER + "/textures/", DATA);
-        ProgressManager.ProgressBar texturesBar = ProgressManager.addProgressBar("Loading All Textures", Objects.requireNonNull(textureFolder.listFiles()).length);
         List<File> files = new ArrayList<>();
         FileUtils.listFile(textureFolder, files);
+        ProgressManager.ProgressBar texturesBar = ProgressManager.addProgressBar("Loading All Textures", files.size());
+
         for (File currentFile : files) {
 
             String json = JsonUtils.loadJson(currentFile.getAbsolutePath());

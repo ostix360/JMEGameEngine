@@ -11,6 +11,8 @@ public class GuiTexture {
     private Color layer = new Color(0, 0, 0, 0);
     private boolean hasLayer = false;
 
+    private Vector2f layerScale = new Vector2f(1, 1);
+
     /**
      * @param position correspond a une pourcentage au niveau de la fenetre sur 1000
      */
@@ -75,6 +77,14 @@ public class GuiTexture {
     public void setLayer(Color layer) {
         this.layer = layer;
         hasLayer = true;
+    }
+
+    public Vector2f getLayerScale() {
+        return layerScale;
+    }
+
+    public void setLayerScale(Vector2f layerScale) {
+        this.layerScale = layerScale;
     }
 
     public void setPosition(Vector2f position) {

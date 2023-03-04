@@ -1,7 +1,9 @@
 package fr.ostix.game.menu.component;
 
 import fr.ostix.game.core.*;
+import fr.ostix.game.core.resources.ResourcePack;
 import fr.ostix.game.gui.*;
+import fr.ostix.game.toolBox.Logger;
 import fr.ostix.game.toolBox.OpenGL.*;
 import org.joml.*;
 
@@ -18,7 +20,7 @@ public abstract class Component {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.texture = new GuiTexture(texture, new Vector2f(x, y), new Vector2f(width, height));
+
     }
 
     public abstract void update();
@@ -26,6 +28,10 @@ public abstract class Component {
     public abstract void render();
 
     public void init() {
+        if (texture == null) {
+            texture = new GuiTexture(ResourcePack.getTextureByName("missing").getID(), new Vector2f(x, y), new Vector2f(width, height));
+            Logger.err("Texture is null",new NullPointerException());
+        }
         MasterGui.addGui(texture);
     }
 

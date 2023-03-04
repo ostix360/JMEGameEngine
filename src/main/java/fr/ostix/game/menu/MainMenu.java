@@ -21,7 +21,7 @@ public class MainMenu extends Screen {
     @Override
     public void init() {
         super.init();
-        start = new Button((float) 1920 / 2 - 125,
+        start = new HorizontalButton((float) 1920 / 2 - 125,
                 (float) 1080 / 2 - 200, 250, 125,
                 ResourcePack.getTextureByName("startButton").getID(), (b) -> {
             startWorld = true;
