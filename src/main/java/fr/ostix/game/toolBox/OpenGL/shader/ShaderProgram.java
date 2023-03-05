@@ -2,6 +2,7 @@ package fr.ostix.game.toolBox.OpenGL.shader;
 
 import fr.ostix.game.toolBox.*;
 import fr.ostix.game.toolBox.OpenGL.shader.uniform.*;
+import org.lwjgl.opengl.GL11;
 
 import java.io.*;
 import java.util.*;
@@ -35,14 +36,17 @@ public abstract class ShaderProgram {
             Logger.err("Failed to validate shader program : " + glGetProgramInfoLog(programID),
                     new IllegalStateException("Could not compile shader"));
         }
+        Logger.errGL("Error while validating program");
     }
 
     protected void bindAttribute(int attribute, String variableName) {
         glBindAttribLocation(programID, attribute, variableName);
+        Logger.errGL("Error while binding attribute");
     }
 
     public void bind() {
         glUseProgram(programID);
+        Logger.errGL("Error while binding program");
     }
 
     public void unBind() {
@@ -53,11 +57,15 @@ public abstract class ShaderProgram {
     private void loadShaders(String shadersName) {
         StringBuilder vertexSource = readShader(shadersName + ".vert");
         StringBuilder fragmentSource = readShader(shadersName + ".frag");
+
         vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vertexShaderID, vertexSource);
+        Logger.errGL("Error while loading vertex shader");
         processShader(vertexShaderID);
+
         fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(fragmentShaderID, fragmentSource);
+        Logger.errGL("Error while loading fragment shader");
         processShader(fragmentShaderID);
     }
 
@@ -87,14 +95,20 @@ public abstract class ShaderProgram {
             Logger.err("Failed to compile shader : " + shaderID + " || GL error : " + glGetShaderInfoLog(shaderID),
                     new IllegalStateException("Could not compile shader"));
         }
+        Logger.errGL("Error while compiling shader");
 
     }
 
 
     private void processProgram() {
         programID = glCreateProgram();
+        Logger.errGL("Error while creating program");
+
         glAttachShader(programID, vertexShaderID);
+        Logger.errGL("Error while attaching vertex shader");
+
         glAttachShader(programID, fragmentShaderID);
+        Logger.errGL("Error while attaching fragment shader");
 
         bindAllAttributes();
 
@@ -103,6 +117,7 @@ public abstract class ShaderProgram {
             Logger.err("Failed to linked shader program : " + glGetProgramInfoLog(programID),
                     new IllegalStateException("Could not compile shader "));
         }
+        Logger.errGL("Error while linking program");
 
         glDetachShader(programID, vertexShaderID);
         glDetachShader(programID, fragmentShaderID);
@@ -113,7 +128,6 @@ public abstract class ShaderProgram {
 
 
     }
-
 
     public void cleanUp() {
         unBind();

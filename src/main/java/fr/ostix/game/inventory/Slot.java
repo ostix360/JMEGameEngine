@@ -11,10 +11,16 @@ import fr.ostix.game.toolBox.OpenGL.*;
 import org.joml.*;
 
 public class Slot {
+
+    private static final GuiLayer layer =
+            new GuiLayer(new Vector2f(0, 0), new Vector2f(1, 1),
+                    new Color(0.3f, 0.3f, 0.3f, 0.3f));
     private final float x, y;
     private final float size;
     private final GuiTexture texture;
-    private final GuiTexture itemDescriptionMenu;
+    private static final GuiTexture itemDescriptionMenu =
+            new GuiTexture(ResourcePack.getTextureByName("itemDescription").getID(),
+                new Vector2f(25, 230), new Vector2f(400, 500));;
     private boolean isEmpty;
     private ItemStack stack;
     private boolean isIn;
@@ -27,9 +33,8 @@ public class Slot {
         this.size = size;
         texture = new GuiTexture(ResourcePack.getTextureByName("slot").getID(),
                 new Vector2f(x, y), new Vector2f(size * 1.23f, size));
-        texture.setLayer(new Color(0.3f, 0.3f, 0.3f, 0.3f));
-        itemDescriptionMenu = new GuiTexture(ResourcePack.getTextureByName("itemDescription").getID(),
-                new Vector2f(25, 230), new Vector2f(400, 500));
+        texture.setLayer(layer);
+
         this.stack = new ItemStack(null, 0);
     }
 

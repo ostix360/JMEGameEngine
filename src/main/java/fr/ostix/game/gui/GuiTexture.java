@@ -8,10 +8,8 @@ public class GuiTexture {
     private Vector2f position;
     private final int texture;
     private Vector2f scale;
-    private Color layer = new Color(0, 0, 0, 0);
+    private GuiLayer layer;
     private boolean hasLayer = false;
-
-    private Vector2f layerScale = new Vector2f(1, 1);
 
     /**
      * @param position correspond a une pourcentage au niveau de la fenetre sur 1000
@@ -66,26 +64,19 @@ public class GuiTexture {
         hasLayer = value;
     }
 
-    public Color getLayer() {
+    public GuiLayer getLayer() {
         if (hasLayer) {
             return layer;
         } else {
-            return new Color(0, 0, 0, 0);
+            return new GuiLayer(new Vector2f(), new Vector2f(), Color.NONE);
         }
     }
 
-    public void setLayer(Color layer) {
+    public void setLayer(GuiLayer layer) {
         this.layer = layer;
         hasLayer = true;
     }
 
-    public Vector2f getLayerScale() {
-        return layerScale;
-    }
-
-    public void setLayerScale(Vector2f layerScale) {
-        this.layerScale = layerScale;
-    }
 
     public void setPosition(Vector2f position) {
         this.position = position;

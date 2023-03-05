@@ -19,6 +19,7 @@ public class Color {
     public static final Color MAGENTA = new Color(1, 0, 1);
     public static final Color GRAY = new Color(0.5f, 0.5f, 0.5f);
     public static final Color SUN = new Color(1.5f, 1.25f, 1.45f);
+    public static final Color NONE = new Color(0, 0, 0, 0);
 
 
     private float red;

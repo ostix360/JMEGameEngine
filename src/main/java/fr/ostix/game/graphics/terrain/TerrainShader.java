@@ -39,7 +39,7 @@ public class TerrainShader extends ShaderProgram {
         super("terrainShader");
         super.storeAllUniformsLocations(transformationMatrix, projectionMatrix, viewMatrix,
                 reflectivity, shine, backgroundTexture, rTexture, gTexture, bTexture, blendMap, skyColour,
-                lightPos, lightColor, lightAttenuation, lightPower);
+                lightPos, lightColor, lightAttenuation, lightPower, shadowMap, plane);
     }
 
 

@@ -1,6 +1,7 @@
 package fr.ostix.game.menu.component;
 
 import fr.ostix.game.core.*;
+import fr.ostix.game.gui.GuiLayer;
 import fr.ostix.game.toolBox.*;
 import fr.ostix.game.toolBox.OpenGL.*;
 import org.joml.*;
@@ -11,6 +12,8 @@ public class Button extends Component {
     protected boolean pressed;
     private final IPressable onPress;
 
+    protected GuiLayer layer;
+
     public Button(float x, float y, float width, float height, int texture, IPressable press) {
         super(x, y, width, height, texture);
 
@@ -20,7 +23,13 @@ public class Button extends Component {
     @Override
     public void init() {
         super.init();
-        this.texture.setLayer(new Color(0.45f, 0.45f, 0.5f, 0.85f));
+        if (this.layer == null) {
+            this.layer = new GuiLayer(new Vector2f(0, 0),
+                    new Vector2f(1f),
+                    new Color(0.45f, 0.45f, 0.5f, 0.85f));
+            Logger.warn("Button layer is null, using default layer");
+        }
+        this.texture.setLayer(this.layer);
     }
 
     @Override

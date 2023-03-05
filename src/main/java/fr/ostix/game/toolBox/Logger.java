@@ -1,5 +1,7 @@
 package fr.ostix.game.toolBox;
 
+import org.lwjgl.opengl.GL11;
+
 import java.io.*;
 import java.text.*;
 import java.util.*;
@@ -34,6 +36,13 @@ public class Logger {
 //        String log = getTime() + "[WARN]" + getThread() + msg;
 //        System.out.println(log);
 //        logLines.add(log);
+    }
+
+    public static void errGL(String msg) {
+        int error = GL11.glGetError();
+        if (error != GL11.GL_NO_ERROR) {
+//            Logger.err("[GL] " + msg, new Exception("OpenGL Error: " + error));
+        }
     }
 
     public static void err(String msg, Exception e) {

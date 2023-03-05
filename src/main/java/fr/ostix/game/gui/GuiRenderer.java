@@ -38,12 +38,15 @@ public class GuiRenderer {
             GL11.glBindTexture(GL_TEXTURE_2D, gui.getTexture());
             Matrix4f matrix4f = Maths.createTransformationMatrix(gui.getPosition(), gui.getScale());
             shader.loadTransformationMatrix(matrix4f);
-            if (gui.hasLayer()) {
-                Matrix4f matrix4f1 = Maths.createTransformationMatrix(gui.getPosition(), gui.getLayerScale());
-                layerShader.loadTransformationMatrix(matrix4f1);
-                layerShader.loadLayer(gui.getLayer());
-            }
+//            if (gui.hasLayer()) {
+//                GuiLayer layer = gui.getLayer();
+//                Matrix4f matrix4f1 = Maths.createTransformationMatrix(
+//                        new Vector2f(gui.getPosition()).add(layer.getRelativePos()), layer.getScale());
+//                layerShader.loadTransformationMatrix(matrix4f1);
+//                layerShader.loadLayer(layer.getLayer());
+//            }
             glDrawArrays(GL_TRIANGLE_STRIP, 0, quadModel.getVertexCount());
+            Logger.errGL("Error while rendering gui");
             Texture.unBindTexture();
         }
         glEnable(GL_DEPTH_TEST);
