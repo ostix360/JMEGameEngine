@@ -41,7 +41,7 @@ public class Logger {
     public static void errGL(String msg) {
         int error = GL11.glGetError();
         if (error != GL11.GL_NO_ERROR) {
-//            Logger.err("[GL] " + msg, new Exception("OpenGL Error: " + error));
+            Logger.err("[GL] " + msg, new Exception("OpenGL Error: " + error));
         }
     }
 

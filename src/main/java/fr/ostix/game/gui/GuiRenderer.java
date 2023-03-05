@@ -27,8 +27,8 @@ public class GuiRenderer {
     }
 
     public void render(List<GuiTexture> guis) {
+
         shader.bind();
-        layerShader.bind();
         quadModel.getVAO().bind(0);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -38,21 +38,29 @@ public class GuiRenderer {
             GL11.glBindTexture(GL_TEXTURE_2D, gui.getTexture());
             Matrix4f matrix4f = Maths.createTransformationMatrix(gui.getPosition(), gui.getScale());
             shader.loadTransformationMatrix(matrix4f);
-//            if (gui.hasLayer()) {
-//                GuiLayer layer = gui.getLayer();
-//                Matrix4f matrix4f1 = Maths.createTransformationMatrix(
-//                        new Vector2f(gui.getPosition()).add(layer.getRelativePos()), layer.getScale());
-//                layerShader.loadTransformationMatrix(matrix4f1);
-//                layerShader.loadLayer(layer.getLayer());
-//            }
+            if (gui.hasLayer()) {
+                GuiLayer layer = gui.getLayer();
+                Vector2f pos = layer.getRelativePos();
+                Vector2f scale = new Vector2f(gui.getScale());
+                scale.mul(layer.getScale());
+                Matrix4f matrix4f1 = new Matrix4f().identity();
+                matrix4f1.translate(pos.x(), pos.y(), 0);
+                matrix4f1.scale(scale.x(), scale.y(), 0);
+                layerShader.bind();
+                layerShader.loadTransformationMatrix(matrix4f1);
+                layerShader.loadLayer(layer.getLayer());
+            }
             glDrawArrays(GL_TRIANGLE_STRIP, 0, quadModel.getVertexCount());
             Logger.errGL("Error while rendering gui");
             Texture.unBindTexture();
+            if (gui.hasLayer()) {
+                layerShader.unBind();
+            }
+
         }
         glEnable(GL_DEPTH_TEST);
         glDisable(GL_BLEND);
         VAO.unbind(0);
-        layerShader.unBind();
         shader.unBind();
     }
 

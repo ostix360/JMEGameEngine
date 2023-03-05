@@ -17,7 +17,7 @@ public class Uniform {
     public void storeUniform(int programID) {
         location = GL20.glGetUniformLocation(programID, name);
         if (location == -1) {
-            Logger.err("No uniform variable called " + name + " found for the program " + programID + " !");
+            Logger.err("No uniform variable called " + name + " found for the program " + programID + "!");
         }
         Logger.errGL("Error while loading uniform " + name + " to program " + programID);
     }

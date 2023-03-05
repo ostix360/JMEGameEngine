@@ -1,6 +1,7 @@
 package fr.ostix.game.gui;
 
 import fr.ostix.game.toolBox.Color;
+import fr.ostix.game.toolBox.OpenGL.DisplayManager;
 import org.joml.Vector2f;
 
 public class GuiLayer {
@@ -10,9 +11,13 @@ public class GuiLayer {
     private final Color layer;
 
     public GuiLayer(Vector2f relativePos, Vector2f scale, Color layer) {
-        this.relativePos = relativePos;
+        this.relativePos = convertToGL(relativePos);
         this.scale = scale;
         this.layer = layer;
+    }
+
+    private Vector2f convertToGL(Vector2f relativePos) {
+        return new Vector2f(relativePos.x() / DisplayManager.getWidth(), relativePos.y() / DisplayManager.getHeight());
     }
 
     public Vector2f getRelativePos() {

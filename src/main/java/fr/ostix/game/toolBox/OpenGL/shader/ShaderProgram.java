@@ -16,7 +16,10 @@ public abstract class ShaderProgram {
     private int fragmentShaderID;
     private int programID;
 
+    private String name;
+
     public ShaderProgram(String shadersName) {
+        this.name = shadersName;
         loadShaders(shadersName);
         processProgram();
     }
@@ -102,6 +105,7 @@ public abstract class ShaderProgram {
 
     private void processProgram() {
         programID = glCreateProgram();
+        System.out.println(name + " program ID : " + programID);
         Logger.errGL("Error while creating program");
 
         glAttachShader(programID, vertexShaderID);
