@@ -1,13 +1,14 @@
 #version 330
 
-in vec2 position;
+in vec3 position;
+in vec2 textureCoords;
 
-out vec2 textureCoords;
+out vec2 passTextureCoords;
 
 uniform mat4 transformationMatrix;
 
 void main(void){
 
-    gl_Position = transformationMatrix * vec4(position, 0.0, 1.0);
-    textureCoords = vec2((position.x+1.0)/2.0, 1 - (position.y+1.0)/2.0);
+    gl_Position = transformationMatrix * vec4(position.xy, 0.0, 1.0);
+    passTextureCoords = textureCoords;
 }

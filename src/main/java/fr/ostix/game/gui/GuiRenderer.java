@@ -25,7 +25,7 @@ public class GuiRenderer {
         OpenGlUtils.enableAlphaBlending();
         OpenGlUtils.enableDepthTesting(false);
         for (GuiModel model : guis.keySet()) {
-            model.getVao().bind(0,1,2);
+            model.getVao().bind(0,1);
             for (GuiTexture gui : guis.get(model)) {
                 GL13.glActiveTexture(GL13.GL_TEXTURE0);
                 GL11.glBindTexture(GL_TEXTURE_2D, gui.getTexture());
@@ -39,7 +39,7 @@ public class GuiRenderer {
         }
         OpenGlUtils.enableDepthTesting(true);
         OpenGlUtils.disableBlending();
-        VAO.unbind(0);
+        VAO.unbind(0,1);
         shader.unBind();
     }
 

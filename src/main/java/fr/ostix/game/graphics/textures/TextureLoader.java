@@ -59,21 +59,28 @@ public class TextureLoader {
 
         glBindTexture(GL_TEXTURE_2D,id);
         glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,w,h,0,GL_RGBA,GL_UNSIGNED_BYTE,buffer);
-
+        Logger.errGL("Error while loading texture");
 
         if (mode == TextureUtils.MIPMAP_MODE) {
             GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
+            Logger.errGL("Error while generating mipmap");
             GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
             GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR_MIPMAP_LINEAR);
 
         } else if (mode == TextureUtils.MIPMAP_ANISOTROPIC_MODE) {
             GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
+            Logger.errGL("Error while generating mipmap anisotropic");
             GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST_MIPMAP_LINEAR);
+            Logger.errGL("Error while setting anisotropic filtering");
             GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST_MIPMAP_LINEAR);
+            Logger.errGL("Error while setting anisotropic filtering");
             if (GL.getCapabilities().GL_EXT_texture_filter_anisotropic) {
                 float amount = Math.min(4f, GL11.glGetFloat(EXTTextureFilterAnisotropic.GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT));
+                Logger.errGL("Error while setting anisotropic filtering");
                 GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL14.GL_TEXTURE_LOD_BIAS, 0f);
+                Logger.errGL("Error while setting anisotropic filtering");
                 GL11.glTexParameterf(GL_TEXTURE_2D, EXTTextureFilterAnisotropic.GL_TEXTURE_MAX_ANISOTROPY_EXT, amount);
+                Logger.errGL("Error while setting anisotropic filtering");
             } else {
                 GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL14.GL_TEXTURE_LOD_BIAS, 3f);
                 Logger.warn("Anisotropic filtering is not supported by your graphic card");
@@ -95,6 +102,7 @@ public class TextureLoader {
             GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_REPEAT);
             GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_REPEAT);
         }
+        Logger.errGL("Error while applying parameter texture");
 
         glBindTexture(GL_TEXTURE_2D,0);
 

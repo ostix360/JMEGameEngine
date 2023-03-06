@@ -25,12 +25,12 @@ public class HorizontalButton extends Button {
         super(x, y, width, height, texture, press);
         this.textureSize = (int) width;
         this.r = (this.textureSize - height) / 2f;
-        this.texture = new GuiTexture(texture, new Vector2f(x, y), new Vector2f(this.textureSize, this.textureSize));
+        this.texture = new GuiTexture(texture, new Vector2f(x, y), new Vector2f(this.width, this.height));
         final float[] texCoords = new float[]{
                 0, 0,
-                0, 1,
-                r, 0,
-                r, 1
+                0, 0.5f,
+                1, 0,
+                1, 0.5f
         };
         this.texture.setModel(new GuiModel(texCoords));
 

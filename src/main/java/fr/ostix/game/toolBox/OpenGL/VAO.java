@@ -1,6 +1,7 @@
 package fr.ostix.game.toolBox.OpenGL;
 
 import com.jme3.jme3tools.*;
+import fr.ostix.game.toolBox.Logger;
 import org.lwjgl.opengl.*;
 
 import java.util.*;
@@ -55,9 +56,10 @@ public class VAO {
     }
 
     public void bind(int... attributes) {
-        bind();
+        this.bind();
         for (int i : attributes) {
             GL20.glEnableVertexAttribArray(i);
+            Logger.errGL("Error while binding VBOS");
         }
     }
 
@@ -86,6 +88,7 @@ public class VAO {
 
     private void bind() {
         GL30.glBindVertexArray(id);
+        Logger.errGL("Error while binding VAO");
     }
 
     private static void unbind() {

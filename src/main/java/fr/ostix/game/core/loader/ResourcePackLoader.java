@@ -38,7 +38,6 @@ public class ResourcePackLoader {
         TextureLoader progress = loader.loadTexture("menu/loader/progress");
         Vector2f pos = new Vector2f(150, 1080 - 150);
 
-
         ProgressManager.ProgressBar resourcesBar = ProgressManager.addProgressBar("Loading All Resource", 5);
 
         resourcesBar.update("Loading Textures... ");

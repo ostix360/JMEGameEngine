@@ -19,6 +19,7 @@ public class GuiShader extends ShaderProgram {
     @Override
     protected void bindAllAttributes() {
         super.bindAttribute(0, "position");
+        super.bindAttribute(1, "textureCoords");
     }
 
     public void loadLayer(Color layer) {
