@@ -28,6 +28,7 @@ public class GLRequestProcessor {
                 break;
             }
         }
+        forceRequest = false;
         isRunning = false;
     }
 

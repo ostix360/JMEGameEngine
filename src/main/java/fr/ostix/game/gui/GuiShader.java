@@ -13,7 +13,7 @@ public class GuiShader extends ShaderProgram {
 
     public GuiShader() {
         super("gui");
-        super.storeAllUniformsLocations(transformationMatrix);
+        super.storeAllUniformsLocations(transformationMatrix, layerColor);
     }
 
     @Override

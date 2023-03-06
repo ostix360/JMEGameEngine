@@ -34,6 +34,17 @@ public class Loader {
         return new MeshModel(vao);
     }
 
+     public MeshModel loadToVAO(float[] position, float[] texturesCoords, int[] indices) {
+        VAO vao = VAO.createVAO();
+        VAOs.add(vao);
+        vao.bind();
+        vao.storeIndicesInVAO(indices);
+        vao.storePositionInAttributeList(0, 3, position);
+        vao.storeDataInAttributeList(1, 2, texturesCoords);
+        VAO.unbind();
+        return new MeshModel(vao);
+    }
+
     public MeshModel loadToVAO(int[] indices, float[] position, float[] texturesCoords, float[] normals, int[] jointIDs, float[] vertexWeights) {
         VAO vao = VAO.createVAO();
         VAOs.add(vao);

@@ -49,7 +49,7 @@ public abstract class ShaderProgram {
 
     public void bind() {
         glUseProgram(programID);
-        Logger.errGL("Error while binding program");
+        Logger.errGL("Error while binding program " + programID);
     }
 
     public void unBind() {

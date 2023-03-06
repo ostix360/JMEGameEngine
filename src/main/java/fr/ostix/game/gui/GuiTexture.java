@@ -8,8 +8,10 @@ public class GuiTexture {
     private Vector2f position;
     private final int texture;
     private Vector2f scale;
-    private GuiLayer layer;
+    private Color layer;
     private boolean hasLayer = false;
+
+    private GuiModel model = GuiModel.QUAD;
 
     /**
      * @param position correspond a une pourcentage au niveau de la fenetre sur 1000
@@ -64,21 +66,29 @@ public class GuiTexture {
         hasLayer = value;
     }
 
-    public GuiLayer getLayer() {
+    public Color getLayer() {
         if (hasLayer) {
             return layer;
         } else {
-            return new GuiLayer(new Vector2f(), new Vector2f(), Color.NONE);
+            return Color.NONE;
         }
     }
 
-    public void setLayer(GuiLayer layer) {
+    public void setLayer(Color layer) {
         this.layer = layer;
         hasLayer = true;
     }
 
+    public void setModel(GuiModel model) {
+        this.model = model;
+    }
+
+    public GuiModel getModel() {
+        return model;
+    }
 
     public void setPosition(Vector2f position) {
         this.position = position;
     }
 }
+

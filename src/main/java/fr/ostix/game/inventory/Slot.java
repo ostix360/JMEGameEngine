@@ -33,7 +33,7 @@ public class Slot {
         this.size = size;
         texture = new GuiTexture(ResourcePack.getTextureByName("slot").getID(),
                 new Vector2f(x, y), new Vector2f(size * 1.23f, size));
-        texture.setLayer(layer);
+        texture.setLayer(new Color(0.45f, 0.45f, 0.5f, 0.85f));
 
         this.stack = new ItemStack(null, 0);
     }

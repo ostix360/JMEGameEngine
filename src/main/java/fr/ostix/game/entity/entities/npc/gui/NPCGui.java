@@ -58,7 +58,7 @@ public class NPCGui extends Screen {
         this.world = world;
     }
 
-    public void showDialogs(List<String> dialogs, int line, World w, Callback callback) {
+    public void showDialogs(List<String> dialogs, int line, World w, Callback<Boolean> callback) {
         this.dialogs.clear();
         this.dialogs.addAll(dialogs);
         this.world = w;
@@ -122,7 +122,7 @@ public class NPCGui extends Screen {
             if (callback == null) {
                 return;
             }
-            this.callback.call();
+            this.callback.call(true);
         }
     }
 

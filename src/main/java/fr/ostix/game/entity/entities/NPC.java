@@ -48,7 +48,7 @@ public class NPC extends Entity implements Interact {
 //        EventManager.getInstance().unRegister(this.NPCDefaultsListener);
     }
 
-    public void talke(World w, Callback callback, Object... args) {
+    public void talke(World w, Callback<Boolean> callback, Object... args) {
         int line = 0;
         int i = 0;
         List<String> dialogs = new ArrayList<>();

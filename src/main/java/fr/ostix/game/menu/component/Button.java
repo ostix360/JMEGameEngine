@@ -23,13 +23,7 @@ public class Button extends Component {
     @Override
     public void init() {
         super.init();
-        if (this.layer == null) {
-            this.layer = new GuiLayer(new Vector2f(0, 0),
-                    new Vector2f(1f),
-                    new Color(0.45f, 0.45f, 0.5f, 0.85f));
-            Logger.warn("Button layer is null, using default layer");
-        }
-        this.texture.setLayer(this.layer);
+        this.texture.setLayer(new Color(0.45f, 0.45f, 0.5f, 0.85f));
     }
 
     @Override

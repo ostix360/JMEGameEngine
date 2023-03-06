@@ -1,6 +1,6 @@
 package fr.ostix.game.core.logics;
 
-public interface Callback {
+public interface Callback<T> {
 
-    void call();
+    void call(T t);
 }
