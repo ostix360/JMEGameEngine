@@ -21,12 +21,12 @@ public class QuestElement extends Component {
         super(x, y, width, height, TEXTURE);
         this.quest = quest;
         if (this.quest.getStatus().equals(QuestStatus.AVAILABLE)) {
-            this.questTitle = new GUIText(quest.getName(), 1.3f, Game.gameFont, new Vector2f(x + 20, y + 20), 1f, true);
-            this.questDescription = new GUIText(quest.getQuestingQuest().getDescription(), 1, Game.gameFont, new Vector2f(x + 50, y + 50), 0.5f, true);
+            this.questTitle = new GUIText(quest.getName(), 1f, Game.gameFont, new Vector2f(x + 50, y + 10), 150f, false);
+            this.questDescription = new GUIText(quest.getQuestingQuest().getDescription(), 0.7f, Game.gameFont, new Vector2f(x + 50, y + 50), 920f, false);
         } else {
-            this.questTitle = new GUIText("????????????", 1.3f, Game.gameFont, new Vector2f(x + 20, y + 20), 1f, true);
+            this.questTitle = new GUIText("????????????", 1.0f, Game.gameFont, new Vector2f(x + 50, y + 10), 920f, false);
             this.questDescription = new GUIText("La vie vous a prepare quelque chose \n" +
-                    "Ne vous inquitez pas ces deja determine", 1, Game.gameFont, new Vector2f(x + 50, y + 50), 0.5f, true);
+                    "Ne vous inquitez pas ces deja determine", 0.7f, Game.gameFont, new Vector2f(x + 50, y + 50), 920f, false);
         }
 
         this.texture = new GuiTexture(TEXTURE, new Vector2f(x, y), new Vector2f(width, height));

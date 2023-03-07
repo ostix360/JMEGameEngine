@@ -28,9 +28,9 @@ public class QuestHandlerMenu extends Screen {
     @Override
     public void init() {
         if (!alreadyInit) {
-            background = new GuiTexture(ResourcePack.getTextureByName("questHandlerBG").getID(), new Vector2f(0, 0), new Vector2f(100, 1));
-            mainTitle = new GUIText("Quests", 1, Game.gameFont, new Vector2f(400, 20), 700f, true);
-            selectedQuest = new GuiTexture(ResourcePack.getTextureByName("point").getID(), new Vector2f(100, 100), new Vector2f(100, 100));
+            background = new GuiTexture(ResourcePack.getTextureByName("questHandlerBG").getID(), new Vector2f(10, 10), new Vector2f(1900, 1060));
+            mainTitle = new GUIText("Quests", 1, Game.gameFont, new Vector2f(920, 20), 700f, false);
+            selectedQuest = new GuiTexture(ResourcePack.getTextureByName("point").getID(), new Vector2f(100, 100), new Vector2f(10, 10));
             alreadyInit = true;
         }
         super.init();
@@ -39,9 +39,9 @@ public class QuestHandlerMenu extends Screen {
     private void addQuested() {
         int i = 0;
         for (QuestCategory quest : questManager.getQuests().values()) {
-            addComponent(new QuestElement(100, 100 + i * 100, 500, 100, quest));
+            addComponent(new QuestElement(100, 100 + i * 110, 500, 100, quest));
             if (quest.getStatus().equals(QuestStatus.QUESTING)) {
-                selectedQuest.setPosition(new Vector2f(100, 400 + i * 100));
+                selectedQuest.setPosition(new Vector2f(105, 450 + i * 100));
             }
             i++;
 
@@ -64,9 +64,10 @@ public class QuestHandlerMenu extends Screen {
         if (isOpened()) {
             return;
         }
-        MasterGui.addGui(background, selectedQuest);
+        MasterGui.addGui(background);
         MasterFont.add(mainTitle);
         addQuested();
+        MasterGui.addGui(selectedQuest);
         opened = true;
     }
 
