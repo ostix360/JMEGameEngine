@@ -20,20 +20,20 @@ public class PauseMenu extends Screen {
     @Override
     public void init() {
         super.init();
-        resumeButton = new HorizontalButton((float) 1920 / 2 - 125,
-                (float) 1080 / 2 - 200, 250, 125,
-                ResourcePack.getTextureByName("resumeButton").getID(), (b) -> {
+        resumeButton = new HorizontalButton((float) 1920 / 2 - 150,
+                (float) 1080 / 2 - 200, 300, 100,
+                ResourcePack.getTextureByName("resumeButton").getID(), 300,(b) -> {
             resume();
         });
-        quitButton = new HorizontalButton((float) 1920 / 2 - 125,
-                (float) 1080 / 2 - 50, 250, 125,
-                ResourcePack.getTextureByName("settingsButton").getID(), (b) -> {
+        settingsButton = new HorizontalButton((float) 1920 / 2 - 177.5f,
+                (float) 1080 / 2 - 50, 355, 95,
+                ResourcePack.getTextureByName("settingsButton").getID(), 400, (b) -> {
             settings();
 
         });
-        settingsButton = new HorizontalButton((float) 1920 / 2 - 125,
-                (float) 1080 / 2 + 100, 250, 125,
-                ResourcePack.getTextureByName("quitButton").getID(), (b) -> {
+        quitButton = new HorizontalButton((float) 1920 / 2 - 107.5f,
+                (float) 1080 / 2 + 100, 215, 95,
+                ResourcePack.getTextureByName("quitButton").getID(), 255,(b) -> {
             quit();
         });
         this.addComponent(resumeButton);

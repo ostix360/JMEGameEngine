@@ -33,19 +33,15 @@ public class Button extends Component {
         if (pressed) onPress.onPress(this);
     }
 
+    public void setScale(Vector2f scale) {
+        this.texture.setScale(new Vector2f(this.width, this.height).mul(scale));
+    }
+
     @Override
     public void render() {
 
     }
 
-    public boolean mouseIn(Vector2f MousePos) {
-        float mX = MousePos.x() / DisplayManager.getWidth() * 1920;
-        float mY = MousePos.y() / DisplayManager.getHeight() * 1080;
-
-
-        return pressed = mX >= this.x && mY >= this.y &&
-                mX < (this.x + this.width) && mY < (this.y + this.height);
-    }
 
     public interface IPressable {
         void onPress(Button button);
