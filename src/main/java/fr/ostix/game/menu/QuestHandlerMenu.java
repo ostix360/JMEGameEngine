@@ -28,8 +28,8 @@ public class QuestHandlerMenu extends Screen {
     @Override
     public void init() {
         if (!alreadyInit) {
-            background = new GuiTexture(ResourcePack.getTextureByName("quest_handler_background").getID(), new Vector2f(0, 0), new Vector2f(100, 1));
-            mainTitle = new GUIText("Quests", 2, Game.gameFont, new Vector2f(400, 20), 1f, true);
+            background = new GuiTexture(ResourcePack.getTextureByName("questHandlerBG").getID(), new Vector2f(0, 0), new Vector2f(100, 1));
+            mainTitle = new GUIText("Quests", 1, Game.gameFont, new Vector2f(400, 20), 700f, true);
             selectedQuest = new GuiTexture(ResourcePack.getTextureByName("point").getID(), new Vector2f(100, 100), new Vector2f(100, 100));
             alreadyInit = true;
         }
@@ -61,20 +61,21 @@ public class QuestHandlerMenu extends Screen {
     }
 
     public void open() {
-        if (isOpened()){
+        if (isOpened()) {
             return;
         }
-        MasterGui.removeGui(background,selectedQuest);
-        MasterFont.remove(mainTitle);
-        removeQuested();
-        opened = false;
-    }
-
-    public void close() {
-        MasterGui.addGui(background,selectedQuest);
+        MasterGui.addGui(background, selectedQuest);
         MasterFont.add(mainTitle);
         addQuested();
         opened = true;
+    }
+
+    public void close() {
+        MasterGui.removeGui(background, selectedQuest);
+        MasterFont.remove(mainTitle);
+        removeQuested();
+        opened = false;
+
     }
 
     public static boolean isOpened() {

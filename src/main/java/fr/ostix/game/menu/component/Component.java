@@ -30,7 +30,7 @@ public abstract class Component {
     public void init() {
         if (texture == null) {
             texture = new GuiTexture(ResourcePack.getTextureByName("missing").getID(), new Vector2f(x, y), new Vector2f(width, height));
-            Logger.err("Texture is null",new NullPointerException());
+            Logger.err("Texture is",new NullPointerException());
         }
         MasterGui.addGui(texture);
     }

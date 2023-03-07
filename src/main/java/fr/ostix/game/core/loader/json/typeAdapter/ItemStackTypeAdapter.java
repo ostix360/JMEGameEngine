@@ -12,7 +12,10 @@ public class ItemStackTypeAdapter implements JsonSerializer<ItemStack>, JsonDese
     @Override
     public JsonElement serialize(ItemStack src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject obj = new JsonObject();
-        obj.addProperty("item", src.getItem().getName());
+        JsonObject item = new JsonObject();
+        item.addProperty("id", src.getItem().getId());
+        item.addProperty("name", src.getItem().getName());
+        obj.add("item", item);
         obj.addProperty("count", src.getCount());
         return obj;
     }

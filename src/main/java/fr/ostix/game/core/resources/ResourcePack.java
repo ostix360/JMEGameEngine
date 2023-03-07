@@ -5,6 +5,7 @@ import fr.ostix.game.entity.animated.animation.animatedModel.*;
 import fr.ostix.game.entity.animated.animation.animation.*;
 import fr.ostix.game.graphics.model.*;
 import fr.ostix.game.graphics.textures.*;
+import fr.ostix.game.toolBox.Logger;
 import fr.ostix.game.world.chunk.*;
 
 import java.util.*;
@@ -37,7 +38,7 @@ public class ResourcePack {
         Texture texture;
         if ((texture = textures.get(name)) == null){
             texture = textures.get("missing");
-            System.err.println("Texture " + name + " not found");
+            Logger.err("Texture " + name + " not found", new NullPointerException());
         }
         return texture;
     }

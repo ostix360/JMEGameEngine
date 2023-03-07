@@ -12,7 +12,7 @@ import org.lwjgl.glfw.*;
 public class QuestElement extends Component {
 
     private final QuestCategory quest;
-    private static final int TEXTURE = ResourcePack.getTextureByName("quest_element").getID();
+    private static final int TEXTURE = ResourcePack.getTextureByName("questElement").getID();
 
     private final GUIText questTitle;
     private final GUIText questDescription;
@@ -29,6 +29,7 @@ public class QuestElement extends Component {
                     "Ne vous inquitez pas ces deja determine", 1, Game.gameFont, new Vector2f(x + 50, y + 50), 0.5f, true);
         }
 
+        this.texture = new GuiTexture(TEXTURE, new Vector2f(x, y), new Vector2f(width, height));
     }
 
 
