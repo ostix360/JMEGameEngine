@@ -48,13 +48,13 @@ public class Button extends Component {
     }
 
     @Override
-    public boolean isIn() {
+    public boolean isIn() { // max x = 1908, y = 1034   min x = 1847, y = 225
         float mX = (float) Input.getMouseX() / DisplayManager.getWidth() * 1920;
         float mY = (float) Input.getMouseY() / DisplayManager.getHeight() * 1080;
-        float px = this.x / scale.x(); //TODO: fix this
-        float py = this.y / scale.y();
-        return mX >= x && mY >= y &&
-                mX < (this.x + this.width * scale.x()) && mY < (this.y + this.height * scale.y());
+        float dx = (this.width * scale.x() - this.width) / 2;
+        float dy = (this.height * scale.y() - this.height) / 2;
+        return mX >= (x - dx) && mY >= (y -dy) &&
+                mX < (this.x + this.width + dx) && mY < (this.y + this.height + dy);
     }
 
     public interface IPressable {
