@@ -63,15 +63,7 @@ public class HorizontalButton extends Button {
                 new Vector2f(this.width / textureSize, this.height / textureSize),
                 new Color(0.45f, 0.45f, 0.5f, 0.85f));
         this.init();
+
     }
 
-
-    @Override
-    public boolean isIn() {
-        float mX = (float) Input.getMouseX() / DisplayManager.getWidth() * 1920;
-        float mY = (float) Input.getMouseY() / DisplayManager.getHeight() * 1080;
-
-        return mX >= this.x && mY >= this.y &&
-                mX < (this.x + this.width) && mY < (this.y + this.height );
-    }
 }

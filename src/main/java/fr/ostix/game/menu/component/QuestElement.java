@@ -25,6 +25,7 @@ public class QuestElement extends Component {
         if (this.quest.getStatus().equals(QuestStatus.AVAILABLE) || this.quest.getStatus().equals(QuestStatus.QUESTING)) {
             this.questTitle = new GUIText(quest.getName(), 1f, Game.gameFont, new Vector2f(x + 50, y + 10), 700, false);
             this.questDescription = new GUIText(quest.getQuestingQuest().getDescription(), 0.7f, Game.gameFont, new Vector2f(x + 50, y + 50), 920f, false);
+            //TODO questing quest null
         }else if (this.quest.getStatus().equals(QuestStatus.DONE)) {
             this.questTitle = new GUIText(quest.getName(), 1f, Game.gameFont, new Vector2f(x + 50, y + 10), 700, false);
             this.questDescription = new GUIText("Deja fait", 0.7f, Game.gameFont, new Vector2f(x + 50, y + 50), 920f, false);

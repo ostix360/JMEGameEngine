@@ -26,10 +26,11 @@ public class PlayerInventory extends Inventory {
         this.backGround = new GuiTexture(ResourcePack.getTextureByName("inventory").getID(),
                 new Vector2f(0), new Vector2f(1920,
                 1080));
-        this.right_button = new Button(1830, 125, 90, 950,
+        this.right_button = new VerticalButton(1845, 380, 65, 500,
                 ResourcePack.getTextureByName("right_button").getID(), (b) -> {
             Logger.log("right button");
-        }); //TODO: add right button
+        });
+        this.right_button.setScale(new Vector2f(1f, 1.62f));
         recipeTab = ItemTab.newEmptyTab("RecipeTab", 35,ItemType.CONSUMABLE);
         super.init();
     }

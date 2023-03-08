@@ -51,6 +51,7 @@ public class Inventory extends Screen {
 
     @Override
     public void update() {
+        super.update();
         if (isOpen) {
             this.render();
         }

@@ -30,7 +30,7 @@ public abstract class Component {
     public void init() {
         if (texture == null) {
             texture = new GuiTexture(ResourcePack.getTextureByName("missing").getID(), new Vector2f(x, y), new Vector2f(width, height));
-            Logger.err("Texture is",new NullPointerException());
+            Logger.err("Texture is", new NullPointerException());
         }
         MasterGui.addGui(texture);
     }
@@ -40,7 +40,7 @@ public abstract class Component {
     }
 
 
-    public boolean isIn(){
+    public boolean isIn() {
         float mX = (float) Input.getMouseX() / DisplayManager.getWidth() * 1920;
         float mY = (float) Input.getMouseY() / DisplayManager.getHeight() * 1080;
         return mX >= this.x && mY >= this.y &&

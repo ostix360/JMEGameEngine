@@ -7,6 +7,7 @@ import fr.ostix.game.gui.GuiTexture;
 import fr.ostix.game.toolBox.Color;
 import fr.ostix.game.toolBox.OpenGL.DisplayManager;
 import org.joml.Vector2f;
+import org.lwjgl.glfw.GLFW;
 
 public class VerticalButton extends Button {
 
@@ -33,26 +34,17 @@ public class VerticalButton extends Button {
         this.texture = new GuiTexture(texture, new Vector2f(x, y), new Vector2f(this.width, this.height));
         final float[] texCoords = new float[]{
                 0, 0,
-                0, ratio,
-                1, 0,
-                1, ratio
+                0, 1,
+                ratio, 0,
+                ratio, 1
         };
         this.texture.setModel(new GuiModel(texCoords));
 
-        this.layer = new GuiLayer(new Vector2f(r, 0),
-                new Vector2f(this.width / textureSize, this.height / textureSize),
-                new Color(0.45f, 0.45f, 0.5f, 0.85f));
-        this.init();
+        this.texture.setLayer(new Color(0.9f, 0.45f, 0.5f, 0.80f));
     }
 
 
-    @Override
-    public boolean isIn() {
-        float mX = (float) Input.getMouseX() / DisplayManager.getWidth() * 1920;
-        float mY = (float) Input.getMouseY() / DisplayManager.getHeight() * 1080;
 
-        return mX >= this.x && mY >= this.y &&
-                mX < (this.x + this.width + r) && mY < (this.y + this.height);
-    }
+
 
 }
