@@ -1,6 +1,8 @@
 package fr.ostix.game.menu.component;
 
 import fr.ostix.game.core.*;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.menu.QuestSelectedEvent;
 import fr.ostix.game.core.quest.*;
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.graphics.font.meshCreator.*;
@@ -20,11 +22,14 @@ public class QuestElement extends Component {
     public QuestElement(float x, float y, float width, float height, QuestCategory quest) {
         super(x, y, width, height, TEXTURE);
         this.quest = quest;
-        if (this.quest.getStatus().equals(QuestStatus.AVAILABLE)) {
-            this.questTitle = new GUIText(quest.getName(), 1f, Game.gameFont, new Vector2f(x + 50, y + 10), 150f, false);
+        if (this.quest.getStatus().equals(QuestStatus.AVAILABLE) || this.quest.getStatus().equals(QuestStatus.QUESTING)) {
+            this.questTitle = new GUIText(quest.getName(), 1f, Game.gameFont, new Vector2f(x + 50, y + 10), 700, false);
             this.questDescription = new GUIText(quest.getQuestingQuest().getDescription(), 0.7f, Game.gameFont, new Vector2f(x + 50, y + 50), 920f, false);
-        } else {
-            this.questTitle = new GUIText("????????????", 1.0f, Game.gameFont, new Vector2f(x + 50, y + 10), 920f, false);
+        }else if (this.quest.getStatus().equals(QuestStatus.DONE)) {
+            this.questTitle = new GUIText(quest.getName(), 1f, Game.gameFont, new Vector2f(x + 50, y + 10), 700, false);
+            this.questDescription = new GUIText("Deja fait", 0.7f, Game.gameFont, new Vector2f(x + 50, y + 50), 920f, false);
+        }else {
+            this.questTitle = new GUIText("???", 1.0f, Game.gameFont, new Vector2f(x + 50, y + 10), 920f, false);
             this.questDescription = new GUIText("La vie vous a prepare quelque chose \n" +
                     "Ne vous inquitez pas ces deja determine", 0.7f, Game.gameFont, new Vector2f(x + 50, y + 50), 920f, false);
         }
@@ -55,7 +60,8 @@ public class QuestElement extends Component {
     @Override
     public void update() {
         if (isIn() && Input.keysMouse[GLFW.GLFW_MOUSE_BUTTON_1]) {
-            QuestManager.INSTANCE.addToQuesting(this.quest.getId());
+//             TODO Burk
+            EventManager.getInstance().callEvent(new QuestSelectedEvent(this.quest.getId(),1));
         }
     }
 }

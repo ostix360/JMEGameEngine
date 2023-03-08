@@ -18,7 +18,7 @@ public class FontRequest extends GLRequest {
         this.text = text;
         this.isTemp = isTemp;
         this.masterFont = masterFont;
-        if (fontsModels.containsKey(text.getTextString())){
+        if (fontsModels.containsKey(text.getTextString())){ //TODO problem when change font size
             MeshModel vao = fontsModels.get(text.getTextString());
             this.text.setMeshInfo(vao, vao.getVertexCount());
             masterFont.addText(text, isTemp);

@@ -15,13 +15,13 @@ public class QuestManagerListener implements Listener {
     @EventHandler
     public void onQuestCategoryStart(QuestCategoryStartEvent event) {
         this.questManager.addToQuesting(event.getQuestID());
-        this.questManager.getQuest(event.getQuestID()).start();
+        this.questManager.getQuesting(event.getQuestID()).start();
 
     }
 
     @EventHandler
     public void onQuestCategoryComplete(QuestCategoryCompleteEvent event) {
         this.questManager.removeFromQuesting(event.getQuestID());
-        this.questManager.getQuest(event.getQuestID()).complete(event.getQuestID());
+        this.questManager.getQuesting(event.getQuestID()).complete(event.getQuestID());
     }
 }

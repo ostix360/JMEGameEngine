@@ -38,6 +38,11 @@ public class Line {
     protected boolean attemptToAddWord(Word word) {
         double additionalLength = word.getWordWidth();
         additionalLength += !words.isEmpty() ? spaceSize : 0;
+        if (words.isEmpty() && word.getWordWidth() > maxLength) {
+            words.add(word);
+            currentLineLength = maxLength;
+            return true;
+        }
         if (currentLineLength + additionalLength <= maxLength) {
             words.add(word);
             currentLineLength += additionalLength;

@@ -1,6 +1,8 @@
 package fr.ostix.game.menu;
 
 import fr.ostix.game.core.*;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.listener.menu.QuestHandlerMenuListener;
 import fr.ostix.game.core.quest.*;
 import fr.ostix.game.core.resources.*;
 import fr.ostix.game.graphics.font.meshCreator.*;
@@ -15,6 +17,7 @@ public class QuestHandlerMenu extends Screen {
     private GuiTexture background;
     private GUIText mainTitle;
     private GuiTexture selectedQuest;
+    private QuestHandlerMenuListener listener;
 
     private boolean alreadyInit = false;
 
@@ -31,6 +34,7 @@ public class QuestHandlerMenu extends Screen {
             background = new GuiTexture(ResourcePack.getTextureByName("questHandlerBG").getID(), new Vector2f(10, 10), new Vector2f(1900, 1060));
             mainTitle = new GUIText("Quests", 1, Game.gameFont, new Vector2f(920, 20), 700f, false);
             selectedQuest = new GuiTexture(ResourcePack.getTextureByName("point").getID(), new Vector2f(100, 100), new Vector2f(10, 10));
+            this.listener = new QuestHandlerMenuListener(this);
             alreadyInit = true;
         }
         super.init();
@@ -39,9 +43,9 @@ public class QuestHandlerMenu extends Screen {
     private void addQuested() {
         int i = 0;
         for (QuestCategory quest : questManager.getQuests().values()) {
-            addComponent(new QuestElement(100, 100 + i * 110, 500, 100, quest));
+            addComponent(new QuestElement(100, 100 + i * 155, 500, 150, quest));
             if (quest.getStatus().equals(QuestStatus.QUESTING)) {
-                selectedQuest.setPosition(new Vector2f(105, 450 + i * 100));
+                selectedQuest.setPosition(new Vector2f(105, 175 + i * 155));
             }
             i++;
 
@@ -53,7 +57,7 @@ public class QuestHandlerMenu extends Screen {
         int i = 0;
         for (QuestCategory quest : questManager.getQuests().values()) {
             if (quest.getId() == questID) {
-                selectedQuest.setPosition(new Vector2f(100, 400 + i * 100));
+                selectedQuest.setPosition(new Vector2f(105, 175 + i * 155));
                 return;
             }
             i++;
@@ -68,6 +72,7 @@ public class QuestHandlerMenu extends Screen {
         MasterFont.add(mainTitle);
         addQuested();
         MasterGui.addGui(selectedQuest);
+        EventManager.getInstance().register(listener);
         opened = true;
     }
 
@@ -75,6 +80,7 @@ public class QuestHandlerMenu extends Screen {
         MasterGui.removeGui(background, selectedQuest);
         MasterFont.remove(mainTitle);
         removeQuested();
+        EventManager.getInstance().unRegister(listener);
         opened = false;
 
     }

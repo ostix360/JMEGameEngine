@@ -88,7 +88,7 @@ public class GuiTexture {
     }
 
     public void setPosition(Vector2f position) {
-        this.position = position;
+        this.position = convertPercentToPos(position, scale);
     }
 }
 

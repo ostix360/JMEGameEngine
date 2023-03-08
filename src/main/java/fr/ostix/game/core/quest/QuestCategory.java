@@ -108,6 +108,7 @@ public class QuestCategory {
             }
             if (q.getStatus() == QuestStatus.UNAVAILABLE)
                 return;
+            this.status = QuestStatus.QUESTING;
             EventManager.getInstance().callEvent(new QuestStartedEvent(q.getId(),2));
             return;
         } while (quests.size() > ++i);
@@ -132,7 +133,14 @@ public class QuestCategory {
         this.status = QuestStatus.DONE;
 //        this.save();
 
-        if (this.nextQuest != -1)
+        if (this.nextQuest != -1){
+            QuestManager.INSTANCE.getQuesting(this.nextQuest).status = QuestStatus.AVAILABLE;
             EventManager.getInstance().callEvent(new QuestCategoryStartEvent(this.nextQuest, 2));
+        }
+
+    }
+
+    public void endQuesting() {
+        this.status = QuestStatus.AVAILABLE;
     }
 }

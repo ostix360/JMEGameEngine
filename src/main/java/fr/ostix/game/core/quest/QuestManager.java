@@ -9,7 +9,6 @@ import fr.ostix.game.toolBox.Logger;
 import fr.ostix.game.toolBox.ToolDirectory;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -58,13 +57,13 @@ public class QuestManager {
         return quests;
     }
 
-    public QuestCategory getQuest(int id) {
+    public QuestCategory getQuesting(int id) {
         return quests.get(id);
 
     }
 
 
-    public List<Integer> getQuest() {
+    public List<Integer> getQuesting() {
         return questing;
     }
 
