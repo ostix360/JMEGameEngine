@@ -33,7 +33,7 @@ public class QuestManager {
     public void addQuest(QuestCategory quest) {
         Registered.registerQuest(quest);
         quests.put(quest.getId(), quest);
-        if (quest.getStatus() == QuestStatus.AVAILABLE) {
+        if (quest.getStatus().equals(QuestStatus.AVAILABLE) || quest.getStatus().equals(QuestStatus.QUESTING)) {
             EventManager.getInstance().callEvent(new QuestCategoryStartEvent(quest.getId(), 1));
         }
     }

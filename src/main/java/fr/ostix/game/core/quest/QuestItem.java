@@ -47,6 +47,7 @@ public class QuestItem extends Quest {
 
     @Override
     public String save() {
+        EventManager.getInstance().unRegister(this.listener);
         GsonBuilder builder = new GsonBuilder();
         builder.excludeFieldsWithoutExposeAnnotation()
                 .registerTypeAdapter(Rewards.class, new RewardsTypeAdapter())

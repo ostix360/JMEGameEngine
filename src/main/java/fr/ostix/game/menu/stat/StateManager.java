@@ -60,7 +60,9 @@ public class StateManager {
         EventManager.getInstance().callEvent(new StateChangeEvent(States.MAIN_MENU.getName(), mainMenu, 4));
 //        Listener keyMainMenuListener = new KeyMenuListener(mainMenu);
 //
-
+        playerSoundListener = new SoundListener(new Vector3f()); //TODO test sound
+        soundsListener = new SoundsListener(playerSoundListener);
+        EventManager.getInstance().register(soundsListener);
 
         //EventManager.getInstance().register(keyMainMenuListener);
         //EventManager.getInstance().unRegister(keyMainMenuListener);
@@ -69,17 +71,13 @@ public class StateManager {
     public Screen update() {
         if (!world.isWorldInitialized()) {
             world.init(pack);
-            MasterParticle.init(loader, MasterRenderer.getProjectionMatrix());
             Logger.log("World is Loaded");
-            Player player = world.getWorld().getPlayer();
             mainMenu.setWorld(world);
-            playerSoundListener = new SoundListener(player);
-            soundsListener = new SoundsListener(playerSoundListener);
-            EventManager.getInstance().register(soundsListener);
+            MasterParticle.init(loader, MasterRenderer.getProjectionMatrix());
             startMenuSounds();
         }
         if (mainMenu.startWorld) {
-            playerSoundListener.updateTransform();
+            playerSoundListener.updateTransform(world.getWorld().getPlayer());
         }
         return currentScreen;
     }

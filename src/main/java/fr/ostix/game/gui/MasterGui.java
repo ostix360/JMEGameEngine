@@ -26,7 +26,6 @@ public class MasterGui {
     }
 
 
-
     public static void addGui(GuiTexture... gui) {
         guis.addAll(Arrays.asList(gui));
         for (GuiTexture g : gui) {
@@ -69,9 +68,14 @@ public class MasterGui {
             batch.add(g);
         } else {
             g.getModel().loadModel((bool) -> {
-                List<GuiTexture> newBatch = new ArrayList<>();
-                newBatch.add(g);
-                guisByModel.put(g.getModel(), newBatch);
+                List<GuiTexture> batch2 = guisByModel.get(model);
+                if (batch2 != null) {
+                    batch2.add(g);
+                }else{
+                    List<GuiTexture> newBatch = new ArrayList<>();
+                    newBatch.add(g);
+                    guisByModel.put(g.getModel(), newBatch);
+                }
             });
         }
     }

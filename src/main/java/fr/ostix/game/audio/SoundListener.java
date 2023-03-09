@@ -9,20 +9,22 @@ import static org.lwjgl.openal.AL10.*;
 
 public class SoundListener {
 
-    private final Player player;
 
-    public SoundListener(Player player) {
-        this.player = player;
-        this.updateTransform();
+    public SoundListener(Vector3f initialPos) {
+        this.updateTransform(initialPos);
     }
 
 
-    public void setVelocity() {
+    public void setVelocity(Player player) {
         Vector3f v = player.getControl().getVelocity();
         alListener3f(AL_VELOCITY, v.x(), v.y(), v.z());
     }
 
-    public void updateTransform() {
+    public void updateTransform(Vector3f pos) {
+        alListener3f(AL_POSITION, pos.x(), pos.y(), pos.z());
+    }
+
+    public void updateTransform(Player player) {
         Vector3f pos = player.getPosition();
         Vector3f rotation = player.getRotation();
         alListener3f(AL_POSITION, pos.x(), pos.y(), pos.z());
@@ -42,6 +44,6 @@ public class SoundListener {
         data[4] = up.y();
         data[5] = up.z();
         alListenerfv(AL_ORIENTATION, data);
-        setVelocity();
+        setVelocity(player);
     }
 }

@@ -29,8 +29,8 @@ public class NPCGod extends NPC {
     }
 
 
-//    @Override
-//    public void talke(String dialog, World world) {
-//        super.talke(dialog, world);
-//    }
+    @Override
+    public void talke(String dialog, World world) {
+        super.talke(dialog, world);
+    }
 }

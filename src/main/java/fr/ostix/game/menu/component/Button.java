@@ -48,7 +48,7 @@ public class Button extends Component {
     }
 
     @Override
-    public boolean isIn() { // max x = 1908, y = 1034   min x = 1847, y = 225
+    public boolean isIn() {
         float mX = (float) Input.getMouseX() / DisplayManager.getWidth() * 1920;
         float mY = (float) Input.getMouseY() / DisplayManager.getHeight() * 1080;
         float dx = (this.width * scale.x() - this.width) / 2;

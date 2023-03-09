@@ -62,7 +62,6 @@ public class HorizontalButton extends Button {
         this.layer = new GuiLayer(new Vector2f(0, r),
                 new Vector2f(this.width / textureSize, this.height / textureSize),
                 new Color(0.45f, 0.45f, 0.5f, 0.85f));
-        this.init();
 
     }
 

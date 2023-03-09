@@ -59,4 +59,9 @@ public class PauseMenu extends Screen {
         super.update();
     }
 
+
+    @Override
+    public void cleanUp() {
+        super.cleanUp();
+    }
 }

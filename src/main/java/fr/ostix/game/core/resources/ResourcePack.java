@@ -38,7 +38,7 @@ public class ResourcePack {
         Texture texture;
         if ((texture = textures.get(name)) == null){
             texture = textures.get("missing");
-            Logger.err("Texture " + name + " not found", new NullPointerException());
+            Logger.err("Texture " + name + " not found", new Exception());
         }
         return texture;
     }

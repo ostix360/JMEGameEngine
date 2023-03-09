@@ -65,6 +65,7 @@ public class QuestCategory {
     }
 
     public String save() {
+        EventManager.getInstance().unRegister(this.listener);
         final StringBuilder content = new StringBuilder();
         content.append(this.id).append(";").append(this.title).append(";").append(this.quests.size()).append(';').append(status.toString()).append(';').append(nextQuest).append("\n");
         for (Quest q : this.quests.values()) {

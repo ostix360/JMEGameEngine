@@ -36,7 +36,7 @@ public class NPCGui extends Screen {
     protected World world;
 
     protected int startLine = 0;
-    private Callback callback;
+    private Callback<Boolean> callback;
 
     public NPCGui(String title, NPC npc) {
         super(title);
@@ -129,6 +129,8 @@ public class NPCGui extends Screen {
     public void cleanUp() {
         MasterGui.removeGui(background);
         MasterFont.remove(this.dialog);
+        EventManager.getInstance().unRegister(this.read);
+        indexDialog = 0;
         super.cleanUp();
     }
 

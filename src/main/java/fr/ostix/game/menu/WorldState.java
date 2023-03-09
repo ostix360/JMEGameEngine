@@ -131,6 +131,7 @@ public class WorldState extends Screen {
             overWorld.cleanUp();
             overWorld = null;
         }
+        hotBar.cleanUp();
 
     }
 

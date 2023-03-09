@@ -42,6 +42,7 @@ public class QuestLocation extends Quest {
 
     @Override
     public String save() {
+        EventManager.getInstance().unRegister(this.listener);
         return JsonUtils.gsonInstance(Rewards.class,new RewardsTypeAdapter(),true).toJson(this);
     }
 }
