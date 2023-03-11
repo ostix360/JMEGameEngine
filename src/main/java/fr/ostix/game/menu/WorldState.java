@@ -60,6 +60,8 @@ public class WorldState extends Screen {
         world.render();
         if (overWorld != null) {
             overWorld.render();
+        }else{
+            hotBar.render();
         }
     }
 
@@ -76,6 +78,7 @@ public class WorldState extends Screen {
             overWorld.update();
         } else {
             world.update();
+            hotBar.update();
         }
     }
 
