@@ -3,10 +3,10 @@ package fr.ostix.game.core.events.listener.menu;
 import fr.ostix.game.core.Game;
 import fr.ostix.game.core.events.EventHandler;
 import fr.ostix.game.core.events.entity.EntityCloseEvent;
+import fr.ostix.game.core.events.entity.EntityInteractEvent;
 import fr.ostix.game.core.events.listener.Listener;
 import fr.ostix.game.core.resources.ResourcePack;
 import fr.ostix.game.entity.Entity;
-import fr.ostix.game.entity.entities.Interact;
 import fr.ostix.game.entity.entities.NPC;
 import fr.ostix.game.entity.entities.Shop;
 import fr.ostix.game.graphics.font.meshCreator.GUIText;
@@ -37,21 +37,31 @@ public class InGameMenuListener implements Listener {
     }
 
     @EventHandler
+    public void onInteract(EntityInteractEvent e){
+        removeToRenderer();
+    }
+
+    @EventHandler
     public void onEntityClose(EntityCloseEvent e) {
-        if (!((e.getEntity()) instanceof Interact)){
+        if (e.getEntity() == null){
             removeToRenderer();
             return;
         }
         if (e.getEntity() instanceof NPC) {
             interactionText.setText("Parler");
+            bgInteraction.setPosition(new Vector2f(1920 / 2f - 62, 855));
+            bgInteraction.setScale(new Vector2f(100, 35));
             sendToRenderer(e.getEntity());
         } else if (e.getEntity() instanceof Shop) {
             interactionText.setText("Acheter");
+            bgInteraction.setScale(new Vector2f(110, 35));
             sendToRenderer(e.getEntity());
         } else {
             removeToRenderer();
         }
     }
+
+
 
     public void sendToRenderer(Entity e) {
         if (entityClose != null) {

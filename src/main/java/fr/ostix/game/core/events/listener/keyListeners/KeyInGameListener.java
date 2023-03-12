@@ -64,7 +64,7 @@ public class KeyInGameListener implements KeyListener {
             if (!world.getEntitiesNear().isEmpty()) {
                 Entity entity = world.getEntitiesNear().get(0);
                 if (entity instanceof NPC) {
-                    EventManager.getInstance().callEvent(new NPCTalkEvent(world, 1, (NPC) entity));//TODO Weird
+                    EventManager.getInstance().callEvent(new NPCTalkEvent(world, 1, (NPC) entity));
                 }
                 EventManager.getInstance().callEvent(new PlayerGiveItemEvent(world.getPlayer(), world, 1));
                 EventManager.getInstance().callEvent(new EntityInteractEvent(world.getEntitiesNear().get(0), world, 3));

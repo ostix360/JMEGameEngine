@@ -10,7 +10,7 @@ import java.util.concurrent.*;
 
 public class EventManager {
 
-    // TODO Event sur un thread séparé LinkedBlockingQueue
+
 
     private static final EventManager INSTANCE = new EventManager();
 

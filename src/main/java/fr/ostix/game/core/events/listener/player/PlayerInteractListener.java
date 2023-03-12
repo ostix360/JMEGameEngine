@@ -4,6 +4,7 @@ import fr.ostix.game.core.events.*;
 import fr.ostix.game.core.events.entity.EntityCloseEvent;
 import fr.ostix.game.core.events.player.*;
 import fr.ostix.game.entity.*;
+import fr.ostix.game.entity.entities.Interact;
 import fr.ostix.game.world.*;
 
 import java.util.*;
@@ -25,12 +26,16 @@ public class PlayerInteractListener extends PlayerListener {
         float z = e.getPlayer().getPosition().z();
         world.getEntitiesNear().clear();
         entities.forEach(entity -> {
-//            if (entity.equals(e.getPlayer())) return; TODO font bugged
+            if (entity.equals(e.getPlayer())) return;
             float distance = (float) Math.sqrt(Math.pow(entity.getPosition().x() - x, 2) + Math.pow(entity.getPosition().z() - z, 2));
             if (distance < 5) {
-                EventManager.getInstance().callEvent(new EntityCloseEvent(entity, world, 2));
                 world.getEntitiesNear().add(entity);
             }
         });
+        if (world.getEntitiesNear().size() > 0 && world.getEntitiesNear().get(0) instanceof Interact) {
+            EventManager.getInstance().callEvent(new EntityCloseEvent(world.getEntitiesNear().get(0), world, 2));
+        }else{
+            EventManager.getInstance().callEvent(new EntityCloseEvent(null, world, 2));
+        }
     }
 }

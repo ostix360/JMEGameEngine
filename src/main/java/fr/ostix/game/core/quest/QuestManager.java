@@ -21,7 +21,6 @@ public class QuestManager {
 
     private final List<Integer> questing;
 
-    //TODO Threaded event Manager ?
 
     public QuestManager() {
         quests = new HashMap<>();

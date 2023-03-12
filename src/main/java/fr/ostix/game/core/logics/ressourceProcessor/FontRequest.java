@@ -5,10 +5,12 @@ import fr.ostix.game.graphics.font.meshCreator.*;
 import fr.ostix.game.graphics.font.rendering.*;
 import fr.ostix.game.graphics.model.*;
 
+import static fr.ostix.game.graphics.font.meshCreator.GUIText.TextProperties;
+
 import java.util.*;
 
 public class FontRequest extends GLRequest {
-    private static final Map<String, MeshModel> fontsModels = new HashMap<>();
+    private static final Map<TextProperties, MeshModel> fontsModels = new HashMap<>();
     private final GUIText text;
     private final MasterFont masterFont;
 
@@ -18,8 +20,8 @@ public class FontRequest extends GLRequest {
         this.text = text;
         this.isTemp = isTemp;
         this.masterFont = masterFont;
-        if (fontsModels.containsKey(text.getTextString())){ //TODO problem when change font size
-            MeshModel vao = fontsModels.get(text.getTextString());
+        if (fontsModels.containsKey(text.getProp())){
+            MeshModel vao = fontsModels.get(text.getProp());
             this.text.setMeshInfo(vao, vao.getVertexCount());
             masterFont.addText(text, isTemp);
             this.isExecuted = true;
@@ -37,7 +39,7 @@ public class FontRequest extends GLRequest {
         MeshModel vao = Loader.INSTANCE.loadFontToVAO(data.getVertexPositions(), data.getTextureCoords());
         text.setMeshInfo(vao, data.getVertexCount());
         vao.getVAO().setVertexCount(data.getVertexCount());
-        fontsModels.put(text.getTextString(), vao);
+        fontsModels.put(text.getProp(), vao);
         masterFont.addText(text, isTemp);
         super.execute();
     }

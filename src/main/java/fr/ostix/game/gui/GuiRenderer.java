@@ -1,7 +1,6 @@
 package fr.ostix.game.gui;
 
 import fr.ostix.game.core.loader.*;
-import fr.ostix.game.graphics.model.*;
 import fr.ostix.game.graphics.textures.*;
 import fr.ostix.game.toolBox.*;
 import fr.ostix.game.toolBox.OpenGL.*;
@@ -29,7 +28,7 @@ public class GuiRenderer {
             for (GuiTexture gui : guis.get(model)) {
                 GL13.glActiveTexture(GL13.GL_TEXTURE0);
                 GL11.glBindTexture(GL_TEXTURE_2D, gui.getTexture());
-                Matrix4f matrix4f = Maths.createTransformationMatrix(gui.getPosition(), gui.getScale());
+                Matrix4f matrix4f = Maths.createTransformationMatrix(gui.getPosition(), gui.getGlScale());
                 shader.loadTransformationMatrix(matrix4f);
                 shader.loadLayer(gui.getLayer());
                 glDrawElements(GL_TRIANGLES,model.getVao().getVertexCount(),GL_UNSIGNED_INT,0);

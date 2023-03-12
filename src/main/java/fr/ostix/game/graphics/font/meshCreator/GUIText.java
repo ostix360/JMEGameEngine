@@ -21,6 +21,8 @@ public class GUIText {
     private int vertexCount;
     private int numberOfLines;
 
+    private TextProperties prop;
+
     private boolean edited;
     private Vector3f colour = new Vector3f(0f, 0f, 0f);
 
@@ -32,6 +34,7 @@ public class GUIText {
         this.position = position.div(1920, 1080);
         this.lineMaxSize = maxLineLength / 1920f;
         this.centerText = centered;
+        prop = new TextProperties(text, fontSize, numberOfLines);
     }
 
     public void remove() {
@@ -57,6 +60,7 @@ public class GUIText {
 
     protected void setNumberOfLines(int number) {
         this.numberOfLines = number;
+        prop.setNumberOfLines(number);
     }
 
     public Vector2f getPosition() {
@@ -108,6 +112,47 @@ public class GUIText {
 
     public void setText(String textString) {
         this.textString = textString;
+        this.prop.setTextString(textString);
         this.edited = true;
+    }
+
+    public TextProperties getProp() {
+        return prop;
+    }
+
+    public static class TextProperties{
+        private String textString;
+        private float fontSize;
+        private int numberOfLines;
+
+        public TextProperties(String textString, float fontSize, int numberOfLines) {
+            this.textString = textString;
+            this.fontSize = fontSize;
+            this.numberOfLines = numberOfLines;
+        }
+
+        public String getTextString() {
+            return textString;
+        }
+
+        public void setTextString(String textString) {
+            this.textString = textString;
+        }
+
+        public float getFontSize() {
+            return fontSize;
+        }
+
+        public void setFontSize(float fontSize) {
+            this.fontSize = fontSize;
+        }
+
+        public int getNumberOfLines() {
+            return numberOfLines;
+        }
+
+        public void setNumberOfLines(int numberOfLines) {
+            this.numberOfLines = numberOfLines;
+        }
     }
 }
