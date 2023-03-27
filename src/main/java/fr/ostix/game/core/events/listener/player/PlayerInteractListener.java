@@ -32,7 +32,7 @@ public class PlayerInteractListener extends PlayerListener {
                 world.getEntitiesNear().add(entity);
             }
         });
-        if (world.getEntitiesNear().size() > 0 && world.getEntitiesNear().get(0) instanceof Interact) {
+        if (world.getEntitiesNear().size() > 0 && world.getEntitiesNear().get(0) instanceof Interact) {         // TODO: if get(0) isn't an instance of Interact, check the next one and so on
             EventManager.getInstance().callEvent(new EntityCloseEvent(world.getEntitiesNear().get(0), world, 2));
         }else{
             EventManager.getInstance().callEvent(new EntityCloseEvent(null, world, 2));
