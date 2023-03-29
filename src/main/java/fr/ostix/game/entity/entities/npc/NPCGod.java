@@ -21,12 +21,6 @@ public class NPCGod extends NPC {
         return INSTANCE;
     }
 
-    @Override
-    public void talke(List<String> dialogs,int line, World world) {
-        this.gui.showDialogs(dialogs,line,world);
-        EventManager.getInstance().callEvent(new StateOverWorldEvent(this.getName(),gui, 1));
-//        EventManager.getInstance().unRegister(this.NPCDefaultsListener);
-    }
 
 
     @Override

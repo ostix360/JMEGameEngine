@@ -15,7 +15,7 @@ public class NPCTalkListener extends EntityListener {
     @EventHandler
     public void onTalk(NPCTalkEvent e) {
         if (e.getNpc().getId() != this.e.getId()) return;
-        ((NPC) this.e).talke(e.getWorld(),null,e.getNpc().getDefaultMessage());
+        ((NPC) this.e).talke(e.getWorld(), e.getNpc().getDefaultMessage());
     }
 
     @Override

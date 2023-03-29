@@ -42,39 +42,17 @@ public class NPC extends Entity implements Interact {
         super.initBeforeSpawn();
     }
 
-    public void talke(List<String> dialogs,int line, World world) {
-        gui.showDialogs(dialogs,line, world);
+    public void talke(World w, int line, Callback<Boolean> callback, String... dialogs) {
+        gui.showDialogs(Arrays.asList(dialogs), line, w, callback);
         EventManager.getInstance().callEvent(new StateOverWorldEvent(name, gui, 1));
-//        EventManager.getInstance().unRegister(this.NPCDefaultsListener);
     }
 
-    public void talke(World w, Callback<Boolean> callback, Object... args) {
-        int line = 0;
-        int i = 0;
-        List<String> dialogs = new ArrayList<>();
-        if (args[i] instanceof Integer){
-            line = (int) args[i];
-            i++;
-        }
-        for (; i < args.length; i++) {
-            if ((args[i] instanceof String)) {
-                dialogs.add((String) args[i]);
-                continue;
-            }else if (args[i] instanceof Object[]){
-                for (Object o : (Object[]) args[i]) {
-                    if (o instanceof String){
-                        dialogs.add((String) o);
-                    }else {
-                        throw new IllegalArgumentException("args[" + i + "] is not a String");
-                    }
-                }
-                break;
-            }
-            throw new IllegalArgumentException("args[" + i + "] is not a String");
-        }
+    public void talke(World world, Callback<Boolean> callback, String... dialogs) {
+        this.talke(world, 0, callback, dialogs);
+    }
 
-        gui.showDialogs(dialogs, line, w,callback);
-        EventManager.getInstance().callEvent(new StateOverWorldEvent(name, gui, 1));
+    public void talke(World world, String... dialogs) {
+        this.talke(world, null, dialogs);
     }
 
 
