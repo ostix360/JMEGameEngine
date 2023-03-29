@@ -69,16 +69,10 @@ public class TextureLoader {
 
         } else if (mode == TextureUtils.MIPMAP_ANISOTROPIC_MODE) {
             GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
-            Logger.errGL("Error while generating mipmap anisotropic");
             GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST_MIPMAP_LINEAR);
-            Logger.errGL("Error while setting anisotropic filtering");
-            GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST_MIPMAP_LINEAR);
-            Logger.errGL("Error while setting anisotropic filtering");
             if (GL.getCapabilities().GL_EXT_texture_filter_anisotropic) {
                 float amount = Math.min(4f, GL11.glGetFloat(EXTTextureFilterAnisotropic.GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT));
-                Logger.errGL("Error while setting anisotropic filtering");
                 GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL14.GL_TEXTURE_LOD_BIAS, 0f);
-                Logger.errGL("Error while setting anisotropic filtering");
                 GL11.glTexParameterf(GL_TEXTURE_2D, EXTTextureFilterAnisotropic.GL_TEXTURE_MAX_ANISOTROPY_EXT, amount);
                 Logger.errGL("Error while setting anisotropic filtering");
             } else {

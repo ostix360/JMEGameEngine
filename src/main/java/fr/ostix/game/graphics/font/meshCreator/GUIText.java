@@ -28,13 +28,13 @@ public class GUIText {
 
     public GUIText(String text, float fontSize, FontType font, Vector2f position, float maxLineLength,
                    boolean centered) {
-        setText(text);
         this.fontSize = fontSize;
         this.font = font;
         this.position = position.div(1920, 1080);
         this.lineMaxSize = maxLineLength / 1920f;
         this.centerText = centered;
         prop = new TextProperties(text, fontSize, numberOfLines);
+        setText(text);
     }
 
     public void remove() {
