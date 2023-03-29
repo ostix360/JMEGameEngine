@@ -127,7 +127,16 @@ public abstract class BoundingVolume implements Cloneable, Collidable {
 
     public abstract BoundingVolume transform(Matrix4f trans, BoundingVolume store);
 
-
+    /**
+     * <code>whichSide</code> returns the side on which the bounding volume
+     * lies on a plane. Possible values are POSITIVE_SIDE, NEGATIVE_SIDE, and
+     * NO_SIDE.
+     *
+     * @param plane
+     *            the plane to check against this bounding volume.
+     * @return the side on which this bounding volume lies.
+     */
+    public abstract Plane.Side whichSide(Plane plane);
 
     /**
      * <code>computeFromPoints</code> generates a bounding volume that

@@ -200,14 +200,12 @@ public final class Ray implements Cloneable, Collidable, java.io.Serializable {
      */
     private boolean intersects(Vector3f v0, Vector3f v1, Vector3f v2,
             Vector3f store, boolean doPlanar, boolean quad) {
-
         TempVars vars = TempVars.get();
 
         Vector3f tempVa = vars.vect1,
                 tempVb = vars.vect2,
                 tempVc = vars.vect3,
                 tempVd = vars.vect4;
-
 
         Vector3f diff = origin.sub(v0, tempVa);
         Vector3f edge1 = v1.sub(v0, tempVb);

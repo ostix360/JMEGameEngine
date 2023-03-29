@@ -63,7 +63,7 @@ public class CollisionResult implements Comparable<CollisionResult> {
     public CollisionResult() {
     }
 
-//    public void setGeometry(Geometry geom) {
+//    public void setGeometry(Geometry geom) { TODO diff
 //        this.geometry = geom;
 //    }
 
@@ -83,7 +83,7 @@ public class CollisionResult implements Comparable<CollisionResult> {
         this.triangleIndex = index;
     }
 
-//    public Triangle getTriangle(Triangle store) {
+//    public Triangle getTriangle(Triangle store) { TODO diff
 //        if (store == null)
 //            store = new Triangle();
 //

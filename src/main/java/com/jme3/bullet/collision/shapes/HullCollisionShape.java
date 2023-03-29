@@ -93,7 +93,7 @@ public class HullCollisionShape extends CollisionShape {
 
     protected float[] getPoints(MeshModel mesh) {
         FloatBuffer vertices = (FloatBuffer) mesh.getVAO().getPosition().getDataReadOnly();
-//        vertices.rewind();
+//        vertices.rewind(); TODO not sure
         int components = mesh.getVertexCount() * 3;
         float[] pointsArray = new float[components];
         for (int i = 0; i < components; i += 3) {
