@@ -117,17 +117,17 @@ public class BIHTree {
         initTriList(vb, ib);
     }
 
-    public BIHTree(MeshModel mesh) {
-        this(mesh, MAX_TRIS_PER_NODE);
-    }
+//    public BIHTree(MeshModel mesh) {
+//        this(mesh, MAX_TRIS_PER_NODE);
+//    }
 
     public BIHTree() {
     }
 
-    public void construct() {
-        BoundingBox sceneBbox = createBox(0, numTris - 1);
-        root = createNode(0, numTris - 1, sceneBbox, 0);
-    }
+//    public void construct() {
+//        BoundingBox sceneBbox = createBox(0, numTris - 1);
+//        root = createNode(0, numTris - 1, sceneBbox, 0);
+//    }
 
     private BoundingBox createBox(int l, int r) {
         TempVars vars = TempVars.get();
@@ -384,84 +384,84 @@ public class BIHTree {
         triIndices[index2] = tmp2;
     }
 
-    private int collideWithRay(Ray r,
-            Matrix4f worldMatrix,
-            BoundingVolume worldBound,
-            CollisionResults results) {
+//    private int collideWithRay(Ray r,
+//            Matrix4f worldMatrix,
+//            BoundingVolume worldBound,
+//            CollisionResults results) {
+//
+//        TempVars vars = TempVars.get();
+//        try {
+//            CollisionResults boundResults = vars.collisionResults;
+//            boundResults.clear();
+//            worldBound.collideWith(r, boundResults);
+//            if (boundResults.size() > 0) {
+//                float tMin = boundResults.getClosestCollision().getDistance();
+//                float tMax = boundResults.getFarthestCollision().getDistance();
+//
+//                if (tMax <= 0) {
+//                    tMax = Float.POSITIVE_INFINITY;
+//                } else if (tMin == tMax) {
+//                    tMin = 0;
+//                }
+//
+//                if (tMin <= 0) {
+//                    tMin = 0;
+//                }
+//
+//                if (r.getLimit() < Float.POSITIVE_INFINITY) {
+//                    tMax = Math.min(tMax, r.getLimit());
+//                    if (tMin > tMax) {
+//                        return 0;
+//                    }
+//                }
+//
+//    //            return root.intersectBrute(r, worldMatrix, this, tMin, tMax, results);
+//                return root.intersectWhere(r, worldMatrix, this, tMin, tMax, results);
+//            }
+//            return 0;
+//        } finally {
+//            vars.release();
+//        }
+//    }
 
-        TempVars vars = TempVars.get();
-        try {
-            CollisionResults boundResults = vars.collisionResults;
-            boundResults.clear();
-            worldBound.collideWith(r, boundResults);
-            if (boundResults.size() > 0) {
-                float tMin = boundResults.getClosestCollision().getDistance();
-                float tMax = boundResults.getFarthestCollision().getDistance();
+//    private int collideWithBoundingVolume(BoundingVolume bv,
+//            Matrix4f worldMatrix,
+//            CollisionResults results) throws CloneNotSupportedException {
+//        BoundingBox bbox;
+//        if (bv instanceof BoundingSphere) {
+//            BoundingSphere sphere = (BoundingSphere) bv;
+//            bbox = new BoundingBox((Vector3f) bv.getCenter().clone(), sphere.getRadius(),
+//                    sphere.getRadius(),
+//                    sphere.getRadius());
+//        } else if (bv instanceof BoundingBox) {
+//            bbox = new BoundingBox((BoundingBox) bv);
+//        } else {
+//            throw new UnsupportedCollisionException("BoundingVolume:" + bv);
+//        }
+//
+//        bbox.transform(worldMatrix.invert(), bbox);
+//        return root.intersectWhere(bv, bbox, worldMatrix, this, results);
+//    }
 
-                if (tMax <= 0) {
-                    tMax = Float.POSITIVE_INFINITY;
-                } else if (tMin == tMax) {
-                    tMin = 0;
-                }
-
-                if (tMin <= 0) {
-                    tMin = 0;
-                }
-
-                if (r.getLimit() < Float.POSITIVE_INFINITY) {
-                    tMax = Math.min(tMax, r.getLimit());
-                    if (tMin > tMax) {
-                        return 0;
-                    }
-                }
-
-    //            return root.intersectBrute(r, worldMatrix, this, tMin, tMax, results);
-                return root.intersectWhere(r, worldMatrix, this, tMin, tMax, results);
-            }
-            return 0;
-        } finally {
-            vars.release();
-        }
-    }
-
-    private int collideWithBoundingVolume(BoundingVolume bv,
-            Matrix4f worldMatrix,
-            CollisionResults results) throws CloneNotSupportedException {
-        BoundingBox bbox;
-        if (bv instanceof BoundingSphere) {
-            BoundingSphere sphere = (BoundingSphere) bv;
-            bbox = new BoundingBox((Vector3f) bv.getCenter().clone(), sphere.getRadius(),
-                    sphere.getRadius(),
-                    sphere.getRadius());
-        } else if (bv instanceof BoundingBox) {
-            bbox = new BoundingBox((BoundingBox) bv);
-        } else {
-            throw new UnsupportedCollisionException("BoundingVolume:" + bv);
-        }
-
-        bbox.transform(worldMatrix.invert(), bbox);
-        return root.intersectWhere(bv, bbox, worldMatrix, this, results);
-    }
-
-    public int collideWith(Collidable other,
-            Matrix4f worldMatrix,
-            BoundingVolume worldBound,
-            CollisionResults results) {
-
-        if (other instanceof Ray) {
-            Ray ray = (Ray) other;
-            return collideWithRay(ray, worldMatrix, worldBound, results);
-        } else if (other instanceof BoundingVolume) {
-            BoundingVolume bv = (BoundingVolume) other;
-            try {
-                return collideWithBoundingVolume(bv, worldMatrix, results);
-            } catch (CloneNotSupportedException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            throw new UnsupportedCollisionException("Collidable:" + other);
-        }
-    }
+//    public int collideWith(Collidable other,
+//            Matrix4f worldMatrix,
+//            BoundingVolume worldBound,
+//            CollisionResults results) {
+//
+//        if (other instanceof Ray) {
+//            Ray ray = (Ray) other;
+//            return collideWithRay(ray, worldMatrix, worldBound, results);
+//        } else if (other instanceof BoundingVolume) {
+//            BoundingVolume bv = (BoundingVolume) other;
+//            try {
+//                return collideWithBoundingVolume(bv, worldMatrix, results);
+//            } catch (CloneNotSupportedException e) {
+//                throw new RuntimeException(e);
+//            }
+//        } else {
+//            throw new UnsupportedCollisionException("Collidable:" + other);
+//        }
+//    }
 
 //    @Override
 //    public void write(JmeExporter ex) throws IOException {
