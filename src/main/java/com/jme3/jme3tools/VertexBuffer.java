@@ -354,58 +354,58 @@ public class VertexBuffer extends NativeObject implements Cloneable {
         super(id);
     }
 
-    public boolean invariant() {
-        // Does the VB hold any data?
-        if (data == null) {
-            throw new AssertionError();
-        }
-        // Position must be 0.
-        if (data.position() != 0) {
-            throw new AssertionError();
-        }
-        // Is the size of the VB == 0?
-        if (data.limit() == 0) {
-            throw new AssertionError();
-        }
-        // Does offset exceed buffer limit or negative?
-        if (offset > data.limit() || offset < 0) {
-            throw new AssertionError();
-        }
-        // Are components between 1 and 4?
-
-        // Are components between 1 and 4 and not InstanceData?
-        if (bufType != Type.InstanceData) {
-            if (components < 1 || components > 4) {
-                throw new AssertionError();
-            }
-        }
-
-        // Does usage comply with buffer directness?
-        //if (usage == Usage.CpuOnly && data.isDirect()) {
-        //    throw new AssertionError();
-        /*} else*/ if (usage != Usage.CpuOnly && !data.isDirect()) {
-            throw new AssertionError();
-        }
-
-        // Double/Char/Long buffers are not supported for VertexBuffers.
-        // For the rest, ensure they comply with the "Format" value.
-        if (data instanceof DoubleBuffer) {
-            throw new AssertionError();
-        } else if (data instanceof CharBuffer) {
-            throw new AssertionError();
-        } else if (data instanceof LongBuffer) {
-            throw new AssertionError();
-        } else if (data instanceof FloatBuffer && format != Format.Float) {
-            throw new AssertionError();
-        } else if (data instanceof IntBuffer && format != Format.Int && format != Format.UnsignedInt) {
-            throw new AssertionError();
-        } else if (data instanceof ShortBuffer && format != Format.Short && format != Format.UnsignedShort) {
-            throw new AssertionError();
-        } else if (data instanceof ByteBuffer && format != Format.Byte && format != Format.UnsignedByte) {
-            throw new AssertionError();
-        }
-        return true;
-    }
+//    public boolean invariant() {
+//        // Does the VB hold any data?
+//        if (data == null) {
+//            throw new AssertionError();
+//        }
+//        // Position must be 0.
+//        if (data.position() != 0) {
+//            throw new AssertionError();
+//        }
+//        // Is the size of the VB == 0?
+//        if (data.limit() == 0) {
+//            throw new AssertionError();
+//        }
+//        // Does offset exceed buffer limit or negative?
+//        if (offset > data.limit() || offset < 0) {
+//            throw new AssertionError();
+//        }
+//        // Are components between 1 and 4?
+//
+//        // Are components between 1 and 4 and not InstanceData?
+//        if (bufType != Type.InstanceData) {
+//            if (components < 1 || components > 4) {
+//                throw new AssertionError();
+//            }
+//        }
+//
+//        // Does usage comply with buffer directness?
+//        //if (usage == Usage.CpuOnly && data.isDirect()) {
+//        //    throw new AssertionError();
+//        /*} else*/ if (usage != Usage.CpuOnly && !data.isDirect()) {
+//            throw new AssertionError();
+//        }
+//
+//        // Double/Char/Long buffers are not supported for VertexBuffers.
+//        // For the rest, ensure they comply with the "Format" value.
+//        if (data instanceof DoubleBuffer) {
+//            throw new AssertionError();
+//        } else if (data instanceof CharBuffer) {
+//            throw new AssertionError();
+//        } else if (data instanceof LongBuffer) {
+//            throw new AssertionError();
+//        } else if (data instanceof FloatBuffer && format != Format.Float) {
+//            throw new AssertionError();
+//        } else if (data instanceof IntBuffer && format != Format.Int && format != Format.UnsignedInt) {
+//            throw new AssertionError();
+//        } else if (data instanceof ShortBuffer && format != Format.Short && format != Format.UnsignedShort) {
+//            throw new AssertionError();
+//        } else if (data instanceof ByteBuffer && format != Format.Byte && format != Format.UnsignedByte) {
+//            throw new AssertionError();
+//        }
+//        return true;
+//    }
 
     /**
      * @return The offset after which the data is sent to the GPU.
@@ -727,34 +727,34 @@ public class VertexBuffer extends NativeObject implements Cloneable {
     /**
      * Converts single floating-point data to {@link Format#Half half} floating-point data.
      */
-    public void convertToHalf() {
-        if (id != -1) {
-            throw new UnsupportedOperationException("Data has already been sent.");
-        }
-
-        if (format != Format.Float) {
-            throw new IllegalStateException("Format must be float!");
-        }
-
-        int numElements = data.limit() / components;
-        format = Format.Half;
-        this.componentsLength = components * format.getComponentSize();
-
-        ByteBuffer halfData = BufferUtils.createByteBuffer(componentsLength * numElements);
-        halfData.rewind();
-
-        FloatBuffer floatData = (FloatBuffer) data;
-        floatData.rewind();
-
-        for (int i = 0; i < floatData.limit(); i++) {
-            float f = floatData.get(i);
-            short half = FastMath.convertFloatToHalf(f);
-            halfData.putShort(half);
-        }
-        this.data = halfData;
-        setUpdateNeeded();
-        dataSizeChanged = true;
-    }
+//    public void convertToHalf() {
+//        if (id != -1) {
+//            throw new UnsupportedOperationException("Data has already been sent.");
+//        }
+//
+//        if (format != Format.Float) {
+//            throw new IllegalStateException("Format must be float!");
+//        }
+//
+//        int numElements = data.limit() / components;
+//        format = Format.Half;
+//        this.componentsLength = components * format.getComponentSize();
+//
+//        ByteBuffer halfData = BufferUtils.createByteBuffer(componentsLength * numElements);
+//        halfData.rewind();
+//
+//        FloatBuffer floatData = (FloatBuffer) data;
+//        floatData.rewind();
+//
+//        for (int i = 0; i < floatData.limit(); i++) {
+//            float f = floatData.get(i);
+//            short half = FastMath.convertFloatToHalf(f);
+//            halfData.putShort(half);
+//        }
+//        this.data = halfData;
+//        setUpdateNeeded();
+//        dataSizeChanged = true;
+//    }
 
     /**
      * Reduces the capacity of the buffer to the given amount
@@ -763,49 +763,49 @@ public class VertexBuffer extends NativeObject implements Cloneable {
      *
      * @param numElements The number of elements to reduce to.
      */
-    public void compact(int numElements) {
-        int total = components * numElements;
-        data.clear();
-        switch (format) {
-            case Byte:
-            case UnsignedByte:
-            case Half:
-                ByteBuffer bbuf = (ByteBuffer) data;
-                bbuf.limit(total);
-                ByteBuffer bnewBuf = BufferUtils.createByteBuffer(total);
-                bnewBuf.put(bbuf);
-                data = bnewBuf;
-                break;
-            case Short:
-            case UnsignedShort:
-                ShortBuffer sbuf = (ShortBuffer) data;
-                sbuf.limit(total);
-                ShortBuffer snewBuf = BufferUtils.createShortBuffer(total);
-                snewBuf.put(sbuf);
-                data = snewBuf;
-                break;
-            case Int:
-            case UnsignedInt:
-                IntBuffer ibuf = (IntBuffer) data;
-                ibuf.limit(total);
-                IntBuffer inewBuf = BufferUtils.createIntBuffer(total);
-                inewBuf.put(ibuf);
-                data = inewBuf;
-                break;
-            case Float:
-                FloatBuffer fbuf = (FloatBuffer) data;
-                fbuf.limit(total);
-                FloatBuffer fnewBuf = BufferUtils.createFloatBuffer(total);
-                fnewBuf.put(fbuf);
-                data = fnewBuf;
-                break;
-            default:
-                throw new UnsupportedOperationException("Unrecognized buffer format: " + format);
-        }
-        data.clear();
-        setUpdateNeeded();
-        dataSizeChanged = true;
-    }
+//    public void compact(int numElements) {
+//        int total = components * numElements;
+//        data.clear();
+//        switch (format) {
+//            case Byte:
+//            case UnsignedByte:
+//            case Half:
+//                ByteBuffer bbuf = (ByteBuffer) data;
+//                bbuf.limit(total);
+//                ByteBuffer bnewBuf = BufferUtils.createByteBuffer(total);
+//                bnewBuf.put(bbuf);
+//                data = bnewBuf;
+//                break;
+//            case Short:
+//            case UnsignedShort:
+//                ShortBuffer sbuf = (ShortBuffer) data;
+//                sbuf.limit(total);
+//                ShortBuffer snewBuf = BufferUtils.createShortBuffer(total);
+//                snewBuf.put(sbuf);
+//                data = snewBuf;
+//                break;
+//            case Int:
+//            case UnsignedInt:
+//                IntBuffer ibuf = (IntBuffer) data;
+//                ibuf.limit(total);
+//                IntBuffer inewBuf = BufferUtils.createIntBuffer(total);
+//                inewBuf.put(ibuf);
+//                data = inewBuf;
+//                break;
+//            case Float:
+//                FloatBuffer fbuf = (FloatBuffer) data;
+//                fbuf.limit(total);
+//                FloatBuffer fnewBuf = BufferUtils.createFloatBuffer(total);
+//                fnewBuf.put(fbuf);
+//                data = fnewBuf;
+//                break;
+//            default:
+//                throw new UnsupportedOperationException("Unrecognized buffer format: " + format);
+//        }
+//        data.clear();
+//        setUpdateNeeded();
+//        dataSizeChanged = true;
+//    }
 
     /**
      * Modify a component inside an element.
@@ -817,98 +817,98 @@ public class VertexBuffer extends NativeObject implements Cloneable {
      * @param val The value to set, either byte, short, int or float depending
      * on the {@link Format}.
      */
-    public void setElementComponent(int elementIndex, int componentIndex, Object val) {
-        int inPos = elementIndex * components;
-        int elementPos = componentIndex;
-
-        if (format == Format.Half) {
-            inPos *= 2;
-            elementPos *= 2;
-        }
-
-        data.clear();
-
-        switch (format) {
-            case Byte:
-            case UnsignedByte:
-            case Half:
-                ByteBuffer bin = (ByteBuffer) data;
-                bin.put(inPos + elementPos, (Byte) val);
-                break;
-            case Short:
-            case UnsignedShort:
-                ShortBuffer sin = (ShortBuffer) data;
-                sin.put(inPos + elementPos, (Short) val);
-                break;
-            case Int:
-            case UnsignedInt:
-                IntBuffer iin = (IntBuffer) data;
-                iin.put(inPos + elementPos, (Integer) val);
-                break;
-            case Float:
-                FloatBuffer fin = (FloatBuffer) data;
-                fin.put(inPos + elementPos, (Float) val);
-                break;
-            default:
-                throw new UnsupportedOperationException("Unrecognized buffer format: " + format);
-        }
-    }
-
-    /**
-     * Get the component inside an element.
-     *
-     * @param elementIndex The element index
-     * @param componentIndex The component index
-     * @return The component, as one of the primitive types, byte, short,
-     * int or float.
-     */
-    public Object getElementComponent(int elementIndex, int componentIndex) {
-        int inPos = elementIndex * components;
-        int elementPos = componentIndex;
-
-        if (format == Format.Half) {
-            inPos *= 2;
-            elementPos *= 2;
-        }
-
-        Buffer srcData = getDataReadOnly();
-
-        switch (format) {
-            case Byte:
-            case UnsignedByte:
-            case Half:
-                ByteBuffer bin = (ByteBuffer) srcData;
-                return bin.get(inPos + elementPos);
-            case Short:
-            case UnsignedShort:
-                ShortBuffer sin = (ShortBuffer) srcData;
-                return sin.get(inPos + elementPos);
-            case Int:
-            case UnsignedInt:
-                IntBuffer iin = (IntBuffer) srcData;
-                return iin.get(inPos + elementPos);
-            case Float:
-                FloatBuffer fin = (FloatBuffer) srcData;
-                return fin.get(inPos + elementPos);
-            default:
-                throw new UnsupportedOperationException("Unrecognized buffer format: " + format);
-        }
-    }
-
-    /**
-     * Copies a single element of data from this <code>VertexBuffer</code>
-     * to the given output VertexBuffer.
-     *
-     * @param inIndex The input element index
-     * @param outVb The buffer to copy to
-     * @param outIndex The output element index
-     *
-     * @throws IllegalArgumentException If the formats of the buffers do not
-     * match.
-     */
-    public void copyElement(int inIndex, VertexBuffer outVb, int outIndex) {
-        copyElements(inIndex, outVb, outIndex, 1);
-    }
+//    public void setElementComponent(int elementIndex, int componentIndex, Object val) {
+//        int inPos = elementIndex * components;
+//        int elementPos = componentIndex;
+//
+//        if (format == Format.Half) {
+//            inPos *= 2;
+//            elementPos *= 2;
+//        }
+//
+//        data.clear();
+//
+//        switch (format) {
+//            case Byte:
+//            case UnsignedByte:
+//            case Half:
+//                ByteBuffer bin = (ByteBuffer) data;
+//                bin.put(inPos + elementPos, (Byte) val);
+//                break;
+//            case Short:
+//            case UnsignedShort:
+//                ShortBuffer sin = (ShortBuffer) data;
+//                sin.put(inPos + elementPos, (Short) val);
+//                break;
+//            case Int:
+//            case UnsignedInt:
+//                IntBuffer iin = (IntBuffer) data;
+//                iin.put(inPos + elementPos, (Integer) val);
+//                break;
+//            case Float:
+//                FloatBuffer fin = (FloatBuffer) data;
+//                fin.put(inPos + elementPos, (Float) val);
+//                break;
+//            default:
+//                throw new UnsupportedOperationException("Unrecognized buffer format: " + format);
+//        }
+//    }
+//
+//    /**
+//     * Get the component inside an element.
+//     *
+//     * @param elementIndex The element index
+//     * @param componentIndex The component index
+//     * @return The component, as one of the primitive types, byte, short,
+//     * int or float.
+//     */
+//    public Object getElementComponent(int elementIndex, int componentIndex) {
+//        int inPos = elementIndex * components;
+//        int elementPos = componentIndex;
+//
+//        if (format == Format.Half) {
+//            inPos *= 2;
+//            elementPos *= 2;
+//        }
+//
+//        Buffer srcData = getDataReadOnly();
+//
+//        switch (format) {
+//            case Byte:
+//            case UnsignedByte:
+//            case Half:
+//                ByteBuffer bin = (ByteBuffer) srcData;
+//                return bin.get(inPos + elementPos);
+//            case Short:
+//            case UnsignedShort:
+//                ShortBuffer sin = (ShortBuffer) srcData;
+//                return sin.get(inPos + elementPos);
+//            case Int:
+//            case UnsignedInt:
+//                IntBuffer iin = (IntBuffer) srcData;
+//                return iin.get(inPos + elementPos);
+//            case Float:
+//                FloatBuffer fin = (FloatBuffer) srcData;
+//                return fin.get(inPos + elementPos);
+//            default:
+//                throw new UnsupportedOperationException("Unrecognized buffer format: " + format);
+//        }
+//    }
+//
+//    /**
+//     * Copies a single element of data from this <code>VertexBuffer</code>
+//     * to the given output VertexBuffer.
+//     *
+//     * @param inIndex The input element index
+//     * @param outVb The buffer to copy to
+//     * @param outIndex The output element index
+//     *
+//     * @throws IllegalArgumentException If the formats of the buffers do not
+//     * match.
+//     */
+//    public void copyElement(int inIndex, VertexBuffer outVb, int outIndex) {
+//        copyElements(inIndex, outVb, outIndex, 1);
+//    }
 
     /**
      * Copies a sequence of elements of data from this <code>VertexBuffer</code>
@@ -922,68 +922,68 @@ public class VertexBuffer extends NativeObject implements Cloneable {
      * @throws IllegalArgumentException If the formats of the buffers do not
      * match.
      */
-    public void copyElements(int inIndex, VertexBuffer outVb, int outIndex, int len) {
-        if (outVb.format != format || outVb.components != components) {
-            throw new IllegalArgumentException("Buffer format mismatch. Cannot copy");
-        }
-
-        int inPos = inIndex * components;
-        int outPos = outIndex * components;
-        int elementSz = components;
-        if (format == Format.Half) {
-            // because half is stored as ByteBuffer, but it's 2 bytes long
-            inPos *= 2;
-            outPos *= 2;
-            elementSz *= 2;
-        }
-
-        // Make sure to grab a read-only copy in case some other
-        // thread is also accessing the buffer and messing with its
-        // position()
-        Buffer srcData = getDataReadOnly();
-        outVb.data.clear();
-
-        switch (format) {
-            case Byte:
-            case UnsignedByte:
-            case Half:
-                ByteBuffer bin = (ByteBuffer) srcData;
-                ByteBuffer bout = (ByteBuffer) outVb.data;
-                bin.position(inPos).limit(inPos + elementSz * len);
-                bout.position(outPos).limit(outPos + elementSz * len);
-                bout.put(bin);
-                break;
-            case Short:
-            case UnsignedShort:
-                ShortBuffer sin = (ShortBuffer) srcData;
-                ShortBuffer sout = (ShortBuffer) outVb.data;
-                sin.position(inPos).limit(inPos + elementSz * len);
-                sout.position(outPos).limit(outPos + elementSz * len);
-                sout.put(sin);
-                break;
-            case Int:
-            case UnsignedInt:
-                IntBuffer iin = (IntBuffer) srcData;
-                IntBuffer iout = (IntBuffer) outVb.data;
-                iin.position(inPos).limit(inPos + elementSz * len);
-                iout.position(outPos).limit(outPos + elementSz * len);
-                iout.put(iin);
-                break;
-            case Float:
-                FloatBuffer fin = (FloatBuffer) srcData;
-                FloatBuffer fout = (FloatBuffer) outVb.data;
-                fin.position(inPos).limit(inPos + elementSz * len);
-                fout.position(outPos).limit(outPos + elementSz * len);
-                fout.put(fin);
-                break;
-            default:
-                throw new UnsupportedOperationException("Unrecognized buffer format: " + format);
-        }
-
-        // Clear the output buffer to rewind it and reset its
-        // limit from where we shortened it above.
-        outVb.data.clear();
-    }
+//    public void copyElements(int inIndex, VertexBuffer outVb, int outIndex, int len) {
+//        if (outVb.format != format || outVb.components != components) {
+//            throw new IllegalArgumentException("Buffer format mismatch. Cannot copy");
+//        }
+//
+//        int inPos = inIndex * components;
+//        int outPos = outIndex * components;
+//        int elementSz = components;
+//        if (format == Format.Half) {
+//            // because half is stored as ByteBuffer, but it's 2 bytes long
+//            inPos *= 2;
+//            outPos *= 2;
+//            elementSz *= 2;
+//        }
+//
+//        // Make sure to grab a read-only copy in case some other
+//        // thread is also accessing the buffer and messing with its
+//        // position()
+//        Buffer srcData = getDataReadOnly();
+//        outVb.data.clear();
+//
+//        switch (format) {
+//            case Byte:
+//            case UnsignedByte:
+//            case Half:
+//                ByteBuffer bin = (ByteBuffer) srcData;
+//                ByteBuffer bout = (ByteBuffer) outVb.data;
+//                bin.position(inPos).limit(inPos + elementSz * len);
+//                bout.position(outPos).limit(outPos + elementSz * len);
+//                bout.put(bin);
+//                break;
+//            case Short:
+//            case UnsignedShort:
+//                ShortBuffer sin = (ShortBuffer) srcData;
+//                ShortBuffer sout = (ShortBuffer) outVb.data;
+//                sin.position(inPos).limit(inPos + elementSz * len);
+//                sout.position(outPos).limit(outPos + elementSz * len);
+//                sout.put(sin);
+//                break;
+//            case Int:
+//            case UnsignedInt:
+//                IntBuffer iin = (IntBuffer) srcData;
+//                IntBuffer iout = (IntBuffer) outVb.data;
+//                iin.position(inPos).limit(inPos + elementSz * len);
+//                iout.position(outPos).limit(outPos + elementSz * len);
+//                iout.put(iin);
+//                break;
+//            case Float:
+//                FloatBuffer fin = (FloatBuffer) srcData;
+//                FloatBuffer fout = (FloatBuffer) outVb.data;
+//                fin.position(inPos).limit(inPos + elementSz * len);
+//                fout.position(outPos).limit(outPos + elementSz * len);
+//                fout.put(fin);
+//                break;
+//            default:
+//                throw new UnsupportedOperationException("Unrecognized buffer format: " + format);
+//        }
+//
+//        // Clear the output buffer to rewind it and reset its
+//        // limit from where we shortened it above.
+//        outVb.data.clear();
+//    }
 
     /**
      * Creates a {@link Buffer} that satisfies the given type and size requirements
@@ -996,33 +996,33 @@ public class VertexBuffer extends NativeObject implements Cloneable {
      * @param numElements the desired capacity (number of elements)
      * @return a new Buffer
      */
-    public static Buffer createBuffer(Format format, int components, int numElements) {
-        if (components < 1 || components > 4) {
-            throw new IllegalArgumentException("Num components must be between 1 and 4");
-        }
-
-        int total = numElements * components;
-
-        switch (format) {
-            case Byte:
-            case UnsignedByte:
-                return BufferUtils.createByteBuffer(total);
-            case Half:
-                return BufferUtils.createByteBuffer(total * 2);
-            case Short:
-            case UnsignedShort:
-                return BufferUtils.createShortBuffer(total);
-            case Int:
-            case UnsignedInt:
-                return BufferUtils.createIntBuffer(total);
-            case Float:
-                return BufferUtils.createFloatBuffer(total);
-            case Double:
-                return BufferUtils.createDoubleBuffer(total);
-            default:
-                throw new UnsupportedOperationException("Unrecognized buffer format: " + format);
-        }
-    }
+//    public static Buffer createBuffer(Format format, int components, int numElements) {
+//        if (components < 1 || components > 4) {
+//            throw new IllegalArgumentException("Num components must be between 1 and 4");
+//        }
+//
+//        int total = numElements * components;
+//
+//        switch (format) {
+//            case Byte:
+//            case UnsignedByte:
+//                return BufferUtils.createByteBuffer(total);
+//            case Half:
+//                return BufferUtils.createByteBuffer(total * 2);
+//            case Short:
+//            case UnsignedShort:
+//                return BufferUtils.createShortBuffer(total);
+//            case Int:
+//            case UnsignedInt:
+//                return BufferUtils.createIntBuffer(total);
+//            case Float:
+//                return BufferUtils.createFloatBuffer(total);
+//            case Double:
+//                return BufferUtils.createDoubleBuffer(total);
+//            default:
+//                throw new UnsupportedOperationException("Unrecognized buffer format: " + format);
+//        }
+//    }
 
     /**
      * Creates a deep clone of the {@link VertexBuffer}.

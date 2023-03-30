@@ -36,33 +36,33 @@ public class ChunkHandler {
         executor.execute(() -> {
 
             int playerChunkX = (int) Math.floor(cam.getPosition().x() / Terrain.getSIZE() / ((float) CHUNK_FILE_SIZE)); // Get
-                                                                                                                        // the
-                                                                                                                        // current
-                                                                                                                        // chunk
-                                                                                                                        // that
-                                                                                                                        // the
-                                                                                                                        // player
-                                                                                                                        // is
-                                                                                                                        // in
-                                                                                                                        // on
-                                                                                                                        // the
-                                                                                                                        // X
-                                                                                                                        // -
-                                                                                                                        // Axis
+            // the
+            // current
+            // chunk
+            // that
+            // the
+            // player
+            // is
+            // in
+            // on
+            // the
+            // X
+            // -
+            // Axis
             int playerChunkZ = (int) Math.floor(cam.getPosition().z() / Terrain.getSIZE() / ((float) CHUNK_FILE_SIZE)); // Get
-                                                                                                                        // the
-                                                                                                                        // current
-                                                                                                                        // chunk
-                                                                                                                        // that
-                                                                                                                        // the
-                                                                                                                        // player
-                                                                                                                        // is
-                                                                                                                        // in
-                                                                                                                        // on
-                                                                                                                        // the
-                                                                                                                        // Z
-                                                                                                                        // -
-                                                                                                                        // Axis
+            // the
+            // current
+            // chunk
+            // that
+            // the
+            // player
+            // is
+            // in
+            // on
+            // the
+            // Z
+            // -
+            // Axis
 
             // System.out.println(playerChunkX + ", " + playerChunkZ);
 
@@ -72,55 +72,23 @@ public class ChunkHandler {
             }
             for (int x1 = 0; x1 <= viewDistanceChunkFile; x1 += CHUNK_FILE_SIZE) { // X - Axis iteration
                 for (int z1 = 0; z1 <= viewDistanceChunkFile; z1 += CHUNK_FILE_SIZE) { // Z - Axis iteration
-                    int x = (int) (x1 / CHUNK_FILE_SIZE);
-                    int z = (int) (z1 / CHUNK_FILE_SIZE);
-                    if (!(chunksFileList.containsKey(new Vector2f(playerChunkX + x, playerChunkZ)))) {
-                        chunksFileList.put(new Vector2f(playerChunkX + x, playerChunkZ),
-                                new ChunksFile(playerChunkX + x, playerChunkZ));
-                        chunksFileList.get(new Vector2f(playerChunkX + x, playerChunkZ)).load();
-                    }
+                    int x = (x1 / CHUNK_FILE_SIZE);
+                    int z = (z1 / CHUNK_FILE_SIZE);
+                    putChunkFile(playerChunkX, playerChunkZ, x, 0);
 
-                    if (!(chunksFileList.containsKey(new Vector2f(playerChunkX, playerChunkZ + z)))) {
-                        chunksFileList.put(new Vector2f(playerChunkX, playerChunkZ + z),
-                                new ChunksFile(playerChunkX, playerChunkZ + z));
-                        chunksFileList.get(new Vector2f(playerChunkX, playerChunkZ + z)).load();
-                    }
+                    putChunkFile(playerChunkX, playerChunkZ, 0, z);
 
-                    if (!(chunksFileList.containsKey(new Vector2f(playerChunkX + x, playerChunkZ + z)))) {
-                        chunksFileList.put(new Vector2f(playerChunkX + x, playerChunkZ + z),
-                                new ChunksFile(playerChunkX + x, playerChunkZ + z));
-                        chunksFileList.get(new Vector2f(playerChunkX + x, playerChunkZ + z)).load();
-                    }
+                    putChunkFile(playerChunkX, playerChunkZ, x, z);
 
-                    if (!(chunksFileList.containsKey(new Vector2f(playerChunkX + x, playerChunkZ - z)))) {
-                        chunksFileList.put(new Vector2f(playerChunkX + x, playerChunkZ - z),
-                                new ChunksFile(playerChunkX + x, playerChunkZ - z));
-                        chunksFileList.get(new Vector2f(playerChunkX + x, playerChunkZ - z)).load();
-                    }
+                    putChunkFile(playerChunkX, playerChunkZ, x, -z);
 
-                    if (!(chunksFileList.containsKey(new Vector2f(playerChunkX, playerChunkZ - z)))) {
-                        chunksFileList.put(new Vector2f(playerChunkX, playerChunkZ - z),
-                                new ChunksFile(playerChunkX, playerChunkZ - z));
-                        chunksFileList.get(new Vector2f(playerChunkX, playerChunkZ - z)).load();
-                    }
+                    putChunkFile(playerChunkX, playerChunkZ, 0, -z);
 
-                    if (!(chunksFileList.containsKey(new Vector2f(playerChunkX - x, playerChunkZ - z)))) {
-                        chunksFileList.put(new Vector2f(playerChunkX - x, playerChunkZ - z),
-                                new ChunksFile(playerChunkX - x, playerChunkZ - z));
-                        chunksFileList.get(new Vector2f(playerChunkX - x, playerChunkZ - z)).load();
-                    }
+                    putChunkFile(playerChunkX, playerChunkZ, -x, -z);
 
-                    if (!(chunksFileList.containsKey(new Vector2f(playerChunkX - x, playerChunkZ + z)))) {
-                        chunksFileList.put(new Vector2f(playerChunkX - x, playerChunkZ + z),
-                                new ChunksFile(playerChunkX - x, playerChunkZ + z));
-                        chunksFileList.get(new Vector2f(playerChunkX - x, playerChunkZ + z)).load();
-                    }
-                    if (!(chunksFileList.containsKey(new Vector2f(playerChunkX - x, playerChunkZ)))) {
-                        chunksFileList.put(new Vector2f(playerChunkX - x, playerChunkZ),
-                                new ChunksFile(playerChunkX - x, playerChunkZ));
-                        chunksFileList.get(new Vector2f(playerChunkX - x, playerChunkZ)).load();
-                    }
+                    putChunkFile(playerChunkX, playerChunkZ, -x, z);
 
+                    putChunkFile(playerChunkX, playerChunkZ, -x, 0);
                 }
             }
             viewDistanceChunkFile = cam.viewDistance;
@@ -325,6 +293,14 @@ public class ChunkHandler {
             chunkList.put(new Vector2f(playerChunkX + x, playerChunkZ + z), chunk);
             entitiesChunk.addAll(chunk.getEntities());
             World.getPhysics().add(chunk);
+        }
+    }
+
+    private void putChunkFile(int playerChunkX, int playerChunkZ, int x, int z) {
+        Vector2f currentChunkFile = new Vector2f(playerChunkX + x, playerChunkZ + z);
+        if (!(chunksFileList.containsKey(currentChunkFile))) {
+            chunksFileList.put(currentChunkFile, new ChunksFile((int) currentChunkFile.x, (int) currentChunkFile.y));
+            chunksFileList.get(currentChunkFile).load();
         }
     }
 

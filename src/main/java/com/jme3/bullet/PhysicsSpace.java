@@ -220,7 +220,6 @@ public class PhysicsSpace {
 
     private void setOverlapFilterCallback() {
         OverlapFilterCallback callback = new OverlapFilterCallback() {
-
             @Override
             public boolean needBroadphaseCollision(BroadphaseProxy bp, BroadphaseProxy bp1) {
                 boolean collides = (bp.collisionFilterGroup & bp1.collisionFilterMask) != 0;
@@ -228,10 +227,8 @@ public class PhysicsSpace {
                     collides = (bp1.collisionFilterGroup & bp.collisionFilterMask) != 0;
                 }
                 if (collides) {
-                    assert (bp.clientObject instanceof CollisionObject && bp1.clientObject instanceof CollisionObject);
                     CollisionObject colOb = (CollisionObject) bp.clientObject;
                     CollisionObject colOb1 = (CollisionObject) bp1.clientObject;
-                    assert (colOb.getUserPointer() != null && colOb1.getUserPointer() != null);
                     PhysicsCollisionObject collisionObject = (PhysicsCollisionObject) colOb.getUserPointer();
                     PhysicsCollisionObject collisionObject1 = (PhysicsCollisionObject) colOb1.getUserPointer();
                     if ((collisionObject.getCollideWithGroups() & collisionObject1.getCollisionGroup()) > 0
