@@ -1,10 +1,7 @@
 package fr.ostix.game.toolBox.OpenGL.shader.uniform;
 
-import fr.ostix.game.toolBox.*;
-import org.lwjgl.opengl.*;
-
-import static org.lwjgl.opengl.GL11.GL_NO_ERROR;
-import static org.lwjgl.opengl.GL11.glGetError;
+import fr.ostix.game.toolBox.Logger;
+import org.lwjgl.opengl.GL20;
 
 public class Uniform {
     protected final String name;

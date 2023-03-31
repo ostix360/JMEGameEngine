@@ -1,9 +1,11 @@
 package fr.ostix.game.entity.animated.animation.animatedModel;
 
-import fr.ostix.game.entity.animated.animation.animation.*;
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.graphics.textures.*;
-import org.joml.*;
+import fr.ostix.game.entity.animated.animation.animation.Animation;
+import fr.ostix.game.entity.animated.animation.animation.Animator;
+import fr.ostix.game.graphics.model.MeshModel;
+import fr.ostix.game.graphics.model.Model;
+import fr.ostix.game.graphics.textures.Texture;
+import org.joml.Matrix4f;
 
 
 /**

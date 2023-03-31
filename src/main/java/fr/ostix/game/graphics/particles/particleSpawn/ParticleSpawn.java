@@ -1,6 +1,7 @@
 package fr.ostix.game.graphics.particles.particleSpawn;
 
-import org.joml.*;
+import org.joml.Random;
+import org.joml.Vector3f;
 
 public interface ParticleSpawn {
     Random random = new Random();

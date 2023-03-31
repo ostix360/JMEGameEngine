@@ -1,6 +1,6 @@
 package fr.ostix.game.entity.animated.colladaParser.dataStructures;
 
-import org.joml.*;
+import org.joml.Matrix4f;
 
 /**
  * This contains the data for a transformation of one joint, at a certain time

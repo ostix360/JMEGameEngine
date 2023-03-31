@@ -1,6 +1,7 @@
 package fr.ostix.game.entity.animated.colladaParser.dataStructures;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class KeyFrameData {
 

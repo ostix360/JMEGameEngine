@@ -1,8 +1,9 @@
 package fr.ostix.game.entity.animated.colladaParser.dataStructures;
 
-import org.joml.*;
+import org.joml.Vector3f;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Vertex {
 

@@ -1,15 +1,17 @@
 package fr.ostix.game.menu.component;
 
-import fr.ostix.game.core.*;
+import fr.ostix.game.core.Game;
+import fr.ostix.game.core.Input;
 import fr.ostix.game.core.events.EventManager;
 import fr.ostix.game.core.events.menu.QuestSelectedEvent;
-import fr.ostix.game.core.quest.*;
-import fr.ostix.game.core.resources.*;
-import fr.ostix.game.graphics.font.meshCreator.*;
-import fr.ostix.game.graphics.font.rendering.*;
-import fr.ostix.game.gui.*;
-import org.joml.*;
-import org.lwjgl.glfw.*;
+import fr.ostix.game.core.quest.QuestCategory;
+import fr.ostix.game.core.quest.QuestStatus;
+import fr.ostix.game.core.resources.ResourcePack;
+import fr.ostix.game.graphics.font.meshCreator.GUIText;
+import fr.ostix.game.graphics.font.rendering.MasterFont;
+import fr.ostix.game.gui.GuiTexture;
+import org.joml.Vector2f;
+import org.lwjgl.glfw.GLFW;
 
 public class QuestElement extends Component {
 

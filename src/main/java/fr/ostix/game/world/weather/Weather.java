@@ -1,9 +1,9 @@
 package fr.ostix.game.world.weather;
 
-import fr.ostix.game.core.camera.*;
-import fr.ostix.game.toolBox.*;
+import fr.ostix.game.core.camera.ICamera;
+import fr.ostix.game.toolBox.Color;
 import org.joml.Math;
-import org.joml.*;
+import org.joml.Vector3f;
 
 public class Weather {
 

@@ -1,10 +1,12 @@
 package fr.ostix.game.graphics.skybox;
 
-import fr.ostix.game.core.camera.*;
-import fr.ostix.game.toolBox.OpenGL.*;
-import fr.ostix.game.world.weather.*;
-import org.joml.*;
-import org.lwjgl.opengl.*;
+import fr.ostix.game.core.camera.Camera;
+import fr.ostix.game.toolBox.OpenGL.OpenGlUtils;
+import fr.ostix.game.toolBox.OpenGL.VAO;
+import fr.ostix.game.world.weather.SkyBox;
+import fr.ostix.game.world.weather.Weather;
+import org.joml.Matrix4f;
+import org.lwjgl.opengl.GL13;
 
 import static org.lwjgl.opengl.GL11.*;
 

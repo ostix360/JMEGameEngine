@@ -1,6 +1,6 @@
 package fr.ostix.game.core.events.quest;
 
-import fr.ostix.game.entity.*;
+import fr.ostix.game.entity.Player;
 
 public class QuestFinishedEvent extends QuestEvent {
     private Player p;

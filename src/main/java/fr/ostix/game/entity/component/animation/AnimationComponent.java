@@ -1,14 +1,15 @@
 package fr.ostix.game.entity.component.animation;
 
 
-import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.animated.animation.animatedModel.*;
-import fr.ostix.game.entity.animated.animation.animation.*;
-import fr.ostix.game.entity.component.*;
-import fr.ostix.game.toolBox.*;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.entity.animated.animation.animatedModel.AnimatedModel;
+import fr.ostix.game.entity.animated.animation.animation.Animation;
+import fr.ostix.game.entity.component.Component;
+import fr.ostix.game.entity.component.ComponentType;
+import fr.ostix.game.toolBox.Logger;
 import org.joml.Random;
 
-import java.util.*;
+import java.util.HashMap;
 
 public class AnimationComponent extends Component {
 

@@ -1,11 +1,11 @@
 package fr.ostix.game.core.events.listener.player;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.listener.*;
-import fr.ostix.game.core.events.player.*;
-import fr.ostix.game.entity.*;
+import fr.ostix.game.core.events.EventHandler;
+import fr.ostix.game.core.events.listener.Listener;
+import fr.ostix.game.core.events.player.PlayerMoveEvent;
+import fr.ostix.game.entity.Player;
 import org.joml.Math;
-import org.joml.*;
+import org.joml.Vector3f;
 
 
 public class PlayerListener implements Listener {

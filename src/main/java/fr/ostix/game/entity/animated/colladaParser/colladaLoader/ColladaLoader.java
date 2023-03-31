@@ -2,7 +2,8 @@ package fr.ostix.game.entity.animated.colladaParser.colladaLoader;
 
 
 import fr.ostix.game.entity.animated.colladaParser.dataStructures.*;
-import fr.ostix.game.entity.animated.colladaParser.xmlParser.*;
+import fr.ostix.game.entity.animated.colladaParser.xmlParser.XmlNode;
+import fr.ostix.game.entity.animated.colladaParser.xmlParser.XmlParser;
 
 public class ColladaLoader {
 

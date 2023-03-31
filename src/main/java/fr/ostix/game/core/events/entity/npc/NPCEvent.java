@@ -1,7 +1,7 @@
 package fr.ostix.game.core.events.entity.npc;
 
-import fr.ostix.game.core.events.entity.*;
-import fr.ostix.game.entity.entities.*;
+import fr.ostix.game.core.events.entity.EntityEvent;
+import fr.ostix.game.entity.entities.NPC;
 
 public abstract class NPCEvent extends EntityEvent {
 

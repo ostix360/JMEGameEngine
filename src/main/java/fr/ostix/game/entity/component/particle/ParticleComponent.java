@@ -1,9 +1,11 @@
 package fr.ostix.game.entity.component.particle;
 
-import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.component.*;
-import fr.ostix.game.graphics.particles.*;
-import org.joml.*;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.entity.component.Component;
+import fr.ostix.game.entity.component.ComponentType;
+import fr.ostix.game.graphics.particles.ParticleSystem;
+import fr.ostix.game.graphics.particles.ParticleTarget;
+import org.joml.Vector3f;
 
 public class ParticleComponent extends Component {
 

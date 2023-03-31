@@ -1,6 +1,6 @@
 package fr.ostix.game.toolBox;
 
-import java.io.*;
+import java.io.File;
 
 public class ToolDirectory {
 

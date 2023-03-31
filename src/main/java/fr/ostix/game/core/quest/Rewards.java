@@ -1,10 +1,11 @@
 package fr.ostix.game.core.quest;
 
 import com.google.gson.annotations.Expose;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.items.*;
+import fr.ostix.game.entity.Player;
+import fr.ostix.game.items.ItemStack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Rewards {
     @Expose

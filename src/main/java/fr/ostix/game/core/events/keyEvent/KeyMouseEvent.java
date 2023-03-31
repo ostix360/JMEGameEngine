@@ -1,7 +1,7 @@
 package fr.ostix.game.core.events.keyEvent;
 
-import fr.ostix.game.core.events.*;
-import org.joml.*;
+import fr.ostix.game.core.events.Event;
+import org.joml.Vector2f;
 
 public abstract class KeyMouseEvent extends Event {
     private final int KEY;

@@ -1,7 +1,7 @@
 package fr.ostix.game.core.events.sounds;
 
-import fr.ostix.game.audio.*;
-import fr.ostix.game.core.events.*;
+import fr.ostix.game.audio.SoundSource;
+import fr.ostix.game.core.events.Event;
 
 public class SoundsEvent extends Event {
 

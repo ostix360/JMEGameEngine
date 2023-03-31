@@ -1,13 +1,16 @@
 package fr.ostix.game.inventory;
 
-import fr.ostix.game.core.resources.*;
-import fr.ostix.game.gui.*;
-import fr.ostix.game.items.*;
-import fr.ostix.game.menu.component.*;
-import fr.ostix.game.toolBox.*;
-import org.joml.*;
+import fr.ostix.game.core.resources.ResourcePack;
+import fr.ostix.game.gui.GuiTexture;
+import fr.ostix.game.gui.MasterGui;
+import fr.ostix.game.items.ItemStack;
+import fr.ostix.game.items.ItemType;
+import fr.ostix.game.menu.component.Button;
+import fr.ostix.game.menu.component.VerticalButton;
+import fr.ostix.game.toolBox.Logger;
+import org.joml.Vector2f;
 
-import java.util.*;
+import java.util.List;
 
 public class PlayerInventory extends Inventory {
 

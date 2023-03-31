@@ -1,10 +1,12 @@
 package fr.ostix.game.toolBox.OpenGL;
 
-import com.jme3.jme3tools.*;
+import com.jme3.jme3tools.VertexBuffer;
 import fr.ostix.game.toolBox.Logger;
-import org.lwjgl.opengl.*;
+import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL30;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VAO {
     public final int id;

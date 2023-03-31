@@ -1,6 +1,6 @@
 package fr.ostix.game.entity.component.ai;
 
-import org.joml.*;
+import org.joml.Vector3f;
 
 public class AIProperties {
     private final float updatePerSecond;

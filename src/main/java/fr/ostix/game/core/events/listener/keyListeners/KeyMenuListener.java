@@ -1,11 +1,14 @@
 package fr.ostix.game.core.events.listener.keyListeners;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.gui.*;
-import fr.ostix.game.core.events.keyEvent.*;
-import fr.ostix.game.menu.*;
+import fr.ostix.game.core.events.EventHandler;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.gui.GuiCloseEvent;
+import fr.ostix.game.core.events.keyEvent.KeyMaintainedEvent;
+import fr.ostix.game.core.events.keyEvent.KeyPressedEvent;
+import fr.ostix.game.core.events.keyEvent.KeyReleasedEvent;
+import fr.ostix.game.menu.Screen;
 
-import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 
 public class KeyMenuListener implements KeyListener {
 

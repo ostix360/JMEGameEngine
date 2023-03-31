@@ -1,7 +1,7 @@
 package fr.ostix.game.items;
 
-import com.google.gson.annotations.*;
-import fr.ostix.game.toolBox.*;
+import com.google.gson.annotations.Expose;
+import fr.ostix.game.toolBox.Logger;
 
 public class ItemStack {
     @Expose
@@ -65,15 +65,17 @@ public class ItemStack {
         return count;
     }
 
-    public void removeItems(Item item, int number) {
+    public boolean removeItems(Item item, int number) {
         if (this.item == item){
+            if (this.count < number){
+                Logger.warn("Error You want to remove more item than you have");
+                return false;
+            }
             this.count -= number;
-        }else{
+        }else {
             Logger.warn("you couldn't remove item to an itemStack if there is not the same...");
         }
-        if (this.count <= 0){
-            this.count = 0;
-        }
+        return true;
     }
 
     public boolean removeItems(int number) {

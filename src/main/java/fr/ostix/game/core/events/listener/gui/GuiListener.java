@@ -1,10 +1,13 @@
 package fr.ostix.game.core.events.listener.gui;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.gui.*;
-import fr.ostix.game.core.events.listener.*;
-import fr.ostix.game.menu.*;
-import fr.ostix.game.menu.stat.*;
+import fr.ostix.game.core.events.EventHandler;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.ExitGameEvent;
+import fr.ostix.game.core.events.gui.GuiCloseEvent;
+import fr.ostix.game.core.events.gui.GuiOpenEvent;
+import fr.ostix.game.core.events.listener.Listener;
+import fr.ostix.game.menu.MainMenu;
+import fr.ostix.game.menu.stat.StateManager;
 
 public class GuiListener implements Listener {
     private final StateManager stateManager;

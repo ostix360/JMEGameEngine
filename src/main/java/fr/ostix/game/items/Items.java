@@ -1,6 +1,6 @@
 package fr.ostix.game.items;
 
-import java.util.*;
+import java.util.HashMap;
 
 public class Items {
 

@@ -1,6 +1,9 @@
 package fr.ostix.game.entity.animated.colladaParser.xmlParser;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Represents a node in an XML file. This contains the name of the node, a map

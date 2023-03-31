@@ -1,8 +1,8 @@
 package fr.ostix.game.graphics.particles;
 
-import fr.ostix.game.core.camera.*;
-import fr.ostix.game.core.loader.*;
-import org.joml.*;
+import fr.ostix.game.core.camera.Camera;
+import fr.ostix.game.core.loader.Loader;
+import org.joml.Matrix4f;
 
 import java.util.*;
 

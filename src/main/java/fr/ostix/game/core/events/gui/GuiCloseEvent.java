@@ -1,6 +1,6 @@
 package fr.ostix.game.core.events.gui;
 
-import fr.ostix.game.menu.*;
+import fr.ostix.game.menu.Screen;
 
 public class GuiCloseEvent extends GuiEvent {
 

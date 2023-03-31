@@ -1,6 +1,6 @@
 package fr.ostix.game.world.weather;
 
-import fr.ostix.game.toolBox.*;
+import fr.ostix.game.toolBox.Color;
 
 public class WeatherFrame {
     private final float time;

@@ -1,12 +1,12 @@
 package fr.ostix.game.core.quest;
 
 import com.google.gson.annotations.Expose;
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.listener.quest.*;
-import fr.ostix.game.core.loader.json.*;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.listener.quest.QuestLocationListener;
+import fr.ostix.game.core.loader.json.JsonUtils;
 import fr.ostix.game.core.quest.serialization.RewardsTypeAdapter;
 import fr.ostix.game.toolBox.Vec3f;
-import org.joml.*;
+import org.joml.Vector3f;
 
 public class QuestLocation extends Quest {
     @Expose

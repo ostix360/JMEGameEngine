@@ -1,6 +1,6 @@
 package fr.ostix.game.core.events.menu;
 
-import fr.ostix.game.core.events.*;
+import fr.ostix.game.core.events.Event;
 
 public class QuestSelectedEvent extends Event {
 

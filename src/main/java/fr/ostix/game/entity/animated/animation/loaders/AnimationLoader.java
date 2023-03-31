@@ -1,12 +1,18 @@
 package fr.ostix.game.entity.animated.animation.loaders;
 
 
-import fr.ostix.game.entity.animated.animation.animation.*;
-import fr.ostix.game.entity.animated.colladaParser.colladaLoader.*;
-import fr.ostix.game.entity.animated.colladaParser.dataStructures.*;
-import org.joml.*;
+import fr.ostix.game.entity.animated.animation.animation.Animation;
+import fr.ostix.game.entity.animated.animation.animation.JointTransform;
+import fr.ostix.game.entity.animated.animation.animation.KeyFrame;
+import fr.ostix.game.entity.animated.animation.animation.Quaternion;
+import fr.ostix.game.entity.animated.colladaParser.colladaLoader.ColladaLoader;
+import fr.ostix.game.entity.animated.colladaParser.dataStructures.AnimationData;
+import fr.ostix.game.entity.animated.colladaParser.dataStructures.JointTransformData;
+import fr.ostix.game.entity.animated.colladaParser.dataStructures.KeyFrameData;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
-import java.util.*;
+import java.util.HashMap;
 
 
 /**

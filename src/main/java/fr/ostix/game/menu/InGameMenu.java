@@ -2,12 +2,13 @@ package fr.ostix.game.menu;
 
 import fr.ostix.game.core.events.EventManager;
 import fr.ostix.game.core.events.listener.menu.InGameMenuListener;
-import fr.ostix.game.core.resources.*;
-import fr.ostix.game.entity.*;
+import fr.ostix.game.core.resources.ResourcePack;
+import fr.ostix.game.entity.Player;
 import fr.ostix.game.graphics.font.meshCreator.GUIText;
 import fr.ostix.game.graphics.font.rendering.MasterFont;
-import fr.ostix.game.gui.*;
-import org.joml.*;
+import fr.ostix.game.gui.GuiTexture;
+import fr.ostix.game.gui.MasterGui;
+import org.joml.Vector2f;
 
 import java.util.ArrayList;
 import java.util.List;

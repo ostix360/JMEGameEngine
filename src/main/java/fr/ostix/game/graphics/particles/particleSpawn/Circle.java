@@ -1,8 +1,9 @@
 package fr.ostix.game.graphics.particles.particleSpawn;
 
-import fr.ostix.game.toolBox.*;
+import fr.ostix.game.toolBox.Maths;
 import org.joml.Math;
-import org.joml.*;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
 
 public class Circle implements ParticleSpawn {
 

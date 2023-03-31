@@ -1,14 +1,17 @@
 package fr.ostix.game.inventory;
 
-import fr.ostix.game.core.*;
-import fr.ostix.game.core.resources.*;
-import fr.ostix.game.graphics.font.meshCreator.*;
-import fr.ostix.game.graphics.font.rendering.*;
-import fr.ostix.game.gui.*;
-import fr.ostix.game.items.*;
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.toolBox.OpenGL.*;
-import org.joml.*;
+import fr.ostix.game.core.Game;
+import fr.ostix.game.core.Input;
+import fr.ostix.game.core.resources.ResourcePack;
+import fr.ostix.game.graphics.font.meshCreator.GUIText;
+import fr.ostix.game.graphics.font.rendering.MasterFont;
+import fr.ostix.game.gui.GuiLayer;
+import fr.ostix.game.gui.GuiTexture;
+import fr.ostix.game.gui.MasterGui;
+import fr.ostix.game.items.ItemStack;
+import fr.ostix.game.toolBox.Color;
+import fr.ostix.game.toolBox.OpenGL.DisplayManager;
+import org.joml.Vector2f;
 
 public class Slot {
 

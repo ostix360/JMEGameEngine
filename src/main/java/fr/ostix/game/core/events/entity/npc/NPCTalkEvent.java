@@ -1,7 +1,7 @@
 package fr.ostix.game.core.events.entity.npc;
 
-import fr.ostix.game.entity.entities.*;
-import fr.ostix.game.world.*;
+import fr.ostix.game.entity.entities.NPC;
+import fr.ostix.game.world.World;
 
 public class NPCTalkEvent extends NPCEvent {
 

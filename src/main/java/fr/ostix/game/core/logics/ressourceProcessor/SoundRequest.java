@@ -1,7 +1,8 @@
 package fr.ostix.game.core.logics.ressourceProcessor;
 
 
-import fr.ostix.game.audio.*;
+import fr.ostix.game.audio.AudioManager;
+import fr.ostix.game.audio.SoundSource;
 
 public class SoundRequest extends GLRequest{
     private final String path;

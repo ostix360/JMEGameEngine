@@ -1,25 +1,35 @@
 package fr.ostix.game.graphics;
 
-import fr.ostix.game.core.camera.*;
+import fr.ostix.game.core.camera.Camera;
 import fr.ostix.game.core.logics.ressourceProcessor.GLRequestProcessor;
 import fr.ostix.game.core.logics.ressourceProcessor.GLRunnableRequest;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.component.light.*;
-import fr.ostix.game.graphics.entity.*;
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.graphics.skybox.*;
-import fr.ostix.game.graphics.terrain.*;
-import fr.ostix.game.graphics.water.*;
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.toolBox.OpenGL.*;
-import fr.ostix.game.world.chunk.*;
-import fr.ostix.game.world.water.*;
-import fr.ostix.game.world.weather.*;
-import org.joml.*;
-import org.lwjgl.opengl.*;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.entity.component.light.Light;
+import fr.ostix.game.graphics.entity.ClassicShader;
+import fr.ostix.game.graphics.entity.EntityRenderer;
+import fr.ostix.game.graphics.model.Model;
+import fr.ostix.game.graphics.skybox.SkyboxRenderer;
+import fr.ostix.game.graphics.terrain.TerrainRenderer;
+import fr.ostix.game.graphics.terrain.TerrainShader;
+import fr.ostix.game.graphics.water.WaterRenderer;
+import fr.ostix.game.toolBox.Color;
+import fr.ostix.game.toolBox.OpenGL.DisplayManager;
+import fr.ostix.game.toolBox.OpenGL.OpenGlUtils;
+import fr.ostix.game.world.chunk.Chunk;
+import fr.ostix.game.world.water.WaterFrameBuffers;
+import fr.ostix.game.world.water.WaterTile;
+import fr.ostix.game.world.weather.Weather;
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL30;
 
-import java.lang.Math;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.lwjgl.opengl.GL11.*;
 

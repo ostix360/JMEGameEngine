@@ -1,11 +1,10 @@
 package fr.ostix.game.core.loader.json.typeAdapter;
 
-import java.lang.reflect.Type;
-
 import com.google.gson.*;
-
 import fr.ostix.game.items.ItemStack;
 import fr.ostix.game.items.Items;
+
+import java.lang.reflect.Type;
 
 public class ItemStackTypeAdapter implements JsonSerializer<ItemStack>, JsonDeserializer<ItemStack> {
 

@@ -1,18 +1,29 @@
 package fr.ostix.game.core.loader;
 
-import de.matthiasmann.twl.utils.*;
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.graphics.textures.*;
-import fr.ostix.game.toolBox.OpenGL.*;
-import org.lwjgl.opengl.*;
+import de.matthiasmann.twl.utils.PNGDecoder;
+import fr.ostix.game.graphics.model.MeshModel;
+import fr.ostix.game.graphics.textures.TextureData;
+import fr.ostix.game.graphics.textures.TextureLoader;
+import fr.ostix.game.graphics.textures.TextureUtils;
+import fr.ostix.game.toolBox.OpenGL.VAO;
+import fr.ostix.game.toolBox.OpenGL.VBO;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import org.lwjgl.opengl.GL14;
+import org.lwjgl.opengl.GL30;
 
-import java.io.*;
-import java.nio.*;
-import java.util.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
-import static fr.ostix.game.toolBox.ToolDirectory.*;
+import static fr.ostix.game.toolBox.ToolDirectory.RES_FOLDER;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL13.*;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE_CUBE_MAP;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE_CUBE_MAP_POSITIVE_X;
 
 public class Loader {
 

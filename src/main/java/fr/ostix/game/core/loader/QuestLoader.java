@@ -1,10 +1,11 @@
 package fr.ostix.game.core.loader;
 
-import fr.ostix.game.core.quest.*;
-import fr.ostix.game.toolBox.*;
+import fr.ostix.game.core.quest.QuestCategory;
+import fr.ostix.game.core.quest.QuestManager;
+import fr.ostix.game.toolBox.ToolDirectory;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.util.Objects;
 
 public class QuestLoader {
     public static void loadAllQuest() {

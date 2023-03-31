@@ -1,7 +1,10 @@
 package fr.ostix.game.core.logics;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Scheduler {
     private static final Timer timer = new Timer("Timer");

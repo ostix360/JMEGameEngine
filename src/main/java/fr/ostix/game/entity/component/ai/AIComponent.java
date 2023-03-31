@@ -1,10 +1,10 @@
 package fr.ostix.game.entity.component.ai;
 
-import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.component.*;
-import org.joml.*;
-
-import java.lang.Math;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.entity.component.Component;
+import fr.ostix.game.entity.component.ComponentType;
+import org.joml.Random;
+import org.joml.Vector3f;
 
 public class AIComponent extends Component {
 

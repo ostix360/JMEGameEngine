@@ -1,9 +1,8 @@
 package fr.ostix.game.audio;
 
-import fr.ostix.game.entity.*;
-import org.joml.*;
-
-import java.lang.Math;
+import fr.ostix.game.entity.Player;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 import static org.lwjgl.openal.AL10.*;
 

@@ -1,10 +1,11 @@
 package fr.ostix.game.entity.component.light;
 
-import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.component.*;
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.world.*;
-import org.joml.*;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.entity.component.Component;
+import fr.ostix.game.entity.component.ComponentType;
+import fr.ostix.game.toolBox.Color;
+import fr.ostix.game.world.World;
+import org.joml.Vector3f;
 
 public class Light extends Component {
     private Vector3f position;

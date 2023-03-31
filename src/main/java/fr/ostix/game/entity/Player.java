@@ -1,10 +1,10 @@
 package fr.ostix.game.entity;
 
-import com.jme3.bullet.control.*;
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.inventory.*;
-import fr.ostix.game.world.*;
-import org.joml.*;
+import com.jme3.bullet.control.BetterCharacterControl;
+import fr.ostix.game.graphics.model.Model;
+import fr.ostix.game.inventory.PlayerInventory;
+import fr.ostix.game.world.World;
+import org.joml.Vector3f;
 
 public class Player extends Entity {
 

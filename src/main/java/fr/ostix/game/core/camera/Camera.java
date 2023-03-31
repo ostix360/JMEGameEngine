@@ -1,15 +1,15 @@
 package fr.ostix.game.core.camera;
 
-import fr.ostix.game.core.*;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.graphics.*;
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.world.*;
-import org.joml.*;
+import fr.ostix.game.core.Input;
+import fr.ostix.game.entity.Player;
+import fr.ostix.game.entity.Transform;
+import fr.ostix.game.graphics.MasterRenderer;
+import fr.ostix.game.toolBox.Maths;
+import fr.ostix.game.world.World;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
-import java.lang.Math;
-
-import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_1;
 
 public class Camera implements ICamera {
 

@@ -1,13 +1,14 @@
 package fr.ostix.game.core.events.listener.player;
 
-import fr.ostix.game.core.events.*;
+import fr.ostix.game.core.events.EventHandler;
+import fr.ostix.game.core.events.EventManager;
 import fr.ostix.game.core.events.entity.EntityCloseEvent;
-import fr.ostix.game.core.events.player.*;
-import fr.ostix.game.entity.*;
+import fr.ostix.game.core.events.player.PlayerMoveEvent;
+import fr.ostix.game.entity.Entity;
 import fr.ostix.game.entity.entities.Interact;
-import fr.ostix.game.world.*;
+import fr.ostix.game.world.World;
 
-import java.util.*;
+import java.util.List;
 
 public class PlayerInteractListener extends PlayerListener {
 

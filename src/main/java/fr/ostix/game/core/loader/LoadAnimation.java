@@ -1,9 +1,10 @@
 package fr.ostix.game.core.loader;
 
 
-import fr.ostix.game.entity.animated.animation.animation.*;
-import fr.ostix.game.entity.animated.animation.loaders.*;
-import fr.ostix.game.toolBox.*;
+import fr.ostix.game.entity.animated.animation.animation.Animation;
+import fr.ostix.game.entity.animated.animation.loaders.AnimationLoader;
+import fr.ostix.game.toolBox.FileType;
+import fr.ostix.game.toolBox.ToolDirectory;
 
 public class LoadAnimation {
 

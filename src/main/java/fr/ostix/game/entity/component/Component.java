@@ -1,6 +1,6 @@
 package fr.ostix.game.entity.component;
 
-import fr.ostix.game.entity.*;
+import fr.ostix.game.entity.Entity;
 
 public abstract class Component {
     private final ComponentType type;

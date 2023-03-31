@@ -1,11 +1,12 @@
 package fr.ostix.game.core;
 
-import fr.ostix.game.core.quest.*;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.entities.*;
-import fr.ostix.game.items.*;
+import fr.ostix.game.core.quest.QuestCategory;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.entity.Player;
+import fr.ostix.game.entity.entities.NPC;
+import fr.ostix.game.items.Item;
 
-import java.util.*;
+import java.util.HashMap;
 
 public class Registered {
     private static final HashMap<Integer, QuestCategory> questRegistered = new HashMap<>();

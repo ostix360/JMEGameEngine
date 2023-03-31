@@ -1,12 +1,13 @@
 package fr.ostix.game.graphics.font.meshCreator;
 
 
-import fr.ostix.game.graphics.font.rendering.*;
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.toolBox.*;
-import org.joml.*;
+import fr.ostix.game.graphics.font.rendering.MasterFont;
+import fr.ostix.game.graphics.model.MeshModel;
+import fr.ostix.game.toolBox.Color;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
 
-import java.util.*;
+import java.util.Objects;
 
 
 public class GUIText {
@@ -153,6 +154,19 @@ public class GUIText {
 
         public void setNumberOfLines(int numberOfLines) {
             this.numberOfLines = numberOfLines;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            TextProperties that = (TextProperties) o;
+            return Float.compare(that.getFontSize(), getFontSize()) == 0 && getNumberOfLines() == that.getNumberOfLines() && Objects.equals(getTextString(), that.getTextString());
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(getTextString(), getFontSize(), getNumberOfLines());
         }
     }
 }

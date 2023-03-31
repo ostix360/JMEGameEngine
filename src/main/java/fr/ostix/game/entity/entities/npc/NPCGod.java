@@ -1,12 +1,8 @@
 package fr.ostix.game.entity.entities.npc;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.states.*;
-import fr.ostix.game.entity.entities.*;
-import fr.ostix.game.entity.entities.npc.gui.*;
-import fr.ostix.game.world.*;
-
-import java.util.*;
+import fr.ostix.game.entity.entities.NPC;
+import fr.ostix.game.entity.entities.npc.gui.NPCGodGui;
+import fr.ostix.game.world.World;
 
 public class NPCGod extends NPC {
     private static final NPCGod INSTANCE = new NPCGod();

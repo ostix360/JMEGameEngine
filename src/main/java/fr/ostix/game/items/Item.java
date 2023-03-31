@@ -1,12 +1,13 @@
 package fr.ostix.game.items;
 
-import com.google.gson.annotations.*;
-import fr.ostix.game.core.*;
-import fr.ostix.game.core.resources.*;
-import fr.ostix.game.graphics.font.meshCreator.*;
-import fr.ostix.game.gui.*;
-import fr.ostix.game.toolBox.*;
-import org.joml.*;
+import com.google.gson.annotations.Expose;
+import fr.ostix.game.core.Game;
+import fr.ostix.game.core.resources.ResourcePack;
+import fr.ostix.game.graphics.font.meshCreator.GUIText;
+import fr.ostix.game.gui.GuiTexture;
+import fr.ostix.game.gui.MasterGui;
+import fr.ostix.game.toolBox.Color;
+import org.joml.Vector2f;
 
 import java.util.Objects;
 

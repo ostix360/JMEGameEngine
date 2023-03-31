@@ -1,18 +1,24 @@
 package fr.ostix.game.graphics.terrain;
 
-import fr.ostix.game.core.camera.*;
-import fr.ostix.game.entity.component.light.*;
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.graphics.textures.*;
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.toolBox.OpenGL.*;
-import fr.ostix.game.world.*;
-import fr.ostix.game.world.chunk.*;
-import fr.ostix.game.world.texture.*;
-import org.joml.*;
-import org.lwjgl.opengl.*;
+import fr.ostix.game.core.camera.Camera;
+import fr.ostix.game.entity.component.light.Light;
+import fr.ostix.game.graphics.model.MeshModel;
+import fr.ostix.game.graphics.textures.Texture;
+import fr.ostix.game.toolBox.Color;
+import fr.ostix.game.toolBox.Maths;
+import fr.ostix.game.toolBox.OpenGL.OpenGlUtils;
+import fr.ostix.game.toolBox.OpenGL.VAO;
+import fr.ostix.game.world.Terrain;
+import fr.ostix.game.world.chunk.Chunk;
+import fr.ostix.game.world.texture.TerrainTexturePack;
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
+import org.lwjgl.opengl.GL13;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 import static org.lwjgl.opengl.GL11.*;
 

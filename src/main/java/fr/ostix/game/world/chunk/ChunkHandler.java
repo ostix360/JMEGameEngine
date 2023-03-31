@@ -1,13 +1,15 @@
 package fr.ostix.game.world.chunk;
 
-import fr.ostix.game.core.camera.*;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.world.*;
+import fr.ostix.game.core.camera.Camera;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.world.Terrain;
+import fr.ostix.game.world.World;
 import org.joml.Math;
-import org.joml.*;
+import org.joml.Vector2f;
 
 import java.util.*;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ChunkHandler {
 
@@ -97,14 +99,10 @@ public class ChunkHandler {
             chunksFileList.remove(new Vector2f(playerChunkX + viewDistanceChunkFile + 1, playerChunkZ));
             chunksFileList.remove(new Vector2f(playerChunkX - viewDistanceChunkFile - 1, playerChunkZ));
 
-            chunksFileList.remove(
-                    new Vector2f(playerChunkX + viewDistanceChunkFile + 1, playerChunkZ + viewDistanceChunkFile + 1));
-            chunksFileList.remove(
-                    new Vector2f(playerChunkX - viewDistanceChunkFile - 1, playerChunkZ - viewDistanceChunkFile - 1));
-            chunksFileList.remove(
-                    new Vector2f(playerChunkX + viewDistanceChunkFile + 1, playerChunkZ - viewDistanceChunkFile - 1));
-            chunksFileList.remove(
-                    new Vector2f(playerChunkX + viewDistanceChunkFile - 1, playerChunkZ + viewDistanceChunkFile + 1));
+            chunksFileList.remove(new Vector2f(playerChunkX + viewDistanceChunkFile + 1, playerChunkZ + viewDistanceChunkFile + 1));
+            chunksFileList.remove(new Vector2f(playerChunkX - viewDistanceChunkFile - 1, playerChunkZ - viewDistanceChunkFile - 1));
+            chunksFileList.remove(new Vector2f(playerChunkX + viewDistanceChunkFile + 1, playerChunkZ - viewDistanceChunkFile - 1));
+            chunksFileList.remove(new Vector2f(playerChunkX + viewDistanceChunkFile - 1, playerChunkZ + viewDistanceChunkFile + 1));
 
             for (int x = 0; x < cam.viewDistance / CHUNK_FILE_SIZE + 1; x++) {
                 chunksFileList.remove(new Vector2f(playerChunkX + x, playerChunkZ + viewDistanceChunkFile + 1));
@@ -129,8 +127,7 @@ public class ChunkHandler {
                 }
             }
 
-            unLoadChunks(playerChunkX, playerChunkZ, -cam.viewDistance, -cam.viewDistance,
-                    cam.viewDistance, cam.viewDistance);
+            unLoadChunks(playerChunkX, playerChunkZ, -cam.viewDistance, -cam.viewDistance, cam.viewDistance, cam.viewDistance);
 
             // synchronized (chunkList) {
             //
@@ -153,57 +150,34 @@ public class ChunkHandler {
     private void unLoadChunks(int playerChunkX, int playerChunkZ, int xMin, int zMin, int xMax, int zMax) {
         Chunk chunk;
 
-        chunk = chunkList.remove(new Vector2f(playerChunkX, playerChunkZ + zMax + 1));
-        World.getPhysics().remove(chunk);
+        for (int x = xMin - 1; x <= xMax + 1; x++) {
+            chunk = chunkList.remove(new Vector2f(playerChunkX + x, playerChunkZ + zMax + 1));
+            World.getPhysics().remove(chunk);
 
-        chunk = chunkList.remove(new Vector2f(playerChunkX, playerChunkZ + zMin - 1));
-        World.getPhysics().remove(chunk);
+            chunk = chunkList.remove(new Vector2f(playerChunkX + x, playerChunkZ + zMin - 1));
+            World.getPhysics().remove(chunk);
+        }
 
-        chunk = chunkList.remove(new Vector2f(playerChunkX + xMax + 1, playerChunkZ));
-        World.getPhysics().remove(chunk);
+        for (int z = zMin - 1; z <= zMax + 1; z++) {
+            chunk = chunkList.remove(new Vector2f(playerChunkX + xMax + 1, playerChunkZ + z));
+            World.getPhysics().remove(chunk);
 
-        chunk = chunkList.remove(new Vector2f(playerChunkX + xMin - 1, playerChunkZ));
-        World.getPhysics().remove(chunk);
+            chunk = chunkList.remove(new Vector2f(playerChunkX + xMin - 1, playerChunkZ + z));
+            World.getPhysics().remove(chunk);
+        }
 
+        // Remove corner chunks
         chunk = chunkList.remove(new Vector2f(playerChunkX + xMax + 1, playerChunkZ + zMax + 1));
-        World.getPhysics().remove(chunk);
-
-        chunk = chunkList.remove(new Vector2f(playerChunkX + xMin - 1, playerChunkZ + zMin - 1));
-        World.getPhysics().remove(chunk);
-
-        chunk = chunkList.remove(new Vector2f(playerChunkX + xMax + 1, playerChunkZ + zMin - 1));
         World.getPhysics().remove(chunk);
 
         chunk = chunkList.remove(new Vector2f(playerChunkX + xMin - 1, playerChunkZ + zMax + 1));
         World.getPhysics().remove(chunk);
 
-        for (int x = 0; x < cam.viewDistance + 1; x++) {
-            chunk = chunkList.remove(new Vector2f(playerChunkX + x, playerChunkZ + zMax + 1));
-            World.getPhysics().remove(chunk);
+        chunk = chunkList.remove(new Vector2f(playerChunkX + xMax + 1, playerChunkZ + zMin - 1));
+        World.getPhysics().remove(chunk);
 
-            chunk = chunkList.remove(new Vector2f(playerChunkX - x, playerChunkZ + zMax + 1));
-            World.getPhysics().remove(chunk);
-
-            chunk = chunkList.remove(new Vector2f(playerChunkX + x, playerChunkZ + zMin - 1));
-            World.getPhysics().remove(chunk);
-
-            chunk = chunkList.remove(new Vector2f(playerChunkX - x, playerChunkZ + zMin - 1));
-            World.getPhysics().remove(chunk);
-        }
-
-        for (int z = 0; z < cam.viewDistance + 1; z++) {
-            chunk = chunkList.remove(new Vector2f(playerChunkX + xMax + 1, playerChunkZ + z));
-            World.getPhysics().remove(chunk);
-
-            chunk = chunkList.remove(new Vector2f(playerChunkX + xMax + 1, playerChunkZ - z));
-            World.getPhysics().remove(chunk);
-
-            chunk = chunkList.remove(new Vector2f(playerChunkX + xMin - 1, playerChunkZ + z));
-            World.getPhysics().remove(chunk);
-
-            chunk = chunkList.remove(new Vector2f(playerChunkX + xMin - 1, playerChunkZ - z));
-            World.getPhysics().remove(chunk);
-        }
+        chunk = chunkList.remove(new Vector2f(playerChunkX + xMin - 1, playerChunkZ + zMin - 1));
+        World.getPhysics().remove(chunk);
     }
 
     private void loadChunks(int playerChunkX, int playerChunkZ, int x, int z) {
@@ -227,62 +201,54 @@ public class ChunkHandler {
             chunkFileIndexX = chunkFileIndexXPositive;
             chunkFileIndexZ = (int) Math.floor(playerChunkZ / (float) CHUNK_FILE_SIZE);
 
-            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ))
-                    .load(playerChunkX + x, playerChunkZ);
+            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ)).load(playerChunkX + x, playerChunkZ);
             addChunk(chunk, x, 0, playerChunkX, playerChunkZ);
         }
 
         if (!(chunkList.containsKey(new Vector2f(playerChunkX, playerChunkZ + z)))) {
             chunkFileIndexX = (int) Math.floor(playerChunkX / (float) CHUNK_FILE_SIZE);
             chunkFileIndexZ = chunkFileIndexZPositive;
-            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ))
-                    .load(playerChunkX, playerChunkZ + z);
+            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ)).load(playerChunkX, playerChunkZ + z);
             addChunk(chunk, 0, z, playerChunkX, playerChunkZ);
         }
 
         if (!(chunkList.containsKey(new Vector2f(playerChunkX + x, playerChunkZ + z)))) {
             chunkFileIndexX = chunkFileIndexXPositive;
             chunkFileIndexZ = chunkFileIndexZPositive;
-            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ))
-                    .load(playerChunkX + x, playerChunkZ + z);
+            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ)).load(playerChunkX + x, playerChunkZ + z);
             addChunk(chunk, x, z, playerChunkX, playerChunkZ);
         }
         if (!(chunkList.containsKey(new Vector2f(playerChunkX + x, playerChunkZ - z)))) {
             chunkFileIndexX = chunkFileIndexXPositive;
             chunkFileIndexZ = (int) Math.floor((playerChunkZ - z) / (float) CHUNK_FILE_SIZE);
-            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ))
-                    .load(playerChunkX + x, playerChunkZ - z);
+            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ)).load(playerChunkX + x, playerChunkZ - z);
             addChunk(chunk, x, -z, playerChunkX, playerChunkZ);
         }
 
         if (!(chunkList.containsKey(new Vector2f(playerChunkX, playerChunkZ - z)))) {
             chunkFileIndexX = (int) Math.floor(playerChunkX / ((float) CHUNK_FILE_SIZE));
             chunkFileIndexZ = (int) Math.floor((playerChunkZ - z) / ((float) CHUNK_FILE_SIZE));
-            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ))
-                    .load(playerChunkX, playerChunkZ - z);
+            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ)).load(playerChunkX, playerChunkZ - z);
             addChunk(chunk, 0, -z, playerChunkX, playerChunkZ);
         }
 
         if (!(chunkList.containsKey(new Vector2f(playerChunkX - x, playerChunkZ - z)))) {
             chunkFileIndexX = (int) Math.floor((playerChunkX - x) / ((float) CHUNK_FILE_SIZE));
             chunkFileIndexZ = (int) Math.floor((playerChunkZ - z) / ((float) CHUNK_FILE_SIZE));
-            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ))
-                    .load(playerChunkX - x, playerChunkZ - z);
+            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ)).load(playerChunkX - x, playerChunkZ - z);
             addChunk(chunk, -x, -z, playerChunkX, playerChunkZ);
         }
 
         if (!(chunkList.containsKey(new Vector2f(playerChunkX - x, playerChunkZ + z)))) {
             chunkFileIndexX = (int) Math.floor((playerChunkX - x) / ((float) CHUNK_FILE_SIZE));
             chunkFileIndexZ = chunkFileIndexZPositive;
-            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ)).load(playerChunkX - x,
-                    playerChunkZ + z);
+            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ)).load(playerChunkX - x, playerChunkZ + z);
             addChunk(chunk, -x, z, playerChunkX, playerChunkZ);
         }
         if (!(chunkList.containsKey(new Vector2f(playerChunkX - x, playerChunkZ)))) {
             chunkFileIndexX = (int) Math.floor((playerChunkX - x) / ((float) CHUNK_FILE_SIZE));
             chunkFileIndexZ = (int) Math.floor(playerChunkZ / ((float) CHUNK_FILE_SIZE));
-            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ)).load(playerChunkX - x,
-                    playerChunkZ);
+            Chunk chunk = chunksFileList.get(new Vector2f(chunkFileIndexX, chunkFileIndexZ)).load(playerChunkX - x, playerChunkZ);
             addChunk(chunk, -x, 0, playerChunkX, playerChunkZ);
         }
 

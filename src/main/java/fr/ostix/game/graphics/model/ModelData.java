@@ -1,7 +1,7 @@
 package fr.ostix.game.graphics.model;
 
 
-import fr.ostix.game.entity.animated.colladaParser.dataStructures.*;
+import fr.ostix.game.entity.animated.colladaParser.dataStructures.MeshData;
 
 public class ModelData {
     private final float[] vertices;

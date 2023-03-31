@@ -1,12 +1,14 @@
 package fr.ostix.game.core.loader.json;
 
-import com.google.gson.*;
-import fr.ostix.game.core.quest.*;
-import fr.ostix.game.core.quest.serialization.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSerializer;
+import com.google.gson.TypeAdapter;
 
 import java.io.*;
-import java.nio.charset.*;
-import java.nio.file.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class JsonUtils {
 

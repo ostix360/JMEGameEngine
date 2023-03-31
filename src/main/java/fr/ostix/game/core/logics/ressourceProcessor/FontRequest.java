@@ -1,13 +1,16 @@
 package fr.ostix.game.core.logics.ressourceProcessor;
 
-import fr.ostix.game.core.loader.*;
-import fr.ostix.game.graphics.font.meshCreator.*;
-import fr.ostix.game.graphics.font.rendering.*;
-import fr.ostix.game.graphics.model.*;
+import fr.ostix.game.core.loader.Loader;
+import fr.ostix.game.graphics.font.meshCreator.FontType;
+import fr.ostix.game.graphics.font.meshCreator.GUIText;
+import fr.ostix.game.graphics.font.meshCreator.TextMeshData;
+import fr.ostix.game.graphics.font.rendering.MasterFont;
+import fr.ostix.game.graphics.model.MeshModel;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static fr.ostix.game.graphics.font.meshCreator.GUIText.TextProperties;
-
-import java.util.*;
 
 public class FontRequest extends GLRequest {
     private static final Map<TextProperties, MeshModel> fontsModels = new HashMap<>();

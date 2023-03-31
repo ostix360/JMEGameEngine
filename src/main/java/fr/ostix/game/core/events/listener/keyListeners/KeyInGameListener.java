@@ -1,19 +1,25 @@
 package fr.ostix.game.core.events.listener.keyListeners;
 
-import fr.ostix.game.core.*;
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.entity.*;
+import fr.ostix.game.core.Input;
+import fr.ostix.game.core.events.EventHandler;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.entity.EntityInteractEvent;
 import fr.ostix.game.core.events.entity.npc.NPCTalkEvent;
-import fr.ostix.game.core.events.keyEvent.*;
-import fr.ostix.game.core.events.player.*;
-import fr.ostix.game.core.events.states.*;
-import fr.ostix.game.entity.*;
+import fr.ostix.game.core.events.keyEvent.KeyMaintainedEvent;
+import fr.ostix.game.core.events.keyEvent.KeyPressedEvent;
+import fr.ostix.game.core.events.keyEvent.KeyReleasedEvent;
+import fr.ostix.game.core.events.player.PlayerGiveItemEvent;
+import fr.ostix.game.core.events.player.PlayerMoveEvent;
+import fr.ostix.game.core.events.states.StateOverWorldEvent;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.entity.Player;
 import fr.ostix.game.entity.entities.NPC;
-import fr.ostix.game.inventory.*;
-import fr.ostix.game.menu.*;
+import fr.ostix.game.inventory.PlayerInventory;
+import fr.ostix.game.menu.QuestHandlerMenu;
+import fr.ostix.game.menu.WorldState;
 import fr.ostix.game.menu.stat.PauseMenu;
-import fr.ostix.game.world.*;
-import org.joml.*;
+import fr.ostix.game.world.World;
+import org.joml.Vector3f;
 
 import static org.lwjgl.glfw.GLFW.*;
 

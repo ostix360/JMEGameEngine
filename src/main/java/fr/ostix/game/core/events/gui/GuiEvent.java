@@ -1,7 +1,7 @@
 package fr.ostix.game.core.events.gui;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.menu.*;
+import fr.ostix.game.core.events.Event;
+import fr.ostix.game.menu.Screen;
 
 public class GuiEvent extends Event {
 

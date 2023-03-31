@@ -1,9 +1,10 @@
 package fr.ostix.game.entity.animated.colladaParser.dataStructures;
 
 
-import org.joml.*;
+import org.joml.Matrix4f;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Contains the extracted data for a single joint in the model. This stores the

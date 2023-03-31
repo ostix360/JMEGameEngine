@@ -1,6 +1,6 @@
 package fr.ostix.game.entity;
 
-import fr.ostix.game.toolBox.*;
+import fr.ostix.game.toolBox.Maths;
 import org.joml.Math;
 import org.joml.*;
 

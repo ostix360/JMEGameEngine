@@ -1,14 +1,16 @@
 package fr.ostix.game.entity;
 
 
-import com.jme3.bullet.control.*;
-import fr.ostix.game.entity.component.*;
-import fr.ostix.game.entity.component.collision.*;
-import fr.ostix.game.entity.component.particle.*;
-import fr.ostix.game.graphics.model.*;
-import org.joml.*;
+import com.jme3.bullet.control.PhysicsControl;
+import fr.ostix.game.entity.component.Component;
+import fr.ostix.game.entity.component.collision.CollisionComponent;
+import fr.ostix.game.entity.component.particle.ParticleComponent;
+import fr.ostix.game.graphics.model.Model;
+import org.joml.Vector3f;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 
 public class Entity {

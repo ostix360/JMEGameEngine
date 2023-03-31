@@ -1,8 +1,8 @@
 package fr.ostix.game.gui;
 
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.toolBox.OpenGL.*;
-import org.joml.*;
+import fr.ostix.game.toolBox.Color;
+import fr.ostix.game.toolBox.OpenGL.DisplayManager;
+import org.joml.Vector2f;
 
 public class GuiTexture {
     private Vector2f glPos;

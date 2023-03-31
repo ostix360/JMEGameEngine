@@ -1,12 +1,16 @@
 package fr.ostix.game.core.quest.serialization;
 
-import com.google.gson.*;
-import com.google.gson.stream.*;
-import fr.ostix.game.core.quest.*;
-import fr.ostix.game.items.*;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import fr.ostix.game.core.quest.Rewards;
+import fr.ostix.game.items.Item;
+import fr.ostix.game.items.ItemStack;
+import fr.ostix.game.items.Items;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RewardsTypeAdapter extends TypeAdapter<Rewards> {
 

@@ -1,9 +1,9 @@
 package fr.ostix.game.world.weather;
 
-import fr.ostix.game.core.camera.*;
-import fr.ostix.game.entity.component.light.*;
-import fr.ostix.game.toolBox.*;
-import org.joml.*;
+import fr.ostix.game.core.camera.ICamera;
+import fr.ostix.game.entity.component.light.Light;
+import fr.ostix.game.toolBox.Color;
+import org.joml.Vector3f;
 
 public class Sky {
     private final SkyBox skybox;

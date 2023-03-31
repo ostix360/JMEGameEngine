@@ -1,6 +1,7 @@
 package fr.ostix.game.graphics.font.meshCreator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TextMeshCreator {
 

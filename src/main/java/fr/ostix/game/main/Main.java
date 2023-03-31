@@ -1,7 +1,7 @@
 package fr.ostix.game.main;
 
 
-import fr.ostix.game.core.*;
+import fr.ostix.game.core.Game;
 
 public class Main {
 

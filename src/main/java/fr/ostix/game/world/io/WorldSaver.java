@@ -1,12 +1,15 @@
 package fr.ostix.game.world.io;
 
-import fr.ostix.game.core.quest.*;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.inventory.*;
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.world.*;
+import fr.ostix.game.core.quest.QuestManager;
+import fr.ostix.game.entity.Player;
+import fr.ostix.game.inventory.PlayerInventory;
+import fr.ostix.game.toolBox.ToolDirectory;
+import fr.ostix.game.world.World;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class WorldSaver {
 

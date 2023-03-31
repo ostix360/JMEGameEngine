@@ -1,11 +1,11 @@
 package fr.ostix.game.core.events.listener.menu;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.listener.*;
-import fr.ostix.game.core.events.menu.*;
+import fr.ostix.game.core.events.EventHandler;
+import fr.ostix.game.core.events.listener.Listener;
+import fr.ostix.game.core.events.menu.QuestSelectedEvent;
 import fr.ostix.game.core.quest.QuestManager;
 import fr.ostix.game.core.quest.QuestStatus;
-import fr.ostix.game.menu.*;
+import fr.ostix.game.menu.QuestHandlerMenu;
 
 public class QuestHandlerMenuListener implements Listener {
     private final QuestHandlerMenu questHandlerMenu;

@@ -2,7 +2,6 @@ package fr.ostix.game.core.logics.ressourceProcessor;
 
 import fr.ostix.game.core.loader.Loader;
 import fr.ostix.game.graphics.model.MeshModel;
-import fr.ostix.game.toolBox.OpenGL.VAO;
 
 public class GLGuiModelRequest extends GLRequest {
     private final float[] vertices;

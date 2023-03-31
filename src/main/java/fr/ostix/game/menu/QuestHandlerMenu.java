@@ -1,15 +1,18 @@
 package fr.ostix.game.menu;
 
-import fr.ostix.game.core.*;
+import fr.ostix.game.core.Game;
 import fr.ostix.game.core.events.EventManager;
 import fr.ostix.game.core.events.listener.menu.QuestHandlerMenuListener;
-import fr.ostix.game.core.quest.*;
-import fr.ostix.game.core.resources.*;
-import fr.ostix.game.graphics.font.meshCreator.*;
-import fr.ostix.game.graphics.font.rendering.*;
-import fr.ostix.game.gui.*;
-import fr.ostix.game.menu.component.*;
-import org.joml.*;
+import fr.ostix.game.core.quest.QuestCategory;
+import fr.ostix.game.core.quest.QuestManager;
+import fr.ostix.game.core.quest.QuestStatus;
+import fr.ostix.game.core.resources.ResourcePack;
+import fr.ostix.game.graphics.font.meshCreator.GUIText;
+import fr.ostix.game.graphics.font.rendering.MasterFont;
+import fr.ostix.game.gui.GuiTexture;
+import fr.ostix.game.gui.MasterGui;
+import fr.ostix.game.menu.component.QuestElement;
+import org.joml.Vector2f;
 
 public class QuestHandlerMenu extends Screen {
     public final QuestManager questManager;

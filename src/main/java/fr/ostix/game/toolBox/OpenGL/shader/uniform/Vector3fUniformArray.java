@@ -1,6 +1,6 @@
 package fr.ostix.game.toolBox.OpenGL.shader.uniform;
 
-import org.joml.*;
+import org.joml.Vector3f;
 
 public class Vector3fUniformArray extends Uniform {
 

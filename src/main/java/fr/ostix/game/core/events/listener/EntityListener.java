@@ -1,9 +1,9 @@
 package fr.ostix.game.core.events.listener;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.entity.*;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.entities.*;
+import fr.ostix.game.core.events.EventHandler;
+import fr.ostix.game.core.events.entity.EntityInteractEvent;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.entity.entities.Interact;
 
 public class EntityListener implements Listener {
     // private final List<Entity> entities = new ArrayList<>();

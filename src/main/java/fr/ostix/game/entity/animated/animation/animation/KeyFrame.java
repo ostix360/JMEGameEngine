@@ -1,6 +1,6 @@
 package fr.ostix.game.entity.animated.animation.animation;
 
-import java.util.*;
+import java.util.HashMap;
 
 /**
  * Represents one keyframe of an animation. This contains the timestamp of the

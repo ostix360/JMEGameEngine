@@ -1,12 +1,14 @@
 package fr.ostix.game.menu;
 
-import fr.ostix.game.core.*;
-import fr.ostix.game.core.resources.*;
-import fr.ostix.game.inventory.*;
-import fr.ostix.game.world.*;
-import fr.ostix.game.world.io.*;
+import fr.ostix.game.core.Input;
+import fr.ostix.game.core.resources.ResourcePack;
+import fr.ostix.game.inventory.Inventory;
+import fr.ostix.game.inventory.PlayerInventory;
+import fr.ostix.game.world.World;
+import fr.ostix.game.world.io.WorldLoader;
+import fr.ostix.game.world.io.WorldSaver;
 
-import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 
 public class WorldState extends Screen {
     private final World world;

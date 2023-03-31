@@ -1,12 +1,12 @@
 package fr.ostix.game.core.loader;
 
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.toolBox.*;
-import org.joml.*;
+import fr.ostix.game.graphics.model.MeshModel;
+import fr.ostix.game.toolBox.ToolDirectory;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import org.lwjgl.assimp.*;
 
-import java.lang.Math;
-import java.util.*;
+import java.util.Objects;
 
 public class LoadMeshModel {
     private static final Matrix4f CORRECTION = new Matrix4f().rotate((float) Math.toRadians(-90), new Vector3f(1, 0, 0));

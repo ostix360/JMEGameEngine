@@ -1,19 +1,25 @@
 package fr.ostix.game.inventory;
 
-import com.google.gson.annotations.*;
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.inventoryEvent.*;
-import fr.ostix.game.core.loader.json.*;
+import com.google.gson.annotations.Expose;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.inventoryEvent.InventoryCloseEvent;
+import fr.ostix.game.core.events.inventoryEvent.InventoryOpenEvent;
+import fr.ostix.game.core.loader.json.JsonUtils;
 import fr.ostix.game.core.loader.json.typeAdapter.InventoryTypeAdapter;
-import fr.ostix.game.core.resources.*;
-import fr.ostix.game.gui.*;
-import fr.ostix.game.items.*;
-import fr.ostix.game.menu.*;
-import fr.ostix.game.toolBox.*;
-import org.joml.*;
+import fr.ostix.game.core.resources.ResourcePack;
+import fr.ostix.game.gui.GuiTexture;
+import fr.ostix.game.gui.MasterGui;
+import fr.ostix.game.items.Item;
+import fr.ostix.game.items.ItemStack;
+import fr.ostix.game.menu.Screen;
+import fr.ostix.game.toolBox.Logger;
+import fr.ostix.game.toolBox.ToolDirectory;
+import org.joml.Vector2f;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
 
 public class Inventory extends Screen {
     @Expose

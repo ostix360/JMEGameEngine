@@ -1,12 +1,12 @@
 package fr.ostix.game.core.events;
 
-import fr.ostix.game.core.events.listener.*;
-import fr.ostix.game.core.events.sounds.*;
-import fr.ostix.game.core.events.states.*;
+import fr.ostix.game.core.events.listener.Listener;
+import fr.ostix.game.core.events.sounds.StartSoundsEvent;
+import fr.ostix.game.core.events.states.StateChangeEvent;
 
-import java.lang.reflect.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class EventManager {
 

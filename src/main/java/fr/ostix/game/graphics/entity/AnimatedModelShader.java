@@ -1,7 +1,9 @@
 package fr.ostix.game.graphics.entity;
 
-import fr.ostix.game.toolBox.OpenGL.shader.*;
-import fr.ostix.game.toolBox.OpenGL.shader.uniform.*;
+import fr.ostix.game.toolBox.OpenGL.shader.ShaderProgram;
+import fr.ostix.game.toolBox.OpenGL.shader.uniform.MatrixUniform;
+import fr.ostix.game.toolBox.OpenGL.shader.uniform.MatrixUniformArray;
+import fr.ostix.game.toolBox.OpenGL.shader.uniform.Vector3fUniform;
 
 public class AnimatedModelShader extends ShaderProgram {
 

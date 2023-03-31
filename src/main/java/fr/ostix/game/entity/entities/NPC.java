@@ -1,19 +1,17 @@
 package fr.ostix.game.entity.entities;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.entity.npc.*;
-import fr.ostix.game.core.events.listener.*;
-import fr.ostix.game.core.events.player.*;
-import fr.ostix.game.core.events.states.*;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.listener.Listener;
+import fr.ostix.game.core.events.listener.NPCTalkListener;
+import fr.ostix.game.core.events.states.StateOverWorldEvent;
 import fr.ostix.game.core.logics.Callback;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.entities.npc.gui.*;
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.world.*;
-import org.joml.*;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.entity.entities.npc.gui.NPCGui;
+import fr.ostix.game.graphics.model.Model;
+import fr.ostix.game.world.World;
+import org.joml.Vector3f;
 
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.Arrays;
 
 public class NPC extends Entity implements Interact {
     private final String name;

@@ -1,15 +1,20 @@
 package fr.ostix.game.graphics.water;
 
-import fr.ostix.game.core.camera.*;
-import fr.ostix.game.core.loader.*;
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.graphics.textures.*;
-import fr.ostix.game.toolBox.OpenGL.*;
-import fr.ostix.game.world.water.*;
-import org.joml.*;
-import org.lwjgl.opengl.*;
+import fr.ostix.game.core.camera.ICamera;
+import fr.ostix.game.core.loader.Loader;
+import fr.ostix.game.graphics.model.MeshModel;
+import fr.ostix.game.graphics.textures.TextureLoader;
+import fr.ostix.game.toolBox.OpenGL.OpenGlUtils;
+import fr.ostix.game.toolBox.OpenGL.VAO;
+import fr.ostix.game.world.water.QuadGenerator;
+import fr.ostix.game.world.water.WaterFrameBuffers;
+import fr.ostix.game.world.water.WaterTile;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
 
-import java.util.*;
+import java.util.List;
 
 public class WaterRenderer {
 

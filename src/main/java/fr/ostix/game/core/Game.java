@@ -1,17 +1,20 @@
 package fr.ostix.game.core;
 
-import fr.ostix.game.audio.*;
-import fr.ostix.game.core.loader.*;
-import fr.ostix.game.core.logics.ressourceProcessor.GLRequestProcessor;
+import fr.ostix.game.audio.AudioManager;
+import fr.ostix.game.audio.SoundSource;
+import fr.ostix.game.core.loader.Loader;
 import fr.ostix.game.core.logics.Scheduler;
-import fr.ostix.game.graphics.font.meshCreator.*;
-import fr.ostix.game.graphics.font.rendering.*;
-import fr.ostix.game.gui.*;
-import fr.ostix.game.menu.*;
-import fr.ostix.game.menu.stat.*;
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.toolBox.OpenGL.*;
-import org.lwjgl.openal.*;
+import fr.ostix.game.core.logics.ressourceProcessor.GLRequestProcessor;
+import fr.ostix.game.graphics.font.meshCreator.FontType;
+import fr.ostix.game.graphics.font.rendering.MasterFont;
+import fr.ostix.game.gui.MasterGui;
+import fr.ostix.game.menu.Screen;
+import fr.ostix.game.menu.WorldState;
+import fr.ostix.game.menu.stat.StateManager;
+import fr.ostix.game.toolBox.Logger;
+import fr.ostix.game.toolBox.OpenGL.DisplayManager;
+import fr.ostix.game.toolBox.OpenGL.OpenGlUtils;
+import org.lwjgl.openal.AL11;
 
 import static org.lwjgl.glfw.GLFW.*;
 

@@ -1,10 +1,12 @@
 package fr.ostix.game.core.logics.ressourceProcessor;
 
 
-import fr.ostix.game.core.loader.*;
-import fr.ostix.game.graphics.textures.*;
+import fr.ostix.game.core.loader.Loader;
+import fr.ostix.game.graphics.textures.Texture;
+import fr.ostix.game.graphics.textures.TextureLoader;
+import fr.ostix.game.graphics.textures.TextureProperties;
 
-import java.io.*;
+import java.io.InputStream;
 
 public class TextureLoaderRequest extends GLRequest {
     private TextureProperties prop;

@@ -1,7 +1,7 @@
 package fr.ostix.game.core.events.player;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.entity.*;
+import fr.ostix.game.core.events.Event;
+import fr.ostix.game.entity.Player;
 
 public abstract class PlayerEvent extends Event {
     private final Player player;

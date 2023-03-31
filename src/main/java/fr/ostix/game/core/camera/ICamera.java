@@ -1,7 +1,8 @@
 package fr.ostix.game.core.camera;
 
 
-import org.joml.*;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 public interface ICamera {
 

@@ -1,7 +1,7 @@
 package fr.ostix.game.core.events.player;
 
-import fr.ostix.game.entity.*;
-import fr.ostix.game.world.*;
+import fr.ostix.game.entity.Player;
+import fr.ostix.game.world.World;
 
 public class PlayerGiveItemEvent extends PlayerEvent {
 

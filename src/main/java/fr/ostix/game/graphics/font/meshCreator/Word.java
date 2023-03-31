@@ -1,6 +1,7 @@
 package fr.ostix.game.graphics.font.meshCreator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * During the loading of a text this represents one word in the text.

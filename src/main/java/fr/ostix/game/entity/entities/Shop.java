@@ -1,20 +1,12 @@
 package fr.ostix.game.entity.entities;
 
-import fr.ostix.game.core.*;
 import fr.ostix.game.core.events.EventManager;
-import fr.ostix.game.core.events.listener.EntityListener;
 import fr.ostix.game.core.events.states.StateOverWorldEvent;
-import fr.ostix.game.core.resources.*;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.graphics.font.meshCreator.*;
-import fr.ostix.game.graphics.font.rendering.MasterFont;
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.gui.*;
-import fr.ostix.game.inventory.*;
-import fr.ostix.game.toolBox.*;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.graphics.model.Model;
+import fr.ostix.game.inventory.ShopInventory;
 import fr.ostix.game.world.World;
-import org.joml.*;
-import org.lwjgl.glfw.GLFW;
+import org.joml.Vector3f;
 
 public class Shop extends Entity implements Interact {
 
@@ -34,18 +26,6 @@ public class Shop extends Entity implements Interact {
     @Override
     public void initBeforeSpawn() {
         super.initBeforeSpawn();
-//        EventManager.getInstance().register(new EntityListener(this, (e) -> {
-//            MasterGui.addGui(bgInteraction);
-//            MasterFont.addTempFont(interactionText);
-//            EventManager.getInstance().register(keyListener);// TODO Remove the current KeyListener and add a menu listener
-//            if (Input.keyPressed(GLFW.GLFW_KEY_E)) {
-//                if (inventory.isOpen()) {
-//                    inventory.close();
-//                } else {
-//                    inventory.open();
-//                }
-//            }
-//        }));
     }
 
 

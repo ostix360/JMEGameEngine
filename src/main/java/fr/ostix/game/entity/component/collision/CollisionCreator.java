@@ -4,8 +4,9 @@ package fr.ostix.game.entity.component.collision;
 //import com.flowpowered.react.collision.shape.CollisionShape.CollisionShapeType;
 //import fr.ostix.game.entity.BoundingModel;
 
-import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.component.*;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.entity.component.Component;
+import fr.ostix.game.entity.component.ComponentCreator;
 
 public class CollisionCreator implements ComponentCreator {
 

@@ -1,9 +1,9 @@
 package fr.ostix.game.core.events.listener;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.entity.*;
-import fr.ostix.game.core.events.entity.npc.*;
-import fr.ostix.game.entity.entities.*;
+import fr.ostix.game.core.events.EventHandler;
+import fr.ostix.game.core.events.entity.EntityInteractEvent;
+import fr.ostix.game.core.events.entity.npc.NPCTalkEvent;
+import fr.ostix.game.entity.entities.NPC;
 
 public class NPCTalkListener extends EntityListener {
 

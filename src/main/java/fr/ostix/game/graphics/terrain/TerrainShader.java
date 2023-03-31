@@ -1,15 +1,18 @@
 package fr.ostix.game.graphics.terrain;
 
 
-import fr.ostix.game.core.camera.*;
-import fr.ostix.game.entity.component.light.*;
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.toolBox.OpenGL.shader.*;
+import fr.ostix.game.core.camera.Camera;
+import fr.ostix.game.entity.component.light.Light;
+import fr.ostix.game.toolBox.Color;
+import fr.ostix.game.toolBox.Maths;
+import fr.ostix.game.toolBox.OpenGL.shader.ShaderProgram;
 import fr.ostix.game.toolBox.OpenGL.shader.uniform.*;
-import fr.ostix.game.world.*;
-import org.joml.*;
+import fr.ostix.game.world.World;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
-import java.util.*;
+import java.util.List;
 
 
 public class TerrainShader extends ShaderProgram {

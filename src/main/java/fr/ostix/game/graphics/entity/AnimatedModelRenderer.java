@@ -1,10 +1,11 @@
 package fr.ostix.game.graphics.entity;
 
-import fr.ostix.game.core.camera.*;
-import fr.ostix.game.entity.animated.animation.animatedModel.*;
-import fr.ostix.game.graphics.textures.*;
-import fr.ostix.game.toolBox.OpenGL.*;
-import org.joml.*;
+import fr.ostix.game.core.camera.ICamera;
+import fr.ostix.game.entity.animated.animation.animatedModel.AnimatedModel;
+import fr.ostix.game.graphics.textures.Texture;
+import fr.ostix.game.toolBox.OpenGL.OpenGlUtils;
+import fr.ostix.game.toolBox.OpenGL.VAO;
+import org.joml.Vector3f;
 
 
 /**

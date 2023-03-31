@@ -1,21 +1,33 @@
 package fr.ostix.game.core.loader;
 
-import fr.ostix.game.audio.*;
-import fr.ostix.game.core.loader.json.*;
-import fr.ostix.game.core.resources.*;
-import fr.ostix.game.entity.animated.animation.animatedModel.*;
-import fr.ostix.game.entity.animated.animation.animation.*;
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.graphics.textures.*;
-import fr.ostix.game.gui.*;
-import fr.ostix.game.toolBox.OpenGL.*;
-import fr.ostix.game.toolBox.*;
-import org.joml.*;
+import fr.ostix.game.audio.AudioManager;
+import fr.ostix.game.audio.SoundSource;
+import fr.ostix.game.core.loader.json.JsonUtils;
+import fr.ostix.game.core.resources.AnimationResources;
+import fr.ostix.game.core.resources.ModelResources;
+import fr.ostix.game.core.resources.SoundResources;
+import fr.ostix.game.core.resources.TextureResources;
+import fr.ostix.game.entity.animated.animation.animatedModel.AnimatedModel;
+import fr.ostix.game.entity.animated.animation.animation.Animation;
+import fr.ostix.game.graphics.model.Model;
+import fr.ostix.game.graphics.textures.Texture;
+import fr.ostix.game.graphics.textures.TextureLoader;
+import fr.ostix.game.graphics.textures.TextureProperties;
+import fr.ostix.game.gui.GuiTexture;
+import fr.ostix.game.gui.MasterGui;
+import fr.ostix.game.toolBox.FileUtils;
+import fr.ostix.game.toolBox.Logger;
+import fr.ostix.game.toolBox.OpenGL.DisplayManager;
+import fr.ostix.game.toolBox.ToolDirectory;
+import org.joml.Vector2f;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
-import static fr.ostix.game.toolBox.OpenGL.OpenGlUtils.*;
+import static fr.ostix.game.toolBox.OpenGL.OpenGlUtils.clearGL;
 
 public class ResourcePackLoader {
 

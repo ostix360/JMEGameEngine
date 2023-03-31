@@ -1,10 +1,11 @@
 package fr.ostix.game.entity.animated.colladaParser.dataStructures;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VertexSkinData {
 
-    public final List<Integer> jointIds = new ArrayList<Integer>();
+    public final List<Integer> jointIds = new ArrayList<>();
     public final List<Float> weights = new ArrayList<Float>();
 
     public void addJointEffect(int jointId, float weight) {

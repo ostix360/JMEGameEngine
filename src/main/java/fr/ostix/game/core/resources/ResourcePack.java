@@ -1,14 +1,14 @@
 package fr.ostix.game.core.resources;
 
-import fr.ostix.game.audio.*;
-import fr.ostix.game.entity.animated.animation.animatedModel.*;
-import fr.ostix.game.entity.animated.animation.animation.*;
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.graphics.textures.*;
+import fr.ostix.game.audio.SoundSource;
+import fr.ostix.game.entity.animated.animation.animatedModel.AnimatedModel;
+import fr.ostix.game.entity.animated.animation.animation.Animation;
+import fr.ostix.game.graphics.model.Model;
+import fr.ostix.game.graphics.textures.Texture;
 import fr.ostix.game.toolBox.Logger;
-import fr.ostix.game.world.chunk.*;
+import fr.ostix.game.world.chunk.Chunk;
 
-import java.util.*;
+import java.util.HashMap;
 
 public class ResourcePack {
     private static HashMap<String, Texture> textures;

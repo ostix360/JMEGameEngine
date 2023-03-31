@@ -1,11 +1,14 @@
 package fr.ostix.game.core;
 
 
-import fr.ostix.game.core.camera.*;
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.toolBox.OpenGL.*;
-import fr.ostix.game.world.*;
-import org.joml.*;
+import fr.ostix.game.core.camera.Camera;
+import fr.ostix.game.toolBox.Maths;
+import fr.ostix.game.toolBox.OpenGL.DisplayManager;
+import fr.ostix.game.world.Terrain;
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 public class MousePicker {
 

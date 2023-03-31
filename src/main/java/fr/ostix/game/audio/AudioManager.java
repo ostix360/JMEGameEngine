@@ -1,18 +1,19 @@
 package fr.ostix.game.audio;
 
-import fr.ostix.game.toolBox.*;
-import org.lwjgl.*;
+import fr.ostix.game.toolBox.ToolDirectory;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.*;
-import org.lwjgl.stb.*;
-import org.lwjgl.system.*;
-import org.newdawn.slick.openal.*;
+import org.lwjgl.stb.STBVorbisInfo;
+import org.lwjgl.system.MemoryStack;
 
-import java.nio.*;
-import java.util.*;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.stb.STBVorbis.*;
-import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryUtil.NULL;
 
 
 public class AudioManager {

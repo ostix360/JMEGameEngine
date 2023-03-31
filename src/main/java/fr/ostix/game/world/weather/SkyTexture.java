@@ -1,6 +1,6 @@
 package fr.ostix.game.world.weather;
 
-import fr.ostix.game.core.loader.*;
+import fr.ostix.game.core.loader.Loader;
 
 public enum SkyTexture {
 

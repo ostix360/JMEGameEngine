@@ -1,11 +1,15 @@
 package fr.ostix.game.graphics.font.rendering;
 
-import fr.ostix.game.core.loader.*;
+import fr.ostix.game.core.loader.Loader;
 import fr.ostix.game.core.logics.ressourceProcessor.FontRequest;
 import fr.ostix.game.core.logics.ressourceProcessor.GLRequestProcessor;
-import fr.ostix.game.graphics.font.meshCreator.*;
+import fr.ostix.game.graphics.font.meshCreator.FontType;
+import fr.ostix.game.graphics.font.meshCreator.GUIText;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MasterFont {
 

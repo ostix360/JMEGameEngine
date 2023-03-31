@@ -1,13 +1,16 @@
 package fr.ostix.game.world.io;
 
-import fr.ostix.game.core.quest.*;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.inventory.*;
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.world.*;
-import org.joml.*;
+import fr.ostix.game.core.quest.QuestManager;
+import fr.ostix.game.entity.Player;
+import fr.ostix.game.inventory.PlayerInventory;
+import fr.ostix.game.toolBox.ToolDirectory;
+import fr.ostix.game.world.World;
+import org.joml.Vector3f;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class WorldLoader {
 

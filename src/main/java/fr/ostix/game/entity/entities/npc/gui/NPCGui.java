@@ -1,24 +1,26 @@
 package fr.ostix.game.entity.entities.npc.gui;
 
-import fr.ostix.game.core.*;
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.listener.*;
-import fr.ostix.game.core.events.listener.keyListeners.*;
-import fr.ostix.game.core.events.states.*;
+import fr.ostix.game.core.Game;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.listener.Listener;
+import fr.ostix.game.core.events.listener.keyListeners.NPCReaderListener;
+import fr.ostix.game.core.events.states.StateOverWorldEvent;
 import fr.ostix.game.core.logics.Callback;
-import fr.ostix.game.core.resources.*;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.entities.*;
-import fr.ostix.game.graphics.font.meshCreator.*;
-import fr.ostix.game.graphics.font.rendering.*;
-import fr.ostix.game.gui.*;
-import fr.ostix.game.menu.*;
-import fr.ostix.game.menu.stat.*;
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.world.*;
-import org.joml.*;
+import fr.ostix.game.core.resources.ResourcePack;
+import fr.ostix.game.entity.Transform;
+import fr.ostix.game.entity.entities.NPC;
+import fr.ostix.game.graphics.font.meshCreator.GUIText;
+import fr.ostix.game.graphics.font.rendering.MasterFont;
+import fr.ostix.game.gui.GuiTexture;
+import fr.ostix.game.gui.MasterGui;
+import fr.ostix.game.menu.Screen;
+import fr.ostix.game.menu.stat.States;
+import fr.ostix.game.toolBox.Color;
+import fr.ostix.game.world.World;
+import org.joml.Vector2f;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NPCGui extends Screen {
 

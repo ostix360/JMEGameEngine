@@ -1,9 +1,11 @@
 package fr.ostix.game.core.events.listener.keyListeners;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.keyEvent.*;
-import fr.ostix.game.entity.entities.npc.gui.*;
-import org.lwjgl.glfw.*;
+import fr.ostix.game.core.events.EventHandler;
+import fr.ostix.game.core.events.keyEvent.KeyMaintainedEvent;
+import fr.ostix.game.core.events.keyEvent.KeyPressedEvent;
+import fr.ostix.game.core.events.keyEvent.KeyReleasedEvent;
+import fr.ostix.game.entity.entities.npc.gui.NPCGui;
+import org.lwjgl.glfw.GLFW;
 
 public class NPCReaderListener implements KeyListener {
 

@@ -1,10 +1,6 @@
 package fr.ostix.game.core.loader;
 
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.toolBox.*;
-
-import java.io.*;
-import java.util.*;
+import java.util.List;
 
 public class OBJFileLoader {
 //    public static MeshModel loadModel(String objFileName, Loader loader) {

@@ -1,10 +1,13 @@
 package fr.ostix.game.inventory;
 
 
-import fr.ostix.game.items.*;
+import fr.ostix.game.items.Item;
+import fr.ostix.game.items.ItemStack;
+import fr.ostix.game.items.ItemType;
 import fr.ostix.game.toolBox.Logger;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
 
 public class ItemTab {
     private final String name;
@@ -100,16 +103,23 @@ public class ItemTab {
         return true;
     }
 
-    public void removeItems(List<ItemStack> items) {
+    public boolean removeItems(List<ItemStack> items) {
         for (ItemStack stack : items) {
-            Slot s;
-            if ((s = slotsContain(stack.getItem())) != null)  {
-                s.getStack().removeItems(stack.getItem(),stack.getCount());
-            }else{
-
+            if (!removeItem(stack)) {
+                Logger.log("Couldn't remove item");
+                return false;
             }
         }
-        // TODO return boolean possibility
+        return true;
+    }
+
+    public boolean removeItem(ItemStack stack) {
+        Slot s;
+        if ((s = slotsContain(stack.getItem())) != null)  {
+            return s.getStack().removeItems(stack.getItem(),stack.getCount());
+        }else{
+            return false;
+        }
     }
 
     private Slot slotsContain(Item i){

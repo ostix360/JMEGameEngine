@@ -1,8 +1,10 @@
 package fr.ostix.game.entity.animated.colladaParser.xmlParser;
 
 
-import java.io.*;
-import java.util.regex.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Reads an XML file and stores all the data in {@link XmlNode} objects,

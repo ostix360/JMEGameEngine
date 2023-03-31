@@ -1,17 +1,19 @@
 package fr.ostix.game.world;
 
-import com.jme3.bullet.control.*;
+import com.jme3.bullet.control.TerrainControl;
 import fr.ostix.game.core.logics.ressourceProcessor.GLRequestProcessor;
 import fr.ostix.game.core.logics.ressourceProcessor.ModelLoaderRequest;
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.world.chunk.*;
-import fr.ostix.game.world.texture.*;
-import org.joml.*;
+import fr.ostix.game.graphics.model.MeshModel;
+import fr.ostix.game.graphics.model.ModelData;
+import fr.ostix.game.toolBox.Maths;
+import fr.ostix.game.world.chunk.Chunk;
+import fr.ostix.game.world.texture.TerrainTexture;
+import fr.ostix.game.world.texture.TerrainTexturePack;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
 
-import java.awt.image.*;
-import java.lang.Math;
-import java.util.*;
+import java.awt.image.BufferedImage;
+import java.util.Map;
 
 public class Terrain {
     private static final int SIZE = 100;

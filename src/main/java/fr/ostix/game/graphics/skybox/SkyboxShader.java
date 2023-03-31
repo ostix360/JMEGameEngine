@@ -1,13 +1,16 @@
 package fr.ostix.game.graphics.skybox;
 
 
-import fr.ostix.game.core.camera.*;
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.toolBox.OpenGL.shader.*;
-import fr.ostix.game.toolBox.OpenGL.shader.uniform.*;
-import org.joml.*;
-
-import java.lang.Math;
+import fr.ostix.game.core.camera.Camera;
+import fr.ostix.game.toolBox.Color;
+import fr.ostix.game.toolBox.Maths;
+import fr.ostix.game.toolBox.OpenGL.shader.ShaderProgram;
+import fr.ostix.game.toolBox.OpenGL.shader.uniform.FloatUniform;
+import fr.ostix.game.toolBox.OpenGL.shader.uniform.IntUniform;
+import fr.ostix.game.toolBox.OpenGL.shader.uniform.MatrixUniform;
+import fr.ostix.game.toolBox.OpenGL.shader.uniform.Vector3fUniform;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 public class SkyboxShader extends ShaderProgram {
 

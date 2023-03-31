@@ -1,7 +1,7 @@
 package fr.ostix.game.core.events.entity;
 
-import fr.ostix.game.entity.*;
-import fr.ostix.game.world.*;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.world.World;
 
 public class EntityInteractEvent extends EntityEvent {
 

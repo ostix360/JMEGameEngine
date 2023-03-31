@@ -1,16 +1,20 @@
 package fr.ostix.game.world.chunk;
 
 
-import fr.ostix.game.core.*;
-import fr.ostix.game.core.resources.*;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.component.*;
-import fr.ostix.game.entity.entities.*;
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.world.*;
-import fr.ostix.game.world.texture.*;
+import fr.ostix.game.core.Registered;
+import fr.ostix.game.core.resources.ResourcePack;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.entity.Transform;
+import fr.ostix.game.entity.component.LoadComponents;
+import fr.ostix.game.entity.entities.NPC;
+import fr.ostix.game.entity.entities.Shop;
+import fr.ostix.game.graphics.model.Model;
+import fr.ostix.game.world.Terrain;
+import fr.ostix.game.world.texture.TerrainTexture;
+import fr.ostix.game.world.texture.TerrainTexturePack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Chunk {
 

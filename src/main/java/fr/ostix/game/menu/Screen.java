@@ -1,10 +1,10 @@
 package fr.ostix.game.menu;
 
-import com.google.gson.annotations.*;
-import fr.ostix.game.menu.component.*;
+import com.google.gson.annotations.Expose;
+import fr.ostix.game.menu.component.Component;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class Screen {
     private final List<Component> components = new CopyOnWriteArrayList<>();

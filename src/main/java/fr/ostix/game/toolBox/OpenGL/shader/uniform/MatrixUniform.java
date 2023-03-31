@@ -1,11 +1,11 @@
 package fr.ostix.game.toolBox.OpenGL.shader.uniform;
 
 import fr.ostix.game.toolBox.Logger;
-import org.joml.*;
-import org.lwjgl.opengl.*;
-import org.lwjgl.system.*;
+import org.joml.Matrix4f;
+import org.lwjgl.opengl.GL20;
+import org.lwjgl.system.MemoryStack;
 
-import java.nio.*;
+import java.nio.FloatBuffer;
 
 public class MatrixUniform extends Uniform {
     public MatrixUniform(String name) {

@@ -1,13 +1,16 @@
 package fr.ostix.game.core;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.keyEvent.*;
-import fr.ostix.game.toolBox.*;
-import org.lwjgl.*;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.keyEvent.KeyMaintainedEvent;
+import fr.ostix.game.core.events.keyEvent.KeyPressedEvent;
+import fr.ostix.game.core.events.keyEvent.KeyReleasedEvent;
+import fr.ostix.game.toolBox.Logger;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.glfw.*;
+import org.lwjgl.glfw.GLFWKeyCallback;
+import org.lwjgl.glfw.GLFWMouseButtonCallback;
 
-import java.nio.*;
+import java.nio.DoubleBuffer;
 
 import static org.lwjgl.glfw.GLFW.*;
 

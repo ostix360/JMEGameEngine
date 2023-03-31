@@ -1,8 +1,9 @@
 package fr.ostix.game.core.events.listener;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.inventoryEvent.*;
-import fr.ostix.game.menu.*;
+import fr.ostix.game.core.events.EventHandler;
+import fr.ostix.game.core.events.inventoryEvent.InventoryCloseEvent;
+import fr.ostix.game.core.events.inventoryEvent.InventoryOpenEvent;
+import fr.ostix.game.menu.WorldState;
 
 public class InventoryListener implements Listener {
 

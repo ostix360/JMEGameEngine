@@ -1,6 +1,6 @@
 package fr.ostix.game.core.events.inventoryEvent;
 
-import fr.ostix.game.core.events.*;
+import fr.ostix.game.core.events.Event;
 
 public class InteractionEvent extends Event {
     private final boolean isNearFromPlayer;

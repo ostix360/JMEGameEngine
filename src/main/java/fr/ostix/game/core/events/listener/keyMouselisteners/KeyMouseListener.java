@@ -1,8 +1,10 @@
 package fr.ostix.game.core.events.listener.keyMouselisteners;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.keyEvent.*;
-import fr.ostix.game.core.events.listener.*;
+import fr.ostix.game.core.events.EventHandler;
+import fr.ostix.game.core.events.keyEvent.KeyMouseMaintainedEvent;
+import fr.ostix.game.core.events.keyEvent.KeyMousePressedEvent;
+import fr.ostix.game.core.events.keyEvent.KeyMouseReleasedEvent;
+import fr.ostix.game.core.events.listener.Listener;
 
 
 public interface KeyMouseListener extends Listener {

@@ -1,8 +1,8 @@
 package fr.ostix.game.entity.entities.npc.gui;
 
 import fr.ostix.game.core.logics.Callback;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.entities.npc.*;
+import fr.ostix.game.entity.Transform;
+import fr.ostix.game.entity.entities.npc.NPCGod;
 import fr.ostix.game.world.World;
 
 import java.util.List;

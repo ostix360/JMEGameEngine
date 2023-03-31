@@ -1,11 +1,11 @@
 package fr.ostix.game.menu.component;
 
-import fr.ostix.game.core.*;
+import fr.ostix.game.core.Input;
 import fr.ostix.game.gui.GuiLayer;
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.toolBox.OpenGL.*;
-import org.joml.*;
-import org.lwjgl.glfw.*;
+import fr.ostix.game.toolBox.Color;
+import fr.ostix.game.toolBox.OpenGL.DisplayManager;
+import org.joml.Vector2f;
+import org.lwjgl.glfw.GLFW;
 
 public class Button extends Component {
 

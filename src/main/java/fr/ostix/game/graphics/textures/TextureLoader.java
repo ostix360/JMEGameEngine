@@ -1,15 +1,16 @@
 package fr.ostix.game.graphics.textures;
 
-import fr.ostix.game.toolBox.*;
-import org.lwjgl.*;
+import fr.ostix.game.toolBox.Logger;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;
 
-import javax.imageio.*;
-import java.awt.image.*;
-import java.io.*;
-import java.nio.*;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.ByteBuffer;
 
-import static fr.ostix.game.toolBox.ToolDirectory.*;
+import static fr.ostix.game.toolBox.ToolDirectory.RES_FOLDER;
 import static org.lwjgl.opengl.GL11.*;
 
 public class TextureLoader {

@@ -1,10 +1,10 @@
 package fr.ostix.game.core.quest;
 
 import com.google.gson.annotations.Expose;
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.listener.*;
-import fr.ostix.game.core.quest.serialization.*;
-import fr.ostix.game.entity.*;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.listener.Listener;
+import fr.ostix.game.core.quest.serialization.IQuestSerializer;
+import fr.ostix.game.entity.Player;
 
 public abstract class Quest implements IQuestSerializer {
     @Expose

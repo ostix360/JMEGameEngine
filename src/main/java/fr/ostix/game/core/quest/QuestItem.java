@@ -1,16 +1,14 @@
 package fr.ostix.game.core.quest;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import fr.ostix.game.core.Registered;
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.listener.quest.*;
-import fr.ostix.game.core.loader.json.*;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.listener.quest.QuestGiveItemListener;
 import fr.ostix.game.core.loader.json.typeAdapter.ItemStackTypeAdapter;
 import fr.ostix.game.core.quest.serialization.RewardsTypeAdapter;
 import fr.ostix.game.entity.Player;
-import fr.ostix.game.items.*;
+import fr.ostix.game.items.ItemStack;
 
 
 public class QuestItem extends Quest {

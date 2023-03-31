@@ -1,9 +1,10 @@
 package fr.ostix.game.core.events.listener.quest;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.listener.*;
-import fr.ostix.game.core.events.quest.*;
-import fr.ostix.game.core.quest.*;
+import fr.ostix.game.core.events.EventHandler;
+import fr.ostix.game.core.events.listener.Listener;
+import fr.ostix.game.core.events.quest.QuestCategoryCompleteEvent;
+import fr.ostix.game.core.events.quest.QuestCategoryStartEvent;
+import fr.ostix.game.core.quest.QuestManager;
 
 public class QuestManagerListener implements Listener {
     private final QuestManager questManager;

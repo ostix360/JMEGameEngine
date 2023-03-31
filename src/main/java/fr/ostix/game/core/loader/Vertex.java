@@ -1,6 +1,6 @@
 package fr.ostix.game.core.loader;
 
-import org.joml.*;
+import org.joml.Vector3f;
 
 
 public class Vertex {

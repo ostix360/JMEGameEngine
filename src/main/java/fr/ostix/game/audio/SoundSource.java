@@ -1,6 +1,6 @@
 package fr.ostix.game.audio;
 
-import org.joml.*;
+import org.joml.Vector3f;
 
 import static org.lwjgl.openal.AL11.*;
 

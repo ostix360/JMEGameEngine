@@ -1,10 +1,11 @@
 package fr.ostix.game.world.chunk;
 
 
-import fr.ostix.game.entity.*;
-import fr.ostix.game.world.*;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.world.Terrain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChunkPart {
     private final List<Entity> entities = new ArrayList<>();

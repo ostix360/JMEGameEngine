@@ -1,11 +1,15 @@
 package fr.ostix.game.entity.animated.colladaParser.colladaLoader;
 
 
-import fr.ostix.game.entity.animated.colladaParser.dataStructures.*;
-import fr.ostix.game.entity.animated.colladaParser.xmlParser.*;
-import fr.ostix.game.toolBox.*;
+import fr.ostix.game.entity.animated.colladaParser.dataStructures.SkinningData;
+import fr.ostix.game.entity.animated.colladaParser.dataStructures.VertexSkinData;
+import fr.ostix.game.entity.animated.colladaParser.xmlParser.XmlNode;
+import fr.ostix.game.toolBox.Logger;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 
 public class SkinLoader {

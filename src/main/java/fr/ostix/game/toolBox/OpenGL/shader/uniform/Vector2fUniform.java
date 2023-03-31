@@ -1,8 +1,8 @@
 package fr.ostix.game.toolBox.OpenGL.shader.uniform;
 
 import fr.ostix.game.toolBox.Logger;
-import org.joml.*;
-import org.lwjgl.opengl.*;
+import org.joml.Vector2f;
+import org.lwjgl.opengl.GL20;
 
 public class Vector2fUniform extends Uniform {
     public Vector2fUniform(String name) {

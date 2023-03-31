@@ -1,9 +1,8 @@
 package fr.ostix.game.toolBox.OpenGL.shader.uniform;
 
 import fr.ostix.game.toolBox.Logger;
-import org.lwjgl.opengl.GL11;
 
-import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL20.glUniform1f;
 
 public class BooleanUniform extends Uniform {
     public BooleanUniform(String name) {

@@ -1,17 +1,18 @@
 package fr.ostix.game.core.quest;
 
 import com.google.gson.annotations.Expose;
-import fr.ostix.game.core.*;
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.entity.npc.*;
-import fr.ostix.game.core.events.listener.quest.*;
-import fr.ostix.game.core.loader.json.*;
+import fr.ostix.game.core.Registered;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.entity.npc.NPCTalkEvent;
+import fr.ostix.game.core.events.listener.quest.QuestTalkListener;
+import fr.ostix.game.core.loader.json.JsonUtils;
 import fr.ostix.game.core.quest.serialization.RewardsTypeAdapter;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.entities.npc.*;
-import fr.ostix.game.world.*;
+import fr.ostix.game.entity.Player;
+import fr.ostix.game.entity.entities.npc.NPCGod;
+import fr.ostix.game.world.World;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuestDialog extends Quest {
     @Expose

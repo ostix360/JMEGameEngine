@@ -1,11 +1,12 @@
 package fr.ostix.game.menu.stat;
 
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.states.*;
-import fr.ostix.game.core.resources.*;
-import fr.ostix.game.menu.*;
-import fr.ostix.game.menu.component.*;
-import fr.ostix.game.menu.stat.*;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.states.StateChangeEvent;
+import fr.ostix.game.core.events.states.StateOverWorldEvent;
+import fr.ostix.game.core.resources.ResourcePack;
+import fr.ostix.game.menu.Screen;
+import fr.ostix.game.menu.component.Button;
+import fr.ostix.game.menu.component.HorizontalButton;
 
 public class PauseMenu extends Screen {
 

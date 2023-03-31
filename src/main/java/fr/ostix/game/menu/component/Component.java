@@ -1,11 +1,12 @@
 package fr.ostix.game.menu.component;
 
-import fr.ostix.game.core.*;
+import fr.ostix.game.core.Input;
 import fr.ostix.game.core.resources.ResourcePack;
-import fr.ostix.game.gui.*;
+import fr.ostix.game.gui.GuiTexture;
+import fr.ostix.game.gui.MasterGui;
 import fr.ostix.game.toolBox.Logger;
-import fr.ostix.game.toolBox.OpenGL.*;
-import org.joml.*;
+import fr.ostix.game.toolBox.OpenGL.DisplayManager;
+import org.joml.Vector2f;
 
 public abstract class Component {
 

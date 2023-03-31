@@ -1,10 +1,10 @@
 package fr.ostix.game.core.quest;
 
-import fr.ostix.game.core.*;
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.listener.quest.*;
-import fr.ostix.game.core.events.quest.*;
-import fr.ostix.game.core.loader.*;
+import fr.ostix.game.core.Registered;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.listener.quest.QuestManagerListener;
+import fr.ostix.game.core.events.quest.QuestCategoryStartEvent;
+import fr.ostix.game.core.loader.QuestLoader;
 import fr.ostix.game.toolBox.Logger;
 import fr.ostix.game.toolBox.ToolDirectory;
 
@@ -13,7 +13,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class QuestManager {
     public static final QuestManager INSTANCE = new QuestManager();

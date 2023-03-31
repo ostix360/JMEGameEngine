@@ -1,25 +1,28 @@
 package fr.ostix.game.menu.stat;
 
-import fr.ostix.game.audio.*;
-import fr.ostix.game.core.*;
-import fr.ostix.game.core.events.*;
-import fr.ostix.game.core.events.listener.*;
-import fr.ostix.game.core.events.listener.sounds.*;
-import fr.ostix.game.core.events.sounds.*;
-import fr.ostix.game.core.events.states.*;
-import fr.ostix.game.core.loader.*;
+import fr.ostix.game.audio.SoundListener;
+import fr.ostix.game.audio.SoundSource;
+import fr.ostix.game.core.Game;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.listener.StateListener;
+import fr.ostix.game.core.events.listener.sounds.SoundsListener;
+import fr.ostix.game.core.events.sounds.StartSoundsEvent;
+import fr.ostix.game.core.events.states.StateChangeEvent;
+import fr.ostix.game.core.loader.Loader;
 import fr.ostix.game.core.logics.Scheduler;
-import fr.ostix.game.core.resources.*;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.graphics.*;
-import fr.ostix.game.graphics.font.meshCreator.*;
-import fr.ostix.game.graphics.font.rendering.*;
-import fr.ostix.game.graphics.particles.*;
-import fr.ostix.game.gui.*;
-import fr.ostix.game.menu.*;
-import fr.ostix.game.toolBox.*;
-import org.joml.*;
-import org.lwjgl.openal.*;
+import fr.ostix.game.core.resources.ResourcePack;
+import fr.ostix.game.graphics.MasterRenderer;
+import fr.ostix.game.graphics.font.meshCreator.FontType;
+import fr.ostix.game.graphics.font.rendering.MasterFont;
+import fr.ostix.game.graphics.particles.MasterParticle;
+import fr.ostix.game.gui.MasterGui;
+import fr.ostix.game.menu.LoaderMenu;
+import fr.ostix.game.menu.MainMenu;
+import fr.ostix.game.menu.Screen;
+import fr.ostix.game.menu.WorldState;
+import fr.ostix.game.toolBox.Logger;
+import org.joml.Vector3f;
+import org.lwjgl.openal.AL10;
 
 
 public class StateManager {
@@ -60,7 +63,7 @@ public class StateManager {
         EventManager.getInstance().callEvent(new StateChangeEvent(States.MAIN_MENU.getName(), mainMenu, 4));
 //        Listener keyMainMenuListener = new KeyMenuListener(mainMenu);
 //
-        playerSoundListener = new SoundListener(new Vector3f()); //TODO test sound
+        playerSoundListener = new SoundListener(new Vector3f());
         soundsListener = new SoundsListener(playerSoundListener);
         EventManager.getInstance().register(soundsListener);
 

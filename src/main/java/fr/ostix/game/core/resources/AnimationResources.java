@@ -1,7 +1,7 @@
 package fr.ostix.game.core.resources;
 
-import fr.ostix.game.core.loader.*;
-import fr.ostix.game.entity.animated.animation.animation.*;
+import fr.ostix.game.core.loader.LoadAnimation;
+import fr.ostix.game.entity.animated.animation.animation.Animation;
 
 public class AnimationResources {
     private Animation animation;

@@ -1,18 +1,24 @@
 package fr.ostix.game.graphics.entity;
 
-import fr.ostix.game.core.camera.*;
-import fr.ostix.game.entity.*;
-import fr.ostix.game.entity.animated.animation.animatedModel.*;
-import fr.ostix.game.entity.component.light.*;
-import fr.ostix.game.graphics.model.*;
-import fr.ostix.game.graphics.textures.*;
-import fr.ostix.game.toolBox.*;
-import fr.ostix.game.toolBox.OpenGL.*;
-import fr.ostix.game.world.*;
-import org.joml.*;
-import org.lwjgl.opengl.*;
+import fr.ostix.game.core.camera.Camera;
+import fr.ostix.game.entity.Entity;
+import fr.ostix.game.entity.animated.animation.animatedModel.AnimatedModel;
+import fr.ostix.game.entity.component.light.Light;
+import fr.ostix.game.graphics.model.MeshModel;
+import fr.ostix.game.graphics.model.Model;
+import fr.ostix.game.graphics.textures.Texture;
+import fr.ostix.game.toolBox.Color;
+import fr.ostix.game.toolBox.OpenGL.OpenGlUtils;
+import fr.ostix.game.toolBox.OpenGL.VAO;
+import fr.ostix.game.world.World;
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
+import org.joml.Vector4f;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 import static org.lwjgl.opengl.GL11.*;
 

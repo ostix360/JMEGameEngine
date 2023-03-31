@@ -1,10 +1,11 @@
 package fr.ostix.game.core.loader.json.typeAdapter;
 
 import com.google.gson.*;
-import fr.ostix.game.inventory.*;
-import fr.ostix.game.items.*;
+import fr.ostix.game.inventory.Inventory;
+import fr.ostix.game.items.ItemStack;
+import fr.ostix.game.items.Items;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
