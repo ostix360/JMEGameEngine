@@ -31,6 +31,6 @@ public class Rewards {
 
     public void reward(Player p) {
         p.getInventory().addItems(rewardsItems);
-        //TODO add Money
+        p.earn(moneyAmount);
     }
 }

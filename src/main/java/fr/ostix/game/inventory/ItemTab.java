@@ -1,6 +1,8 @@
 package fr.ostix.game.inventory;
 
 
+import fr.ostix.game.core.logics.Callback;
+import fr.ostix.game.entity.entities.shop.Product;
 import fr.ostix.game.items.Item;
 import fr.ostix.game.items.ItemStack;
 import fr.ostix.game.items.ItemType;
@@ -21,18 +23,21 @@ public class ItemTab {
         this.type = type;
     }
 
-
-    public static ItemTab newEmptyTab(String name, int slotCount, ItemType type) {
-        return new ItemTab(name, generate(slotCount), type);
+    public static ItemTab newEmptyTab(String name, int slotCount, ItemType type, Callback<Product> callback) {
+        return new ItemTab(name, generate(slotCount, callback), type);
     }
 
-    private static Slot[] generate(int slotCount) {
+    public static ItemTab newEmptyTab(String name, int slotCount, ItemType type) {
+        return newEmptyTab(name, slotCount, type, null);
+    }
+
+    private static Slot[] generate(int slotCount, Callback<Product> callback) {
         Slot[] slots = new Slot[slotCount];
         int index = 0;
         int size = 140;
         for (int x = 0; x < slotCount / 5; x++) {
             for (int y = 0; y < slotCount / 7; y++) {
-                slots[index++] = new Slot(495 + x * size + x * 48, 240 + y * size + y * 17, size);
+                slots[index++] = new Slot(495 + x * size + x * 48, 240 + y * size + y * 17, size, callback);
             }
         }
         return slots;
@@ -83,13 +88,13 @@ public class ItemTab {
             if (item.getType() != type && type != ItemType.ALL) continue;
             ItemStack stack = items.get(item);
             Slot s;
-            if ((s = slotsContain(stack.getItem())) != null)  {
+            if ((s = slotsContain(stack.getItem())) != null) {
                 s.getStack().setStack(stack);
-            }else{
+            } else {
                 boolean found = false;
                 for (Slot slot : slots) {
-                    if (slot.isEmpty()){
-                        slot.getStack().addItems(stack.getItem(),stack.getCount());
+                    if (slot.isEmpty()) {
+                        slot.getStack().addItems(stack.getItem(), stack.getCount());
                         found = true;
                         break;
                     }
@@ -115,15 +120,15 @@ public class ItemTab {
 
     public boolean removeItem(ItemStack stack) {
         Slot s;
-        if ((s = slotsContain(stack.getItem())) != null)  {
-            return s.getStack().removeItems(stack.getItem(),stack.getCount());
-        }else{
+        if ((s = slotsContain(stack.getItem())) != null) {
+            return s.getStack().removeItems(stack.getItem(), stack.getCount());
+        } else {
             return false;
         }
     }
 
-    private Slot slotsContain(Item i){
-        for(Slot slot : slots){
+    private Slot slotsContain(Item i) {
+        for (Slot slot : slots) {
             if (slot.isEmpty())
                 continue;
             if (!slot.getStack().getItem().equals(i))

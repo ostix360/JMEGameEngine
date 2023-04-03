@@ -23,6 +23,8 @@ public class Player extends Entity {
     private int sprintTime = 60 * 5;
     private final boolean isSprinting = false;
 
+    private int money = 0;
+
     private PlayerInventory inventory;
 
 
@@ -116,5 +118,16 @@ public class Player extends Entity {
         this.inventory = playerInventory;
     }
 
+    public void pay(int price) {
+        money -= price;
+    }
+
+    public void earn(int price) {
+        money += price;
+    }
+
+    public int getMoney() {
+        return money;
+    }
 }
 

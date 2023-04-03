@@ -34,7 +34,7 @@ public class PlayerInventory extends Inventory {
             Logger.log("right button");
         });
         this.right_button.setScale(new Vector2f(1f, 1.62f));
-        recipeTab = ItemTab.newEmptyTab("RecipeTab", 35,ItemType.CONSUMABLE);
+        recipeTab = ItemTab.newEmptyTab("RecipeTab", 35, ItemType.CONSUMABLE);
         super.init();
     }
 
@@ -49,6 +49,7 @@ public class PlayerInventory extends Inventory {
         recipeTab.startRendering();
         isOpen = true;
     }
+
 
     public void render() {
         recipeTab.render();
@@ -69,6 +70,7 @@ public class PlayerInventory extends Inventory {
     public void removeItems(List<ItemStack> items) {
         super.removeItems(items.toArray(new ItemStack[0]));
     }
+
     @Override
     public void update() {
         super.update();

@@ -7,7 +7,7 @@ import fr.ostix.game.entity.Entity;
 import fr.ostix.game.entity.Transform;
 import fr.ostix.game.entity.component.LoadComponents;
 import fr.ostix.game.entity.entities.NPC;
-import fr.ostix.game.entity.entities.Shop;
+import fr.ostix.game.entity.entities.shop.Shop;
 import fr.ostix.game.graphics.model.Model;
 import fr.ostix.game.world.Terrain;
 import fr.ostix.game.world.texture.TerrainTexture;

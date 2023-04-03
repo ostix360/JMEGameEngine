@@ -1,5 +1,6 @@
 package fr.ostix.game.menu;
 
+import fr.ostix.game.core.Game;
 import fr.ostix.game.core.events.EventManager;
 import fr.ostix.game.core.events.listener.menu.InGameMenuListener;
 import fr.ostix.game.core.resources.ResourcePack;
@@ -8,6 +9,7 @@ import fr.ostix.game.graphics.font.meshCreator.GUIText;
 import fr.ostix.game.graphics.font.rendering.MasterFont;
 import fr.ostix.game.gui.GuiTexture;
 import fr.ostix.game.gui.MasterGui;
+import fr.ostix.game.toolBox.Color;
 import org.joml.Vector2f;
 
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ public class InGameMenu extends Screen {
     private int heartTexture;
     private GuiTexture enduranceBar;
     private int enduranceTexture;
+    private int coinTexture;
+    private GUIText moneyText;
 
     public List<GuiTexture> toRender = new ArrayList<>();
     public List<GUIText> toRenderText = new ArrayList<>();
@@ -35,6 +39,9 @@ public class InGameMenu extends Screen {
         heartTexture = ResourcePack.getTextureByName("food").getID();
         enduranceBar = new GuiTexture(ResourcePack.getTextureByName("enduranceBar").getID(), new Vector2f(975, 955), new Vector2f(590, 135));
         enduranceTexture = ResourcePack.getTextureByName("endurance").getID();
+        moneyText = new GUIText(String.valueOf(0), 1, Game.gameFont, new Vector2f(1920 - 100, 25),
+                30, false);
+        moneyText.setColour(Color.YELLOW);
         listener = new InGameMenuListener(this);
         EventManager.getInstance().register(listener);
     }
@@ -42,6 +49,7 @@ public class InGameMenu extends Screen {
 
     @Override
     public void update() {
+        moneyText.setText(String.valueOf(player.getMoney()));
         super.update();
     }
 
@@ -56,6 +64,9 @@ public class InGameMenu extends Screen {
 
         MasterGui.addTempGui(toRender.toArray(new GuiTexture[0]));
         toRenderText.forEach(MasterFont::addTempFont);
+
+        MasterFont.addTempFont(moneyText);
+
 
         toRender.clear();
         toRenderText.clear();

@@ -8,7 +8,7 @@ import fr.ostix.game.core.events.listener.Listener;
 import fr.ostix.game.core.resources.ResourcePack;
 import fr.ostix.game.entity.Entity;
 import fr.ostix.game.entity.entities.NPC;
-import fr.ostix.game.entity.entities.Shop;
+import fr.ostix.game.entity.entities.shop.Shop;
 import fr.ostix.game.graphics.font.meshCreator.GUIText;
 import fr.ostix.game.graphics.font.rendering.MasterFont;
 import fr.ostix.game.gui.GuiTexture;
@@ -54,6 +54,7 @@ public class InGameMenuListener implements Listener {
             sendToRenderer(e.getEntity());
         } else if (e.getEntity() instanceof Shop) {
             interactionText.setText("Acheter");
+            bgInteraction.setPosition(new Vector2f(1920 / 2f - 57, 855));
             bgInteraction.setScale(new Vector2f(110, 35));
             sendToRenderer(e.getEntity());
         } else {

@@ -22,19 +22,20 @@ public class Item {
     private final GUIText itemDescription;
 
     private final ItemType type;
+    private int price;
 
 
 
-    public Item(int id, String name, String description, String textureName, ItemType type) {
+    public Item(int id, String name, String description, int price, String textureName, ItemType type) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.price = price;
         this.texture = ResourcePack.getTextureByName(textureName).getID();
         this.itemDescription = new GUIText(description, 1f, Game.gameFont,
                 new Vector2f(95, 290f), 280f, false);
         this.type = type;
         this.itemDescription.setColour(Color.MAGENTA);
-
     }
 
     public void onItemUse() {
@@ -85,5 +86,9 @@ public class Item {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getType());
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

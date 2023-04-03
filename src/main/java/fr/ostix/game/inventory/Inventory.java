@@ -25,12 +25,13 @@ public class Inventory extends Screen {
     @Expose
     private Collection<ItemStack> items;
 
-    protected final HashMap<Item, ItemStack> itemStackByItem = new HashMap<>();
+    protected final HashMap<Item, ItemStack> itemStackByItem;
     private final GuiTexture backGround;
     private boolean isOpen = false;
 
     public Inventory() {
         super("Inventory");
+        this.itemStackByItem = new HashMap<>();
         this.backGround = new GuiTexture(ResourcePack.getTextureByName("inventory").getID(),
                 new Vector2f(0), new Vector2f(1920,
                 1080));
@@ -39,6 +40,7 @@ public class Inventory extends Screen {
 
     public Inventory(String title) {
         super(title);
+        this.itemStackByItem = new HashMap<>();
         this.backGround = new GuiTexture(ResourcePack.getTextureByName("inventory").getID(),
                 new Vector2f(0), new Vector2f(1920,
                 1080));

@@ -2,7 +2,9 @@ package fr.ostix.game.inventory;
 
 import fr.ostix.game.core.Game;
 import fr.ostix.game.core.Input;
+import fr.ostix.game.core.logics.Callback;
 import fr.ostix.game.core.resources.ResourcePack;
+import fr.ostix.game.entity.entities.shop.Product;
 import fr.ostix.game.graphics.font.meshCreator.GUIText;
 import fr.ostix.game.graphics.font.rendering.MasterFont;
 import fr.ostix.game.gui.GuiLayer;
@@ -12,6 +14,7 @@ import fr.ostix.game.items.ItemStack;
 import fr.ostix.game.toolBox.Color;
 import fr.ostix.game.toolBox.OpenGL.DisplayManager;
 import org.joml.Vector2f;
+import org.lwjgl.glfw.GLFW;
 
 public class Slot {
 
@@ -30,7 +33,13 @@ public class Slot {
 
     private GUIText count;
 
+    private Callback<Product> onClick;
+
     public Slot(float x, float y, float size) {
+        this(x, y, size, null);
+    }
+
+    public Slot(float x, float y, float size, Callback<Product> onClick) {
         this.x = x;
         this.y = y;
         this.size = size;
@@ -39,6 +48,7 @@ public class Slot {
         texture.setLayer(new Color(0.45f, 0.45f, 0.5f, 0.85f));
 
         this.stack = new ItemStack(null, 0);
+        this.onClick = onClick;
     }
 
     public boolean isEmpty() {
@@ -61,6 +71,11 @@ public class Slot {
         isIn = mX >= this.x && mY >= this.y &&
                 mX < (this.x + this.size) && mY < (this.y + this.size);
         texture.hasLayer(isIn);
+        if (isIn && Input.keysMouse[GLFW.GLFW_MOUSE_BUTTON_1]) {
+            if (onClick != null) {
+                onClick.call(new Product(stack, stack.getItem().getPrice()));
+            }
+        }
     }
 
     public void render() {
