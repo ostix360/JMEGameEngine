@@ -22,7 +22,8 @@ public class Item {
     private final GUIText itemDescription;
 
     private final ItemType type;
-    private int price;
+    private final int price;
+    private final GUIText priceText;
 
 
 
@@ -36,6 +37,9 @@ public class Item {
                 new Vector2f(95, 290f), 280f, false);
         this.type = type;
         this.itemDescription.setColour(Color.MAGENTA);
+        this.priceText = new GUIText("Price: " + price, 1f, Game.gameFont,
+                new Vector2f(95, 630f), 280f, false);
+        this.priceText.setColour(Color.YELLOW);
     }
 
     public void onItemUse() {
@@ -43,6 +47,10 @@ public class Item {
 
     public GUIText getItemDescription() {
         return itemDescription;
+    }
+
+     public GUIText getPriceText() {
+        return priceText;
     }
 
     public int getId() {
@@ -56,6 +64,8 @@ public class Item {
     public String getDescription() {
         return description;
     }
+
+
 
     public int getTexture() {
         return texture;

@@ -1,25 +1,41 @@
 package fr.ostix.game.inventory;
 
+import fr.ostix.game.core.Game;
 import fr.ostix.game.entity.Player;
+import fr.ostix.game.graphics.font.meshCreator.GUIText;
+import fr.ostix.game.graphics.font.rendering.MasterFont;
 import fr.ostix.game.items.ItemStack;
 import fr.ostix.game.items.ItemType;
 import fr.ostix.game.items.Items;
+import fr.ostix.game.toolBox.Color;
+import org.joml.Vector2f;
 
 public class ShopInventory extends Inventory {
 
     private final ItemTab shopTab;
     private Player player;
+    private GUIText moneyText;
+    private int coin;
 
 
-    public ShopInventory() { // TODO render money amount
+    public ShopInventory() {
         super("Shop");
-        shopTab = ItemTab.newEmptyTab("Shop", 35, ItemType.ALL, (p) ->{
+        shopTab = ItemTab.newEmptyTab("Shop", 35, ItemType.ALL, (p) -> {
             if (p.getPrice() <= 0) return;
             if (p.getPrice() > this.player.getMoney()) return;
             this.player.pay(p.getPrice());
             this.player.getInventory().addItems(p.getProductStack());
         });
         setItems();
+    }
+
+    @Override
+    public void init() {
+        super.init();
+        //coin = ResourcePack.getTexture("coin").getTextureID();
+        moneyText = new GUIText(String.valueOf(0), 1, Game.gameFont, new Vector2f(1920 - 100, 25),
+                30, false);
+        moneyText.setColour(Color.YELLOW);
     }
 
     private void setItems() {
@@ -36,12 +52,16 @@ public class ShopInventory extends Inventory {
     @Override
     public void update() {
         super.update();
-        if (isOpen()) shopTab.update();
+        if (isOpen()) {
+            shopTab.update();
+            moneyText.setText(String.valueOf(player.getMoney()));
+        }
     }
 
     @Override
     public void render() {
         shopTab.render();
+        MasterFont.addTempFont(moneyText);
     }
 
     @Override
