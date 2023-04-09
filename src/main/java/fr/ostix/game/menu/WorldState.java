@@ -4,6 +4,7 @@ import fr.ostix.game.core.Input;
 import fr.ostix.game.core.resources.ResourcePack;
 import fr.ostix.game.inventory.Inventory;
 import fr.ostix.game.inventory.PlayerInventory;
+import fr.ostix.game.menu.ingame.InGameMenu;
 import fr.ostix.game.world.World;
 import fr.ostix.game.world.io.WorldLoader;
 import fr.ostix.game.world.io.WorldSaver;
@@ -22,7 +23,7 @@ public class WorldState extends Screen {
 
     private Screen overWorld;
 
-    private WorldLoader worldLoader;
+    private final WorldLoader worldLoader;
 
     private final WorldSaver worldSaver;
 
@@ -51,11 +52,6 @@ public class WorldState extends Screen {
         worldLoader.loadWorld();
         world.setTime(worldLoader.getTime());
         world.resume();
-    }
-
-    @Override
-    public void open() {
-
     }
 
     public void render() {

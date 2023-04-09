@@ -13,13 +13,11 @@ import fr.ostix.game.graphics.font.meshCreator.GUIText;
 import fr.ostix.game.graphics.font.rendering.MasterFont;
 import fr.ostix.game.gui.GuiTexture;
 import fr.ostix.game.gui.MasterGui;
-import fr.ostix.game.menu.InGameMenu;
+import fr.ostix.game.menu.ingame.InGameMenu;
 import fr.ostix.game.toolBox.Color;
 import org.joml.Vector2f;
 
 public class InGameMenuListener implements Listener {
-
-    private final InGameMenu inGameMenu;
 
     private final GuiTexture bgInteraction;
     private final GUIText interactionText;
@@ -27,7 +25,6 @@ public class InGameMenuListener implements Listener {
     private Entity entityClose;
 
     public InGameMenuListener(InGameMenu inGameMenu) {
-        this.inGameMenu = inGameMenu;
         bgInteraction = new GuiTexture(ResourcePack.getTextureByName("bgInteraction").getID(),
                 new Vector2f(1920 / 2f - 60, 850), new Vector2f(120, 40));
         interactionText = new GUIText("Ouvrir", 1, Game.gameFont, new Vector2f(1920 / 2f - 50, 860),

@@ -1,4 +1,4 @@
-package fr.ostix.game.menu;
+package fr.ostix.game.menu.ingame;
 
 import fr.ostix.game.core.Game;
 import fr.ostix.game.core.events.EventManager;
@@ -9,6 +9,7 @@ import fr.ostix.game.graphics.font.meshCreator.GUIText;
 import fr.ostix.game.graphics.font.rendering.MasterFont;
 import fr.ostix.game.gui.GuiTexture;
 import fr.ostix.game.gui.MasterGui;
+import fr.ostix.game.menu.Screen;
 import fr.ostix.game.toolBox.Color;
 import org.joml.Vector2f;
 

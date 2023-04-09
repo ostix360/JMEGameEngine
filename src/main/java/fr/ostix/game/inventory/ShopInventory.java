@@ -1,12 +1,15 @@
 package fr.ostix.game.inventory;
 
 import fr.ostix.game.core.Game;
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.states.StateOverWorldEvent;
 import fr.ostix.game.entity.Player;
 import fr.ostix.game.graphics.font.meshCreator.GUIText;
 import fr.ostix.game.graphics.font.rendering.MasterFont;
 import fr.ostix.game.items.ItemStack;
 import fr.ostix.game.items.ItemType;
 import fr.ostix.game.items.Items;
+import fr.ostix.game.menu.ingame.CloseChoicePopup;
 import fr.ostix.game.toolBox.Color;
 import org.joml.Vector2f;
 
@@ -16,15 +19,24 @@ public class ShopInventory extends Inventory {
     private Player player;
     private GUIText moneyText;
     private int coin;
+    private CloseChoicePopup confirmPopup;
 
 
     public ShopInventory() {
         super("Shop");
+
         shopTab = ItemTab.newEmptyTab("Shop", 35, ItemType.ALL, (p) -> {
             if (p.getPrice() <= 0) return;
             if (p.getPrice() > this.player.getMoney()) return;
-            this.player.pay(p.getPrice());
-            this.player.getInventory().addItems(p.getProductStack());
+            confirmPopup = new CloseChoicePopup("Confirm payment",
+                    " Are you sure you want to buy "+ p.getProductStack().getItem().getName() +" ?",
+                    (b) -> {
+                        this.player.pay(p.getPrice());
+                        this.player.getInventory().addItems(p.getProductStack());
+                        EventManager.getInstance().callEvent(new StateOverWorldEvent("World", null, 2));
+                    },
+                    (b) -> EventManager.getInstance().callEvent(new StateOverWorldEvent("World", null, 2)));
+            EventManager.getInstance().callEvent(new StateOverWorldEvent("Confirm payment", confirmPopup, 2));
         });
         setItems();
     }
