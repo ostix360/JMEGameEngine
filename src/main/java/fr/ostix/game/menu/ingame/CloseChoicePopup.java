@@ -21,23 +21,23 @@ public class CloseChoicePopup extends Screen {
 
     public CloseChoicePopup(String title, String question, Button.IPressable yesCallback, Button.IPressable noCallback) {
         super(title);
-        yes = new HorizontalButton(400,800,200,100,
+        yes = new HorizontalButton(1100,900,200,100,
                 ResourcePack.getTextureByName("yes").getID(), yesCallback);
-        no = new HorizontalButton(800,800,200,100,
+        no = new HorizontalButton(450,900,200,100,
                 ResourcePack.getTextureByName("no").getID(), noCallback);
         background = new GuiTexture(ResourcePack.getTextureByName("closeChoice").getID(),
-                new Vector2f(600, 500),new Vector2f(600, 550));
-        this.question = new GUIText(question, 1, Game.gameFont, new Vector2f(300, 400),
+                new Vector2f(400, 300),new Vector2f(1000, 750));
+        this.question = new GUIText(question, 1, Game.gameFont, new Vector2f(700, 500),
                 600, false);
     }
 
     @Override
     public void init() {
         super.init();
-        this.addComponent(yes);
-        this.addComponent(no);
         MasterGui.addGui(background);
         MasterFont.add(question);
+        this.addComponent(yes);
+        this.addComponent(no);
     }
 
     @Override

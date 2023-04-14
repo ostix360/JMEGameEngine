@@ -23,11 +23,11 @@ public abstract class Screen {
         init = true;
     }
 
-    public void open(){
+    public void open() {
 
     }
 
-    public void close(){
+    public void close() {
 
     }
 
@@ -57,8 +57,7 @@ public abstract class Screen {
 
     public void cleanUp() {
         for (Component c : components) {
-            c.cleanUp();
-            components.remove(c);
+            removeComponent(c);
         }
     }
 

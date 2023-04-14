@@ -71,7 +71,7 @@ public class Slot {
         isIn = mX >= this.x && mY >= this.y &&
                 mX < (this.x + this.size) && mY < (this.y + this.size);
         texture.hasLayer(isIn);
-        if (isIn && Input.keysMouse[GLFW.GLFW_MOUSE_BUTTON_1]) {
+        if (!isEmpty() && isIn && Input.keysMouse[GLFW.GLFW_MOUSE_BUTTON_1]) {
             if (onClick != null) {
                 onClick.call(new Product(stack, stack.getItem().getPrice()));
                 //TODO add confirmation popup to avoid miss click

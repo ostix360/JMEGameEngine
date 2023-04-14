@@ -30,6 +30,7 @@ public class MainMenu extends Screen {
             EventManager.getInstance().callEvent(new StateChangeEvent(States.WORLD.getName(), world, 4));
 
         });
+        start.init();
 
     }
 
