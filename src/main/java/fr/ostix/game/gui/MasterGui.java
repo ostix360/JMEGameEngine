@@ -72,7 +72,7 @@ public class MasterGui {
                 List<GuiTexture> batch2 = guisByModel.get(model);
                 if (batch2 != null) {
                     batch2.add(g);
-                }else{
+                } else {
                     List<GuiTexture> newBatch = new ArrayList<>();
                     newBatch.add(g);
                     guisByModel.put(g.getModel(), newBatch);
@@ -86,6 +86,9 @@ public class MasterGui {
         List<GuiTexture> batch = guisByModel.get(model);
         if (batch != null) {
             batch.remove(g);
+            if (batch.isEmpty()) {
+                guisByModel.remove(model);
+            }
         }
     }
 
