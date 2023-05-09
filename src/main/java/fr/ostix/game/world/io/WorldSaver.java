@@ -11,21 +11,21 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WorldSaver {
+public class WorldSaver extends IO{
 
-    private final World world;
-    private final QuestManager questManager;
 
-    public WorldSaver(World world) {
-        this.world = world;
-        this.questManager = QuestManager.INSTANCE;
+    public WorldSaver(World world, String saveName) {
+        super(world, saveName);
     }
 
     //save Player position rotation, player inventory, questManager, time from a file
     public void saveWorld() {
         Player player = world.getPlayer();
         PlayerInventory PI = world.getPlayer().getInventory();
-        File file = new File(ToolDirectory.RES_FOLDER,"world/world/save.txt");
+        File file = new File(ToolDirectory.RES_FOLDER,this.name + "world/save.txt");
+        if(!file.getParentFile().exists()){
+            this.createFile();
+        }
         try (BufferedWriter br = new BufferedWriter(new FileWriter(file))) {
             String line;
             line = "Player;" + player.getPosition().x + ";" + player.getPosition().y + ";" + player.getPosition().z + ";" + player.getRotation().x + ";" + player.getRotation().y + ";" + player.getRotation().z;

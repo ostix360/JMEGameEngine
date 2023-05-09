@@ -40,10 +40,10 @@ public class QuestManager {
         }
     }
 
-    public void reload() {
+    public void reload(String save) {
         quests.clear();
         questing.clear();
-        QuestLoader.loadAllQuest();
+        QuestLoader.loadAllQuest(save);
     }
 
     public void addToQuesting(int q) {
