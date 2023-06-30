@@ -21,7 +21,7 @@ switch (OperatingSystem.current()) {
 repositories {
     mavenCentral()
 }
-task runConfiguration {
+tasks.register('runConfiguration') {
     //Run
     def run = new File("run")
     if (!run.exists()) run.mkdirs()
@@ -31,7 +31,7 @@ task runConfiguration {
 
 
     //Config
-    def runConfigurationsDir = new File(dir+"/.idea/runConfigurations")
+    def runConfigurationsDir = new File(dir + "/.idea/runConfigurations")
     runConfigurationsDir.mkdirs()
     def taskName = 'Main'
     def mainClass = MAIN_CLASS

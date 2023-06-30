@@ -33,8 +33,8 @@ public class WorldState extends Screen {
 
         hotBar = new InGameMenu();
 
-        worldLoader = new WorldLoader(world);
-        worldSaver = new WorldSaver(world);
+        worldLoader = new WorldLoader(world, "default");
+        worldSaver = new WorldSaver(world, "default");
 //        EventManager.getInstance().register(new InventoryListener(this));
     }
 

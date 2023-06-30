@@ -9,7 +9,7 @@ import fr.ostix.game.core.events.listener.Listener;
 import fr.ostix.game.menu.MainMenu;
 import fr.ostix.game.menu.stat.StateManager;
 
-public class GuiListener implements Listener {
+public class GuiListener implements Listener { // TODO : what is it for?
     private final StateManager stateManager;
 
     public GuiListener(StateManager stateManager) {
