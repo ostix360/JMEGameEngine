@@ -24,7 +24,7 @@ import java.util.List;
 
 public class NPCGui extends Screen {
 
-    protected final NPC npc;
+    protected NPC npc;
     private int indexDialog = 0;
 
     protected GuiTexture background;
@@ -138,6 +138,7 @@ public class NPCGui extends Screen {
         MasterFont.remove(this.next_dialog);
         EventManager.getInstance().unRegister(this.read);
         indexDialog = 0;
+        this.npc.isTalking = false;
         super.cleanUp();
     }
 }

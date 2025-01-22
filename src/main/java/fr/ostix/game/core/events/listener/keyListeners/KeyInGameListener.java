@@ -14,6 +14,7 @@ import fr.ostix.game.core.events.states.StateOverWorldEvent;
 import fr.ostix.game.entity.Entity;
 import fr.ostix.game.entity.Player;
 import fr.ostix.game.entity.entities.NPC;
+import fr.ostix.game.entity.entities.npc.NPCGod;
 import fr.ostix.game.inventory.PlayerInventory;
 import fr.ostix.game.menu.QuestHandlerMenu;
 import fr.ostix.game.menu.WorldState;
@@ -68,11 +69,12 @@ public class KeyInGameListener implements KeyListener {
         }
         if (e.getKEY() == GLFW_KEY_E) {
             if (!world.getEntitiesNear().isEmpty()) {
+                if (NPCGod.getInstance().isInteracting()) return;
                 Entity entity = world.getEntitiesNear().get(0);
                 if (entity instanceof NPC) {
                     EventManager.getInstance().callEvent(new NPCTalkEvent(world, 1, (NPC) entity));
                 }
-                EventManager.getInstance().callEvent(new PlayerGiveItemEvent(world.getPlayer(), world, 1));
+                EventManager.getInstance().callEvent(new PlayerGiveItemEvent(world.getPlayer(), world, world.getEntitiesNear().get(0).getId(),1));
                 EventManager.getInstance().callEvent(new EntityInteractEvent(world.getEntitiesNear().get(0), world, 3));
 
             }

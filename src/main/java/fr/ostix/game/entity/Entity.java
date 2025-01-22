@@ -193,6 +193,10 @@ public class Entity {
 
     }
 
+    public boolean isInteracting() {
+        return false;
+    }
+
     public enum MovementType {
         FORWARD("run"),
         BACK("back"),

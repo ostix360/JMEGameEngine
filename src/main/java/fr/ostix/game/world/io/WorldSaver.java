@@ -22,7 +22,7 @@ public class WorldSaver extends IO{
     public void saveWorld() {
         Player player = world.getPlayer();
         PlayerInventory PI = world.getPlayer().getInventory();
-        File file = new File(ToolDirectory.RES_FOLDER,this.name + "world/save.txt");
+        File file = new File(ToolDirectory.RES_FOLDER,this.name + "/world/save.txt");
         if(!file.getParentFile().exists()){
             this.createFile();
         }

@@ -16,6 +16,7 @@ import java.util.Arrays;
 public class NPC extends Entity implements Interact {
     private final String name;
     protected NPCGui gui;
+    public boolean isTalking = false;
 
     private String defaultMessage = null;
 
@@ -44,6 +45,7 @@ public class NPC extends Entity implements Interact {
         gui.showDialogs(Arrays.asList(dialogs), line, w, callback);
 
         EventManager.getInstance().callEvent(new StateOverWorldEvent(name, gui, 1));
+        this.isTalking = true;
     }
 
     public void talke(World world, Callback<Boolean> callback, String... dialogs) {
@@ -61,7 +63,7 @@ public class NPC extends Entity implements Interact {
         }
         EventManager.getInstance().callEvent(new StateOverWorldEvent(name, gui, 1));
         gui.showDialog(dialog, world);
-
+        this.isTalking = true;
 //        EventManager.getInstance().unRegister(this.NPCDefaultsListener);
 //        List<String> dialogs = new ArrayList<String>();
 //        dialogs.add("Hello");
@@ -73,6 +75,11 @@ public class NPC extends Entity implements Interact {
     @Override
     public void interact(World world) {
 
+    }
+
+    @Override
+    public boolean isInteracting() {
+        return isTalking;
     }
 
     public String getName() {

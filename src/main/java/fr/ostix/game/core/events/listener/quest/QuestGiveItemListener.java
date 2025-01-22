@@ -18,6 +18,7 @@ public class QuestGiveItemListener implements Listener {
 
     @EventHandler
     public void onItemGive(PlayerGiveItemEvent event) {
+        if (event.getEntityId() != this.quest.getNpcID()) return;
         if (!event.getPlayer().getInventory().has(this.quest.getItem())) {
             Registered.getNPC(this.quest.getNpcID()).talke(event.getWorld(),"Desole vous n'avez pas assez de " + this.quest.getItem().getItem().getName());
             return;
