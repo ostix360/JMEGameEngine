@@ -52,6 +52,11 @@ public class WorldState extends Screen {
         worldLoader.loadWorld();
         world.setTime(worldLoader.getTime());
         world.resume();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void render() {
