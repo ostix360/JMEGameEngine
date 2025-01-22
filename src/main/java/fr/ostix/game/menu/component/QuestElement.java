@@ -32,8 +32,8 @@ public class QuestElement extends Component {
             this.questDescription = new GUIText("Deja fait", 0.7f, Game.gameFont, new Vector2f(x + 50, y + 50), 920f, false);
         }else {
             this.questTitle = new GUIText("???", 1.0f, Game.gameFont, new Vector2f(x + 50, y + 10), 920f, false);
-            this.questDescription = new GUIText("La vie vous a prepare quelque chose \n" +
-                    "Ne vous inquitez pas ces deja determine", 0.7f, Game.gameFont, new Vector2f(x + 50, y + 50), 920f, false);
+            this.questDescription = new GUIText("La vie vous a prepare.e quelque chose \n" +
+                    "Ne vous inquitez pas c'est deja determine", 0.7f, Game.gameFont, new Vector2f(x + 50, y + 50), 920f, false);
         }
 
         this.texture = new GuiTexture(TEXTURE, new Vector2f(x, y), new Vector2f(width, height));
