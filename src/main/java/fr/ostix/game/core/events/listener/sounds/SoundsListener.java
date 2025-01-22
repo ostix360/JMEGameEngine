@@ -21,7 +21,7 @@ public class SoundsListener implements Listener {
         if (ambientSounds != null && isAmbient) {
             ambientSounds.stop();
         }
-//        e.getSound().play();
+        e.getSound().play();
         if (isAmbient){
             ambientSounds = e.getSound();
         }

@@ -13,10 +13,10 @@ import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_1;
 
 public class Camera implements ICamera {
 
-    private final SmoothFloat distanceFromObject = new SmoothFloat(50, 8);
+    private final SmoothFloat distanceFromObject = new SmoothFloat(15, 8);
 
     private final SmoothFloat angleAroundPlayer = new SmoothFloat(0, 10);
-    public int viewDistance = 15;
+    public int viewDistance = 6;
     private Matrix4f projection;
 
     private final Vector3f position;

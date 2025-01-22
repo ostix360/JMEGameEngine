@@ -76,13 +76,13 @@ public class StateManager {
     public Screen update() {
         mainMenu.setWorld(world);
         if (!world.isWorldInitialized()) {
+            startMenuSounds();
             world.init(pack);
             shouldLoadQuest = true;
             Logger.log("World is Loaded");
             MasterParticle.init(loader, MasterRenderer.getProjectionMatrix());
         }
         if (mainMenu.startWorld) {
-            startMenuSounds();
             if (shouldLoadQuest) {
                 QuestManager.INSTANCE.reload("world");
                 shouldLoadQuest = false;
@@ -98,6 +98,7 @@ public class StateManager {
         back.setPosition(new Vector3f(0, 0, 0));
         back.setLooping(true);
         back.setProperty(AL10.AL_SOURCE_RELATIVE, AL10.AL_TRUE);
+//        back.play();
         EventManager.getInstance().callEvent(new StartSoundsEvent(2, back));
     }
 
