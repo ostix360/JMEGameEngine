@@ -112,7 +112,7 @@ public class MasterRenderer {
         camera.reflect(waterTiles.get(0).getHeight());
         skyboxRenderer.render(camera, weather);
         entityRenderer.render(entities, lights, camera, skyColor, new Vector4f(0, 1, 0, -waterTiles.get(0).getHeight() - 0.001f));
-        //terrainRenderer.render(terrains, lights,camera, skyColor,new Vector4f(0, 1, 0, -waterTiles.get(0).getHeight()-0.1f));
+        terrainRenderer.render(terrains, lights,camera, skyColor,new Vector4f(0, 1, 0, -waterTiles.get(0).getHeight()-0.1f));
         camera.reflect(waterTiles.get(0).getHeight());
         waterFbos.unbindCurrentFrameBuffer();
     }

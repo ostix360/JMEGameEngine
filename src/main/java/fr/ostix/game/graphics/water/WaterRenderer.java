@@ -103,7 +103,7 @@ public class WaterRenderer {
 	private Matrix4f createModelMatrix(float x, float y, float z) {
 		Matrix4f modelMatrix = new Matrix4f();
 		modelMatrix.translate(new Vector3f(x, y, z));
-		modelMatrix.scale(new Vector3f(WaterTile.TILE_SIZE, WaterTile.TILE_SIZE, WaterTile.TILE_SIZE));
+		modelMatrix.scale(new Vector3f(WaterTile.TILE_SIZE, 1, WaterTile.TILE_SIZE));
 		return modelMatrix;
 	}
 

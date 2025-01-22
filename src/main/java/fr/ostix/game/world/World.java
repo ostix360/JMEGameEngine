@@ -195,8 +195,8 @@ public class World {
     }
 
     private void initWater() {
-        float waterHeight = -10f;
-        waterTiles.add(new WaterTile(5, 5, waterHeight));
+        float waterHeight = -3f;
+        waterTiles.add(new WaterTile(1100, 1200, waterHeight));
     }
 
     private void initTerrain(Map<Vector2f, Chunk> worldChunk) {

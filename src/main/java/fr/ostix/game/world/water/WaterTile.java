@@ -2,7 +2,7 @@ package fr.ostix.game.world.water;
 
 public class WaterTile {
 
-    public static final float TILE_SIZE = 50;
+    public static final float TILE_SIZE = 2000;
 
     private final float height;
     private final float x;
