@@ -5,7 +5,7 @@ import fr.ostix.game.core.events.states.StateChangeEvent;
 import fr.ostix.game.core.resources.ResourcePack;
 import fr.ostix.game.menu.component.Button;
 import fr.ostix.game.menu.component.HorizontalButton;
-import fr.ostix.game.menu.stat.States;
+import fr.ostix.game.menu.state.States;
 
 public class MainMenu extends Screen {
 

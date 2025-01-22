@@ -61,8 +61,8 @@ public class QuestCategory {
                     i++;
                     continue;
             }
+            q.setCategoryID(id);
             quests.put(q.getId(), q);
-
         }
         return new QuestCategory(quests, id, title, status, nextQuest);
     }
@@ -113,7 +113,7 @@ public class QuestCategory {
             if (q.getStatus() == QuestStatus.UNAVAILABLE)
                 return;
             this.status = QuestStatus.QUESTING;
-            EventManager.getInstance().callEvent(new QuestStartedEvent(q.getId(),2));
+            EventManager.getInstance().callEvent(new QuestStartedEvent(q.getId(), this.id, 2));
             return;
         } while (quests.size() > ++i);
 

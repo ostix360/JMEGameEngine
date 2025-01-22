@@ -31,7 +31,7 @@ public class SkyboxRenderer {
     }
 
     public void render(Camera cam, Weather weather) {
-        OpenGlUtils.goWireframe(false);
+//        OpenGlUtils.goWireframe(false);
         OpenGlUtils.enableDepthTesting(false);
         SkyBox skybox = weather.getSky().getSkyBox();
         glDepthMask(false);

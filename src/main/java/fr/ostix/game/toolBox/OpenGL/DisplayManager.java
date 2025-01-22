@@ -7,6 +7,8 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
+import org.lwjgl.opengl.GLUtil;
+import org.lwjgl.system.Callback;
 import org.lwjgl.system.MemoryStack;
 
 import java.nio.IntBuffer;
@@ -30,10 +32,11 @@ public class DisplayManager {
 
         if (!glfwInit()) throw new RuntimeException("Unable/Failed to Initialize GLFW");
 
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
+        glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
         glfwWindowHint(GLFW_SAMPLES, 8);
 
         window = glfwCreateWindow(width, height, title, NULL, NULL);
@@ -60,6 +63,8 @@ public class DisplayManager {
         if (GL.getCapabilities().OpenGL46) ; //LOGGER.info("OpenGL 46 is available");
         GL11.glViewport(0, 0, width, height);
         GL11.glEnable(GL13.GL_MULTISAMPLE);
+
+//        Callback hy = GLUtil.setupDebugMessageCallback();
         glfwSwapInterval(1);
         return window;
     }
@@ -97,7 +102,7 @@ public class DisplayManager {
     }
 
     private static float getCurrentTime(){
-        return (float) (glfwGetTime()  *1000/ glfwGetTimerFrequency());
+        return (float) (glfwGetTime() * 1000 / glfwGetTimerFrequency());
     }
 
 

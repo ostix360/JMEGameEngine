@@ -6,6 +6,7 @@ public class QuestEvent extends Event {
     private final int questID;
 
 
+
     public QuestEvent(int questID, int priority) {
         super(priority);
         this.questID = questID;

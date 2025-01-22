@@ -35,7 +35,8 @@ public class GuiRenderer {
                 Matrix4f matrix4f = Maths.createTransformationMatrix(gui.getPosition(), gui.getGlScale());
                 shader.loadTransformationMatrix(matrix4f);
                 shader.loadLayer(gui.getLayer());
-                glDrawElements(GL_TRIANGLES,model.getVao().getVertexCount(),GL_UNSIGNED_INT,0);
+                Logger.errGL("Error while rendering gui");
+                glDrawElements(GL_TRIANGLES, model.getVao().getVertexCount(),GL_UNSIGNED_INT,0);
                 Logger.errGL("Error while rendering gui");
                 Texture.unBindTexture();
             }

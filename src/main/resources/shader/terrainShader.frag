@@ -30,22 +30,22 @@ const float totalsTexels = (pcfCount * 2 - 1) * (pcfCount * 2 - 1);
 
 void main() {
 
-    //    float shadowMapSize = 8192;
-    //    float texelSize = 1/shadowMapSize;
-    //    float total = 0.0;
-    //
-    //    for (int x =-pcfCount; x <= pcfCount; x++){
-    //        for (int y =-pcfCount; y <= pcfCount; y++){
-    //            float objectNearstLght = texture(shadowMap, shadowCoords.xy + vec2(x, y) * texelSize).r;
-    //            if (shadowCoords.z > objectNearstLght){
-    //                total += 1.0;
-    //            }
-    //        }
-    //    }
-    //
-    //    total /= totalsTexels;
-    //
-    //    float lightFactor = 0.7 -  (clamp(total, 0.0, 0.4) * shadowCoords.w);
+        float shadowMapSize = 8192;
+        float texelSize = 1/shadowMapSize;
+        float total = 0.0;
+
+        for (int x =-pcfCount; x <= pcfCount; x++){
+            for (int y =-pcfCount; y <= pcfCount; y++){
+                float objectNearstLght = texture(shadowMap, shadowCoords.xy + vec2(x, y) * texelSize).r;
+                if (shadowCoords.z > objectNearstLght){
+                    total += 1.0;
+                }
+            }
+        }
+
+        total /= totalsTexels;
+
+        float lightFactor = 0.7 -  (clamp(total, 0.0, 0.4) * shadowCoords.w);
 
 
     vec4 blendMapColour = texture(blendMap, pass_textureCoords);

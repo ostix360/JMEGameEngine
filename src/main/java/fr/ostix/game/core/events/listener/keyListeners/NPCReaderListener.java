@@ -17,7 +17,7 @@ public class NPCReaderListener implements KeyListener {
     @Override
     @EventHandler
     public void onKeyPress(KeyPressedEvent e) {
-        if (e.getKEY() == GLFW.GLFW_KEY_SPACE){
+        if (e.getKEY() == GLFW.GLFW_KEY_SPACE || e.getKEY() == GLFW.GLFW_KEY_ENTER) {
             gui.next();
         }
     }

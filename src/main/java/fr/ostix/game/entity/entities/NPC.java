@@ -19,7 +19,7 @@ public class NPC extends Entity implements Interact {
 
     private String defaultMessage = null;
 
-    private String theDefaultMessage = "debug message";
+    private String theDefaultMessage = "Hello my friend!!";
 
     protected final Listener NPCDefaultsListener;
 
@@ -42,6 +42,7 @@ public class NPC extends Entity implements Interact {
 
     public void talke(World w, int line, Callback<Boolean> callback, String... dialogs) {
         gui.showDialogs(Arrays.asList(dialogs), line, w, callback);
+
         EventManager.getInstance().callEvent(new StateOverWorldEvent(name, gui, 1));
     }
 
@@ -58,9 +59,9 @@ public class NPC extends Entity implements Interact {
         if (dialog == null) {
             return;
         }
+        EventManager.getInstance().callEvent(new StateOverWorldEvent(name, gui, 1));
         gui.showDialog(dialog, world);
 
-        EventManager.getInstance().callEvent(new StateOverWorldEvent(name, gui, 1));
 //        EventManager.getInstance().unRegister(this.NPCDefaultsListener);
 //        List<String> dialogs = new ArrayList<String>();
 //        dialogs.add("Hello");

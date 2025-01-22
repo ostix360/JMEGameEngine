@@ -1,4 +1,4 @@
-package fr.ostix.game.menu.stat;
+package fr.ostix.game.menu.state;
 
 import fr.ostix.game.core.events.EventManager;
 import fr.ostix.game.core.events.states.StateChangeEvent;

@@ -24,6 +24,10 @@ public class WorldLoader extends IO{
         Player player = this.world.getPlayer();
         PlayerInventory PI = this.world.getPlayer().getInventory();
         File file = new File(ToolDirectory.RES_FOLDER, this.name + "/world/save.txt");
+
+        if (!file.exists()) {
+            return;
+        }
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -45,7 +49,6 @@ public class WorldLoader extends IO{
             e.printStackTrace();
         }
         PI.loadInventory();
-        this.questManager.reload(name);
     }
 
 

@@ -39,7 +39,7 @@ public class EntityRenderer {
     public void render(Map<Model, List<Entity>> entities, List<Light> lights, Camera cam, Color skyColor, Vector4f clipPlane) {
         prepare(lights, skyColor, cam, clipPlane);
         for (Model model : entities.keySet()) {
-            OpenGlUtils.goWireframe(false);
+//            OpenGlUtils.goWireframe(false);
             if (model instanceof AnimatedModel) {
                 prepareAnimatedTexturedModel((AnimatedModel) model);
             } else {
@@ -61,7 +61,7 @@ public class EntityRenderer {
         shader.loadSkyColor(skyColor);
         shader.loadViewMatrix(cam);
         shader.clipPlane.loadVec4fToUniform(clipPlane);
-        OpenGlUtils.goWireframe(false);
+//        OpenGlUtils.goWireframe(false);
     }
 
     private void prepareAnimatedTexturedModel(AnimatedModel model) {

@@ -35,7 +35,7 @@ public class TerrainRenderer {
 
     public void render(Map<Vector2f, Chunk> terrains, List<Light> lights, Camera cam, Color skyColor, Vector4f clipPlane) {
         prepare(lights, skyColor, cam, clipPlane);
-        OpenGlUtils.goWireframe(false);
+//        OpenGlUtils.goWireframe(false);
         // shader.loadShaderMapSpace(toShadowSpace);
         for (Chunk chunk : terrains.values()) {
             Terrain ter = chunk.getTerrain();

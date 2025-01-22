@@ -3,6 +3,7 @@ package fr.ostix.game.toolBox.OpenGL;
 import fr.ostix.game.toolBox.Logger;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
+import org.lwjgl.opengl.GLDebugMessageCallback;
 
 public class OpenGlUtils {
 

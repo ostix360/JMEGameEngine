@@ -14,7 +14,7 @@ import fr.ostix.game.graphics.font.rendering.MasterFont;
 import fr.ostix.game.gui.GuiTexture;
 import fr.ostix.game.gui.MasterGui;
 import fr.ostix.game.menu.Screen;
-import fr.ostix.game.menu.stat.States;
+import fr.ostix.game.menu.state.States;
 import fr.ostix.game.toolBox.Color;
 import fr.ostix.game.world.World;
 import org.joml.Vector2f;
@@ -28,6 +28,7 @@ public class NPCGui extends Screen {
     private int indexDialog = 0;
 
     protected GuiTexture background;
+    private GUIText next_dialog;
 
     protected GUIText dialog;
 
@@ -50,6 +51,7 @@ public class NPCGui extends Screen {
     public void init() {
         background = new GuiTexture(ResourcePack.getTextureByName("dialogs").getID(), new Vector2f(600, 500),
                 new Vector2f(600, 550));
+        this.next_dialog = new GUIText("Press ENTER to continue", 0.5f, Game.gameFont, new Vector2f(1020, 870), 600, false);
         this.read = new NPCReaderListener(this);
         super.init();
     }
@@ -89,6 +91,7 @@ public class NPCGui extends Screen {
         moveToNPC();
         MasterGui.addGui(background);
         MasterFont.add(this.dialog);
+        MasterFont.add(this.next_dialog);
 
 
         EventManager.getInstance().register(this.read);
@@ -125,16 +128,16 @@ public class NPCGui extends Screen {
                 return;
             }
             this.callback.call(true);
+            this.cleanUp();
         }
     }
 
     public void cleanUp() {
         MasterGui.removeGui(background);
         MasterFont.remove(this.dialog);
+        MasterFont.remove(this.next_dialog);
         EventManager.getInstance().unRegister(this.read);
         indexDialog = 0;
         super.cleanUp();
     }
-
-
 }

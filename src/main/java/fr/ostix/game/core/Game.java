@@ -10,7 +10,7 @@ import fr.ostix.game.graphics.font.rendering.MasterFont;
 import fr.ostix.game.gui.MasterGui;
 import fr.ostix.game.menu.Screen;
 import fr.ostix.game.menu.WorldState;
-import fr.ostix.game.menu.stat.StateManager;
+import fr.ostix.game.menu.state.StateManager;
 import fr.ostix.game.toolBox.Logger;
 import fr.ostix.game.toolBox.OpenGL.DisplayManager;
 import fr.ostix.game.toolBox.OpenGL.OpenGlUtils;

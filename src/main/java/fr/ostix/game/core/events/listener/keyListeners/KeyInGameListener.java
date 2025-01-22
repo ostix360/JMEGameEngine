@@ -17,7 +17,7 @@ import fr.ostix.game.entity.entities.NPC;
 import fr.ostix.game.inventory.PlayerInventory;
 import fr.ostix.game.menu.QuestHandlerMenu;
 import fr.ostix.game.menu.WorldState;
-import fr.ostix.game.menu.stat.PauseMenu;
+import fr.ostix.game.menu.state.PauseMenu;
 import fr.ostix.game.world.World;
 import org.joml.Vector3f;
 

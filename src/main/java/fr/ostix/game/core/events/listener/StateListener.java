@@ -3,7 +3,7 @@ package fr.ostix.game.core.events.listener;
 import fr.ostix.game.core.events.EventHandler;
 import fr.ostix.game.core.events.states.StateChangeEvent;
 import fr.ostix.game.core.events.states.StateOverWorldEvent;
-import fr.ostix.game.menu.stat.StateManager;
+import fr.ostix.game.menu.state.StateManager;
 
 public class StateListener implements Listener{
 

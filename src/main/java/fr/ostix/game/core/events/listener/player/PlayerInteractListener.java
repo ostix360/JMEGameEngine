@@ -27,6 +27,7 @@ public class PlayerInteractListener extends PlayerListener {
         float z = e.getPlayer().getPosition().z();
         world.getEntitiesNear().clear();
         entities.forEach(entity -> {
+            if (!(entity instanceof Interact)) return;
             if (entity.equals(e.getPlayer())) return;
             float distance = (float) Math.sqrt(Math.pow(entity.getPosition().x() - x, 2) + Math.pow(entity.getPosition().z() - z, 2));
             if (distance < 5) {

@@ -85,7 +85,7 @@ public class ItemTab {
     public boolean setItems(HashMap<Item, ItemStack> items) {
         clearSlots();
         for (Item item : items.keySet()) {
-            if (item.getType() != type && type != ItemType.ALL) continue;
+            if (item.getType() != type && type != ItemType.ALL && item.getType() != ItemType.ALL) continue;
             ItemStack stack = items.get(item);
             Slot s;
             if ((s = slotsContain(stack.getItem())) != null) {

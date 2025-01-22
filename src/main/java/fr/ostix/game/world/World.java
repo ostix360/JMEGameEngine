@@ -35,6 +35,7 @@ import fr.ostix.game.inventory.PlayerInventory;
 import fr.ostix.game.menu.WorldState;
 import fr.ostix.game.toolBox.Action;
 import fr.ostix.game.toolBox.Color;
+import fr.ostix.game.toolBox.OpenGL.OpenGlUtils;
 import fr.ostix.game.world.chunk.Chunk;
 import fr.ostix.game.world.chunk.ChunkHandler;
 import fr.ostix.game.world.texture.TerrainTexture;
@@ -76,7 +77,7 @@ public class World {
 
     private static final List<Action> toDo = new ArrayList<>();
 
-    private KeyInGameListener keyWorldListener;
+    public KeyInGameListener keyWorldListener;
 
     private static final BulletAppState physics = new BulletAppState();
     private final List<Entity> entitiesNear = new ArrayList<>();
@@ -252,7 +253,7 @@ public class World {
 
 
     public void update() {
-        keyWorldListener.update();
+
         cam.move();
 
         physics.update(1 / 60f);
@@ -285,8 +286,10 @@ public class World {
 
 
     public void render() {
+        OpenGlUtils.goWireframe(false);
         physics.render();
         renderer.renderScene(entities, waterTiles, lights, cam);
+        OpenGlUtils.goWireframe(false);
         MasterParticle.render(cam);
     }
 

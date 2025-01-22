@@ -20,6 +20,8 @@ public abstract class Quest implements IQuestSerializer {
     @Expose
     private QuestStatus status;
 
+    protected int categoryID;
+
     protected Listener listener;
 
     private final boolean isStarted = false;
@@ -77,5 +79,13 @@ public abstract class Quest implements IQuestSerializer {
 
     public void setStatus(QuestStatus status) {
         this.status = status;
+    }
+
+    public int getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
     }
 }

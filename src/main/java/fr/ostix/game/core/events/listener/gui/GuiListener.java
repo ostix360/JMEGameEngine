@@ -7,7 +7,7 @@ import fr.ostix.game.core.events.gui.GuiCloseEvent;
 import fr.ostix.game.core.events.gui.GuiOpenEvent;
 import fr.ostix.game.core.events.listener.Listener;
 import fr.ostix.game.menu.MainMenu;
-import fr.ostix.game.menu.stat.StateManager;
+import fr.ostix.game.menu.state.StateManager;
 
 public class GuiListener implements Listener { // TODO : what is it for?
     private final StateManager stateManager;

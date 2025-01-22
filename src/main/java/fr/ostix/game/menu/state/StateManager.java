@@ -1,4 +1,4 @@
-package fr.ostix.game.menu.stat;
+package fr.ostix.game.menu.state;
 
 import fr.ostix.game.audio.SoundListener;
 import fr.ostix.game.audio.SoundSource;
@@ -10,6 +10,7 @@ import fr.ostix.game.core.events.sounds.StartSoundsEvent;
 import fr.ostix.game.core.events.states.StateChangeEvent;
 import fr.ostix.game.core.loader.Loader;
 import fr.ostix.game.core.logics.Scheduler;
+import fr.ostix.game.core.quest.QuestManager;
 import fr.ostix.game.core.resources.ResourcePack;
 import fr.ostix.game.graphics.MasterRenderer;
 import fr.ostix.game.graphics.font.meshCreator.FontType;
@@ -33,6 +34,7 @@ public class StateManager {
     protected static MainMenu mainMenu;
     private Screen currentScreen;
     private Screen toCleanUp;
+    private boolean shouldLoadQuest = true;
 
 
     private final StateListener stateListener;
@@ -72,14 +74,19 @@ public class StateManager {
     }
 
     public Screen update() {
+        mainMenu.setWorld(world);
         if (!world.isWorldInitialized()) {
             world.init(pack);
+            shouldLoadQuest = true;
             Logger.log("World is Loaded");
-            mainMenu.setWorld(world);
             MasterParticle.init(loader, MasterRenderer.getProjectionMatrix());
-            startMenuSounds();
         }
         if (mainMenu.startWorld) {
+            startMenuSounds();
+            if (shouldLoadQuest) {
+                QuestManager.INSTANCE.reload("world");
+                shouldLoadQuest = false;
+            }
             playerSoundListener.updateTransform(world.getWorld().getPlayer());
         }
         return currentScreen;

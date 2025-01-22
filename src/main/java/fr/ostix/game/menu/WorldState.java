@@ -33,8 +33,8 @@ public class WorldState extends Screen {
 
         hotBar = new InGameMenu();
 
-        worldLoader = new WorldLoader(world, "default");
-        worldSaver = new WorldSaver(world, "default");
+        worldLoader = new WorldLoader(world, "world");
+        worldSaver = new WorldSaver(world, "world");
 //        EventManager.getInstance().register(new InventoryListener(this));
     }
 
@@ -72,6 +72,7 @@ public class WorldState extends Screen {
     public void update() {
         super.update();
         checkInputs();
+
         if (overWorld != null) {
             overWorld.update();
         } else {
@@ -87,7 +88,7 @@ public class WorldState extends Screen {
 //            if (currentInventory != null) currentInventory.close();
 //            currentInventory = null;
 //        }
-
+        this.world.keyWorldListener.update();
         if (Input.keys[GLFW_KEY_ESCAPE]) {
             openInventory = false;
             worldCanBeUpdated = true;
@@ -138,17 +139,19 @@ public class WorldState extends Screen {
 
     public void notifyStateOverWorldSet(Screen screen) {
         if (screen != null) {
+            if (overWorld != null) {
+                overWorld.close();
+                overWorld.cleanUp();
+            }
             if (!screen.isInit()) {
                 screen.init();
             }
             screen.open();
             world.pause();
         } else {
-            world.resume();
-        }
-        if (overWorld != null) {
             overWorld.close();
             overWorld.cleanUp();
+            world.resume();
         }
         overWorld = screen;
     }

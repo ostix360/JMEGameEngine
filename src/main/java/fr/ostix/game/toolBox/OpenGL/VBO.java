@@ -58,6 +58,7 @@ public class VBO {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this.id); //Activation de l'addresse memoir
         buffer = createIntBuffer(indices);   //creation d'une memoir tampon (Buffer) du tableau a ajouter dans notre VAO
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, (IntBuffer) buffer, GL_STATIC_DRAW);  //Definition des données dans une memoir tampon (Buffer)
+//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);       //Desactivation du VBO actife
     }
 
     private FloatBuffer createFloatBuffer(float[] data) {

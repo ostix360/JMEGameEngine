@@ -38,33 +38,9 @@ public class ChunkHandler {
         executor.execute(() -> {
 
             int playerChunkX = (int) Math.floor(cam.getPosition().x() / Terrain.getSIZE() / ((float) CHUNK_FILE_SIZE)); // Get
-            // the
-            // current
-            // chunk
-            // that
-            // the
-            // player
-            // is
-            // in
-            // on
-            // the
-            // X
-            // -
-            // Axis
+            // the current chunk that the player is in on the X - Axis
             int playerChunkZ = (int) Math.floor(cam.getPosition().z() / Terrain.getSIZE() / ((float) CHUNK_FILE_SIZE)); // Get
-            // the
-            // current
-            // chunk
-            // that
-            // the
-            // player
-            // is
-            // in
-            // on
-            // the
-            // Z
-            // -
-            // Axis
+            // the current chunk that the player is in on the Z - Axis
 
             // System.out.println(playerChunkX + ", " + playerChunkZ);
 

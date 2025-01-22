@@ -1,4 +1,4 @@
-package fr.ostix.game.menu.stat;
+package fr.ostix.game.menu.state;
 
 public enum States {
 

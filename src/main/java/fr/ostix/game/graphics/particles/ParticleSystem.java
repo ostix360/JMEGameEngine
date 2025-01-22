@@ -10,11 +10,11 @@ import java.util.Random;
 
 public class ParticleSystem {
 
-    private final float pps;
-    private final float averageSpeed;
-    private final float gravity;
-    private final float averageLifeLength;
-    private final float averageScale;
+    private float pps;
+    private float averageSpeed;
+    private float gravity;
+    private float averageLifeLength;
+    private float averageScale;
     private ParticleSpawn spawn = SpawnParticleType.POINT.getSpawn();
     private Vector3f positionOffset = new Vector3f(0, 0, 0);
     private ParticleTarget target = null;

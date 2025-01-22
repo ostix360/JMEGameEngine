@@ -21,7 +21,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class ParticleRenderer {
 
     private static final float[] VERTICES = {-0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f, -0.5f};
-    private static final int MAX_INSTANCES = 10000;
+    private static final int MAX_INSTANCES = 20000;
     private static final int INSTANCE_DATA_LENGTH = 21;
 
     public static final FloatBuffer BUFFER = BufferUtils.createFloatBuffer(MAX_INSTANCES * INSTANCE_DATA_LENGTH);

@@ -28,6 +28,6 @@ public class QuestGiveItemListener implements Listener {
                 return;
             }
         }
-        EventManager.getInstance().callEvent(new QuestFinishedEvent(quest.getId(),1,event.getPlayer()));
+        EventManager.getInstance().callEvent(new QuestFinishedEvent(quest.getId(), quest.getCategoryID(),1,event.getPlayer()));
     }
 }

@@ -92,7 +92,7 @@ public class TextMeshCreator {
 			}
 			Character character = metaData.getCharacter(c);
 			if (character == null){
-				System.err.println(c + " is not a valid char");
+				System.err.println(c + " is not a valid char in" + text.getTextString());
 				continue;
 			}
 			currentWord.addCharacter(character);

@@ -18,7 +18,7 @@ public class QuestLocationListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
         if (e.getPlayer().getPosition().equals(quest.getPos(), quest.getRange())) {
-            EventManager.getInstance().callEvent(new QuestFinishedEvent(quest.getId(),1,e.getPlayer()));
+            EventManager.getInstance().callEvent(new QuestFinishedEvent(quest.getId(), quest.getCategoryID(),1,e.getPlayer()));
         }
     }
 }

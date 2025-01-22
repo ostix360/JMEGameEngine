@@ -19,6 +19,9 @@ public class QuestCategoryListener implements Listener {
 
     @EventHandler
     public void onQuestStart(QuestStartedEvent event) {
+        if (event.getCategoryID() != questCategory.getId()) {
+            return;
+        }
         try {
             questCategory.quests().get(event.getQuestID() - 1).execute();
             Quest q = questCategory.quests().get(event.getQuestID() - 1);
@@ -32,6 +35,9 @@ public class QuestCategoryListener implements Listener {
 
     @EventHandler
     public void onQuestComplete(QuestFinishedEvent event) {
+        if (questCategory.getId() != event.getCategoryID()) {
+            return;
+        }
         try {
             questCategory.quests().get(event.getQuestID() - 1).done(event.getP());
 
@@ -51,6 +57,6 @@ public class QuestCategoryListener implements Listener {
             System.err.println("Exception for " + questCategory.getName()); // ???
             e.printStackTrace();
         }
-        EventManager.getInstance().callEvent(new QuestStartedEvent(event.getQuestID() + 1, 2));
+        EventManager.getInstance().callEvent(new QuestStartedEvent(event.getQuestID() + 1, event.getCategoryID(), 2));
     }
 }
