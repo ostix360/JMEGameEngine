@@ -120,8 +120,8 @@ public class MasterRenderer {
     private void renderWaterRefractionPass(List<Light> lights, Camera camera) {
         waterFbos.bindRefractionFrameBuffer();
         this.initFrame();
-        entityRenderer.render(entities, lights, camera, skyColor, new Vector4f(0, -1, 0, -10f));
-        terrainRenderer.render(terrains, lights, camera, skyColor, new Vector4f(0, -1, 0, -10f));
+        entityRenderer.render(entities, lights, camera, skyColor, new Vector4f(0, -1, 0, -2.9f));
+        terrainRenderer.render(terrains, lights, camera, skyColor, new Vector4f(0, -1, 0, -2.9f));
         waterFbos.unbindCurrentFrameBuffer();
     }
 
