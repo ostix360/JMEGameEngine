@@ -151,10 +151,10 @@ public class KeyInGameListener implements KeyListener {
         } else if (Input.keys[GLFW_KEY_D] || Input.keys[GLFW_KEY_RIGHT]) {
             p.increaseRotation(new Vector3f(0, -1.8f, 0));
         }
-        if (Input.keys[GLFW_KEY_LEFT_SHIFT]) {
-//            EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
-            p.getControl().setWalkDirection(new Vector3f(0, -10, 0));
-        }
+//        if (Input.keys[GLFW_KEY_LEFT_SHIFT]) {
+////            EventManager.getInstance().callEvent(new PlayerMoveEvent(p, 1));
+//            p.getControl().setWalkDirection(new Vector3f(0, -10, 0));
+//        }
 
     }
 }

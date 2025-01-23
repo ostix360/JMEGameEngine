@@ -1,5 +1,7 @@
 package fr.ostix.game.entity.entities.npc;
 
+import fr.ostix.game.core.events.EventManager;
+import fr.ostix.game.core.events.entity.EntityCloseEvent;
 import fr.ostix.game.entity.entities.NPC;
 import fr.ostix.game.entity.entities.npc.gui.NPCGodGui;
 import fr.ostix.game.entity.entities.npc.gui.NPCGui;
@@ -24,6 +26,7 @@ public class NPCGod extends NPC {
 
     @Override
     public void talke(String dialog, World world) {
+        EventManager.getInstance().callEvent(new EntityCloseEvent(null, world, 2));
         super.talke(dialog, world);
     }
 }

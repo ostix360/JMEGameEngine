@@ -81,6 +81,7 @@ public class WorldState extends Screen {
         if (overWorld != null) {
             overWorld.update();
         } else {
+            this.world.keyWorldListener.update();
             world.update();
             hotBar.update();
         }
@@ -93,7 +94,7 @@ public class WorldState extends Screen {
 //            if (currentInventory != null) currentInventory.close();
 //            currentInventory = null;
 //        }
-        this.world.keyWorldListener.update();
+
         if (Input.keys[GLFW_KEY_ESCAPE]) {
             openInventory = false;
             worldCanBeUpdated = true;

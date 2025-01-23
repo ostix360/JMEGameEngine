@@ -51,7 +51,7 @@ public class ShopInventory extends Inventory {
     }
 
     private void setItems() {
-        this.addItems(new ItemStack(Items.getItem(0), 10));
+        this.addItems(new ItemStack(Items.getItem(0), 1));
     }
 
     @Override
