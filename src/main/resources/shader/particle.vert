@@ -22,6 +22,6 @@ void main(void){
     textureCoords2 = texCoords + texOffsets.zw;
     blend = blendFactor;
 
-//    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 0.0, 1.0);
-    gl_Position = vec4(0.5, 0.5, 0.0, 1.0);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 0.0, 1.0);
+//    gl_Position = vec4(0.5, 0.5, 0.0, 1.0);
 }
