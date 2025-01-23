@@ -72,7 +72,7 @@ public class World {
     private Player player;
     private Camera cam;
     private Weather weather;
-    private float time = 0000.0F;
+    private float time = 10000.0F;
     private final WorldState state;
 
     private static final List<Action> toDo = new ArrayList<>();

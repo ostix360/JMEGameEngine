@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class WorldLoader extends IO{
 
-    private float time;
+    private float time = 8000.0F;
 
     public WorldLoader(World world, String name) {
         super(world, name);

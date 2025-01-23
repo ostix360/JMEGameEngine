@@ -70,6 +70,7 @@ public class AudioManager {
             IntBuffer error = stack.mallocInt(1);
             long decoder = stb_vorbis_open_filename(ToolDirectory.RES_FOLDER + "/sounds/" + path + ".ogg", error, null);
             if (decoder == NULL) {
+                System.err.println("Failed to open file: " + path + ".ogg.");
                 throw new RuntimeException("Failed to open Ogg Vorbis file. Error: " + error.get(0));
             }
 

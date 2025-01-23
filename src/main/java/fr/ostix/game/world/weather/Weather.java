@@ -15,7 +15,7 @@ public class Weather {
     private final WeatherFrame[] weatherFrames = {
             new WeatherFrame(0.0F, 0.0023F, 5.0F, new Color(0.0F, 0.0F, 0.1F), new Color(0.0F, 0.0F, 0.1F), SkyTexture.NIGHT),
             new WeatherFrame(3500.0F, 0.0023F, 5.0F, new Color(0.01F, 0.0F, 0.15F), new Color(0.0F, 0.0F, 0.1F), SkyTexture.NIGHT),
-            new WeatherFrame(5000.0F, 0.004F, 1.0F, new Color(0.8F, 0.2F, 0.2F), new Color(1.2F, 0.1F, 0.2F), SkyTexture.SUNSET),
+            new WeatherFrame(5000.0F, 0.004F, 1.0F, new Color(0.4F, 0.1F, 0.1F), new Color(0.8F, 0.1F, 0.2F), SkyTexture.SUNSET),
             new WeatherFrame(8000.0F, 0.0023F, 5.0F, new Color(0.5444f, 0.62f, 0.69f), new Color(1.0F, 1.0F, 1.0F), SkyTexture.DAY),
             new WeatherFrame(12000.0F, 0.0023F, 5.0F, new Color(0.5444f, 0.62f, 0.69f), new Color(1.0F, 1.0F, 1.0F), SkyTexture.DAY),
             new WeatherFrame(16500.0F, 0.0023F, 5.0F, new Color(0.5444f, 0.62f, 0.69f), new Color(1.0F, 1.0F, 1.0F), SkyTexture.DAY),
