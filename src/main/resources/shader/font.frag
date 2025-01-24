@@ -7,11 +7,11 @@ out vec4 out_Color;
 uniform vec3 color;
 uniform sampler2D textureAtlas;
 
-const float width = 0.41;
+const float width = 0.35;
 const float edge = 0.3;
 
-const float borderWidth = 0.53;
-const float borderEdge = 0.36;
+const float borderWidth = 0.48;
+const float borderEdge = 0.29;
 
 const vec2 offsets = vec2(0.006, 0.006);
 
