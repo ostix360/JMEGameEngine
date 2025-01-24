@@ -7,7 +7,7 @@ plugins {
 
 def MAIN_CLASS = 'fr.ostix.game.main.Main'
 group 'fr.ostix.game'
-version '0.5.5'
+version '0.6.0'
 
 switch (OperatingSystem.current()) {
 	case OperatingSystem.LINUX:
